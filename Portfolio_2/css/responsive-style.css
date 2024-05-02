@@ -1,0 +1,41 @@
+/* ---============================ Responsive Design Style ============================---- */
+
+@media screen and (max-width: 767px){
+    .section_MK25_first_title{
+        font-size: 3rem;
+    }
+
+    .section_MK25_subtitle{
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    /* Home section */
+    
+    .banner_content{
+        margin-top: 45px;
+    }
+
+    .section_MK25_subtitle p{
+        text-align: left;
+    }
+
+    .skills_wrapper h3{
+        transform: translateY(-48px);
+    }
+
+    .external_MK25_section_link{
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .swiper-button-next, .swiper-button-prev{
+        display: none;
+    }
+
+    .btn{
+        margin-top: 0;
+    }
+
+    
+}

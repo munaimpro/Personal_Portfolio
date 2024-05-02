@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Munaim Khan">
+    <title>Munaim Personal Portfolio</title>
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
+    <!-- Bootstrap 5 CDN Link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Fontawesome CDN Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+	  <!-- Swiper CSS Link -->
+	  <link rel="stylesheet" href="css/swiper-bundle.min.css"/>
+
+    <!-- Custom CSS Links -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive-style.css">
+</head>
+
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="90" data-bs-theme="dark">
+    <!-- Scroll To Top button -->
+    <div class="scroll_to_top fixed-bottom">
+      <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <!-- Body Theme button -->
+    <div class="body_theme">
+      <i class="fas fa-moon"></i>
+      <i class="fas fa-sun"></i>
+    </div>
+
+    <!-- Navbar section -->
+    <header class="header_wrapper vertical_MK25_w_space">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+              <a class="navbar-brand" href="#">
+                <img src="images/logo.png" alt="logo" class="img-fluid">
+              </a>
+
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"><i class="fas fa-stream"></i></span>
+              </button>
+
+              <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav menu-navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#home">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#about">About</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#services">Services</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#portfolio">Portfolio</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#blog">Blog</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Banner section -->
+    <section id="home" class="banner_wrapper vertical_MK25_w_space">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-1 col-1 order-1 mb-5 banner_social_icon">
+            <div class="row">
+              <div class="social_icon">
+                <div class="d-flex flex-column">
+                  <div class="d-flex align-items-center mb-3">
+                    <a target="_blank" href="">
+                      <div class="social_MK25_icon rounded-circle justify-content-center align-items-center">
+                        <i class="fa-brands fa-facebook-f"></i>
+                      </div>
+                    </a>
+                  </div>
+  
+                  <div class="d-flex align-items-center mb-3">
+                    <a target="_blank" href="">
+                      <div class="social_MK25_icon rounded-circle justify-content-center align-items-center">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                      </div>
+                    </a>
+                  </div>
+  
+                  <div class="d-flex align-items-center mb-3">
+                    <a target="_blank" href="">
+                      <div class="social_MK25_icon rounded-circle justify-content-center align-items-center">
+                        <i class="fa-brands fa-github"></i>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-7 col-12 order-lg-1 order-3 mb-5 banner_content">
+            <h5 class="text-uppercase">Hello, I am</h5>
+            <h2 class="text-uppercase">Muanim Khan</h2>
+            <h3>Backend Web Developer</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestias non doloremque eveniet officiis voluptatem, excepturi, optio hic corporis provident iste doloribus cumque suscipit rem unde accusamus veniam maiores et?</p>
+            <div class="mt-5">
+              <a class="btn primary-btn" href="">
+                Hire Me <i class="fa-solid fa-circle-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-4 col-11 order-lg-2 order-2 mb-5">
+            <div class="top-right-img text-center">
+              <img src="images/me.png" alt="banner" class="img-fluid w-100">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- About section -->
+    <section id="about" class="about_wrapper vertical_MK25_w_space">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-sm-12 text-center mb-5">
+            <h2 class="section_MK25_first_title">ABOUT ME</h2>
+          </div>
+          <div class="col-lg-7 mb-5 mb-lg-0 about_mk25_image">
+            <img src="images/about-us.webp" alt="about us" class="img-fluid">
+          </div>
+          <div class="col-lg-5 mb-5 mb-lg-0 section_MK25_subtitle">
+            <h3>I am Munaim Khan</h3>
+            <h4>Backend web developer</h4>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptas eum reprehenderit maxime natus cum sequi ab saepe labore fugit, fugiat, facilis sed? Minima non labore quod inventore modi provident consequatur!</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis veniam praesentium officiis perferendis corrupti nobis dicta at non adipisci neque!</p>
+            <div class="row">
+              <div class="col-12">
+                <a href="" class="btn primary-btn">
+                  Get CV <i class="fa-solid fa-download"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills section -->
+    <section id="skills" class="skills_wrapper vertical_MK25_w_space">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-sm-12 text-center mb-5">
+            <h2 class="section_MK25_first_title">SKILLS</h2>
+          </div>
+          <div class="col-lg-5 mb-5 section_MK25_subtitle">
+            <h3>Skills i acquired</h3>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptas eum reprehenderit maxime natus cum sequi ab saepe labore fugit, fugiat, facilis sed? Minima non labore quod inventore modi provident consequatur!</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis veniam praesentium officiis perferendis corrupti nobis dicta at non adipisci neque!</p>
+          </div>
+          <div class="col-lg-7 mb-5 skill_MK25_items">
+            <div class="bar">
+              <div class="bar_MK25_text row justify-content-space-between">
+                <div class="col-6">HTML</div>
+                <div class="col-6">95%</div>
+              </div>
+              <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar" style="width: 25%"></div>
+              </div>
+            </div>
+
+            <div class="bar">
+              <div class="bar_MK25_text row justify-content-space-between">
+                <div class="col-6">CSS</div>
+                <div class="col-6">95%</div>
+              </div>
+              <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar" style="width: 25%"></div>
+              </div>
+            </div>
+
+            <div class="bar">
+              <div class="bar_MK25_text row justify-content-space-between">
+                <div class="col-6">JavaScript</div>
+                <div class="col-6">95%</div>
+              </div>
+              <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar" style="width: 25%"></div>
+              </div>
+            </div>
+
+            <div class="bar">
+              <div class="bar_MK25_text row justify-content-space-between">
+                <div class="col-6">PHP</div>
+                <div class="col-6">95%</div>
+              </div>
+              <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar" style="width: 25%"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <a href="" class="external_MK25_section_link fw-bold">
+              View All About <i class="fa-solid fa-circle-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Services section -->
+    <section id="services" class="services_wrapper vertical_MK25_w_space">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-sm-12 mb-5">
+            <h2 class="section_MK25_first_title">SERVICES</h2>
+            <div class="section_MK25_subtitle">
+              <h3>What i provide</h3>
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-lg-6 mb-5">
+            <div class="card">
+              <div>
+                <i class="service_MK25_icon fas fa-3x fa-calendar-days"></i>
+              </div>
+              <h3 class="text-uppercase mb-3 mt-4">Web Development</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt dicta neque a cum ipsa deleniti quasi corporis distinctio. Iure, corrupti!</p>
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-lg-6 mb-5">
+            <div class="card">
+              <div>
+                <i class="service_MK25_icon fas fa-3x fa-calendar-days"></i>
+              </div>
+              <h3 class="text-uppercase mb-3 mt-4">Web Development</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt dicta neque a cum ipsa deleniti quasi corporis distinctio. Iure, corrupti!</p>
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-lg-6 mb-5">
+            <div class="card">
+              <div>
+                <i class="service_MK25_icon fas fa-3x fa-calendar-days"></i>
+              </div>
+              <h3 class="text-uppercase mb-3 mt-4">Web Development</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt dicta neque a cum ipsa deleniti quasi corporis distinctio. Iure, corrupti!</p>
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-lg-6 mb-5">
+            <div class="card">
+              <div>
+                <i class="service_MK25_icon fas fa-3x fa-calendar-days"></i>
+              </div>
+              <h3 class="text-uppercase mb-3 mt-4">Web Development</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt dicta neque a cum ipsa deleniti quasi corporis distinctio. Iure, corrupti!</p>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <a href="" class="external_MK25_section_link fw-bold">
+              View All Services <i class="fa-solid fa-circle-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Portfolio section -->
+    <section id="portfolio" class="portfolio_wrapper vertical_MK25_w_space">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-sm-12 mb-5">
+            <h2 class="section_MK25_first_title">PORTFOLIO</h2>
+            <div class="section_MK25_subtitle">
+              <h3>What i have done</h3>
+            </div>
+          </div>
+          <!-- Portfolio 1 -->
+          <div class="col-sm-12 col-md-6 col-lg-4 mb-5 portfolio-container">
+            <div class="card p-0">
+              <div class="card-body">
+                <div class="portfolio_image">
+                  <span style="background-image: url('images/portfolio/portfolio.png')"></span>
+                </div>
+                <div class="portfolio_data">
+                  <p class="portfolio_title mb-3 mt-4">Green City Bangladesh</p>
+                  <p class="portfolio_technology">
+                    <span class="me-1"><i class="fas fa-laptop"></i></span>
+                    <span class="me-3">Agency Website</span>
+                    <span class="me-1"><i class="fas fa-code"></i></span>
+                    <span class="me-3">Laravel</span>
+                  </p>
+                  <a href="#" class="btn primary-btn float-end">
+                    Details<span class="ms-3"><i class="fa-solid fa-circle-arrow-right"></i></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Portfolio 2 -->
+          <div class="col-sm-12 col-md-6 col-lg-4 mb-5 portfolio-container">
+            <div class="card p-0">
+              <div class="card-body">
+                <div class="portfolio_image">
+                  <span style="background-image: url('images/portfolio/portfolio1.webp')"></span>
+                </div>
+                <div class="portfolio_data">
+                  <p class="portfolio_title mb-3 mt-4">Green City Bangladesh</p>
+                  <p class="portfolio_technology">
+                    <span class="me-1"><i class="fas fa-laptop"></i></span>
+                    <span class="me-3">Agency Website</span>
+                    <span class="me-1"><i class="fas fa-code"></i></span>
+                    <span class="me-3">Laravel</span>
+                  </p>
+                  <a href="#" class="btn primary-btn float-end">
+                    Details<span class="ms-3"><i class="fa-solid fa-circle-arrow-right"></i></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Portfolio 3 -->
+          <div class="col-sm-12 col-md-6 col-lg-4 mb-5 portfolio-container">
+            <div class="card p-0">
+              <div class="card-body">
+                <div class="portfolio_image">
+                  <span style="background-image: url('images/portfolio/portfolio2.webp')"></span>
+                </div>
+                <div class="portfolio_data">
+                  <p class="portfolio_title mb-3 mt-4">Green City Bangladesh</p>
+                  <p class="portfolio_technology">
+                    <span class="me-1"><i class="fas fa-laptop"></i></span>
+                    <span class="me-3">Agency Website</span>
+                    <span class="me-1"><i class="fas fa-code"></i></span>
+                    <span class="me-3">Laravel</span>
+                  </p>
+                  <a href="#" class="btn primary-btn float-end">
+                    Details<span class="ms-3"><i class="fa-solid fa-circle-arrow-right"></i></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <a href="" class="external_MK25_section_link fw-bold">
+              View All Works <i class="fa-solid fa-circle-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonial section -->
+    <section id="testimonial" class="testimonial_wrapper vertical_MK25_w_space">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 mb-5">
+            <h2 class="section_MK25_first_title">OUR CLIENT</h2>
+            <div class="section_MK25_subtitle">
+              <h3>What are they saying</h3>
+            </div>
+          </div>
+
+          <div class="col-lg-10 m-auto mb-5">
+            <!-- Swiper -->
+            <div class="swiper testimonial_swiper">
+              <div class="swiper-wrapper">
+                <!-- Testimonial 1 -->
+                <div class="swiper-slide">
+                  <div class="row justify-content-center">
+                    <div class="col-md-6 testimonial_image">
+                        <div class="mb-4 mb-lg-0">
+                            <img src="images/portfolio/portfolio1.webp" class="img-fluid" alt="Client Image">
+                        </div>
+                    </div>
+                    <div class="col-md-6 testimonial_data">
+                        <div class="client_message border-bottom">
+                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec justo eu felis dapibus consectetur. Donec maximus metus a nisl posuere, ut convallis nisl mollis. Sed vitae tellus sed massa placerat vulputate.</p>
+                        </div>
+                        
+                        <div class="client_identity">
+                          <h3>Jhon Doe 1</h3>
+                          <p>Marketing Manager</p>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="swiper-slide">
+                  <div class="row justify-content-center">
+                    <div class="col-md-6 testimonial_image">
+                        <div class="mb-4 mb-lg-0">
+                            <img src="images/portfolio/portfolio1.webp" class="img-fluid" alt="Client Image">
+                        </div>
+                    </div>
+                    <div class="col-md-6 testimonial_data">
+                        <div class="client_message border-bottom">
+                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec justo eu felis dapibus consectetur. Donec maximus metus a nisl posuere, ut convallis nisl mollis. Sed vitae tellus sed massa placerat vulputate.</p>
+                        </div>
+                        
+                        <div class="client_identity">
+                          <h3>Jhon Doe 2</h3>
+                          <p>Marketing Manager</p>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="swiper-slide">
+                  <div class="row justify-content-center">
+                    <div class="col-md-6 testimonial_image">
+                        <div class="mb-4 mb-lg-0">
+                            <img src="images/portfolio/portfolio1.webp" class="img-fluid" alt="Client Image">
+                        </div>
+                    </div>
+                    <div class="col-md-6 testimonial_data">
+                        <div class="client_message border-bottom">
+                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec justo eu felis dapibus consectetur. Donec maximus metus a nisl posuere, ut convallis nisl mollis. Sed vitae tellus sed massa placerat vulputate.</p>
+                        </div>
+                        
+                        <div class="client_identity">
+                          <h3>Jhon Doe 3</h3>
+                          <p>Marketing Manager</p>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-button-next"><i class="fas fa-chevron-right"></i></div>
+              <div class="swiper-button-prev"><i class="fas fa-chevron-left"></i></div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Blog section -->
+    <section id="blog" class="blog_wrapper vertical_MK25_w_space">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-sm-12 mb-5">
+            <h2 class="section_MK25_first_title">BLOG</h2>
+            <div class="section_MK25_subtitle">
+              <h3>Latest Post</h3>
+            </div>
+          </div>
+
+          <!-- Blog 1 -->
+          <div class="col-lg-4 col-sm-12 col-md-6 mb-5">
+            <div class="card border-0 p-0">
+              <div class="overflow-hidden">
+                <img src="images/blog/blog.webp" alt="Blog Image">
+              </div>
+              <div class="card-body">
+                <h3 class="card-title">Blog Title 1</h3>
+                <p class="blog_MK25_info">
+                  <i class="fas fa-user"></i><a class="ms-1" href="">Munaim Khan</a>
+                  <span class="mx-2 fw-bold">.</span>
+                  <i class="fa-solid fa-calendar-days"></i><span class="ms-1">January 20, 2023</span>
+                </p>
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget fermentum velit. Donec nec enim quis justo eleifend mattis.</p>
+                <a href="#" class="read_more_link">Read More <i class="fa-solid fa-circle-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Blog 2 -->
+          <div class="col-lg-4 col-sm-12 col-md-6 mb-5">
+            <div class="card border-0 p-0">
+              <div class="overflow-hidden">
+                <img src="images/blog/blog.webp" alt="Blog Image">
+              </div>
+              <div class="card-body">
+                <h3 class="card-title">Blog Title 2</h3>
+                <p class="blog_MK25_info">
+                  <i class="fas fa-user"></i><a class="ms-1" href="">Munaim Khan</a>
+                  <span class="mx-2 fw-bold">.</span>
+                  <i class="fa-solid fa-calendar-days"></i><span class="ms-1">January 20, 2023</span>
+                </p>
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget fermentum velit. Donec nec enim quis justo eleifend mattis.</p>
+                <a href="#" class="read_more_link">Read More <i class="fa-solid fa-circle-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Blog 3 -->
+          <div class="col-lg-4 col-sm-12 col-md-6 mb-5">
+            <div class="card border-0 p-0">
+              <div class="overflow-hidden">
+                <img src="images/blog/blog.webp" alt="Blog Image">
+              </div>
+              <div class="card-body">
+                <h3 class="card-title">Blog Title 3</h3>
+                <p class="blog_MK25_info">
+                  <i class="fas fa-user"></i><a class="ms-1" href="">Munaim Khan</a>
+                  <span class="mx-2 fw-bold">.</span>
+                  <i class="fa-solid fa-calendar-days"></i><span class="ms-1">January 20, 2023</span>
+                </p>
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget fermentum velit. Donec nec enim quis justo eleifend mattis.</p>
+                <a href="#" class="read_more_link">Read More <i class="fa-solid fa-circle-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 text-center">
+            <a href="" class="btn">All Blog <i class="fa-regular fa-pen-to-square"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact section -->
+    <section id="contact" class="contact_wrapper vertical_MK25_w_space">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-sm-12 mb-5">
+            <h2 class="section_MK25_first_title">CONTACT</h2>
+          </div>
+
+          <div class="col-lg-7 mb-5 mb-lg-0">
+            <div class="contact_MK25_form">
+              <p>I am always open to discuss about <span>web application development</span></p>
+              <form class="row g-3">
+                <div class="col-md-6">
+                  <input placeholder="Name" type="text" class="form-control" id="name">
+                </div>
+                <div class="col-md-6">
+                  <input placeholder="Email" type="email" class="form-control" id="email">
+                </div>
+                <div class="col-12">
+                  <input placeholder="Subject" type="text" class="form-control" id="subject">
+                </div>
+                <div class="col-12">
+                  <textarea placeholder="Message" class="form-control" id="message"></textarea>
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn primary-btn">Send Message <i class="fa-regular fa-paper-plane"></i></button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="col-lg-5 mb-5 mb-lg-0">
+            <div class="contact_MK25_info">
+              <h2>Contact Informatoin</h2>
+              <div class="contact_widget_item">
+                <div class="contact_widget_item_icon">
+                  <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div class="contact_widget_item_text">
+                  <p class="m-0 mb-2 contact_widget_item_title">Locatoin</p>
+                  <p class="m-0">Lorem ipsum dolor sit amet</p>
+                </div>
+              </div>
+              <div class="contact_widget_item">
+                <div class="contact_widget_item_icon">
+                  <i class="fa-solid fa-envelope"></i>
+                </div>
+                <div class="contact_widget_item_text">
+                  <p class="m-0 mb-2 contact_widget_item_title">Email</p>
+                  <p class="m-0">example@example.com</p>
+                </div>
+              </div>
+              <div class="contact_widget_item">
+                <div class="contact_widget_item_icon">
+                  <i class="fa-solid fa-phone"></i>
+                </div>
+                <div class="contact_widget_item_text">
+                  <p class="m-0 mb-2 contact_widget_item_title">Phone</p>
+                  <p class="m-0">01233-324254</p>
+                </div>
+              </div>
+              <div class="social_links">
+                <div>
+                  <p class="mb-2 contact_widget_item_title">Follow me on social</p>
+                </div>
+                <div class="d-flex">
+                  <div class="d-flex align-items-center me-3">
+                    <a target="_blank" href="">
+                      <div class="social_MK25_icon rounded-circle justify-content-center align-items-center">
+                        <i class="fa-brands fa-facebook-f"></i>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="d-flex align-items-center me-3">
+                    <a target="_blank" href="">
+                      <div class="social_MK25_icon rounded-circle justify-content-center align-items-center">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="d-flex align-items-center me-3">
+                    <a target="_blank" href="">
+                      <div class="social_MK25_icon rounded-circle justify-content-center align-items-center">
+                        <i class="fa-brands fa-github"></i>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer section -->
+    <section id="footer" class="vertical_MK25_w_space footer_wrapper">
+      <div class="container">
+        <div class="footer_top border-bottom">
+          <div class="row">
+            <div class="col-6 mb-lg-0 mb-4">
+              <div class="footer_logo">
+                <img class="img-fluid" src="images/logo.png" alt="Logo">
+              </div>
+            </div>
+            <div class="col-6 mb-lg-0 mb-4">
+              <div class="d-flex h-100 justify-content-end">
+                <div class="footer_social_icon">
+                  <div class="d-flex">
+                    <div class="d-flex align-items-center me-3">
+                      <a target="_blank" href="">
+                        <div class="social_MK25_icon rounded-circle justify-content-center align-items-center">
+                          <i class="fa-brands fa-facebook-f"></i>
+                        </div>
+                      </a>
+                    </div>
+    
+                    <div class="d-flex align-items-center me-3">
+                      <a target="_blank" href="">
+                        <div class="social_MK25_icon rounded-circle justify-content-center align-items-center">
+                          <i class="fa-brands fa-linkedin-in"></i>
+                        </div>
+                      </a>
+                    </div>
+    
+                    <div class="d-flex align-items-center me-3">
+                      <a target="_blank" href="">
+                        <div class="social_MK25_icon rounded-circle justify-content-center align-items-center">
+                          <i class="fa-brands fa-github"></i>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer_bottom">
+          <div class="col-12">
+            <p>Copyright © 2024 All rights reserved</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bootstrap 5 JS CDN Links -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Swiper JS Link -->
+    <script src="js/swiper-bundle.min.js"></script>
+
+    <!-- Custom JS Link -->
+    <script src="js/main.js"></script>
+</body>
+</html>
