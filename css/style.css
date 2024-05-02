@@ -231,9 +231,12 @@ p{
 .header_wrapper .navbar{
     backdrop-filter: blur(20px);
     padding: 0.9375rem 0;
+    position: fixed;
+    width: 100%;
     transition: .6s ease;
     -webkit-transition: .6s ease;
     -o-transition: .6s ease;
+    z-index: 9999;
 }
 
 .header_wrapper .navbar-brand img{
@@ -271,14 +274,11 @@ p{
 }
 
 .header-scrolled{
-    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
     background: rgba(255, 255, 255, 0.1);
     box-shadow: var(--box-shadow);
     -webkit-box-shadow: var(--box-shadow);
-    z-index: 9999;
 }
 
 /* 3. Banner */
