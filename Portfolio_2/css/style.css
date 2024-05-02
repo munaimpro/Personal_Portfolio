@@ -368,7 +368,9 @@ p{
     transition: .3s ease;
 }
 
-.skills_wrapper .bar:hover{
+.skills_wrapper .bar:hover,
+.page_sectionMK25_wrapper .education_item:hover,
+.page_sectionMK25_wrapper .interest_MK25_item:hover{
     transform: scale(1.03);
 }
 
