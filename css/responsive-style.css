@@ -1,5 +1,15 @@
 /* ---============================ Responsive Design Style ============================---- */
 
+@media screen and (min-width: 360px){
+    .breadcumb_wrapper{
+        padding-bottom: 0;
+    }
+
+    .breadcrumb_MK25_title{
+        padding: 5rem 0;
+    }
+}
+
 @media screen and (max-width: 767px){
     .section_MK25_first_title{
         font-size: 3rem;
@@ -11,10 +21,6 @@
     }
 
     /* Home section */
-    
-    .banner_content{
-        margin-top: 45px;
-    }
 
     .section_MK25_subtitle p{
         text-align: left;
@@ -46,4 +52,28 @@
     }
 
     
+}
+
+@media screen and (max-width: 576px) {
+    h2 {
+        font-size: 3.5rem !important;
+    }
+
+    section .col-12:last-child{
+        text-align: center !important;
+    }
+
+    section .col-12:last-child .external_MK25_section_link{
+        float: none;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    h2 {
+        font-size: 3rem !important;
+    }
+
+    .call_to_action_wrapper .card h3 {
+        font-size: 2rem;
+    }
 }

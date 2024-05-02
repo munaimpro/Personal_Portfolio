@@ -736,6 +736,10 @@ p{
     color: var(--third-color);
 }
 
+.breadcrumb_MK25_title{
+    padding: 5rem 0;
+}
+
 .breadcrumb_MK25_title h2{
     font-size: 3rem;
 }
