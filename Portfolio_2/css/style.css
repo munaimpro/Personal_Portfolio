@@ -738,7 +738,8 @@ p{
     font-size: 3rem;
 }
 
-.skills_wrapper .education_MK25_list .education_item{
+.skills_wrapper .education_MK25_list .education_item,
+.interest_MK25_item{
     background: var(--card-bg-color);
     box-shadow: var(--box-shadow);
     border-bottom: 3px solid var(--second-color);
@@ -758,7 +759,20 @@ p{
     margin-bottom: 5px;
 }
 
-.skills_wrapper .education_item p{
+.skills_wrapper .education_item p,
+.interest_MK25_item .outer_changeable_text p{
     color: var(--first-color);
     font-weight: 500;
+}
+
+.interest_MK25_item .outer_changeable_icon{
+    color: var(--second-color);
+}
+
+.page_sectionMK25_wrapper{
+    position: relative;
+}
+
+.page_sectionMK25_wrapper h3::before{
+    top: 78px;
 }
