@@ -24,6 +24,10 @@
         transform: translateY(-48px);
     }
 
+    .page_sectionMK25_wrapper h3{
+        transform: none;
+    }
+
     .external_MK25_section_link{
         margin-left: auto;
         margin-right: auto;
@@ -35,6 +39,10 @@
 
     .btn{
         margin-top: 0;
+    }
+
+    .interest_MK25_item{
+        margin-right: 0 !important;
     }
 
     

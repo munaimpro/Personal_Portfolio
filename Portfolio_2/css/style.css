@@ -778,3 +778,35 @@ p{
 .page_sectionMK25_wrapper h3::before{
     top: 78px;
 }
+
+.call_to_action_wrapper .card{
+    border-radius: 10px;
+}
+
+.call_to_action_wrapper .card .title{
+    text-transform: uppercase;
+    line-height: 60px;
+}
+
+.call_to_action_wrapper .card h3{
+    font-size: 2.3rem;
+    font-weight: 700;
+}
+
+.call_to_action_wrapper .card{
+    overflow: hidden;
+}
+
+.page_sectionMK25_wrapper .contact_MK25_info{
+    background: transparent;
+    padding: 0;
+}
+
+.page_sectionMK25_wrapper .contact_MK25_info p{
+    color: var(--first-color);
+}
+
+.page_sectionMK25_wrapper .contact_widget_item .contact_widget_item_icon{
+    border-color: var(--second-color);
+    color: var(--second-color);
+}

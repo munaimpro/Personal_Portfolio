@@ -24,6 +24,10 @@
 </head>
 
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="90" data-bs-theme="dark">
+    <!-- Facebook page integration -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0" nonce="yIa05hwk"></script>
+
     <!-- Scroll To Top button -->
     <div class="scroll_to_top fixed-bottom">
       <i class="fas fa-chevron-up"></i>
@@ -94,13 +98,10 @@
     <section id="skills" class="page_sectionMK25_wrapper skills_wrapper vertical_MK25_w_space">
         <div class="container">
           <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12 mb-5 skill_MK25_items">
+            <div class="col-lg-6 col-sm-12 mb-5 mb-lg-0 skill_MK25_items">
                 <div class="section_MK25_subtitle">
                   <h4>EDUCATION</h4>
-                </div>
-
-                <div class="section_MK25_subtitle">
-                  <h3 class="mb-5 text-start">ACADEMIC EDUCATION</h3>
+                  <h3 class="mb-5">ACADEMIC EDUCATION</h3>
                 </div>
                 
                 <ul class="education_MK25_list">
@@ -125,12 +126,9 @@
                 </ul>
             </div>
             
-            <div class="col-lg-6 col-md-6 col-sm-12 mb-5 skill_MK25_items">
+            <div class="col-lg-6 col-sm-12 mb-5 mb-lg-0 skill_MK25_items">
                 <div class="section_MK25_subtitle">
                     <h4>SKILLS</h4>
-                </div>
-                
-                <div class="section_MK25_subtitle">
                     <h3 class="mb-5">TECHNICAL SKILLS</h3>
                 </div>
                 
@@ -179,15 +177,12 @@
     </section>
 
     <!-- Interest Section -->
-    <section class="skills_wrapper page_sectionMK25_wrapper vertical_MK25_w_space">
+    <section class="page_sectionMK25_wrapper vertical_MK25_w_space">
         <div class="container">
-          <div class="row justify-content-center">
+          <div class="row mb-5 mb-lg-0 justify-content-center">
             <div class="col-12">
               <div class="section_MK25_subtitle">
                   <h4>INTEREST</h4>
-              </div>
-              
-              <div class="section_MK25_subtitle">
                   <h3 class="mb-5">WHAT I LIKE TO DO</h3>
               </div>
             </div>
@@ -232,9 +227,12 @@
     <section class="page_sectionMK25_wrapper contact_wrapper vertical_MK25_w_space">
         <div class="container">
           <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12 mb-5 skill_MK25_items">
+            <div class="col-lg-6 col-sm-12 mb-5 mb-lg-0 skill_MK25_items">
+                <div class="section_MK25_subtitle">
+                  <h4>CONTACT</h4>
+                  <h3 class="mb-5">FOR ENQUERIES</h3>
+                </div>
                 <div class="contact_MK25_info">
-                  <h2 class="mb-5 text-start">FOR ENQUERIES</h2>
                   <div class="contact_widget_item">
                     <div class="contact_widget_item_icon">
                       <i class="fa-solid fa-location-dot"></i>
@@ -265,12 +263,9 @@
                 </div>
             </div>
             
-            <div class="col-lg-6 col-md-6 col-sm-12 mb-5 skill_MK25_items">
+            <div class="col-lg-6 col-sm-12 mb-5 mb-lg-0 skill_MK25_items">
                 <div class="section_MK25_subtitle">
                     <h4>SOCIAL</h4>
-                </div>
-                
-                <div class="section_MK25_subtitle">
                     <h3 class="mb-5">GET CONNECTED</h3>
                 </div>
             
@@ -372,6 +367,41 @@
           </div>
         </div>
     </section>
+
+    <!-- Cal To Action section -->
+    <section class="call_to_action_wrapper vertical_MK25_w_space">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-6 col-sm-12 mb-5 mb-lg-0">
+            <div class="card text-center">
+              <div class="title">
+                <h3>Facebook Page</h3>
+              </div>
+              <div class="call_to_action_content text-center">
+                <div class="row">
+                  <div class="col-12"> <!-- Use Bootstrap grid system -->
+                    <div class="embed-responsive embed-responsive-16by9">
+                      <div class="fb-page embed-responsive-item" 
+                           data-href="https://www.facebook.com/webcodermunaim" 
+                           data-tabs="" 
+                           data-height="500" 
+                           data-small-header="false" 
+                           data-adapt-container-width="true" 
+                           data-hide-cover="false" 
+                           data-show-facepile="false">
+                        <blockquote cite="https://www.facebook.com/webcodermunaim" class="fb-xfbml-parse-ignore">
+                          <a href="https://www.facebook.com/webcodermunaim">Web Coder Munaim</a>
+                        </blockquote>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>    
 
     <!-- Footer section -->
     <section id="footer" class="vertical_MK25_w_space footer_wrapper">
