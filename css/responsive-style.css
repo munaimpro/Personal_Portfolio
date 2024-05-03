@@ -49,6 +49,7 @@
 
     .interest_MK25_item{
         margin-right: 0 !important;
+        margin-left: 0 !important;
     }
 
     
@@ -75,5 +76,19 @@
 
     .call_to_action_wrapper .card h3 {
         font-size: 2rem;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    h2 {
+        font-size: 2.5rem !important;
+    }
+
+    .call_to_action_wrapper .card h3 {
+        font-size: 2rem;
+    }
+
+    .contact_MK25_info h2{
+        font-size: 1.4rem !important;
     }
 }
