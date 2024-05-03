@@ -1,6 +1,6 @@
 /* ---============================ Responsive Design Style ============================---- */
 
-@media screen and (min-width: 360px){
+/* @media screen and (min-width: 360px){
     .breadcumb_wrapper{
         padding-bottom: 0;
     }
@@ -22,7 +22,7 @@
 
     /* Home section */
 
-    .section_MK25_subtitle p{
+    /* .section_MK25_subtitle p{
         text-align: left;
     }
 
@@ -41,9 +41,9 @@
 
     .swiper-button-next, .swiper-button-prev{
         display: none;
-    }
+    } */
 
-    .btn{
+    /* .btn{
         margin-top: 0;
     }
 
@@ -53,9 +53,9 @@
     }
 
     
-}
+} */
 
-@media screen and (max-width: 576px) {
+/* @media screen and (max-width: 576px) {
     h2 {
         font-size: 3.5rem !important;
     }
@@ -91,4 +91,80 @@
     .contact_MK25_info h2{
         font-size: 1.4rem !important;
     }
+} */
+
+
+
+
+
+
+/* ---============================ Responsive Design Style ============================---- */
+
+/* Extra small devices (phones, less than 576px) */
+@media screen and (max-width: 575.98px) {
+    .breadcumb_wrapper {
+        padding-bottom: 0;
+    }
+
+    .breadcrumb_MK25_title {
+        padding: 5rem 0;
+    }
+
+    /* Adjustments for specific elements at extra small devices */
+    h2 {
+        font-size: 2.5rem !important;
+    }
+
+    section .col-12:last-child {
+        text-align: center !important;
+    }
+
+    section .col-12:last-child .external_MK25_section_link {
+        float: none;
+    }
+
+    .contact_MK25_info h2 {
+        font-size: 1.4rem !important;
+    }
+
+    .interest_MK25_item{
+        margin-left: 0;
+    }
+}
+
+/* Small devices (phones, 576px and up) */
+@media screen and (min-width: 576px) and (max-width: 767.98px) {
+    .swiper-button-next, .swiper-button-prev{
+        display: none;
+    }
+
+    .client_identity{
+        text-align: center;
+    }
+
+    .section_MK25_first_title {
+        font-size: 3rem;
+    }
+
+    .section_MK25_subtitle {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    /* Adjustments for specific elements at small devices */
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media screen and (min-width: 768px) and (max-width: 991.98px) {
+    /* Adjustments for specific elements at medium devices */
+}
+
+/* Large devices (desktops, 992px and up) */
+@media screen and (min-width: 992px) and (max-width: 1199.98px) {
+    /* Adjustments for specific elements at large devices */
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media screen and (min-width: 1200px) {
+    /* Adjustments for specific elements at extra large devices */
 }
