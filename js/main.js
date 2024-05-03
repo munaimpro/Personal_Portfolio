@@ -39,8 +39,11 @@ window.addEventListener('scroll', function(){
 });
 
 scrollTopButton.addEventListener('click', () => {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
+    // Smooth scroll to the top
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
 });
 
 // Website dark light theme
