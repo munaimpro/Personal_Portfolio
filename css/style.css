@@ -123,7 +123,7 @@ p{
 }
 
 .vertical_MK25_w_space{
-    padding-bottom: 7rem;
+    padding-bottom: 6rem;
 }
 
 .external_MK25_section_link{
@@ -731,7 +731,7 @@ p{
 }
 
 .breadcrumb_MK25_links a{
-    color: #000000;
+    color: #030810;
     margin-right: 32px;
 }
 
@@ -749,7 +749,7 @@ p{
 }
 
 .breadcrumb_MK25_title{
-    color: #000000;
+    color: #030810;
     padding: 5rem 0;
 }
 
@@ -823,6 +823,12 @@ p{
 .call_to_action_wrapper .card h3{
     font-size: 2.3rem;
     font-weight: 700;
+    line-height: 55px;
+    margin-bottom: 22px;
+}
+
+.call_to_action_wrapper .call_to_action_content p{
+    margin-bottom: 55px;
 }
 
 .call_to_action_wrapper .card{
