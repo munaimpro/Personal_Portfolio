@@ -376,7 +376,8 @@ p{
 
 .skills_wrapper .bar:hover,
 .page_sectionMK25_wrapper .education_item:hover,
-.page_sectionMK25_wrapper .interest_MK25_item:hover{
+.page_sectionMK25_wrapper .interest_MK25_item:hover,
+.page_sectionMK25_wrapper .social_MK25_item:hover{
     transform: scale(1.03);
 }
 
@@ -716,6 +717,10 @@ p{
 
 
 /* Breadcrumb */
+.breadcrumb_bg{
+    padding: 0;
+    background: repeating-linear-gradient(-20deg, #8274d7, #c5cadf 366px);
+}
 
 .breadcrumb_MK25_links a,
 .breadcrumb_MK25_links span{
@@ -726,6 +731,7 @@ p{
 }
 
 .breadcrumb_MK25_links a{
+    color: #000000;
     margin-right: 32px;
 }
 
@@ -739,10 +745,11 @@ p{
 }
 
 .breadcrumb_MK25_links span{
-    color: var(--third-color);
+    color: var(--second-color);
 }
 
 .breadcrumb_MK25_title{
+    color: #000000;
     padding: 5rem 0;
 }
 
@@ -751,7 +758,7 @@ p{
 }
 
 .skills_wrapper .education_MK25_list .education_item,
-.interest_MK25_item{
+.interest_MK25_item, .social_MK25_item{
     background: var(--card-bg-color);
     box-shadow: var(--box-shadow);
     border-bottom: 3px solid var(--second-color);
@@ -759,6 +766,7 @@ p{
     margin-top: 15px;
     border-radius: 6px;
     transition: .3s ease;
+    overflow: hidden;
 }
 
 .skills_wrapper .education_MK25_list{
@@ -777,8 +785,22 @@ p{
     font-weight: 500;
 }
 
-.interest_MK25_item .outer_changeable_icon{
+.outer_changeable_icon{
     color: var(--second-color);
+}
+
+.contact_wrapper .social_MK25_item{
+    border-right: 3px solid var(--second-color);
+    border-bottom: 0;
+    padding: 0 !important;
+}
+
+.contact_wrapper .social_MK25_items .outer_changeable_icon{
+    background: var(--second-color);
+    color: var(--text-white);
+    text-align: center;
+    padding: 20px 7px;
+    overflow: hidden;
 }
 
 .page_sectionMK25_wrapper{
