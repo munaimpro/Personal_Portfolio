@@ -106,6 +106,17 @@ p{
     font-size: var(--normal-font-size);
 }
 
+code{
+    white-space: pre-line;
+    width: 100%;
+    display: block;
+    padding: 20px;
+    background: var(--transparent-color-02);
+    color: var(--third-color);
+    border-radius: 5px;
+    border-left: 5px solid var(--second-color);
+}
+
 /* 1. Custom CSS */
 
 ::-webkit-scrollbar{
@@ -601,6 +612,39 @@ p{
     margin: 0;
 }
 
+.breadcrumb_MK25_blog .breadcrumb_MK25_title{
+    padding: 5rem 15rem;
+}
+
+.breadcrumb_MK25_title h3::before{
+    display: none;
+}
+
+.blog_details_wrapper .blog_banner{
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.blog_details_option 
+.external_MK25_section_link{
+    float: initial;
+    padding: 15px;
+}
+
+.blog_details_option .card{
+    display: flex;
+    flex-direction: row;
+}
+
+.blog_details_option .col-lg-6:last-child .card{
+    flex-direction: row-reverse;
+}
+
+.blog_details_option .blog_details_option_image{
+    width: 50%;
+}
+
 /* 9. Contact */
 
 .contact_wrapper .form-control{
@@ -758,7 +802,7 @@ p{
     right: -22px;
     top: -3px;
     content: "/";
-    color: var(--third-color);
+    color: var(--second-color);
     font-size: 20px;
 }
 
