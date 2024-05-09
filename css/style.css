@@ -583,6 +583,24 @@ p{
     transform: translateX(.15rem);
 }
 
+.blog_wrapper .pagination .navbar-nav{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.blog_wrapper .pagination .navbar-nav li{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.blog_wrapper .pagination .btn{
+    padding: 5px 15px;
+    border-radius: 5px;
+    margin: 0;
+}
+
 /* 9. Contact */
 
 .contact_wrapper .form-control{
