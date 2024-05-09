@@ -18,6 +18,9 @@
 	  <!-- Swiper CSS Link -->
 	  <link rel="stylesheet" href="css/swiper-bundle.min.css"/>
 
+    <!-- Highlight JS CSS Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/gradient-light.css">
+
     <!-- Custom CSS Links -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive-style.css">
@@ -107,14 +110,15 @@
             <div class="blog_text">
               <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque rerum magnam enim distinctio quibusdam saepe. Assumenda omnis dolores officiis consectetur eveniet alias impedit laborum voluptatem natus facere quis esse saepe recusandae doloremque cumque necessitatibus sapiente cupiditate, animi vel eius. Eaque!</p>
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis eum cumque, expedita officia ea dicta eligendi accusantium odio quam amet vero quis commodi? Hic, nobis!</p>
-              <pre>
-                <code>// Bad
+              <pre style="tab-size: 4;">
+                <code class="language-javascript">// Bad
                   const x = getData();
                   const y = processIt(x);
                   
                   // Good
                   const userData = fetchUserInformation();
-                  const processedUser = generateUserReport(userData);</code>
+                  const processedUser = generateUserReport(userData);
+                </code>
               </pre>
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem mollitia, exercitationem laudantium praesentium ullam doloremque illo molestias. Eos ratione aliquam maxime, architecto quasi autem? Culpa accusamus ipsa consectetur maiores voluptas.</p>
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est consequuntur eaque dignissimos architecto laudantium iste soluta, eos ratione quo tempore quam veniam nostrum aliquam modi nemo culpa animi ipsum minima facere eum! Tenetur, atque! Nesciunt facere voluptates eos tempora voluptate praesentium, mollitia repellendus maxime reiciendis ut dolorum, placeat dignissimos aliquid.</p>
@@ -231,6 +235,14 @@
     
     <!-- Facebook Page Integration JS Link -->
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0" nonce="yIa05hwk"></script>
+
+    <!-- Highlight JS Link -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+
+    <script>
+      hljs.highlightAll();
+    </script>
 
     <!-- Custom JS Link -->
     <script src="js/main.js"></script>
