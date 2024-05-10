@@ -21,6 +21,10 @@
     <!-- Highlight JS CSS Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/gradient-light.css">
 
+    <!-- Owl Carousal CSS Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- Custom CSS Links -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive-style.css">
@@ -101,7 +105,13 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-7 mb-5">
-            
+            <div class="project_image">
+              <div class="owl-carousel owl-theme">
+                <div class="item"><img src="images/portfolio/portfolio1.webp" alt="Project Image"></div>
+                <div class="item"><img src="images/portfolio/portfolio2.webp" alt="Project Image"></div>
+                <div class="item"><img src="images/portfolio/portfolio3.webp" alt="Project Image"></div>
+              </div>
+            </div>
           </div>
           <div class="col-lg-5">
             <div class="project_title mb-5">
@@ -201,9 +211,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
 
-    <script>
-      hljs.highlightAll();
-    </script>
+    <!-- jQuery CDN Link -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Owl Carousal JS Link -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
     <!-- Custom JS Link -->
     <script src="js/main.js"></script>

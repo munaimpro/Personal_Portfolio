@@ -184,6 +184,15 @@ code{
     color: var(--text-white);
 }
 
+.owl-item img{
+    height: 70vh;
+}
+
+.owl-theme .owl-dots .owl-dot.active span,
+.owl-theme .owl-dots .owl-dot:hover span{
+    background: var(--second-color);
+}
+
 /* Scroll To Top Button */
 
 .scroll_to_top{

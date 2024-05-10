@@ -66,3 +66,26 @@ if(savedTheme){
     document.body.classList[savedTheme === 'dark' ? 'add' : 'remove']('dark-theme');
     themeButton.classList[savedIcon === 'sun' ? 'add' : 'remove']('sun');
 }
+
+// Highlight JS initialization
+hljs.highlightAll();
+
+// Owl Carousal configuration
+$('.owl-carousel').owlCarousel({
+    loop:true,
+    smartSpeed:1200,
+    autoplay:true,
+    margin:10,
+    nav:false,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:1
+        },
+        1000:{
+            items:1
+        }
+    }
+})
