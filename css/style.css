@@ -828,7 +828,6 @@ code{
 /* Breadcrumb */
 .breadcrumb_bg{
     padding: 0;
-    background: repeating-linear-gradient(-20deg, #8274d7, #c5cadf 366px);
 }
 
 .breadcrumb_MK25_links a,
@@ -863,7 +862,16 @@ code{
 }
 
 .breadcrumb_MK25_title h2{
-    font-size: 3rem;
+    color: var(--second-color);
+    font-size: 4rem;
+    background-image: url('../images/page_title_bg.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.breadcrumb_MK25_title h2::before{
+    display: none;
 }
 
 .skills_wrapper .education_MK25_list .education_item,
