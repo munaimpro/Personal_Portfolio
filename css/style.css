@@ -310,6 +310,7 @@ code{
     background-position: top center;
     background-repeat: no-repeat;
     background-size: cover;
+    padding-top: 6rem;
 }
 
 .banner_wrapper .banner_content,
@@ -907,8 +908,11 @@ code{
     background: var(--second-color);
     color: var(--text-white);
     text-align: center;
-    padding: 20px 7px;
+    padding: 7px;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .page_sectionMK25_wrapper{
@@ -933,6 +937,10 @@ code{
     font-weight: 700;
     line-height: 55px;
     margin-bottom: 22px;
+}
+
+.call_to_action_wrapper .card h3::before{
+    display: none;
 }
 
 .call_to_action_wrapper .call_to_action_content p{
