@@ -396,7 +396,8 @@ code{
 .skills_wrapper .bar:hover,
 .page_sectionMK25_wrapper .education_item:hover,
 .page_sectionMK25_wrapper .interest_MK25_item:hover,
-.page_sectionMK25_wrapper .social_MK25_item:hover{
+.page_sectionMK25_wrapper .social_MK25_item:hover,
+.pricing_wrapper .single_pricing:hover{
     transform: scale(1.03);
 }
 
@@ -988,3 +989,71 @@ code{
     border-color: var(--second-color);
     color: var(--second-color);
 }
+
+/* Pricing */
+.pricing_wrapper .single_pricing{
+    background: var(--card-bg-color);
+    border-radius: 6px;
+    box-shadow: var(--box-shadow);
+    transition: .5s ease all;
+    text-align: center;
+    overflow: hidden;
+}
+
+.pricing_wrapper .single_pricing .deal_type{
+    background: linear-gradient(to bottom, #4a39b6, var(--second-color));
+    padding: 15px 0;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: var(--text-white);
+}
+
+.pricing_wrapper .single_pricing .deal_amount{
+    clip-path: polygon(0 0, 100% 0%, 100% 52%, 50% 100%, 0% 50%);
+    background: linear-gradient(to right, #4a39b5, var(--second-color));
+    padding: 15px 0;
+    color: var(--text-white);
+}
+
+.pricing_wrapper .price .money{
+    font-size: 60px;
+    font-weight: 900;
+}
+
+.pricing_wrapper .price .money sup{
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.pricing_wrapper .single_deal{
+    list-style: none;
+    padding: 15px 30px;
+}
+
+.pricing_wrapper .single_deal li{
+    color: var(--third-color);
+    display: flex;
+    font-size: 18px;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--third-color);
+    align-items: center;
+}
+
+.pricing_wrapper .btn{
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
