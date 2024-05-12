@@ -818,7 +818,6 @@ code{
     --webkit-background-clip: text;
     --webkit-text-fill-color: transparent;
     opacity: .8;
-    width: fit-content;
 }
 
 .footer_wrapper .footer_links h3{

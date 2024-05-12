@@ -151,6 +151,13 @@
     .breadcrumb_MK25_blog .breadcrumb_MK25_title h3{
         font-size: 1.5rem;    
     }
+
+    /* Footer section */
+    .footer_wrapper .footer_logo,
+    .footer_wrapper .d-flex{
+        text-align: center !important;
+        justify-content: center !important;
+    }
 }
 
 /* Small devices (phones, 576px and up) */
@@ -189,7 +196,12 @@
         font-size: 1.8rem;    
     }
 
-    /* Adjustments for specific elements at small devices */
+    /* Footer section */
+    .footer_wrapper .footer_logo,
+    .footer_wrapper .d-flex{
+        text-align: center !important;
+        justify-content: center !important;
+    }
 }
 
 /* Medium devices (tablets, 768px and up) */
@@ -197,6 +209,13 @@
     /* Blog details title */
     .breadcrumb_MK25_blog .breadcrumb_MK25_title{
         padding: 5rem 1rem !important;
+    }
+
+    /* Footer section */
+    .footer_wrapper .footer_logo,
+    .footer_wrapper .d-flex{
+        text-align: center !important;
+        justify-content: center !important;
     }
 }
 
