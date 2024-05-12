@@ -252,6 +252,7 @@ code{
 
 .header_wrapper .navbar{
     backdrop-filter: blur(20px);
+    height: calc(4rem + 1rem);
     padding: 0.9375rem 0;
     position: fixed;
     width: 100%;
@@ -804,15 +805,32 @@ code{
 
 .footer_wrapper{
     background: var(--second-color);
+    color: var(--text-white);
     padding: 0;
 }
 
-.footer_wrapper p{
+.footer_wrapper p, .footer_wrapper a{
     color: var(--text-white);
 }
-.footer_wrapper .footer_logo img{
-    max-width: 10rem;
-    height: auto;
+
+.footer_wrapper .footer_logo h2{
+    font-size: 3rem;
+    font-weight: 600;
+    --webkit-background-clip: text;
+    --webkit-text-fill-color: transparent;
+    opacity: .8;
+    width: fit-content;
+}
+
+.footer_wrapper .footer_links h3{
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.footer_wrapper .footer_links a{
+    padding-right: .5rem;
+    padding-left: .5rem;
 }
 
 .footer_wrapper .footer_social_icon{
@@ -821,6 +839,7 @@ code{
 }
 
 .footer_wrapper .footer_top,
+.footer_wrapper .footer_middle,
 .footer_wrapper .footer_bottom{
     padding: 2rem 0;
 }
