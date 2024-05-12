@@ -93,8 +93,6 @@ body{
     color: var(--first-color);
     background: var(--body-bg-color);
     font-family: 'Poppines', sans-serif;
-    overflow-y: scroll;
-    overscroll-behavior: contain;
 }
 
 a{
