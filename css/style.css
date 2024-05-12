@@ -623,6 +623,7 @@ code{
 }
 
 .breadcrumb_MK25_blog .breadcrumb_MK25_title{
+    color: var(--text-black);
     padding: 5rem 15rem;
 }
 
@@ -839,7 +840,7 @@ code{
 }
 
 .breadcrumb_MK25_links a{
-    color: #030810;
+    color: var(--text-black);
     margin-right: 32px;
 }
 
