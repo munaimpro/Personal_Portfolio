@@ -57,7 +57,7 @@ themeButton.addEventListener('click', () => {
 });
 
 let getCurrentTheme = () => document.body.classList.contains('dark-theme') ? 'dark' : 'light';
-let getCurrentIcon = () => document.body.classList.contains('sun') ? 'sun' : 'moon';
+let getCurrentIcon = () => themeButton.classList.contains('sun') ? 'sun' : 'moon';
 
 let savedTheme = localStorage.getItem('saved-theme');
 let savedIcon  = localStorage.getItem('saved-icon');
