@@ -142,6 +142,15 @@
     .interest_MK25_item{
         margin-left: 0;
     }
+
+    /* Blog details title */
+    .breadcrumb_MK25_blog .breadcrumb_MK25_title{
+        padding: 5rem 1rem !important;
+    }
+
+    .breadcrumb_MK25_blog .breadcrumb_MK25_title h3{
+        font-size: 1.3rem;    
+    }
 }
 
 /* Small devices (phones, 576px and up) */
@@ -171,12 +180,24 @@
         text-align: center;
     }
 
+    /* Blog details title */
+    .breadcrumb_MK25_blog .breadcrumb_MK25_title{
+        padding: 5rem 1rem !important;
+    }
+
+    .breadcrumb_MK25_blog .breadcrumb_MK25_title h3{
+        font-size: 1.8rem;    
+    }
+
     /* Adjustments for specific elements at small devices */
 }
 
 /* Medium devices (tablets, 768px and up) */
 @media screen and (min-width: 768px) and (max-width: 991.98px) {
-    /* Adjustments for specific elements at medium devices */
+    /* Blog details title */
+    .breadcrumb_MK25_blog .breadcrumb_MK25_title{
+        padding: 5rem 1rem !important;
+    }
 }
 
 /* Large devices (desktops, 992px and up) */
