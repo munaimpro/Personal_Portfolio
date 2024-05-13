@@ -19,22 +19,6 @@ navlink.forEach(function(e){
 });
 
 
-// Swiper JS initialization
-const swiper = new Swiper(".testimonial_swiper", {
-    slidesPerView: 1,
-    spaceBetween: 30,
-    loop: true,
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-    },
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-});
-
-
 // Scroll To Top
 let scrollTopButton = document.querySelector('.scroll_to_top');
 window.addEventListener('scroll', function(){
@@ -102,7 +86,7 @@ $('.owl-carousel').owlCarousel({
     smartSpeed:1200,
     autoplay:true,
     margin:10,
-    nav:false,
+    nav:true,
     responsive:{
         0:{
             items:1
