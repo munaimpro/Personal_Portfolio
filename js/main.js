@@ -8,6 +8,7 @@ window.onscroll = function(){
     }
 }
 
+
 // Nav hide
 let navlink = document.querySelectorAll('.nav-link');
 let navCollapse = document.querySelector('.navbar-collapse.collapse');
@@ -17,8 +18,9 @@ navlink.forEach(function(e){
     });
 });
 
+
 // Swiper JS initialization
-var swiper = new Swiper(".testimonial_swiper", {
+const swiper = new Swiper(".testimonial_swiper", {
     slidesPerView: 1,
     spaceBetween: 30,
     loop: true,
@@ -30,7 +32,8 @@ var swiper = new Swiper(".testimonial_swiper", {
       nextEl: ".swiper-button-next",
       prevEl: ".swiper-button-prev",
     },
-  });
+});
+
 
 // Scroll To Top
 let scrollTopButton = document.querySelector('.scroll_to_top');
@@ -46,29 +49,52 @@ scrollTopButton.addEventListener('click', () => {
     });
 });
 
+
 // Website dark light theme
-let themeButton = document.querySelector('.body_theme');
-themeButton.addEventListener('click', () => {
+const themeButton = document.querySelector('.body_theme');
+
+// Function to toggle theme
+const toggleTheme = () => {
     document.body.classList.toggle('dark-theme');
     themeButton.classList.toggle('sun');
 
     localStorage.setItem('saved-theme', getCurrentTheme());
     localStorage.setItem('saved-icon', getCurrentIcon());
+};
+
+// Function to get current theme
+const getCurrentTheme = () => document.body.classList.contains('dark-theme') ? 'dark' : 'light';
+
+// Function to get current icon
+const getCurrentIcon = () => themeButton.classList.contains('sun') ? 'sun' : 'moon';
+
+// Event listener for theme button click
+themeButton.addEventListener('click', () => {
+    toggleTheme();
 });
 
-let getCurrentTheme = () => document.body.classList.contains('dark-theme') ? 'dark' : 'light';
-let getCurrentIcon = () => themeButton.classList.contains('sun') ? 'sun' : 'moon';
-
+// Check saved theme and icon from local storage
 let savedTheme = localStorage.getItem('saved-theme');
-let savedIcon  = localStorage.getItem('saved-icon');
+let savedIcon = localStorage.getItem('saved-icon');
 
-if(savedTheme){
+// Apply saved theme and icon
+if (savedTheme) {
     document.body.classList[savedTheme === 'dark' ? 'add' : 'remove']('dark-theme');
     themeButton.classList[savedIcon === 'sun' ? 'add' : 'remove']('sun');
 }
 
+// Function to automatically toggle theme every 24 hours
+const autoToggleTheme = () => {
+    toggleTheme();
+};
+
+// Set interval to run autoToggleTheme every 24 hours (24 * 60 * 60 * 1000 milliseconds)
+setInterval(autoToggleTheme, 24 * 60 * 60 * 1000);
+
+
 // Highlight JS initialization
 hljs.highlightAll();
+
 
 // Owl Carousal configuration
 $('.owl-carousel').owlCarousel({
