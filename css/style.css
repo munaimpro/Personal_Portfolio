@@ -710,6 +710,10 @@ code{
     border-top: 1px solid var(--line-color);
 }
 
+.recent_blog{
+    padding-top: 4rem;
+}
+
 .blog_details_option 
 .external_MK25_section_link{
     float: initial;
