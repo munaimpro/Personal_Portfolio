@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -23,25 +23,23 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<div id="global-loader">
-<div class="whirly-loader"> </div>
-</div>
+    <div id="global-loader">
+        <div class="whirly-loader"> </div>
+    </div>
 
 <div class="main-wrapper">
-
     <!-- Header start -->
     <div class="header">
-
-    <div class="header-left active">
-    <a href="index.html" class="logo">
-    <img src="assets/img/logo.png" alt="">
-    </a>
-    <a href="index.html" class="logo-small">
-    <img src="assets/img/logo-small.png" alt="">
-    </a>
-    <a id="toggle_btn" href="javascript:void(0);">
-    </a>
-    </div>
+        <div class="header-left active">
+            <a href="index.html" class="logo">
+                <img src="assets/img/logo.png" alt="">
+            </a>
+            <a href="index.html" class="logo-small">
+                <img src="assets/img/logo-small.png" alt="">
+            </a>
+            <a id="toggle_btn" href="javascript:void(0);">
+            </a>
+        </div>
 
     <a id="mobile_btn" class="mobile_btn" href="#sidebar">
     <span class="bar-icon">
@@ -240,7 +238,7 @@
                             <li><a href="award.html">Awards</a></li>
                             <li><a href="experience.html">Experience</a></li>
                             <li><a href="interest.html">Interest</a></li>
-                            <li><a href="social_media.html">Social Media</a></li>
+                            <li><a href="social_media.html" class="active">Social Media</a></li>
                         </ul>
                     </li>
                     
@@ -263,13 +261,18 @@
                     <li class="submenu">
                         <a href="javascript:void(0);"><img src="assets/img/icons/expense1.svg" alt="img"><span> Post</span> <span class="menu-arrow"></span></a>
                         <ul>
+                            <li><a href="addpost.html">Create Post</a></li>
                             <li><a href="postlist.html">All Post</a></li>
                             <li><a href="categorylist.html">Category List</a></li>
                         </ul>
                     </li>
 
-                    <li>
-                        <a href="userlist.html" class="active"><img src="assets/img/icons/users1.svg" alt="img"><span> Users</span> </a>
+                    <li class="submenu">
+                        <a href="javascript:void(0);"><img src="assets/img/icons/users1.svg" alt="img"><span> Users</span> <span class="menu-arrow"></span></a>
+                        <ul>
+                            <li><a href="newuser.html">New User </a></li>
+                            <li><a href="userlists.html">Users List</a></li>
+                        </ul>
                     </li>
 
                     <li class="submenu">
@@ -289,88 +292,35 @@
     </div>
     <!-- Sidebar end -->
 
+    <!-- Page content start -->
     <div class="page-wrapper">
-        <!-- Page content start -->
         <div class="content">
             <!-- Create modal start -->
             <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="createModalLabel">Add User</h5>
+                            <h5 class="modal-title" id="createModalLabel">Create Social Media</h5>
                         </div>
                         <div class="modal-body">
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>First Name</label>
-                                    <input type="text">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Last Name</label>
-                                    <input type="text">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>User Name</label>
-                                    <input type="text">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Password</label>
-                                    <div class="pass-group">
-                                        <input type="password" class=" pass-input">
-                                        <span class="fas toggle-password fa-eye-slash"></span>
+                            <form id="save-form">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12 p-1">
+                                            <label class="form-label">Media Name *</label>
+                                            <input type="text" class="form-control" id="mediaTitle">
+                                            <label class="form-label">Media Link *</label>
+                                            <input type="text" class="form-control" id="mediaLink">
+                                            <label class="form-label">Media Icon *</label>
+                                            <input type="text" class="form-control" id="mediaIcon">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Phone</label>
-                                    <input type="text">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input type="text">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Role</label>
-                                    <select class="form-control">
-                                        <option>Select</option>
-                                        <option>Owner</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label> User Image</label>
-                                    <div class="image-upload">
-                                        <input type="file">
-                                        <div class="image-uploads">
-                                        <img src="assets/img/icons/upload.svg" alt="img">
-                                        <h4>Drag and drop a file to upload</h4>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                         <div class="modal-footer justify-content-end">
-                            <button type="button" class="btn btn-submit">Add user</button>
-                            <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-sm btn-primary">Add media</button>
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Cancel</button>
                         </div>
                     </div>
                 </div>
@@ -382,94 +332,27 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="editModalLabel">Update User</h5>
+                            <h5 class="modal-title" id="editModalLabel">Edit Social Media</h5>
                         </div>
                         <div class="modal-body">
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>First Name</label>
-                                    <input type="text">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Last Name</label>
-                                    <input type="text">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>User Name</label>
-                                    <input type="text">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Password</label>
-                                    <div class="pass-group">
-                                        <input type="password" class=" pass-input">
-                                        <span class="fas toggle-password fa-eye-slash"></span>
+                            <form id="update-form">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12 p-1">
+                                            <label class="form-label">Media Name *</label>
+                                            <input type="text" class="form-control" id="mediaTitle">
+                                            <label class="form-label">Media Link *</label>
+                                            <input type="text" class="form-control" id="mediaLink">
+                                            <label class="form-label">Media Icon *</label>
+                                            <input type="text" class="form-control" id="mediaIcon">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Phone</label>
-                                    <input type="text">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input type="text">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Role</label>
-                                    <select class="form-control">
-                                        <option>Select</option>
-                                        <option>Owner</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label> User Image</label>
-                                    <div class="image-upload">
-                                        <input type="file">
-                                        <div class="image-uploads">
-                                        <img src="assets/img/icons/upload.svg" alt="img">
-                                        <h4>Drag and drop a file to upload</h4>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-12">
-                                <div class="product-list">
-                                    <ul class="row">
-                                        <li class="ps-0">
-                                            <div class="productviewset">
-                                                <div class="productviewsimg">
-                                                    <img src="assets/img/customer/profile2.jpg" alt="img">
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                         <div class="modal-footer justify-content-end">
-                            <button type="button" class="btn btn-submit">Update details</button>
-                            <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-sm btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Cancel</button>
                         </div>
                     </div>
                 </div>
@@ -486,8 +369,8 @@
                             <input class="d-none" id="deleteID"/>
                         </div>
                         <div class="modal-footer justify-content-end">
-                            <button type="button" class="btn btn-submit">Yes, delete it!</button>
-                            <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-sm btn-primary">Yes, delete it!</button>
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Cancel</button>
                         </div>
                     </div>
                 </div>
@@ -497,12 +380,12 @@
             <!-- Page header start -->
             <div class="page-header">
                 <div class="page-title">
-                    <h4>User List</h4>
-                    <h6>Manage your User</h6>
+                    <h4>Social Media</h4>
+                    <h6>All about Social media</h6>
                 </div>
                 <div class="page-btn">
                     <button class="btn btn-added" data-bs-toggle="modal" data-bs-target="#createModal">
-                        <img src="assets/img/icons/plus.svg" class="me-1" alt="img">Add User
+                        <img src="assets/img/icons/plus.svg" class="me-1" alt="img">Add Social Media
                     </button>
                 </div>
             </div>
@@ -511,12 +394,11 @@
             <!-- Table start -->
             <div class="card">
                 <div class="card-body">
+                    <!-- Table search start -->
                     <div class="table-top">
                         <div class="search-set">
                             <div class="search-input">
-                                <a class="btn btn-searchset">
-                                    <img src="assets/img/icons/search-white.svg" alt="img">
-                                </a>
+                                <a class="btn btn-searchset"><img src="assets/img/icons/search-white.svg" alt="img"></a>
                             </div>
                         </div>
                         <div class="wordset">
@@ -533,26 +415,22 @@
                             </ul>
                         </div>
                     </div>
-
+                    <!-- Table search end -->
+                    
+                    <!-- Table content start -->
                     <div class="table-responsive">
-                        <table class="table  datanew">
+                        <table class="table datanew">
                             <thead>
-                            <tr>
-                            <th>
-                            <label class="checkboxs">
-                            <input type="checkbox">
-                            <span class="checkmarks"></span>
-                            </label>
-                            </th>
-                            <th>Profile</th>
-                            <th>First name </th>
-                            <th>Last name </th>
-                            <th>User name </th>
-                            <th>Phone</th>
-                            <th>email</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                            </tr>
+                                <tr>
+                                    <th>
+                                        <label class="checkboxs">
+                                            <input type="checkbox" id="select-all">
+                                            <span class="checkmarks"></span>
+                                        </label>
+                                    </th>
+                                    <th>Social Media</th>
+                                    <th>Action</th>
+                                </tr>
                             </thead>
 
                             <tbody>
@@ -563,24 +441,7 @@
                                             <span class="checkmarks"></span>
                                         </label>
                                     </td>
-                                    <td class="productimgname">
-                                        <a href="javascript:void(0);" class="product-img">
-                                            <img src="assets/img/customer/customer1.jpg" alt="product">
-                                        </a>
-                                    </td>
-                                    <td>Thomas</td>
-                                    <td>Thomas </td>
-                                    <td>Thomas21 </td>
-                                    <td>+12163547758 </td>
-                                    <td>
-                                        <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="42362a2d2f233102273a232f322e276c212d2f">[email&#160;protected]</a>
-                                    </td>
-                                    <td>
-                                        <div class="status-toggle d-flex justify-content-between align-items-center">
-                                            <input type="checkbox" id="user1" class="check">
-                                            <label for="user1" class="checktoggle">checkbox</label>
-                                        </div>
-                                    </td>
+                                    <td>Coding</td>
                                     <td>
                                         <a class="me-3" data-bs-toggle="modal" data-bs-target="#editModal">
                                             <img src="assets/img/icons/edit.svg" alt="img">
@@ -593,16 +454,17 @@
                             </tbody>
                         </table>
                     </div>
+                    <!-- Table content end -->
                 </div>
             </div>
             <!-- Table end -->
         </div>
-        <!-- Page content end -->
     </div>
+    <!-- Page content end -->
 </div>
 
 
-<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.6.0.min.js"></script>
+<script src="assets/js/jquery-3.6.0.min.js"></script>
 
 <script src="assets/js/feather.min.js"></script>
 
@@ -614,9 +476,6 @@
 <script src="assets/js/bootstrap.bundle.min.js"></script>
 
 <script src="assets/plugins/select2/js/select2.min.js"></script>
-
-<script src="assets/js/moment.min.js"></script>
-<script src="assets/js/bootstrap-datetimepicker.min.js"></script>
 
 <script src="assets/plugins/sweetalert/sweetalert2.all.min.js"></script>
 <script src="assets/plugins/sweetalert/sweetalerts.min.js"></script>

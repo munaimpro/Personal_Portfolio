@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -263,13 +263,13 @@
                     <li class="submenu">
                         <a href="javascript:void(0);"><img src="assets/img/icons/expense1.svg" alt="img"><span> Post</span> <span class="menu-arrow"></span></a>
                         <ul>
-                            <li><a href="postlist.html">All Post</a></li>
-                            <li><a href="categorylist.html">Category List</a></li>
+                            <li><a href="postlist.html" class="active">All Post</a></li>
+                            <li><a href="categorylist.html">All Category</a></li>
                         </ul>
                     </li>
 
                     <li>
-                        <a href="userlist.html" class="active"><img src="assets/img/icons/users1.svg" alt="img"><span> Users</span> </a>
+                        <a href="userlist.html"><img src="assets/img/icons/users1.svg" alt="img"><span> Users</span> </a>
                     </li>
 
                     <li class="submenu">
@@ -293,83 +293,47 @@
         <!-- Page content start -->
         <div class="content">
             <!-- Create modal start -->
-            <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="createModalLabel">Add User</h5>
+                            <h5 class="modal-title" id="createModalLabel">Create Post</h5>
                         </div>
                         <div class="modal-body">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label>First Name</label>
+                                    <label>Post Title</label>
                                     <input type="text">
                                 </div>
                             </div>
 
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label>Last Name</label>
+                                    <label>Post Slug</label>
                                     <input type="text">
                                 </div>
                             </div>
 
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label>User Name</label>
-                                    <input type="text">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Password</label>
-                                    <div class="pass-group">
-                                        <input type="password" class=" pass-input">
-                                        <span class="fas toggle-password fa-eye-slash"></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Phone</label>
-                                    <input type="text">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input type="text">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Role</label>
-                                    <select class="form-control">
-                                        <option>Select</option>
-                                        <option>Owner</option>
+                                    <label>Category</label>
+                                    <select id="">
+                                        <option value="">Category Name</option>
+                                        <option value="">Category Name</option>
+                                        <option value="">Category Name</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label> User Image</label>
-                                    <div class="image-upload">
-                                        <input type="file">
-                                        <div class="image-uploads">
-                                        <img src="assets/img/icons/upload.svg" alt="img">
-                                        <h4>Drag and drop a file to upload</h4>
-                                    </div>
-                                    </div>
+                                    <label>Post Thumbnail</label>
+                                    <input type="text">
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer justify-content-end">
-                            <button type="button" class="btn btn-submit">Add user</button>
+                            <button type="button" class="btn btn-submit">Create</button>
                             <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
                         </div>
                     </div>
@@ -382,93 +346,18 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="editModalLabel">Update User</h5>
+                            <h5 class="modal-title" id="editModalLabel">Update Category</h5>
                         </div>
                         <div class="modal-body">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label>First Name</label>
+                                    <label>Category Name</label>
                                     <input type="text">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Last Name</label>
-                                    <input type="text">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>User Name</label>
-                                    <input type="text">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Password</label>
-                                    <div class="pass-group">
-                                        <input type="password" class=" pass-input">
-                                        <span class="fas toggle-password fa-eye-slash"></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Phone</label>
-                                    <input type="text">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input type="text">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Role</label>
-                                    <select class="form-control">
-                                        <option>Select</option>
-                                        <option>Owner</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label> User Image</label>
-                                    <div class="image-upload">
-                                        <input type="file">
-                                        <div class="image-uploads">
-                                        <img src="assets/img/icons/upload.svg" alt="img">
-                                        <h4>Drag and drop a file to upload</h4>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-12">
-                                <div class="product-list">
-                                    <ul class="row">
-                                        <li class="ps-0">
-                                            <div class="productviewset">
-                                                <div class="productviewsimg">
-                                                    <img src="assets/img/customer/profile2.jpg" alt="img">
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer justify-content-end">
-                            <button type="button" class="btn btn-submit">Update details</button>
+                            <button type="button" class="btn btn-submit">Update</button>
                             <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
                         </div>
                     </div>
@@ -494,115 +383,96 @@
             </div>
             <!-- Delete modal end -->
 
-            <!-- Page header start -->
-            <div class="page-header">
-                <div class="page-title">
-                    <h4>User List</h4>
-                    <h6>Manage your User</h6>
-                </div>
-                <div class="page-btn">
-                    <button class="btn btn-added" data-bs-toggle="modal" data-bs-target="#createModal">
-                        <img src="assets/img/icons/plus.svg" class="me-1" alt="img">Add User
-                    </button>
-                </div>
-            </div>
-            <!-- Page header end -->
-
-            <!-- Table start -->
-            <div class="card">
-                <div class="card-body">
-                    <div class="table-top">
-                        <div class="search-set">
-                            <div class="search-input">
-                                <a class="btn btn-searchset">
-                                    <img src="assets/img/icons/search-white.svg" alt="img">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="wordset">
-                            <ul>
-                                <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img src="assets/img/icons/pdf.svg" alt="img"></a>
-                                </li>
-                                <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img src="assets/img/icons/excel.svg" alt="img"></a>
-                                </li>
-                                <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img src="assets/img/icons/printer.svg" alt="img"></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="table-responsive">
-                        <table class="table  datanew">
-                            <thead>
-                            <tr>
-                            <th>
-                            <label class="checkboxs">
-                            <input type="checkbox">
-                            <span class="checkmarks"></span>
-                            </label>
-                            </th>
-                            <th>Profile</th>
-                            <th>First name </th>
-                            <th>Last name </th>
-                            <th>User name </th>
-                            <th>Phone</th>
-                            <th>email</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                            </tr>
-                            </thead>
-
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <label class="checkboxs">
-                                            <input type="checkbox">
-                                            <span class="checkmarks"></span>
-                                        </label>
-                                    </td>
-                                    <td class="productimgname">
-                                        <a href="javascript:void(0);" class="product-img">
-                                            <img src="assets/img/customer/customer1.jpg" alt="product">
-                                        </a>
-                                    </td>
-                                    <td>Thomas</td>
-                                    <td>Thomas </td>
-                                    <td>Thomas21 </td>
-                                    <td>+12163547758 </td>
-                                    <td>
-                                        <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="42362a2d2f233102273a232f322e276c212d2f">[email&#160;protected]</a>
-                                    </td>
-                                    <td>
-                                        <div class="status-toggle d-flex justify-content-between align-items-center">
-                                            <input type="checkbox" id="user1" class="check">
-                                            <label for="user1" class="checktoggle">checkbox</label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a class="me-3" data-bs-toggle="modal" data-bs-target="#editModal">
-                                            <img src="assets/img/icons/edit.svg" alt="img">
-                                        </a>                                        
-                                        <a lass="me-3" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                                            <img src="assets/img/icons/delete.svg" alt="img">
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <!-- Table end -->
+        <div class="page-header">
+        <div class="page-title">
+        <h4>Blog Post</h4>
+        <h6>Manage Blog Post</h6>
         </div>
-        <!-- Page content end -->
+        <div class="page-btn">
+            <button class="btn btn-added" data-bs-toggle="modal" data-bs-target="#createModal">
+                <img src="assets/img/icons/plus.svg" class="me-1" alt="img">Add Post
+            </button>
+        </div>
+        </div>
+
+        <!-- Table start -->
+        <div class="card">
+            <div class="card-body">
+                <div class="table-top">
+                    <div class="search-set">
+                        <div class="search-input">
+                            <a class="btn btn-searchset">
+                                <img src="assets/img/icons/search-white.svg" alt="img">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="wordset">
+                        <ul>
+                            <li>
+                                <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img src="assets/img/icons/pdf.svg" alt="img"></a>
+                            </li>
+                            <li>
+                                <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img src="assets/img/icons/excel.svg" alt="img"></a>
+                            </li>
+                            <li>
+                                <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img src="assets/img/icons/printer.svg" alt="img"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table  datanew">
+                    <thead>
+                    <tr>
+                        <th>Heading</th>
+                        <th>Category</th>
+                        <th>Created By</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>View</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td class="productimgname">
+                                <a href="javascript:void(0);" class="post image">
+                                    <img src="assets/img/product/product17.jpg" alt="post thumbnail">
+                                </a>
+                                Post heading will be go here
+                            </td>
+                            <td>Post category</td>
+                            <td>Created by</td>
+                            <td>Date</td>
+                            <td>
+                                <span class="bg-lightgreen badges">Published</span>
+                                <span class="bg-lightred badges">Drafted</span>
+                            </td>
+                            <td>22</td>
+                            <td>
+                                <a class="me-3" data-bs-toggle="modal" data-bs-target="#editModal">
+                                    <img src="assets/img/icons/edit.svg" alt="img">
+                                </a>                                        
+                                <a lass="me-3" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                    <img src="assets/img/icons/delete.svg" alt="img">
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    </table>
+                    </div>
+            </div>
+        </div>
+        <!-- Table end -->
+
     </div>
+</div>
 </div>
 
 
-<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.6.0.min.js"></script>
+<script src="assets/js/jquery-3.6.0.min.js"></script>
 
 <script src="assets/js/feather.min.js"></script>
 
@@ -614,9 +484,6 @@
 <script src="assets/js/bootstrap.bundle.min.js"></script>
 
 <script src="assets/plugins/select2/js/select2.min.js"></script>
-
-<script src="assets/js/moment.min.js"></script>
-<script src="assets/js/bootstrap-datetimepicker.min.js"></script>
 
 <script src="assets/plugins/sweetalert/sweetalert2.all.min.js"></script>
 <script src="assets/plugins/sweetalert/sweetalerts.min.js"></script>
