@@ -257,13 +257,13 @@
                     </li>
                     
                     <li>
-                        <a href="message.html"><i data-feather="file"></i><span> Message</span> </a>
+                        <a href="message.html" class="active"><i data-feather="file"></i><span> Message</span> </a>
                     </li>
                     
                     <li class="submenu">
                         <a href="javascript:void(0);"><img src="assets/img/icons/expense1.svg" alt="img"><span> Post</span> <span class="menu-arrow"></span></a>
                         <ul>
-                            <li><a href="postlist.html" class="active">All Post</a></li>
+                            <li><a href="postlist.html">All Post</a></li>
                             <li><a href="categorylist.html">All Category</a></li>
                         </ul>
                     </li>
@@ -292,143 +292,140 @@
     <div class="page-wrapper">
         <!-- Page content start -->
         <div class="content">
-            <!-- Create modal start -->
+            <!-- Create Message modal start -->
             <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="createModalLabel">Create Post</h5>
+                            <h5 class="modal-title" id="createModalLabel">Message</h5>
                         </div>
                         <div class="modal-body">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label>Title</label>
+                                    <label>Name</label>
                                     <input type="text">
                                 </div>
                             </div>
 
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label>Slug</label>
+                                    <label>Email</label>
+                                    <input type="email">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Subject</label>
                                     <input type="text">
                                 </div>
                             </div>
 
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label>Category</label>
-                                    <select class="form-control" id="">
-                                        <option value="">Category Name</option>
-                                        <option value="">Category Name</option>
-                                        <option value="">Category Name</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Thumbnail</label>
-                                    <div class="image-upload">
-                                        <input type="file">
-                                        <div class="image-uploads">
-                                            <img src="assets/img/icons/upload.svg" alt="img">
-                                            <h4>Drag and drop a file to upload</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Description</label>
-                                    <textarea class="form-control" id="postDescription"></textarea>
+                                    <label>Message</label>
+                                    <textarea class="form-control" id="messageDescription"></textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer justify-content-end">
                             <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-submit">Publish</button>
+                            <button type="button" class="btn btn-submit">Send</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Create modal end -->
+            <!-- Create Message modal end -->
 
-            <!-- Edit modal start -->
-            <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+            <!-- View Message modal start -->
+            <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="editModalLabel">Update Post</h5>
+                            <h5 class="modal-title" id="createModalLabel">Message</h5>
                         </div>
                         <div class="modal-body">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label>Title</label>
+                                    <label>Name</label>
                                     <input type="text">
                                 </div>
                             </div>
 
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label>Slug</label>
+                                    <label>Email</label>
+                                    <input type="email">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Subject</label>
                                     <input type="text">
                                 </div>
                             </div>
 
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label>Category</label>
-                                    <select class="form-control" id="">
-                                        <option value="">Category Name</option>
-                                        <option value="">Category Name</option>
-                                        <option value="">Category Name</option>
-                                    </select>
+                                    <label>Message</label>
+                                    <textarea class="form-control" id="messageDescription"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-end">
+                            <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Ok</button>
+                            <button type="button" class="btn btn-submit" data-bs-toggle="modal" data-bs-target="#replyModal">Reply</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- View Message modal end -->
+
+            <!-- Reply Message modal start -->
+            <div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="createModalLabel">Message</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input type="text">
                                 </div>
                             </div>
 
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label>Thumbnail</label>
-                                    <div class="image-upload">
-                                        <input type="file">
-                                        <div class="image-uploads">
-                                            <img src="assets/img/icons/upload.svg" alt="img">
-                                            <h4>Drag and drop a file to upload</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-12">
-                                <div class="product-list">
-                                    <ul class="row">
-                                        <li class="ps-0">
-                                            <div class="productviewset">
-                                                <div class="productviewsimg">
-                                                    <img src="assets/img/customer/profile2.jpg" alt="img">
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
+                                    <label>Email</label>
+                                    <input type="email">
                                 </div>
                             </div>
 
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label>Description</label>
-                                    <textarea class="form-control" id="postDescription"></textarea>
+                                    <label>Subject</label>
+                                    <input type="text">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Message</label>
+                                    <textarea class="form-control" id="messageDescription"></textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer justify-content-end">
                             <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-submit">Update</button>
+                            <button type="button" class="btn btn-submit">Send</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Edit modal end -->
+            <!-- Reply Message modal end -->
 
             <!-- Delete modal start -->
             <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
@@ -447,18 +444,20 @@
                 </div>
             </div>
             <!-- Delete modal end -->
-
+        
+        <!-- Page header - Message not read start -->
         <div class="page-header">
-        <div class="page-title">
-        <h4>Blog Post</h4>
-        <h6>Manage Blog Post</h6>
+            <div class="page-title">
+                <h4>Message</h4>
+                <h6>Manage Client Message</h6>
+            </div>
+            <div class="page-btn">
+                <button class="btn btn-added" data-bs-toggle="modal" data-bs-target="#createModal">
+                    <img src="assets/img/icons/plus.svg" class="me-1" alt="img">Send Message
+                </button>
+            </div>
         </div>
-        <div class="page-btn">
-            <button class="btn btn-added" data-bs-toggle="modal" data-bs-target="#createModal">
-                <img src="assets/img/icons/plus.svg" class="me-1" alt="img">Add Post
-            </button>
-        </div>
-        </div>
+        <!-- Page header - Message not read end -->
 
         <!-- Table start -->
         <div class="card">
@@ -490,35 +489,26 @@
                     <table class="table  datanew">
                     <thead>
                     <tr>
-                        <th>Heading</th>
-                        <th>Category</th>
-                        <th>Created By</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Subject</th>
                         <th>Date</th>
-                        <th>Status</th>
-                        <th>View</th>
                         <th>Action</th>
                     </tr>
                     </thead>
 
                     <tbody>
                         <tr>
-                            <td class="productimgname">
-                                <a href="javascript:void(0);" class="post image">
-                                    <img src="assets/img/product/product17.jpg" alt="post thumbnail">
-                                </a>
-                                Post heading will be go here
-                            </td>
-                            <td>Post category</td>
-                            <td>Created by</td>
-                            <td>Date</td>
+                            <td>Client name</td>
+                            <td>example@example.com</td>
+                            <td>Email subject will be go here</td>
+                            <td>Feb 2, 2022</td>
                             <td>
-                                <span class="bg-lightgreen badges">Published</span>
-                                <span class="bg-lightred badges">Drafted</span>
-                            </td>
-                            <td>22</td>
-                            <td>
-                                <a class="me-3" data-bs-toggle="modal" data-bs-target="#editModal">
-                                    <img src="assets/img/icons/edit.svg" alt="img">
+                                <a class="me-3" data-bs-toggle="modal" data-bs-target="#viewModal">
+                                    <img src="assets/img/icons/eye.svg" alt="img">
+                                </a>                                        
+                                <a lass="me-3" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                    <img src="assets/img/icons/reply.svg" alt="img">
                                 </a>                                        
                                 <a lass="me-3" data-bs-toggle="modal" data-bs-target="#deleteModal">
                                     <img src="assets/img/icons/delete.svg" alt="img">
