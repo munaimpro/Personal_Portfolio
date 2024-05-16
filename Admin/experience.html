@@ -30,17 +30,16 @@
 <div class="main-wrapper">
     <!-- Header start -->
     <div class="header">
-
-    <div class="header-left active">
-    <a href="index.html" class="logo">
-    <img src="assets/img/logo.png" alt="">
-    </a>
-    <a href="index.html" class="logo-small">
-    <img src="assets/img/logo-small.png" alt="">
-    </a>
-    <a id="toggle_btn" href="javascript:void(0);">
-    </a>
-    </div>
+        <div class="header-left active">
+            <a href="index.html" class="logo">
+                <img src="assets/img/logo.png" alt="">
+            </a>
+            <a href="index.html" class="logo-small">
+                <img src="assets/img/logo-small.png" alt="">
+            </a>
+            <a id="toggle_btn" href="javascript:void(0);">
+            </a>
+        </div>
 
     <a id="mobile_btn" class="mobile_btn" href="#sidebar">
     <span class="bar-icon">
@@ -225,7 +224,7 @@
                     <li class="submenu">
                         <a href="javascript:void(0);"><img src="assets/img/icons/product.svg" alt="img"><span> Website Details</span> <span class="menu-arrow"></span></a>
                         <ul>
-                            <li><a href="seoproperty.html" class="active">Logo & SEO Information</a></li>
+                            <li><a href="seoproperty.html">Logo & SEO Information</a></li>
                             <li><a href="visitorinfo.html">Visitor Information</a></li>
                         </ul>
                     </li>
@@ -237,7 +236,7 @@
                             <li><a href="education.html">Education</a></li>
                             <li><a href="skill.html">Skills</a></li>
                             <li><a href="award.html">Awards</a></li>
-                            <li><a href="experience.html">Experience</a></li>
+                            <li><a href="experience.html" class="active">Experience</a></li>
                             <li><a href="interest.html">Interest</a></li>
                             <li><a href="social_media.html">Social Media</a></li>
                         </ul>
@@ -296,38 +295,66 @@
     <!-- Page content start -->
     <div class="page-wrapper">
         <div class="content">
+            <!-- Create modal start -->
+            <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="createModalLabel">Create Experience</h5>
+                        </div>
+                        <div class="modal-body">
+                            <form id="save-form">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12 p-1">
+                                            <label class="form-label">Designation *</label>
+                                            <input type="text" class="form-control" id="experienceTitle">
+
+                                            <label class="form-label mt-3">Working Place *</label>
+                                            <input type="text" class="form-control" id="experienceInstitution">
+
+                                            <label class="form-label mt-3">Starting Date *</label>
+                                            <input type="text" class="form-control" id="starttingDate">
+
+                                            <label class="form-label mt-3">Ending Date *</label>
+                                            <input type="text" class="form-control" id="endingDate">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer justify-content-end">
+                            <button type="button" class="btn btn-sm btn-primary">Create Experience</button>
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Create modal end -->
+
             <!-- Edit modal start -->
             <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="editModalLabel">SEO Properties</h5>
+                            <h5 class="modal-title" id="editModalLabel">Edit Experience</h5>
                         </div>
                         <div class="modal-body">
                             <form id="update-form">
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-12 p-1">
-                                            <label class="form-label">Title *</label>
-                                            <input type="text" class="form-control" id="siteTitle">
+                                            <label class="form-label">Designation *</label>
+                                            <input type="text" class="form-control" id="experienceTitle">
 
-                                            <label class="form-label mt-3">Keywords *</label>
-                                            <input type="text" class="form-control" id="siteKeywords">
+                                            <label class="form-label mt-3">Working Place *</label>
+                                            <input type="text" class="form-control" id="experienceInstitution">
 
-                                            <label class="form-label mt-3">Description *</label>
-                                            <textarea class="form-control" id="siteDescription"></textarea>
+                                            <label class="form-label mt-3">Starting Date *</label>
+                                            <input type="text" class="form-control" id="starttingDate">
 
-                                            <label class="form-label mt-3">Open Graph Website Name *</label>
-                                            <input type="text" class="form-control" id="ogSitename">
-
-                                            <label class="form-label mt-3">Open Graph Website Title *</label>
-                                            <input type="text" class="form-control" id="ogSitetitle">
-
-                                            <label class="form-label mt-3">Open Graph Website URL *</label>
-                                            <input type="text" class="form-control" id="ogSiteURL">
-
-                                            <label class="form-label mt-3">Open Graph Website Image *</label>
-                                            <input type="file" class="form-control" id="ogSiteimage">
+                                            <label class="form-label mt-3">Ending Date *</label>
+                                            <input type="text" class="form-control" id="endingDate">
                                         </div>
                                     </div>
                                 </div>
@@ -360,58 +387,19 @@
             </div>
             <!-- Delete modal end -->
 
-            <!-- Page header - Website Logo start -->
+            <!-- Page header start -->
             <div class="page-header">
                 <div class="page-title">
-                    <h4>Website Logo</h4>
-                    <h6>Used as website and admin panel logo</h6>
+                    <h4>Working Experience</h4>
+                    <h6>All about Experience information</h6>
+                </div>
+                <div class="page-btn">
+                    <button class="btn btn-added" data-bs-toggle="modal" data-bs-target="#createModal">
+                        <img src="assets/img/icons/plus.svg" class="me-1" alt="img">Add Experience
+                    </button>
                 </div>
             </div>
-            <!-- Page header - Website Logo end -->
-
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-12 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label>Logo</label>
-                                <div class="product-list">
-                                    <ul>
-                                        <li class="p-0">
-                                            <div class="productviews">
-                                                <div class="productviewsimg">
-                                                    <img class="mw-100 mh-100" src="assets/img/logo.png" alt="website logo">
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="image-upload ">
-                                    <input type="file">
-                                    <div class="image-uploads">
-                                        <img src="assets/img/icons/upload.svg" alt="img">
-                                        <h4>Drag and drop a file to upload</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <div class="col-lg-12">
-                        <button class="btn btn-submit me-2">Upload</button>
-                        <button class="btn btn-cancel">Cancel</button>
-                    </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Page header - SEO Properties start -->
-            <div class="page-header">
-                <div class="page-title">
-                    <h4>SEO Properties</h4>
-                    <h6>Used in title and social media</h6>
-                </div>
-            </div>
-            <!-- Page header - SEO Properties end -->
+            <!-- Page header end -->
 
             <!-- Table start -->
             <div class="card">
@@ -441,7 +429,7 @@
                     
                     <!-- Table content start -->
                     <div class="table-responsive">
-                        <table class="table  datanew">
+                        <table class="table datanew">
                             <thead>
                                 <tr>
                                     <th>
@@ -450,10 +438,10 @@
                                             <span class="checkmarks"></span>
                                         </label>
                                     </th>
-                                    <th>Page Name</th>
-                                    <th>Title</th>
-                                    <th>Keywords </th>
-                                    <th width="30%">Description</th>
+                                    <th>Working Place</th>
+                                    <th>Designation</th>
+                                    <th>Starting Date</th>
+                                    <th>Ending Date</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -466,10 +454,10 @@
                                             <span class="checkmarks"></span>
                                         </label>
                                     </td>
-                                    <td>Name</td>
-                                    <td>Title</td>
-                                    <td>Keyword 1, keywords 2</td>
-                                    <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui aliquid vel quae at eligendi. Consectetur!</td>
+                                    <td>Upwork</td>
+                                    <td>Backend PHP and Laravel Developer</td>
+                                    <td>20 Feb, 2019</td>
+                                    <td>present</td>
                                     <td>
                                         <a class="me-3" data-bs-toggle="modal" data-bs-target="#editModal">
                                             <img src="assets/img/icons/edit.svg" alt="img">

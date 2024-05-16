@@ -225,8 +225,8 @@
                     <li class="submenu">
                         <a href="javascript:void(0);"><img src="assets/img/icons/product.svg" alt="img"><span> Website Details</span> <span class="menu-arrow"></span></a>
                         <ul>
-                            <li><a href="seoproperty.html" class="active">Logo & SEO Information</a></li>
-                            <li><a href="visitorinfo.html">Visitor Information</a></li>
+                            <li><a href="seoproperty.html">Logo & SEO Information</a></li>
+                            <li><a href="visitorinfo.html" class="active">Visitor Information</a></li>
                         </ul>
                     </li>
                     
@@ -296,119 +296,11 @@
     <!-- Page content start -->
     <div class="page-wrapper">
         <div class="content">
-            <!-- Edit modal start -->
-            <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editModalLabel">SEO Properties</h5>
-                        </div>
-                        <div class="modal-body">
-                            <form id="update-form">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-12 p-1">
-                                            <label class="form-label">Title *</label>
-                                            <input type="text" class="form-control" id="siteTitle">
-
-                                            <label class="form-label mt-3">Keywords *</label>
-                                            <input type="text" class="form-control" id="siteKeywords">
-
-                                            <label class="form-label mt-3">Description *</label>
-                                            <textarea class="form-control" id="siteDescription"></textarea>
-
-                                            <label class="form-label mt-3">Open Graph Website Name *</label>
-                                            <input type="text" class="form-control" id="ogSitename">
-
-                                            <label class="form-label mt-3">Open Graph Website Title *</label>
-                                            <input type="text" class="form-control" id="ogSitetitle">
-
-                                            <label class="form-label mt-3">Open Graph Website URL *</label>
-                                            <input type="text" class="form-control" id="ogSiteURL">
-
-                                            <label class="form-label mt-3">Open Graph Website Image *</label>
-                                            <input type="file" class="form-control" id="ogSiteimage">
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer justify-content-end">
-                            <button type="button" class="btn btn-sm btn-primary">Save changes</button>
-                            <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Cancel</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Edit modal end -->
-
-            <!-- Delete modal start -->
-            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body text-center">
-                            <h3 class="mt-3">Are you sure?</h3>
-                            <p class="mb-3">You won't be able to revert this!</p>
-                            <input class="d-none" id="deleteID"/>
-                        </div>
-                        <div class="modal-footer justify-content-end">
-                            <button type="button" class="btn btn-sm btn-primary">Yes, delete it!</button>
-                            <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Cancel</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Delete modal end -->
-
-            <!-- Page header - Website Logo start -->
+            <!-- Page header start -->
             <div class="page-header">
                 <div class="page-title">
-                    <h4>Website Logo</h4>
-                    <h6>Used as website and admin panel logo</h6>
-                </div>
-            </div>
-            <!-- Page header - Website Logo end -->
-
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-12 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label>Logo</label>
-                                <div class="product-list">
-                                    <ul>
-                                        <li class="p-0">
-                                            <div class="productviews">
-                                                <div class="productviewsimg">
-                                                    <img class="mw-100 mh-100" src="assets/img/logo.png" alt="website logo">
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="image-upload ">
-                                    <input type="file">
-                                    <div class="image-uploads">
-                                        <img src="assets/img/icons/upload.svg" alt="img">
-                                        <h4>Drag and drop a file to upload</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <div class="col-lg-12">
-                        <button class="btn btn-submit me-2">Upload</button>
-                        <button class="btn btn-cancel">Cancel</button>
-                    </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Page header - SEO Properties start -->
-            <div class="page-header">
-                <div class="page-title">
-                    <h4>SEO Properties</h4>
-                    <h6>Used in title and social media</h6>
+                    <h4>Visitor's Information</h4>
+                    <h6>Who visited our site</h6>
                 </div>
             </div>
             <!-- Page header - SEO Properties end -->
@@ -450,11 +342,12 @@
                                             <span class="checkmarks"></span>
                                         </label>
                                     </th>
-                                    <th>Page Name</th>
-                                    <th>Title</th>
-                                    <th>Keywords </th>
-                                    <th width="30%">Description</th>
-                                    <th>Action</th>
+                                    <th>IP Address</th>
+                                    <th>Country</th>
+                                    <th>City</th>
+                                    <th>Browser</th>
+                                    <th>Total Visit</th>
+                                    <th>Last Visit</th>
                                 </tr>
                             </thead>
 
@@ -466,18 +359,12 @@
                                             <span class="checkmarks"></span>
                                         </label>
                                     </td>
-                                    <td>Name</td>
-                                    <td>Title</td>
-                                    <td>Keyword 1, keywords 2</td>
-                                    <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui aliquid vel quae at eligendi. Consectetur!</td>
-                                    <td>
-                                        <a class="me-3" data-bs-toggle="modal" data-bs-target="#editModal">
-                                            <img src="assets/img/icons/edit.svg" alt="img">
-                                        </a>                                        
-                                        <a lass="me-3" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                                            <img src="assets/img/icons/delete.svg" alt="img">
-                                        </a>
-                                    </td>
+                                    <td>Ip address</td>
+                                    <td>country name</td>
+                                    <td>city name</td>
+                                    <td>browser name</td>
+                                    <td>total visit count</td>
+                                    <td>last visiting time and date</td>
                                 </tr>
                             </tbody>
                         </table>
