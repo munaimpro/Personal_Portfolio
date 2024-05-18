@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('messages', function (Blueprint $table) {
+        Schema::create('logos', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100);
-            $table->string('email', 100);
-            $table->string('subject');
-            $table->text('message');
-            $table->enum('message_status', ['viewed', 'new', 'replied']);
+            $table->string('logo');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
@@ -28,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('logos');
     }
 };
