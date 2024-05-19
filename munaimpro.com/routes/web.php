@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\EducationController;
 use App\Http\Middleware\TokenVerificationMiddleware;
 
 
@@ -28,6 +29,17 @@ Route::group(['prefix' => 'Admin'], function(){
     Route::post('addAboutInfo', [AboutController::class, 'addAboutInfo'])->middleware(TokenVerificationMiddleware::class);
     Route::post('updateAboutInfo', [AboutController::class, 'updateAboutInfo'])->middleware(TokenVerificationMiddleware::class);
     Route::get('retriveAboutInfo', [AboutController::class, 'retriveAboutInfo'])->middleware(TokenVerificationMiddleware::class);
+
+
+    // API Routes (Education Controller)
+    Route::post('addEducationInfo', [EducationController::class, 'addEducationInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::post('updateEducationInfo', [EducationController::class, 'updateEducationInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::get('retriveEducationInfo', [EducationController::class, 'retriveEducationInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::post('deleteEducationInfo', [EducationController::class, 'deleteEducationInfo'])->middleware(TokenVerificationMiddleware::class);
+
+
+    // API Routes (Skill Controller)
+    
 
 
 // Page Routes (User Controller)

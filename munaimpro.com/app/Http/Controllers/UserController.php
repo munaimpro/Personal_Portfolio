@@ -253,25 +253,30 @@ class UserController extends Controller
                 // Retrive profile picture link from database
                 $getPreviousProfilePicture = User::where('email', '=', $email)->first('profile_picture');
 
-                // dd($getPreviousProfilePicture->profile_picture);
-
                 // Remove file from storage
                 if($getPreviousProfilePicture){
-                    if(Storage::exists("public/".$getPreviousProfilePicture->profile_picture)){
-                        Storage::delete("public/".$getPreviousProfilePicture->profile_picture);
+                    if(Storage::exists("public/profile_picture/".$getPreviousProfilePicture->profile_picture)){
+                        Storage::delete("public/profile_picture/".$getPreviousProfilePicture->profile_picture);
                     }
                 }
 
-                // Stored new file to the storage
-                $profilePicture = $request->file('profile_picture')->store('profile_picture', 'public');
+                // Getting new file
+                $profilePicture = $request->file('profile_picture');
 
-                User::where('email', '=', $email)->update([
+                /* Extract the original file name with extension */
+                $profilePictureName = $profilePicture->getClientOriginalName();
+
+                $user = User::where('email', '=', $email)->update([
                     'first_name' => $request->input('first_name'),
                     'last_name' => $request->input('last_name'),
                     'email' => $request->input('email'),
-                    'profile_picture' => $profilePicture,
+                    'profile_picture' => $profilePictureName,
                     'password' => Hash::make($request->input('password')),
                 ]);
+
+                if($user){
+                    $profilePicture->storeAs('profile_picture', $profilePictureName, 'public');
+                }
         
                 return response()->json([
                     'status' => 'success',
