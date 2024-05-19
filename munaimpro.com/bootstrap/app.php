@@ -27,6 +27,10 @@ return Application::configure(basePath: dirname(__DIR__))
             'Admin/updateEducationInfo',
             'Admin/retriveEducationInfo',
             'Admin/deleteEducationInfo',
+            'Admin/addSkillInfo',
+            'Admin/updateSkillInfo',
+            'Admin/retriveSkillInfo',
+            'Admin/deleteSkillInfo',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

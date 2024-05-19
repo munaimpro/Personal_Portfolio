@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\SkillController;
 use App\Http\Controllers\EducationController;
 use App\Http\Middleware\TokenVerificationMiddleware;
 
@@ -39,7 +40,11 @@ Route::group(['prefix' => 'Admin'], function(){
 
 
     // API Routes (Skill Controller)
-    
+    Route::post('addSkillInfo', [SkillController::class, 'addSkillInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::post('updateSkillInfo', [SkillController::class, 'updateSkillInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::get('retriveSkillInfo', [SkillController::class, 'retriveSkillInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::post('deleteSkillInfo', [SkillController::class, 'deleteSkillInfo'])->middleware(TokenVerificationMiddleware::class);
+
 
 
 // Page Routes (User Controller)
