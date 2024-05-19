@@ -11,7 +11,16 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->validateCsrfTokens([
+            'Admin/userSignup',
+            'Admin/userSignin',
+            'Admin/userSignout',
+            'Admin/userSendOTP',
+            'Admin/userOTPVerification',
+            'Admin/userResetPassword',
+            'Admin/userProfile',
+            'Admin/userUpdateProfile',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

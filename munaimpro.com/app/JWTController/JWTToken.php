@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Helper;
+namespace App\JWTController;
 
 use Exception;
 use Firebase\JWT\JWT; // Use Built-in class JWT
@@ -8,7 +8,9 @@ use Firebase\JWT\Key; // Use Built-in class Key
 
 class JWTToken
 {
-		/** Method for create token */
+    /** 
+     * Method for create token 
+    */
 		
     static function CreateToken($userEmail, $userId):string{
         $key = env('JWT_KEY');
@@ -28,12 +30,12 @@ class JWTToken
     }
 		
 		
-		/**
-		* Method for create token for reset password 
-		* Token creation process can be implemented for any purpous
-		*/
+    /**
+    * Method for create token for reset password 
+    * Token creation process can be implemented for any purpous
+    */
 		
-    static function CreateTokenForResetPassword($userEmail):string{
+    static function createTokenForResetPassword($userEmail):string{
         $key = env('JWT_KEY');
 
         $payload = [
@@ -48,10 +50,10 @@ class JWTToken
     }
 		
 		
-		/**
-		* Method for verify token
-		* Further authorized access will be controlled by calling this method
-		*/
+    /**
+    * Method for verify token
+    * Further authorized access will be controlled by calling this method
+    */
 		
     static function VerifyToken($token):string|object{
         try{
