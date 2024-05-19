@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AboutController;
 use App\Http\Middleware\TokenVerificationMiddleware;
 
 
@@ -23,8 +24,8 @@ Route::group(['prefix' => 'Admin'], function(){
     Route::post('userUpdateProfile', [UserController::class, 'updateProfile'])->middleware(TokenVerificationMiddleware::class);
 
 
-// API Routes (User Controller)
-    
+// API Routes (About Controller)
+    Route::post('addAboutInfo', [AboutController::class, 'addAboutInfo']);
 
 
 // Page Routes (User Controller)

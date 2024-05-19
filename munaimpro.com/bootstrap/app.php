@@ -20,6 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'Admin/userResetPassword',
             'Admin/userProfile',
             'Admin/userUpdateProfile',
+            'Admin/addAboutInfo',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
