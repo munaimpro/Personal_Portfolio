@@ -103,18 +103,18 @@ class AboutController extends Controller
 
                 // Remove hero file from storage
                 if($getPreviousHeroImage){
-                    if(Storage::exists("public/".$getPreviousHeroImage->hero_image)){
-                        Storage::delete("public/".$getPreviousHeroImage->hero_image);
+                    if(Storage::exists("public/website_pictures/hero/".$getPreviousHeroImage->hero_image)){
+                        Storage::delete("public/website_pictures/hero/".$getPreviousHeroImage->hero_image);
                     }
                 }
 
                 // Getting new hero file
                 $heroImage = $request->file('hero_image');
 
-                $aboutData = array_merge($request->input(), ['hero_image' => $heroImage]);
-
                 /* Extract the original file name with extension */
                 $heroImageName = $heroImage->getClientOriginalName();
+
+                $aboutData = array_merge($request->input(), ['hero_image' => $heroImageName]);
 
                 $about = About::where('id', '=', $aboutId)->update($aboutData);
 
@@ -128,17 +128,24 @@ class AboutController extends Controller
 
                 // Remove about file from storage
                 if($getPreviousAboutImage){
-                    if(Storage::exists("public/".$getPreviousAboutImage->about_image)){
-                        Storage::delete("public/".$getPreviousAboutImage->about_image);
+                    if(Storage::exists("public/website_pictures/about/".$getPreviousAboutImage->about_image)){
+                        Storage::delete("public/website_pictures/about/".$getPreviousAboutImage->about_image);
                     }
                 }
 
-                // Stored new about file to the storage
-                $aboutImage = $request->file('about_image')->store('website_pictures/about', 'public');
+                // Getting new about file
+                $aboutImage = $request->file('about_image');
 
-                $aboutData = array_merge($request->input(), ['about_image' => $aboutImage]);
+                /* Extract the original file name with extension */
+                $aboutImageName = $aboutImage->getClientOriginalName();
 
-                About::where('id', '=', $aboutId)->update($aboutData);
+                $aboutData = array_merge($request->input(), ['about_image' => $aboutImageName]);
+
+                $about = About::where('id', '=', $aboutId)->update($aboutData);
+
+                if($about){
+                    $aboutImage->storeAs('website_pictures/about', $aboutImageName, 'public');
+                }
 
             } else{
                 About::where('id', '=', $aboutId)->update($request->input());
