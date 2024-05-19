@@ -25,7 +25,9 @@ Route::group(['prefix' => 'Admin'], function(){
 
 
 // API Routes (About Controller)
-    Route::post('addAboutInfo', [AboutController::class, 'addAboutInfo']);
+    Route::post('addAboutInfo', [AboutController::class, 'addAboutInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::post('updateAboutInfo', [AboutController::class, 'updateAboutInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::get('retriveAboutInfo', [AboutController::class, 'retriveAboutInfo'])->middleware(TokenVerificationMiddleware::class);
 
 
 // Page Routes (User Controller)

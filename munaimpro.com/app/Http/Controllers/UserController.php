@@ -48,7 +48,6 @@ class UserController extends Controller
                 'message' => 'Welcome! new account created'
             ]);
         } catch(Exception $e){
-            DB::rollback();
             return response()->json([
                 'status' => 'failed',
                 'message' => 'Signup failed'.$e->getMessage()
