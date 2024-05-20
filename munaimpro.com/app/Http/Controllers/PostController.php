@@ -206,9 +206,29 @@ class PostController extends Controller
         try{
             // Getting post id from input
             $postInfoId = $request->input('post_info_id');
-            
-            // Delete post data by id
-            $postDelete = Post::findOrFail($postInfoId)->delete(); 
+
+            // Retrive post thumbnail link from database
+            $getPreviousPostThumbnail = Post::where('id', '=', $postInfoId)->first('post_thumbnail');
+
+            // Remove previous post thumbnail file from storage
+            if($getPreviousPostThumbnail){
+                if(Storage::exists("public/post_thumbnail/".$getPreviousPostThumbnail->post_thumbnail)){
+                    $deleteThumbnail = Storage::delete("public/post_thumbnail/".$getPreviousPostThumbnail->post_thumbnail);
+
+                    if($deleteThumbnail){
+                        // Delete post data by id
+                        $postDelete = Post::findOrFail($postInfoId)->delete();
+                    } else{
+                        return response()->json([
+                            'status' => 'failed',
+                            'message' => 'Something went wrong'
+                        ]);
+                    }
+                }
+            } else{
+                // Delete post data by id
+                $postDelete = Post::findOrFail($postInfoId)->delete();
+            }
 
             if($postDelete){
                 return response()->json([
