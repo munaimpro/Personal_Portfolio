@@ -28,7 +28,7 @@ class AboutController extends Controller
                 
                 $about = About::create($aboutData);
 
-                /* Store hero image into storage/public/profile_picture folder */
+                /* Store hero image into storage/public/website_pictures folder */
                 if ($about){
                     $heroImage->storeAs('website_pictures/hero', $heroImageName, 'public');
                     $aboutImage->storeAs('website_pictures/about', $aboutImageName, 'public');
