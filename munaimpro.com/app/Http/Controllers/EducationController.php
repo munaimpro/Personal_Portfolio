@@ -81,9 +81,37 @@ class EducationController extends Controller
     }
 
 
-    /* Method for retrive education information */
+    /* Method for retrive all education information */
 
-    public function retriveEducationInfo(Request $request){
+    public function retriveAllEducationInfo(){
+        try{
+            $education = Education::get(); // Getting all education data
+
+            if($education){
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Education data found',
+                    'data' => $education,
+                ]);
+            } else{
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Something went wrong'
+                ]);
+            }
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong'.$e->getMessage()
+            ]);
+        }
+
+    }
+
+
+    /* Method for retrive education information by id */
+
+    public function retriveEducationInfoById(Request $request){
         try{
             $educationInfoId = $request->input('education_info_id'); // Primary key id from input
         

@@ -77,9 +77,37 @@ class SkillController extends Controller
     }
 
 
-    /* Method for retrive skill information */
+    /* Method for retrive all skill information */
 
-    public function retriveSkillInfo(Request $request){
+    public function retriveAllSkillInfo(Request $request){
+        try{
+            $skill = Skill::get(); // Getting all skill data
+
+            if($skill){
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Skill data found',
+                    'data' => $skill,
+                ]);
+            } else{
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Something went wrong'
+                ]);
+            }
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong'.$e->getMessage()
+            ]);
+        }
+
+    }
+
+
+    /* Method for retrive skill information by id */
+
+    public function retriveSkillInfoById(Request $request){
         try{
             $skillInfoId = $request->input('skill_info_id'); // Primary key id from input
         

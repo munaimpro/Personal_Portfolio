@@ -79,9 +79,37 @@ class ExperienceController extends Controller
     }
 
 
-    /* Method for retrive Experience information */
+    /* Method for retrive all experience information */
 
-    public function retriveExperienceInfo(Request $request){
+    public function retriveAllExperienceInfo(Request $request){
+        try{
+            $experience = Experience::get(['experience_title', 'experience_institution', 'experience_starting_date', 'experience_ending_date']); // Getting all experience data
+
+            if($experience){
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Experience data found',
+                    'data' => $experience,
+                ]);
+            } else{
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Something went wrong'
+                ]);
+            }
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong'.$e->getMessage()
+            ]);
+        }
+
+    }
+
+
+    /* Method for retrive Experience information by id */
+
+    public function retriveExperienceInfoById(Request $request){
         try{
             $experienceInfoId = $request->input('experience_info_id'); // Primary key id from input
         

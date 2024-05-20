@@ -73,9 +73,37 @@ class CategoryController extends Controller
     }
 
 
-    /* Method for retrive category information */
+    /* Method for retrive all category information */
 
-    public function retriveCategoryInfo(Request $request){
+    public function retriveAllCategoryInfo(Request $request){
+        try{
+            $category = Category::get('category_name'); // Getting all category data
+
+            if($category){
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Category data found',
+                    'data' => $category,
+                ]);
+            } else{
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Something went wrong'
+                ]);
+            }
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong'.$e->getMessage()
+            ]);
+        }
+
+    }
+
+
+    /* Method for retrive category information by id */
+
+    public function retriveCategoryInfoById(Request $request){
         try{
             $categoryInfoId = $request->input('category_info_id'); // Primary key id from input
         

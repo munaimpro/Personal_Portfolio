@@ -77,9 +77,37 @@ class ServiceController extends Controller
     }
 
 
-    /* Method for retrive service information */
+    /* Method for retrive all service information */
 
-    public function retriveServiceInfo(Request $request){
+    public function retriveAllServiceInfo(Request $request){
+        try{
+            $service = Service::get(); // Getting all service data
+
+            if($service){
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Service data found',
+                    'data' => $service,
+                ]);
+            } else{
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Something went wrong'
+                ]);
+            }
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong'.$e->getMessage()
+            ]);
+        }
+
+    }
+
+
+    /* Method for retrive service information by id */
+
+    public function retriveServiceInfoById(Request $request){
         try{
             $serviceInfoId = $request->input('service_info_id'); // Primary key id from input
         

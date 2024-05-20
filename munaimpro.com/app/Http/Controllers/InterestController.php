@@ -75,9 +75,37 @@ class InterestController extends Controller
     }
 
 
-    /* Method for retrive interest information */
+    /* Method for retrive all interest information */
 
-    public function retriveInterestInfo(Request $request){
+    public function retriveAllInterestInfo(Request $request){
+        try{
+            $interest = Interest::get(['interest_title', 'interest_icon']); // Getting all interest data
+
+            if($interest){
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Interest data found',
+                    'data' => $interest,
+                ]);
+            } else{
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Something went wrong'
+                ]);
+            }
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong'.$e->getMessage()
+            ]);
+        }
+
+    }
+
+
+    /* Method for retrive interest information by id */
+
+    public function retriveInterestInfoById(Request $request){
         try{
             $interestInfoId = $request->input('interest_info_id'); // Primary key id from input
         
