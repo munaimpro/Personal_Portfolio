@@ -145,7 +145,7 @@ class PostController extends Controller
     public function retriveAllPostInfo(Request $request){
         try{
             // Getting all post data with category and user
-            $post = Post::with(['category', 'user'])->get();
+            $post = Post::with(['category:id,category_name', 'user:id'])->get();
 
             if($post){
                 return response()->json([
@@ -176,7 +176,7 @@ class PostController extends Controller
             $postInfoId = $request->input('post_info_id'); // Primary key id from input
             
             // Getting post data by id with category and user
-            $post = Post::with(['category', 'user'])->findOrFail($postInfoId);
+            $post = Post::with(['category:id,category_name', 'user:id'])->findOrFail($postInfoId);
 
             if($post){
                 return response()->json([
@@ -212,12 +212,24 @@ class PostController extends Controller
 
             // Remove previous post thumbnail file from storage
             if($getPreviousPostThumbnail){
-                if(Storage::exists("public/post_thumbnail/".$getPreviousPostThumbnail->post_thumbnail)){
-                    $deleteThumbnail = Storage::delete("public/post_thumbnail/".$getPreviousPostThumbnail->post_thumbnail);
+                if(Storage::exists("public/post_thumbnails/".$getPreviousPostThumbnail->post_thumbnail)){
+                    $deleteThumbnail = Storage::delete("public/post_thumbnails/".$getPreviousPostThumbnail->post_thumbnail);
 
                     if($deleteThumbnail){
                         // Delete post data by id
                         $postDelete = Post::findOrFail($postInfoId)->delete();
+
+                        if($postDelete){
+                            return response()->json([
+                                'status' => 'success',
+                                'message' => 'Post deleted'
+                            ]);
+                        } else{
+                            return response()->json([
+                                'status' => 'failed',
+                                'message' => 'Something went wrong'
+                            ]);
+                        }
                     } else{
                         return response()->json([
                             'status' => 'failed',
@@ -228,12 +240,40 @@ class PostController extends Controller
             } else{
                 // Delete post data by id
                 $postDelete = Post::findOrFail($postInfoId)->delete();
-            }
 
-            if($postDelete){
+                if($postDelete){
+                    return response()->json([
+                        'status' => 'success',
+                        'message' => 'Post deleted'
+                    ]);
+                } else{
+                    return response()->json([
+                        'status' => 'failed',
+                        'message' => 'Something went wrong'
+                    ]);
+                }
+            }
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong'.$e->getMessage()
+            ]);
+        }
+    }
+
+
+    /* Method for retrive post information by slug */
+
+    public function retrivePostInfoBySlug($slug){
+        try{
+            // Getting post data by id with category and user
+            $post = Post::where('post_slug', '=', $slug)->with(['category:id,category_name', 'user:id,first_name,last_name'])->get(['id', 'post_heading', 'post_slug', 'post_thumbnail', 'post_description', 'category_id', 'user_id']);
+
+            if($post){
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'Post deleted'
+                    'message' => 'Post data found',
+                    'data' => $post,
                 ]);
             } else{
                 return response()->json([
@@ -247,5 +287,103 @@ class PostController extends Controller
                 'message' => 'Something went wrong'.$e->getMessage()
             ]);
         }
+
+    }
+
+
+    /* Method for retrive previous post information by id */
+
+    public function retrivePreviousPostInfoById(Request $request){
+        try{
+            $postInfoId = $request->input('post_info_id'); // Primary key id from input
+            
+            // Get previous id
+            $previousPostInfoId = Post::where('id', '<', $postInfoId)->pluck('id');
+            
+            // Getting post data by id with category and user
+            $post = Post::with(['category:id,category_name', 'user:id'])->findOrFail($previousPostInfoId, ['id', 'post_heading', 'post_thumbnail', 'publish_time']);
+
+            if($post){
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Previous post data found',
+                    'data' => $post,
+                ]);
+            } else{
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Something went wrong'
+                ]);
+            }
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong'.$e->getMessage()
+            ]);
+        }
+
+    }
+
+
+    /* Method for retrive next post information by id */
+
+    public function retriveNextPostInfoById(Request $request){
+        try{
+            $postInfoId = $request->input('post_info_id'); // Primary key id from input
+            
+            // Get previous id
+            $previousPostInfoId = Post::where('id', '>', $postInfoId)->pluck('id');
+            
+            // Getting post data by id with category and user
+            $post = Post::with(['category:id,category_name', 'user:id'])->findOrFail($previousPostInfoId, ['id', 'post_heading', 'post_thumbnail', 'publish_time']);
+
+            if($post){
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Next post data found',
+                    'data' => $post,
+                ]);
+            } else{
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Something went wrong'
+                ]);
+            }
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong'.$e->getMessage()
+            ]);
+        }
+
+    }
+
+
+    /* Method for retrive latest post information by id */
+
+    public function retriveLatestPostInfo(){
+        try{
+            // Getting latest 2 post data with category and user
+            $post = Post::with(['category:id,category_name', 'user:id'])->latest('publish_time')->take(2)->get(['id', 'post_heading', 'post_thumbnail', 'publish_time']);
+
+            if($post){
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Latest post data found',
+                    'data' => $post,
+                ]);
+            } else{
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Something went wrong'
+                ]);
+            }
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong'.$e->getMessage()
+            ]);
+        }
+
     }
 }

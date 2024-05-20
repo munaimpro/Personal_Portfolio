@@ -14,11 +14,11 @@ class Post extends Model
 
     // Relationship with user
     public function user():BelongsTo{
-        return $this->belongsTo('users');
+        return $this->belongsTo(User::class);
     }
 
     // Relationship with category
     public function category():BelongsTo{
-        return $this->belongsTo('categories');
+        return $this->belongsTo(Category::class);
     }
 }

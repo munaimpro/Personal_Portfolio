@@ -58,6 +58,10 @@ return Application::configure(basePath: dirname(__DIR__))
             'Admin/retriveAllPostInfo',
             'Admin/retrivePostInfoById',
             'Admin/deletePostInfo',
+            'Admin/retrivePostInfoBySlug/{slug}',
+            'Admin/retrivePreviousPostInfoById',
+            'Admin/retriveNextPostInfoById',
+            'Admin/retriveLatestPostInfo',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
