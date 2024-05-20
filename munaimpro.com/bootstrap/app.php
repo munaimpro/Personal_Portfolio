@@ -35,6 +35,18 @@ return Application::configure(basePath: dirname(__DIR__))
             'Admin/updateInterestInfo',
             'Admin/retriveInterestInfo',
             'Admin/deleteInterestInfo',
+            'Admin/addCategoryInfo',
+            'Admin/updateCategoryInfo',
+            'Admin/retriveCategoryInfo',
+            'Admin/deleteCategoryInfo',
+            'Admin/addExperienceInfo',
+            'Admin/updateExperienceInfo',
+            'Admin/retriveExperienceInfo',
+            'Admin/deleteExperienceInfo',
+            'Admin/addServiceInfo',
+            'Admin/updateServiceInfo',
+            'Admin/retriveServiceInfo',
+            'Admin/deleteServiceInfo',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

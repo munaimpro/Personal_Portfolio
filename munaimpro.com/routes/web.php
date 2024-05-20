@@ -4,8 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\SkillController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\InterestController;
 use App\Http\Controllers\EducationController;
+use App\Http\Controllers\ExperienceController;
 use App\Http\Middleware\TokenVerificationMiddleware;
 
 
@@ -52,6 +55,27 @@ Route::group(['prefix' => 'Admin'], function(){
     Route::put('updateInterestInfo', [InterestController::class, 'updateInterestInfo'])->middleware(TokenVerificationMiddleware::class);
     Route::get('retriveInterestInfo', [InterestController::class, 'retriveInterestInfo'])->middleware(TokenVerificationMiddleware::class);
     Route::delete('deleteInterestInfo', [InterestController::class, 'deleteInterestInfo'])->middleware(TokenVerificationMiddleware::class);
+
+
+    // API Routes (Category Controller)
+    Route::post('addCategoryInfo', [CategoryController::class, 'addCategoryInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::put('updateCategoryInfo', [CategoryController::class, 'updateCategoryInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::get('retriveCategoryInfo', [CategoryController::class, 'retriveCategoryInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::delete('deleteCategoryInfo', [CategoryController::class, 'deleteCategoryInfo'])->middleware(TokenVerificationMiddleware::class);
+
+
+    // API Routes (Experience Controller)
+    Route::post('addExperienceInfo', [ExperienceController::class, 'addExperienceInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::put('updateExperienceInfo', [ExperienceController::class, 'updateExperienceInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::get('retriveExperienceInfo', [ExperienceController::class, 'retriveExperienceInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::delete('deleteExperienceInfo', [ExperienceController::class, 'deleteExperienceInfo'])->middleware(TokenVerificationMiddleware::class);
+
+
+    // API Routes (Service Controller)
+    Route::post('addServiceInfo', [ServiceController::class, 'addServiceInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::put('updateServiceInfo', [ServiceController::class, 'updateServiceInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::get('retriveServiceInfo', [ServiceController::class, 'retriveServiceInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::delete('deleteServiceInfo', [ServiceController::class, 'deleteServiceInfo'])->middleware(TokenVerificationMiddleware::class);
 
 
 
