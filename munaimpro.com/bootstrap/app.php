@@ -53,6 +53,11 @@ return Application::configure(basePath: dirname(__DIR__))
             'Admin/retriveAllServiceInfo',
             'Admin/retriveServiceInfoById',
             'Admin/deleteServiceInfo',
+            'Admin/addPostInfo',
+            'Admin/updatePostInfo',
+            'Admin/retriveAllPostInfo',
+            'Admin/retrivePostInfoById',
+            'Admin/deletePostInfo',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

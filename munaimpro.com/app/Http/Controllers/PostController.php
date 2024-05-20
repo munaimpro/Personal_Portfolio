@@ -18,7 +18,7 @@ class PostController extends Controller
                 'post_heading' => 'required|string|max:255',
                 'post_slug' => 'required|string|max:255',
                 'post_thumbnail' => 'required|image',
-                'post_descrption' => 'required|string',
+                'post_description' => 'required|string',
                 'category_id' => 'required|integer',
                 'publish_time' => 'required|string',
                 'post_status' => 'required|string',
@@ -77,15 +77,15 @@ class PostController extends Controller
                 'post_heading' => 'required|string|max:255',
                 'post_slug' => 'required|string|max:255',
                 'post_thumbnail' => 'image',
-                'post_descrption' => 'required|string',
+                'post_description' => 'required|string',
                 'category_id' => 'required|integer',
                 'user_id' => 'required|integer',
                 'publish_time' => 'required|string',
                 'post_status' => 'required|string',
             ]);
 
-            $userIdFromHeader = $request->header('userId'); // User ID from header
-            $userIdFromInput = $request->input('userId'); // User ID from input
+            $userIdFromHeader = (int) $request->header('userId'); // User ID from header
+            $userIdFromInput = $request->input('user_id'); // User ID from input
 
             // Matching both user id for validated post owner
             if($userIdFromHeader === $userIdFromInput){

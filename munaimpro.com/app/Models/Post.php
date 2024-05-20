@@ -10,7 +10,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $filllable = ['post_heading', 'post_slug', 'post_thumbnail', 'post_descrption', 'post_view', 'category_id', 'user_id', 'publish_time', 'post_status'];
+    protected $fillable = ['post_heading', 'post_slug', 'post_thumbnail', 'post_description', 'post_view', 'category_id', 'user_id', 'publish_time', 'post_status'];
 
     // Relationship with user
     public function user():BelongsTo{
