@@ -97,6 +97,14 @@ Route::group(['prefix' => 'Admin'], function(){
     Route::get('retriveLatestPostInfo', [PostController::class, 'retriveLatestPostInfo'])->middleware(TokenVerificationMiddleware::class);
 
 
+    // API Routes (Award Controller)
+    Route::post('addAwardInfo', [PostController::class, 'addAwardInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::put('updateAwardInfo', [PostController::class, 'updateAwardInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::get('retriveAllAwardInfo', [PostController::class, 'retriveAllAwardInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::get('retriveAwardInfoById', [PostController::class, 'retriveAwardInfoById'])->middleware(TokenVerificationMiddleware::class);
+    Route::delete('deleteAwardInfo', [PostController::class, 'deleteAwardInfo'])->middleware(TokenVerificationMiddleware::class);
+
+
 
 // Page Routes (User Controller)
     Route::get('signin', [UserController::class, 'userSigninPage']);
