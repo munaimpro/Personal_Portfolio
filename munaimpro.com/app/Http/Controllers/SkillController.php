@@ -81,7 +81,7 @@ class SkillController extends Controller
 
     public function retriveAllSkillInfo(Request $request){
         try{
-            $skill = Skill::get(); // Getting all skill data
+            $skill = Skill::get(['id', 'skill_type', 'skill_name', 'skill_percentage']); // Getting all skill data
 
             if($skill){
                 return response()->json([
@@ -111,7 +111,7 @@ class SkillController extends Controller
         try{
             $skillInfoId = $request->input('skill_info_id'); // Primary key id from input
         
-            $skill = Skill::findOrFail($skillInfoId); // Getting skill data by id
+            $skill = Skill::findOrFail($skillInfoId, ['id', 'skill_type', 'skill_name', 'skill_percentage']); // Getting skill data by id
 
             if($skill){
                 return response()->json([

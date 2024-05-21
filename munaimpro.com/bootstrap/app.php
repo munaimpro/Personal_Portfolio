@@ -20,6 +20,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'Admin/userResetPassword',
             'Admin/userProfile',
             'Admin/userUpdateProfile',
+            'Admin/retriveAllUserInfo',
+            'Admin/retriveUserInfoById',
             'Admin/addAboutInfo',
             'Admin/updateAboutInfo',
             'Admin/retriveAboutInfo',

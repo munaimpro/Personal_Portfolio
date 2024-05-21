@@ -79,7 +79,7 @@ class InterestController extends Controller
 
     public function retriveAllInterestInfo(Request $request){
         try{
-            $interest = Interest::get(['interest_title', 'interest_icon']); // Getting all interest data
+            $interest = Interest::get(['id', 'interest_title', 'interest_icon']); // Getting all interest data
 
             if($interest){
                 return response()->json([
@@ -109,7 +109,7 @@ class InterestController extends Controller
         try{
             $interestInfoId = $request->input('interest_info_id'); // Primary key id from input
         
-            $interest = Interest::findOrFail($interestInfoId)->get(['interest_title', 'interest_icon']); // Getting interest data by id
+            $interest = Interest::findOrFail($interestInfoId, ['id', 'interest_title', 'interest_icon']); // Getting interest data by id
 
             if($interest){
                 return response()->json([

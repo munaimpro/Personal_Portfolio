@@ -81,7 +81,7 @@ class ServiceController extends Controller
 
     public function retriveAllServiceInfo(Request $request){
         try{
-            $service = Service::get(); // Getting all service data
+            $service = Service::get(['id', 'service_icon', 'service_title', 'service_description']); // Getting all service data
 
             if($service){
                 return response()->json([
@@ -111,7 +111,7 @@ class ServiceController extends Controller
         try{
             $serviceInfoId = $request->input('service_info_id'); // Primary key id from input
         
-            $service = Service::findOrFail($serviceInfoId); // Getting Service data by id
+            $service = Service::findOrFail($serviceInfoId, ['id', 'service_icon', 'service_title', 'service_description']); // Getting Service data by id
 
             if($service){
                 return response()->json([

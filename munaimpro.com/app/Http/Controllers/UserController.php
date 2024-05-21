@@ -27,20 +27,33 @@ class UserController extends Controller
     public function userSignup(Request $request){
         
         try{
+            // Input validation process for backend
+            $validatedData = $request->validate([
+                'first_name' => 'required|string|max:50',
+                'last_name' => 'required|string|max:50',
+                'email' => 'required|email',
+                'password' => 'required|string|max:100',
+                'profile_picture' => 'required|image',
+            ]);
+
             if($request->hasFile('profile_picture')){
+                /* Getting profile picture */
                 $profilePicture = $request->file('profile_picture');
 
+                /* Extract the original file name with extension */
+                $profilePictureName = substr(md5(time()), 0, 5).'-'.$profilePicture->getClientOriginalName();
+
                 /* Merge profile picture into array */
-                $userData = array_merge($request->input(), ['profile_picture' => $profilePicture]);
+                $userData = array_merge($validatedData, ['profile_picture' => $profilePictureName]);
                 
                 $user = User::create($userData);
 
                 /* Store profile picture into storage/public/profile_picture folder */
                 if($user){
-                    $profilePicture->store('profile_picture', 'public');
+                    $profilePicture->storeAs('profile_picture/', $profilePictureName, 'public');
                 }
             } else{
-                User::create($request->input());
+                User::create($validatedData);
             }
         
             return response()->json([
@@ -246,6 +259,15 @@ class UserController extends Controller
 
     public function updateProfile(Request $request){
         try{
+            // Input validation process for backend
+            $validatedData = $request->validate([
+                'first_name' => 'required|string|max:50',
+                'last_name' => 'required|string|max:50',
+                'email' => 'required|email',
+                'password' => 'required|string|max:100',
+                'profile_picture' => 'image',
+            ]);
+
             $email = $request->header('userEmail');
 
             if($request->hasFile('profile_picture')){
@@ -264,7 +286,7 @@ class UserController extends Controller
                 $profilePicture = $request->file('profile_picture');
 
                 /* Extract the original file name with extension */
-                $profilePictureName = $profilePicture->getClientOriginalName();
+                $profilePictureName = substr(md5(time()), 0, 5).'-'.$profilePicture->getClientOriginalName();
 
                 $user = User::where('email', '=', $email)->update([
                     'first_name' => $request->input('first_name'),
@@ -301,5 +323,65 @@ class UserController extends Controller
                 'message' => 'Request failed'.$e->getMessage()
             ]);
         }
+    }
+
+
+
+    /* Method for retreive all user */
+
+    public function retriveAllUserInfo(Request $request){
+        try{
+            $user = User::get(['id', 'first_name', 'last_name', 'email', 'profile_picture']); // Getting all user data
+
+            if($user){
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'User data found',
+                    'data' => $user,
+                ]);
+            } else{
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Something went wrong'
+                ]);
+            }
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong'.$e->getMessage()
+            ]);
+        }
+
+    }
+
+
+
+    /* Method for retreive user by id */
+
+    public function retriveUserInfoById(Request $request){
+        try{
+            $userInfoId = $request->input('user_info_id'); // Primary key id from input
+        
+            $user = User::findOrFail($userInfoId, ['id', 'first_name', 'last_name', 'email', 'profile_picture']); // Getting User data by id
+
+            if($user){
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'user data found',
+                    'data' => $user,
+                ]);
+            } else{
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Something went wrong'
+                ]);
+            }
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong'.$e->getMessage()
+            ]);
+        }
+
     }
 }

@@ -83,7 +83,7 @@ class ExperienceController extends Controller
 
     public function retriveAllExperienceInfo(Request $request){
         try{
-            $experience = Experience::get(['experience_title', 'experience_institution', 'experience_starting_date', 'experience_ending_date']); // Getting all experience data
+            $experience = Experience::get(['id', 'experience_title', 'experience_institution', 'experience_starting_date', 'experience_ending_date']); // Getting all experience data
 
             if($experience){
                 return response()->json([
@@ -113,7 +113,7 @@ class ExperienceController extends Controller
         try{
             $experienceInfoId = $request->input('experience_info_id'); // Primary key id from input
         
-            $experience = Experience::findOrFail($experienceInfoId)->get(['experience_title', 'experience_institution', 'experience_starting_date', 'experience_ending_date']); // Getting Experience data by id
+            $experience = Experience::findOrFail($experienceInfoId, ['id', 'experience_title', 'experience_institution', 'experience_starting_date', 'experience_ending_date']); // Getting Experience data by id
 
             if($experience){
                 return response()->json([

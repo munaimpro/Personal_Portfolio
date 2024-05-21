@@ -28,7 +28,10 @@ Route::group(['prefix' => 'Admin'], function(){
     Route::post('userOTPVerification', [UserController::class, 'verifyOTPCode']);
     Route::post('userResetPassword', [UserController::class, 'resetPassword']);
     Route::get('userProfile', [UserController::class, 'userProfile'])->middleware(TokenVerificationMiddleware::class);
-    Route::put('userUpdateProfile', [UserController::class, 'updateProfile'])->middleware(TokenVerificationMiddleware::class);
+    Route::post('userUpdateProfile', [UserController::class, 'updateProfile'])->middleware(TokenVerificationMiddleware::class);
+    Route::get('retriveAllUserInfo', [EducationController::class, 'retriveAllUserInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::get('retriveUserInfoById', [EducationController::class, 'retriveUserInfoById'])->middleware(TokenVerificationMiddleware::class);
+    Route::delete('deleteUserInfo', [EducationController::class, 'deleteUserInfo'])->middleware(TokenVerificationMiddleware::class);
 
 
 // API Routes (About Controller)
@@ -56,8 +59,8 @@ Route::group(['prefix' => 'Admin'], function(){
     // API Routes (Interest Controller)
     Route::post('addInterestInfo', [InterestController::class, 'addInterestInfo'])->middleware(TokenVerificationMiddleware::class);
     Route::put('updateInterestInfo', [InterestController::class, 'updateInterestInfo'])->middleware(TokenVerificationMiddleware::class);
-    Route::get('retriveAllInterestInfo', [InterestController::class, 'retriveInterestInfo'])->middleware(TokenVerificationMiddleware::class);
-    Route::get('retriveInterestInfoById', [InterestController::class, 'retriveInterestInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::get('retriveAllInterestInfo', [InterestController::class, 'retriveAllInterestInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::get('retriveInterestInfoById', [InterestController::class, 'retriveInterestInfoById'])->middleware(TokenVerificationMiddleware::class);
     Route::delete('deleteInterestInfo', [InterestController::class, 'deleteInterestInfo'])->middleware(TokenVerificationMiddleware::class);
 
 

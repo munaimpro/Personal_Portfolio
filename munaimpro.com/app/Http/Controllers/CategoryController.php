@@ -75,9 +75,9 @@ class CategoryController extends Controller
 
     /* Method for retrive all category information */
 
-    public function retriveAllCategoryInfo(Request $request){
+    public function retriveAllCategoryInfo(){
         try{
-            $category = Category::get('category_name'); // Getting all category data
+            $category = Category::get(['id', 'category_name']); // Getting all category data
 
             if($category){
                 return response()->json([
@@ -107,7 +107,7 @@ class CategoryController extends Controller
         try{
             $categoryInfoId = $request->input('category_info_id'); // Primary key id from input
         
-            $category = Category::findOrFail($categoryInfoId)->get('category_name'); // Getting category data by id
+            $category = Category::findOrFail($categoryInfoId, ['id', 'category_name']); // Getting category data by id
 
             if($category){
                 return response()->json([
