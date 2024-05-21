@@ -25,7 +25,7 @@ return new class extends Migration
             $table->date('project_ending_date');
             $table->string('project_url', 100);
             $table->string('core_technology', 100);
-            $table->integer('project_view');
+            $table->integer('project_view')->default(0);
             $table->enum('project_status', ['published', 'unpublished']);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();

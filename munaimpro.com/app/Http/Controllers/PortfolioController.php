@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\Portfolio;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class PortfolioController extends Controller
@@ -12,17 +13,18 @@ class PortfolioController extends Controller
     /* Method for add post information */
 
     public function addPortfolioInfo(Request $request){
-        try{
+        // Log::info('Multiple file name - '.$request->file('project_ui_image'));
+        try {
             // Input validation process for backend
             $validatedData = $request->validate([
                 'project_title' => 'required|string|max:255',
                 'project_thumbnail' => 'required|image',
-                'project_ui_image' => 'required|image',
+                'project_ui_image.*' => 'required|image', // Allow multiple images
                 'project_type' => 'required|string|max:100',
                 'service_id' => 'required|integer',
                 'project_description' => 'required|string',
                 'client_name' => 'required|string|max:100',
-                'client_designation' => 'max:100',
+                'client_designation' => 'nullable|string|max:100',
                 'project_starting_date' => 'required|string',
                 'project_ending_date' => 'required|string',
                 'project_url' => 'required|string|max:100',
@@ -30,51 +32,49 @@ class PortfolioController extends Controller
                 'project_status' => 'required|string',
             ]);
 
-            $projectUIImage = [];
-
-            if($request->hasFile('project_thumbnail') && $request->hasFile('project_ui_image')){
-                /* Getting thumbnail file */
+            if ($request->hasFile('project_thumbnail') && $request->hasFile('project_ui_image')) {
+                // Getting thumbnail file
                 $portfolioThumbnail = $request->file('project_thumbnail');
-
-                /* Extract the original thumbnail name with extension */
+                
+                // Generate unique name for thumbnail
                 $portfolioThumbnailName = $portfolioThumbnail->getClientOriginalName();
-                $portfolioThumbnailUniqueName = substr(md5(time()), 0, 5).'-'.$portfolioThumbnailName;
+                $portfolioThumbnailUniqueName = substr(md5(time()), 0, 5) . '-' . $portfolioThumbnailName;
 
-                /* Getting portfolio UI images */
-                foreach ($request->file('project_ui_image') as $uiImage) {
-                    $path = $uiImage->store('portfolio/ui_images');
-                    $projectUIImage[] = $path;
-                }
+                $uiImage = $request->file('project_ui_image');
+                $uiJsonImage = json_encode($uiImage);
 
-                /* Merge thumbnail image and UI images into array */
-                $portfolioData = array_merge($validatedData, ['project_thumbnail' => $portfolioThumbnailUniqueName, 'project_ui_image' => $projectUIImage]);
+                // Merge thumbnail image and UI images into array
+                $portfolioData = array_merge($validatedData, [
+                    'project_thumbnail' => $portfolioThumbnailUniqueName,
+                    'project_ui_image' => $uiJsonImage
+                ]);
 
+                // Create portfolio
                 $portfolio = Portfolio::create($portfolioData);
 
-                /* Store portfolio thumbnail into storage/public/post_thumbnails folder */
-                if ($portfolio){
+                // Store portfolio thumbnail into storage/public/post_thumbnails folder
+                if ($portfolio) {
                     $portfolioThumbnail->storeAs('portfolio/thumbnails', $portfolioThumbnailUniqueName, 'public');
                 }
-            }
 
-            if($portfolio){
                 return response()->json([
                     'status' => 'success',
                     'message' => 'New portfolio added'
                 ]);
-            } else{
-                return response()->json([
-                    'status' => 'success',
-                    'message' => 'Something went wrong'
-                ]);
             }
-        } catch(Exception $e){
+
             return response()->json([
                 'status' => 'failed',
-                'message' => 'Something went wrong'.$e->getMessage()
+                'message' => 'Files are missing'
             ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong: ' . $e->getMessage()
+            ], 500);
         }
     }
+
     
 
 
