@@ -119,6 +119,14 @@ Route::group(['prefix' => 'Admin'], function(){
     Route::delete('deleteSocialMediaInfo', [SocialMediaController::class, 'deleteSocialMediaInfo'])->middleware(TokenVerificationMiddleware::class);
 
 
+    // API Routes (Portfolio Controller)
+    Route::post('addPortfolioInfo', [AwardController::class, 'addPortfolioInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::put('updatePortfolioInfo', [AwardController::class, 'updatePortfolioInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::get('retriveAllPortfolioInfo', [AwardController::class, 'retriveAllPortfolioInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::get('retrivePortfolioInfoById', [AwardController::class, 'retrivePortfolioInfoById'])->middleware(TokenVerificationMiddleware::class);
+    Route::delete('deletePortfolioInfo', [AwardController::class, 'deletePortfolioInfo'])->middleware(TokenVerificationMiddleware::class);
+
+
 
 
 // Page Routes (User Controller)

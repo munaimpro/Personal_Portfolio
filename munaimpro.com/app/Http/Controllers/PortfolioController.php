@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Exception;
-use App\Models\Post;
+use App\Models\Portfolio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class PostController extends Controller
+class PortfolioController extends Controller
 {
     /* Method for add post information */
 
@@ -15,13 +15,19 @@ class PostController extends Controller
         try{
             // Input validation process for backend
             $validatedData = $request->validate([
-                'post_heading' => 'required|string|max:255',
-                'post_slug' => 'required|string|max:255',
-                'post_thumbnail' => 'required|image',
-                'post_description' => 'required|string',
-                'category_id' => 'required|integer',
-                'publish_time' => 'required|string',
-                'post_status' => 'required|string',
+                'project_title' => 'required|string|max:255',
+                'project_thumbnail' => 'required|string|max:100',
+                'project_ui_image' => 'required|image',
+                'project_type' => 'required|string|max:100',
+                'service_id' => 'required|integer',
+                'project_description' => 'required|string',
+                'client_name' => 'required|string|100',
+                'client_designation' => 'string|100',
+                'project_starting_date' => 'required|string',
+                'project_ending_date' => 'required|string',
+                'project_url' => 'required|string|100',
+                'core_technology' => 'required|string|100',
+                'project_status' => 'required|string',
             ]);
 
             $userId = $request->header('userId'); // User ID from header
@@ -35,9 +41,9 @@ class PostController extends Controller
                 $postThumbnailUniqueName = substr(md5(time()), 0, 5).'-'.$postThumbnailName;
 
                 /* Merge thumbnail image into array */
-                $postData = array_merge($validatedData, ['post_thumbnail' => $postThumbnailUniqueName, 'user_id' => $userId]);
+                $portfolioData = array_merge($validatedData, ['post_thumbnail' => $postThumbnailUniqueName, 'user_id' => $userId]);
 
-                $post = Post::create($postData);
+                $post = Portfolio::create($portfolioData);
 
                 /* Store post thumbnail into storage/public/post_thumbnails folder */
                 if ($post){
@@ -68,9 +74,9 @@ class PostController extends Controller
 
     /* Method for update post information */
 
-    public function updatePostInfo(Request $request){
+    public function updatePortfolioInfo(Request $request){
         try{
-            $postInfoId = $request->input('post_info_id');
+            $portfolioInfoId = $request->input('portfolio_info_id');
             
             // Input validation process for backend
             $validatedData = $request->validate([
@@ -92,7 +98,7 @@ class PostController extends Controller
 
                 if($request->hasFile('post_thumbnail')){
                     // Retrive post thumbnail link from database
-                    $getPreviousPostThumbnail = Post::where('id', '=', $postInfoId)->first('post_thumbnail');
+                    $getPreviousPostThumbnail = Portfolio::where('id', '=', $portfolioInfoId)->first('post_thumbnail');
 
                     // Remove previous post thumbnail file from storage
                     if($getPreviousPostThumbnail){
@@ -109,16 +115,16 @@ class PostController extends Controller
                     $postThumbnailUniqueName = substr(md5(time()), 0, 5).'-'.$postThumbnailName;
     
                     /* Merge thumbnail image into array */
-                    $postData = array_merge($validatedData, ['post_thumbnail' => $postThumbnailUniqueName]);
+                    $portfolioData = array_merge($validatedData, ['post_thumbnail' => $postThumbnailUniqueName]);
     
-                    $post = Post::findOrFail($postInfoId)->update($postData);
+                    $post = Portfolio::findOrFail($portfolioInfoId)->update($portfolioData);
     
                     /* Store post thumbnail into storage/public/post_thumbnails folder */
                     if ($post){
                         $postThumbnail->storeAs('post_thumbnails', $postThumbnailUniqueName, 'public');
                     }
                 } else{
-                    Post::findOrFail($postInfoId)->update($validatedData);
+                    Portfolio::findOrFail($portfolioInfoId)->update($validatedData);
                 }
                 
                 return response()->json([
@@ -145,7 +151,7 @@ class PostController extends Controller
     public function retriveAllPostInfo(Request $request){
         try{
             // Getting all post data with category and user
-            $post = Post::with(['category:id,category_name', 'user:id'])->get();
+            $post = Portfolio::with(['category:id,category_name', 'user:id'])->get();
 
             if($post){
                 return response()->json([
@@ -171,12 +177,12 @@ class PostController extends Controller
 
     /* Method for retrive post information by id */
 
-    public function retrivePostInfoById(Request $request){
+    public function retrivePortfolioInfoById(Request $request){
         try{
-            $postInfoId = $request->input('post_info_id'); // Primary key id from input
+            $portfolioInfoId = $request->input('portfolio_info_id'); // Primary key id from input
             
             // Getting post data by id with category and user
-            $post = Post::with(['category:id,category_name', 'user:id'])->findOrFail($postInfoId);
+            $post = Portfolio::with(['category:id,category_name', 'user:id'])->findOrFail($portfolioInfoId);
 
             if($post){
                 return response()->json([
@@ -202,27 +208,27 @@ class PostController extends Controller
 
     /* Method for delete post information */
 
-    public function deletePostInfo(Request $request){
+    public function deletePortfolioInfo(Request $request){
         try{
             // Getting post id from input
-            $postInfoId = $request->input('post_info_id');
+            $portfolioInfoId = $request->input('portfolio_info_id');
 
             // Retrive post thumbnail link from database
-            $getPreviousPostThumbnail = Post::where('id', '=', $postInfoId)->first('post_thumbnail');
+            $getPreviousPortfolioThumbnail = Portfolio::where('id', '=', $portfolioInfoId)->first('post_thumbnail');
 
             // Remove previous post thumbnail file from storage
-            if($getPreviousPostThumbnail){
-                if(Storage::exists("public/post_thumbnails/".$getPreviousPostThumbnail->post_thumbnail)){
-                    $deleteThumbnail = Storage::delete("public/post_thumbnails/".$getPreviousPostThumbnail->post_thumbnail);
+            if($getPreviousPortfolioThumbnail){
+                if(Storage::exists("public/portfolio/thumbnails".$getPreviousPortfolioThumbnail->portfolio_thumbnail)){
+                    $deleteThumbnail = Storage::delete("public/portfolio/thumbnails".$getPreviousPortfolioThumbnail->portfolio_thumbnail);
 
                     if($deleteThumbnail){
                         // Delete post data by id
-                        $postDelete = Post::findOrFail($postInfoId)->delete();
+                        $portfolioDelete = Portfolio::findOrFail($portfolioInfoId)->delete();
 
-                        if($postDelete){
+                        if($portfolioDelete){
                             return response()->json([
                                 'status' => 'success',
-                                'message' => 'Post deleted'
+                                'message' => 'Portfolio deleted'
                             ]);
                         } else{
                             return response()->json([
@@ -238,8 +244,8 @@ class PostController extends Controller
                     }
                 }
             } else{
-                // Delete post data by id
-                $postDelete = Post::findOrFail($postInfoId)->delete();
+                // Delete portfolio data by id
+                $postDelete = Portfolio::findOrFail($portfolioInfoId)->delete();
 
                 if($postDelete){
                     return response()->json([
@@ -267,11 +273,11 @@ class PostController extends Controller
     public function retrivePostInfoBySlug($slug){
         try{
             // Getting post data by slug with category and user
-            $post = Post::where('post_slug', '=', $slug)->with(['category:id,category_name', 'user:id,first_name,last_name'])->get(['id', 'post_heading', 'post_slug', 'post_thumbnail', 'post_description', 'category_id', 'user_id']);
+            $post = Portfolio::where('post_slug', '=', $slug)->with(['category:id,category_name', 'user:id,first_name,last_name'])->get(['id', 'post_heading', 'post_slug', 'post_thumbnail', 'post_description', 'category_id', 'user_id']);
 
             if($post){
                 // Increasing post view on details view
-                Post::where('post_slug', '=', $slug)->increment('post_view');
+                Portfolio::where('post_slug', '=', $slug)->increment('post_view');
 
                 return response()->json([
                     'status' => 'success',
@@ -298,13 +304,13 @@ class PostController extends Controller
 
     public function retrivePreviousPostInfoById(Request $request){
         try{
-            $postInfoId = $request->input('post_info_id'); // Primary key id from input
+            $portfolioInfoId = $request->input('portfolio_info_id'); // Primary key id from input
             
             // Get previous id
-            $previousPostInfoId = Post::where('id', '<', $postInfoId)->pluck('id');
+            $previousPostInfoId = Portfolio::where('id', '<', $portfolioInfoId)->pluck('id');
             
             // Getting post data by id with category and user
-            $post = Post::with(['category:id,category_name', 'user:id'])->findOrFail($previousPostInfoId, ['id', 'post_heading', 'post_thumbnail', 'publish_time']);
+            $post = Portfolio::with(['category:id,category_name', 'user:id'])->findOrFail($previousPostInfoId, ['id', 'post_heading', 'post_thumbnail', 'publish_time']);
 
             if($post){
                 return response()->json([
@@ -332,13 +338,13 @@ class PostController extends Controller
 
     public function retriveNextPostInfoById(Request $request){
         try{
-            $postInfoId = $request->input('post_info_id'); // Primary key id from input
+            $portfolioInfoId = $request->input('portfolio_info_id'); // Primary key id from input
             
             // Get previous id
-            $previousPostInfoId = Post::where('id', '>', $postInfoId)->pluck('id');
+            $previousPostInfoId = Portfolio::where('id', '>', $portfolioInfoId)->pluck('id');
             
             // Getting post data by id with category and user
-            $post = Post::with(['category:id,category_name', 'user:id'])->findOrFail($previousPostInfoId, ['id', 'post_heading', 'post_thumbnail', 'publish_time']);
+            $post = Portfolio::with(['category:id,category_name', 'user:id'])->findOrFail($previousPostInfoId, ['id', 'post_heading', 'post_thumbnail', 'publish_time']);
 
             if($post){
                 return response()->json([
@@ -367,7 +373,7 @@ class PostController extends Controller
     public function retriveLatestPostInfo(){
         try{
             // Getting latest 2 post data with category and user
-            $post = Post::with(['category:id,category_name', 'user:id'])->latest('publish_time')->take(2)->get(['id', 'post_heading', 'post_thumbnail', 'publish_time']);
+            $post = Portfolio::with(['category:id,category_name', 'user:id'])->latest('publish_time')->take(2)->get(['id', 'post_heading', 'post_thumbnail', 'publish_time']);
 
             if($post){
                 return response()->json([
