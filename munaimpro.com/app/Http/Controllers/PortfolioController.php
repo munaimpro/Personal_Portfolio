@@ -11,50 +11,56 @@ class PortfolioController extends Controller
 {
     /* Method for add post information */
 
-    public function addPostInfo(Request $request){
+    public function addPortfolioInfo(Request $request){
         try{
             // Input validation process for backend
             $validatedData = $request->validate([
                 'project_title' => 'required|string|max:255',
-                'project_thumbnail' => 'required|string|max:100',
+                'project_thumbnail' => 'required|image',
                 'project_ui_image' => 'required|image',
                 'project_type' => 'required|string|max:100',
                 'service_id' => 'required|integer',
                 'project_description' => 'required|string',
-                'client_name' => 'required|string|100',
-                'client_designation' => 'string|100',
+                'client_name' => 'required|string|max:100',
+                'client_designation' => 'max:100',
                 'project_starting_date' => 'required|string',
                 'project_ending_date' => 'required|string',
-                'project_url' => 'required|string|100',
-                'core_technology' => 'required|string|100',
+                'project_url' => 'required|string|max:100',
+                'core_technology' => 'required|string|max:100',
                 'project_status' => 'required|string',
             ]);
 
-            $userId = $request->header('userId'); // User ID from header
+            $projectUIImage = [];
 
-            if($request->hasFile('post_thumbnail')){
-                /* Getting file */
-                $postThumbnail = $request->file('post_thumbnail');
+            if($request->hasFile('project_thumbnail') && $request->hasFile('project_ui_image')){
+                /* Getting thumbnail file */
+                $portfolioThumbnail = $request->file('project_thumbnail');
 
-                /* Extract the original file name with extension */
-                $postThumbnailName = $postThumbnail->getClientOriginalName();
-                $postThumbnailUniqueName = substr(md5(time()), 0, 5).'-'.$postThumbnailName;
+                /* Extract the original thumbnail name with extension */
+                $portfolioThumbnailName = $portfolioThumbnail->getClientOriginalName();
+                $portfolioThumbnailUniqueName = substr(md5(time()), 0, 5).'-'.$portfolioThumbnailName;
 
-                /* Merge thumbnail image into array */
-                $portfolioData = array_merge($validatedData, ['post_thumbnail' => $postThumbnailUniqueName, 'user_id' => $userId]);
+                /* Getting portfolio UI images */
+                foreach ($request->file('project_ui_image') as $uiImage) {
+                    $path = $uiImage->store('portfolio/ui_images');
+                    $projectUIImage[] = $path;
+                }
 
-                $post = Portfolio::create($portfolioData);
+                /* Merge thumbnail image and UI images into array */
+                $portfolioData = array_merge($validatedData, ['project_thumbnail' => $portfolioThumbnailUniqueName, 'project_ui_image' => $projectUIImage]);
 
-                /* Store post thumbnail into storage/public/post_thumbnails folder */
-                if ($post){
-                    $postThumbnail->storeAs('post_thumbnails', $postThumbnailUniqueName, 'public');
+                $portfolio = Portfolio::create($portfolioData);
+
+                /* Store portfolio thumbnail into storage/public/post_thumbnails folder */
+                if ($portfolio){
+                    $portfolioThumbnail->storeAs('portfolio/thumbnails', $portfolioThumbnailUniqueName, 'public');
                 }
             }
 
-            if($post){
+            if($portfolio){
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'New blog created'
+                    'message' => 'New portfolio added'
                 ]);
             } else{
                 return response()->json([

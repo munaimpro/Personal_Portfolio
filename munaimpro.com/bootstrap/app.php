@@ -85,6 +85,12 @@ return Application::configure(basePath: dirname(__DIR__))
             'Admin/retriveSocialMediaInfoById',
             'Admin/retriveSpecificSocialMediaInfo',
             'Admin/deleteSocialMediaInfo',
+
+            'Admin/addPortfolioInfo',
+            'Admin/updatePortfolioInfo',
+            'Admin/retriveAllPortfolioInfo',
+            'Admin/retrivePortfolioInfoById',
+            'Admin/deletePortfolioInfo',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

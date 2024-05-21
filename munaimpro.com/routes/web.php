@@ -10,6 +10,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\InterestController;
 use App\Http\Controllers\EducationController;
+use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\SocialMediaController;
 use App\Http\Middleware\TokenVerificationMiddleware;
@@ -120,11 +121,11 @@ Route::group(['prefix' => 'Admin'], function(){
 
 
     // API Routes (Portfolio Controller)
-    Route::post('addPortfolioInfo', [AwardController::class, 'addPortfolioInfo'])->middleware(TokenVerificationMiddleware::class);
-    Route::put('updatePortfolioInfo', [AwardController::class, 'updatePortfolioInfo'])->middleware(TokenVerificationMiddleware::class);
-    Route::get('retriveAllPortfolioInfo', [AwardController::class, 'retriveAllPortfolioInfo'])->middleware(TokenVerificationMiddleware::class);
-    Route::get('retrivePortfolioInfoById', [AwardController::class, 'retrivePortfolioInfoById'])->middleware(TokenVerificationMiddleware::class);
-    Route::delete('deletePortfolioInfo', [AwardController::class, 'deletePortfolioInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::post('addPortfolioInfo', [PortfolioController::class, 'addPortfolioInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::put('updatePortfolioInfo', [PortfolioController::class, 'updatePortfolioInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::get('retriveAllPortfolioInfo', [PortfolioController::class, 'retriveAllPortfolioInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::get('retrivePortfolioInfoById', [PortfolioController::class, 'retrivePortfolioInfoById'])->middleware(TokenVerificationMiddleware::class);
+    Route::delete('deletePortfolioInfo', [PortfolioController::class, 'deletePortfolioInfo'])->middleware(TokenVerificationMiddleware::class);
 
 
 
