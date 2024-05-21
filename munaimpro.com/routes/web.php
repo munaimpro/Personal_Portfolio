@@ -4,12 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AwardController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\InterestController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\ExperienceController;
+use App\Http\Controllers\SocialMediaController;
 use App\Http\Middleware\TokenVerificationMiddleware;
 
 
@@ -101,11 +103,21 @@ Route::group(['prefix' => 'Admin'], function(){
 
 
     // API Routes (Award Controller)
-    Route::post('addAwardInfo', [PostController::class, 'addAwardInfo'])->middleware(TokenVerificationMiddleware::class);
-    Route::put('updateAwardInfo', [PostController::class, 'updateAwardInfo'])->middleware(TokenVerificationMiddleware::class);
-    Route::get('retriveAllAwardInfo', [PostController::class, 'retriveAllAwardInfo'])->middleware(TokenVerificationMiddleware::class);
-    Route::get('retriveAwardInfoById', [PostController::class, 'retriveAwardInfoById'])->middleware(TokenVerificationMiddleware::class);
-    Route::delete('deleteAwardInfo', [PostController::class, 'deleteAwardInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::post('addAwardInfo', [AwardController::class, 'addAwardInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::put('updateAwardInfo', [AwardController::class, 'updateAwardInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::get('retriveAllAwardInfo', [AwardController::class, 'retriveAllAwardInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::get('retriveAwardInfoById', [AwardController::class, 'retriveAwardInfoById'])->middleware(TokenVerificationMiddleware::class);
+    Route::delete('deleteAwardInfo', [AwardController::class, 'deleteAwardInfo'])->middleware(TokenVerificationMiddleware::class);
+
+
+    // API Routes (Social Media Controller)
+    Route::post('addSocialMediaInfo', [SocialMediaController::class, 'addSocialMediaInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::put('updateSocialMediaInfo', [SocialMediaController::class, 'updateSocialMediaInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::get('retriveAllSocialMediaInfo', [SocialMediaController::class, 'retriveAllSocialMediaInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::get('retriveSocialMediaInfoById', [SocialMediaController::class, 'retriveSocialMediaInfoById'])->middleware(TokenVerificationMiddleware::class);
+    Route::get('retriveSpecificSocialMediaInfo', [SocialMediaController::class, 'retriveSpecificSocialMediaInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::delete('deleteSocialMediaInfo', [SocialMediaController::class, 'deleteSocialMediaInfo'])->middleware(TokenVerificationMiddleware::class);
+
 
 
 

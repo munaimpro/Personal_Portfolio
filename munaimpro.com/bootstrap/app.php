@@ -22,39 +22,47 @@ return Application::configure(basePath: dirname(__DIR__))
             'Admin/userUpdateProfile',
             'Admin/retriveAllUserInfo',
             'Admin/retriveUserInfoById',
+            
             'Admin/addAboutInfo',
             'Admin/updateAboutInfo',
             'Admin/retriveAboutInfo',
+            
             'Admin/addEducationInfo',
             'Admin/updateEducationInfo',
             'Admin/retriveAllEducationInfo',
             'Admin/retriveEducationInfoById',
             'Admin/deleteEducationInfo',
+            
             'Admin/addSkillInfo',
             'Admin/updateSkillInfo',
             'Admin/retriveAllSkillInfo',
             'Admin/retriveSkillInfoById',
             'Admin/deleteSkillInfo',
+            
             'Admin/addInterestInfo',
             'Admin/updateInterestInfo',
             'Admin/retriveAllInterestInfo',
             'Admin/retriveInterestInfoById',
             'Admin/deleteInterestInfo',
+            
             'Admin/addCategoryInfo',
             'Admin/updateCategoryInfo',
             'Admin/retriveAllCategoryInfo',
             'Admin/retriveCategoryInfoById',
             'Admin/deleteCategoryInfo',
+            
             'Admin/addExperienceInfo',
             'Admin/updateExperienceInfo',
             'Admin/retriveAllExperienceInfo',
             'Admin/retriveExperienceInfoById',
             'Admin/deleteExperienceInfo',
+
             'Admin/addServiceInfo',
             'Admin/updateServiceInfo',
             'Admin/retriveAllServiceInfo',
             'Admin/retriveServiceInfoById',
             'Admin/deleteServiceInfo',
+
             'Admin/addPostInfo',
             'Admin/updatePostInfo',
             'Admin/retriveAllPostInfo',
@@ -64,6 +72,19 @@ return Application::configure(basePath: dirname(__DIR__))
             'Admin/retrivePreviousPostInfoById',
             'Admin/retriveNextPostInfoById',
             'Admin/retriveLatestPostInfo',
+
+            'Admin/addAwardInfo',
+            'Admin/updateAwardInfo',
+            'Admin/retriveAllAwardInfo',
+            'Admin/retriveAwardInfoById',
+            'Admin/deleteAwardInfo',
+
+            'Admin/addSocialMediaInfo',
+            'Admin/updateSocialMediaInfo',
+            'Admin/retriveAllSocialMediaInfo',
+            'Admin/retriveSocialMediaInfoById',
+            'Admin/retriveSpecificSocialMediaInfo',
+            'Admin/deleteSocialMediaInfo',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
