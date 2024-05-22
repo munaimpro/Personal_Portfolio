@@ -20,7 +20,7 @@
     <td><a href="javascript:void(0);">IT0001</a></td>
     <td class="productimgname">
     <a class="product-img" href="productlist.html">
-    <img src="assets/img/product/product2.jpg" alt="product">
+    <img src="{{ asset('assets/img/product/product2.jpg') }}" alt="product">
     </a>
     <a href="productlist.html">Orange</a>
     </td>
@@ -33,7 +33,7 @@
     <td><a href="javascript:void(0);">IT0002</a></td>
     <td class="productimgname">
     <a class="product-img" href="productlist.html">
-    <img src="assets/img/product/product3.jpg" alt="product">
+    <img src="{{ asset('assets/img/product/product3.jpg') }}" alt="product">
     </a>
     <a href="productlist.html">Pineapple</a>
     </td>
@@ -46,7 +46,7 @@
     <td><a href="javascript:void(0);">IT0003</a></td>
     <td class="productimgname">
     <a class="product-img" href="productlist.html">
-    <img src="assets/img/product/product4.jpg" alt="product">
+    <img src="{{ asset('assets/img/product/product4.jpg') }}" alt="product">
     </a>
     <a href="productlist.html">Stawberry</a>
     </td>
@@ -59,7 +59,7 @@
     <td><a href="javascript:void(0);">IT0004</a></td>
     <td class="productimgname">
     <a class="product-img" href="productlist.html">
-    <img src="assets/img/product/product5.jpg" alt="product">
+    <img src="{{ asset('assets/img/product/product5.jpg') }}" alt="product">
     </a>
     <a href="productlist.html">Avocat</a>
     </td>

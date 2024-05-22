@@ -155,7 +155,8 @@ Route::group(['prefix' => 'Admin'], function(){
 // Page Routes (User Controller)
     Route::get('signin', [UserController::class, 'userSigninPage']);
     Route::view('/testfile', 'jsondata');
-    Route::view('/', 'admin.pages.dashboard');
+    Route::view('/dashboard', 'admin.pages.dashboard');
+    Route::view('/award', 'admin.pages.award');
 });
 
 

@@ -15,7 +15,7 @@
                     </ul>
                     <div class="dropdown">
                         <button class="btn btn-white btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                        2022 <img src="assets/img/icons/dropdown.svg" alt="img" class="ms-2">
+                        2022 <img src="{{ asset('assets/img/icons/dropdown.svg') }}" alt="img" class="ms-2">
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <li>
@@ -71,7 +71,7 @@
                                 <td>1</td>
                                 <td class="productimgname">
                                     <a href="productlist.html" class="product-img">
-                                        <img src="assets/img/product/product22.jpg" alt="product">
+                                        <img src="{{ asset('assets/img/product/product22.jpg') }}" alt="product">
                                     </a>
                                     <a href="productlist.html">Apple Earpods</a>
                                 </td>
@@ -82,7 +82,7 @@
                                 <td>2</td>
                                 <td class="productimgname">
                                     <a href="productlist.html" class="product-img">
-                                        <img src="assets/img/product/product23.jpg" alt="product">
+                                        <img src="{{ asset('assets/img/product/product23.jpg') }}" alt="product">
                                     </a>
                                     <a href="productlist.html">iPhone 11</a>
                                 </td>
@@ -93,7 +93,7 @@
                                 <td>3</td>
                                 <td class="productimgname">
                                     <a href="productlist.html" class="product-img">
-                                        <img src="assets/img/product/product24.jpg" alt="product">
+                                        <img src="{{ asset('assets/img/product/product24.jpg') }}" alt="product">
                                     </a>
                                     <a href="productlist.html">samsung</a>
                                 </td>
