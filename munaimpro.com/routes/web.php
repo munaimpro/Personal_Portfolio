@@ -146,6 +146,7 @@ Route::group(['prefix' => 'Admin'], function(){
     Route::get('retriveAllSeoPropertyInfo', [WebsiteInformationController::class, 'retriveAllSeoPropertyInfo'])->middleware(TokenVerificationMiddleware::class);
     Route::get('retriveSeoPropertyInfoById', [WebsiteInformationController::class, 'retriveSeoPropertyInfoById'])->middleware(TokenVerificationMiddleware::class);
     Route::get('retriveAllVisitorInfo', [WebsiteInformationController::class, 'retriveAllVisitorInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::post('updateSeoPropertyInfo', [WebsiteInformationController::class, 'updateSeoPropertyInfo'])->middleware(TokenVerificationMiddleware::class);
 
 
 

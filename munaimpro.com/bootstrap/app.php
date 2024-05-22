@@ -105,6 +105,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'Admin/retriveAllSeoPropertyInfo',
             'Admin/retriveSeoPropertyInfoById',
             'Admin/retriveAllVisitorInfo',
+            'Admin/updateSeoPropertyInfo',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

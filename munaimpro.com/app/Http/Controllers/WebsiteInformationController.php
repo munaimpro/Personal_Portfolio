@@ -208,6 +208,68 @@ class WebsiteInformationController extends Controller
     }
 
 
+
+    /* Method for update SEO property information */
+
+    public function updateSeoPropertyInfo(Request $request){
+        try{
+            // Input validation process for backend
+            $validatedData = $request->validate([
+                'page_name' => 'required|string|',
+                'site_title' => 'required|string|max:50',
+                'site_keywords' => 'required|string|max:255',
+                'site_description' => 'required|string',
+                'og_site_name' => 'required|string|max:100',
+                'og_url' => 'required|string|max:100',
+                'og_title' => 'required|string|max:100',
+                'og_description' => 'required|string',
+                'og_image' => 'image|mimes:png,jpg,jpeg',
+            ]);
+
+            $seopropertyId = $request->input('seoproperty_info_id');
+
+            if($request->hasFile('og_image')){
+                // Retrive og image link from database
+                $getPreviousOGImage = SeoProperty::where('id', '=', $seopropertyId)->first('og_image');
+
+                // Remove og image file from storage
+                if($getPreviousOGImage){
+                    if(Storage::exists("public/website_pictures/open_graph_images/".$getPreviousOGImage->og_image)){
+                        Storage::delete("public/website_pictures/open_graph_images/".$getPreviousOGImage->og_image);
+                    }
+                }
+
+                // Getting new og file
+                $ogImage = $request->file('og_image');
+
+                /* Extract the original file name with extension */
+                $ogImageName = $ogImage->getClientOriginalName();
+
+                $seopropertyData = array_merge($validatedData, ['og_image' => $ogImageName]);
+
+                $seoproperty = Seoproperty::where('id', '=', $seopropertyId)->update($seopropertyData);
+
+                if($seoproperty){
+                    $ogImage->storeAs('website_pictures/open_graph_images', $ogImageName, 'public');
+                }
+
+            } else{
+                Seoproperty::where('id', '=', $seopropertyId)->update($validatedData);
+            }
+        
+            return response()->json([
+                'status' => 'success',
+                'message' => 'SEO information updated successfully'
+            ]);
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Request failed'.$e->getMessage()
+            ]);
+        }
+    }
+
+
     /* Method for retrieve website visitor information */
     
     public function retriveAllVisitorInfo(){
