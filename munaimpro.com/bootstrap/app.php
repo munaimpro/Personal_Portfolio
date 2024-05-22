@@ -94,6 +94,10 @@ return Application::configure(basePath: dirname(__DIR__))
 
             'Admin/sendMessageFromWebsite',
             'Admin/sendMessageFromAdmin',
+            'Admin/replyMessageFromAdmin',
+            'Admin/retriveMessageById',
+            'Admin/retriveAllMessage',
+            'Admin/deleteMessage',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

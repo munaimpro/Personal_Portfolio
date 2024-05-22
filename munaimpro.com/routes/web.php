@@ -132,6 +132,10 @@ Route::group(['prefix' => 'Admin'], function(){
     // API Routes (Message Controller)
     Route::post('sendMessageFromWebsite', [MessageController::class, 'sendMessageFromWebsite']);
     Route::post('sendMessageFromAdmin', [MessageController::class, 'sendMessageFromAdmin'])->middleware(TokenVerificationMiddleware::class);
+    Route::post('replyMessageFromAdmin', [MessageController::class, 'replyMessageFromAdmin'])->middleware(TokenVerificationMiddleware::class);
+    Route::get('retriveMessageById', [MessageController::class, 'retriveMessageById'])->middleware(TokenVerificationMiddleware::class);
+    Route::get('retriveAllMessage', [MessageController::class, 'retriveAllMessage'])->middleware(TokenVerificationMiddleware::class);
+    Route::delete('deleteMessage', [MessageController::class, 'deleteMessage'])->middleware(TokenVerificationMiddleware::class);
 
 
 

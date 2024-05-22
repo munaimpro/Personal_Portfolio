@@ -26,7 +26,6 @@ class AdminMessageMail extends Mailable
         $this->email = $email;
         $this->subject = $subject;
         $this->adminMessage = $adminMessage;
-        // dd($this->message);
     }
 
     /**
