@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AwardController;
 use App\Http\Controllers\SkillController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\InterestController;
@@ -128,10 +129,16 @@ Route::group(['prefix' => 'Admin'], function(){
     Route::delete('deletePortfolioInfo', [PortfolioController::class, 'deletePortfolioInfo'])->middleware(TokenVerificationMiddleware::class);
 
 
+    // API Routes (Message Controller)
+    Route::post('sendMessageFromWebsite', [MessageController::class, 'sendMessageFromWebsite']);
+    Route::post('sendMessageFromAdmin', [MessageController::class, 'sendMessageFromAdmin'])->middleware(TokenVerificationMiddleware::class);
+
+
 
 
 // Page Routes (User Controller)
     Route::get('signin', [UserController::class, 'userSigninPage']);
+    Route::view('/testfile', 'jsondata');
 });
 
 

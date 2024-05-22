@@ -91,6 +91,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'Admin/retriveAllPortfolioInfo',
             'Admin/retrivePortfolioInfoById',
             'Admin/deletePortfolioInfo',
+
+            'Admin/sendMessageFromWebsite',
+            'Admin/sendMessageFromAdmin',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

@@ -19,7 +19,7 @@ class PortfolioController extends Controller
             $validatedData = $request->validate([
                 'project_title' => 'required|string|max:255',
                 'project_thumbnail' => 'required|image',
-                'project_ui_image.*' => 'required|image', // Allow multiple images
+                'project_ui_image.*' => 'required|file|mimes:jpg,png,jpeg,svg|max:2048', // Allow multiple images
                 'project_type' => 'required|string|max:100',
                 'service_id' => 'required|integer',
                 'project_description' => 'required|string',
@@ -32,7 +32,26 @@ class PortfolioController extends Controller
                 'project_status' => 'required|string',
             ]);
 
-            if ($request->hasFile('project_thumbnail') && $request->hasFile('project_ui_image')) {
+            $fileNames = [];
+
+            dd($request->hasfile('project_ui_image'));
+
+            // Getting project ui files with unique name
+            if ($request->hasfile('project_ui_image')) {
+                foreach ($request->file('project_ui_image') as $file) {
+                    $name = time() . '_' . $file->getClientOriginalName();
+                    // dd($name);
+                    // $request->file('project_ui_image')->move(public_path('uploads'), $name);
+                    $fileNames[] = $name; // Store the file name
+                    dd($fileNames[]);
+                }
+            }
+
+            $fileName=json_encode($fileNames);
+
+            dd($fileName);
+
+            if ($request->hasFile('project_thumbnail')) {
                 // Getting thumbnail file
                 $portfolioThumbnail = $request->file('project_thumbnail');
                 
@@ -40,13 +59,12 @@ class PortfolioController extends Controller
                 $portfolioThumbnailName = $portfolioThumbnail->getClientOriginalName();
                 $portfolioThumbnailUniqueName = substr(md5(time()), 0, 5) . '-' . $portfolioThumbnailName;
 
-                $uiImage = $request->file('project_ui_image');
-                $uiJsonImage = json_encode($uiImage);
+
 
                 // Merge thumbnail image and UI images into array
                 $portfolioData = array_merge($validatedData, [
                     'project_thumbnail' => $portfolioThumbnailUniqueName,
-                    'project_ui_image' => $uiJsonImage
+                    'project_ui_image' => $fileName
                 ]);
 
                 // Create portfolio
@@ -63,15 +81,15 @@ class PortfolioController extends Controller
                 ]);
             }
 
-            return response()->json([
-                'status' => 'failed',
-                'message' => 'Files are missing'
-            ]);
+            // return response()->json([
+            //     'status' => 'failed',
+            //     'message' => 'Files are missing'
+            // ]);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'failed',
                 'message' => 'Something went wrong: ' . $e->getMessage()
-            ], 500);
+            ]);
         }
     }
 
