@@ -167,7 +167,7 @@ class AboutController extends Controller
 
     /* Method for about information retrive */
 
-    public function retriveAboutInfo(Request $request){
+    public function retriveAboutInfo(){
         try{
             $aboutId = About::pluck('id')->first(); // Primary key id from about table
             

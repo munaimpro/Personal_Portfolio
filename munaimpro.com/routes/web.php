@@ -15,6 +15,7 @@ use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\SocialMediaController;
 use App\Http\Middleware\TokenVerificationMiddleware;
+use App\Http\Controllers\WebsiteInformationController;
 
 
 
@@ -136,6 +137,15 @@ Route::group(['prefix' => 'Admin'], function(){
     Route::get('retriveMessageById', [MessageController::class, 'retriveMessageById'])->middleware(TokenVerificationMiddleware::class);
     Route::get('retriveAllMessage', [MessageController::class, 'retriveAllMessage'])->middleware(TokenVerificationMiddleware::class);
     Route::delete('deleteMessage', [MessageController::class, 'deleteMessage'])->middleware(TokenVerificationMiddleware::class);
+
+
+    // API Routes (WebsiteInformation Controller)
+    Route::get('retrieveLogoInfo', [WebsiteInformationController::class, 'retrieveLogoInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::post('addLogoInfo', [WebsiteInformationController::class, 'addLogoInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::put('updateLogoInfo', [WebsiteInformationController::class, 'updateLogoInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::get('retriveAllSeoPropertyInfo', [WebsiteInformationController::class, 'retriveAllSeoPropertyInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::get('retriveSeoPropertyInfoById', [WebsiteInformationController::class, 'retriveSeoPropertyInfoById'])->middleware(TokenVerificationMiddleware::class);
+    Route::get('retriveAllVisitorInfo', [WebsiteInformationController::class, 'retriveAllVisitorInfo'])->middleware(TokenVerificationMiddleware::class);
 
 
 

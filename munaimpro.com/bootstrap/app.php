@@ -98,6 +98,13 @@ return Application::configure(basePath: dirname(__DIR__))
             'Admin/retriveMessageById',
             'Admin/retriveAllMessage',
             'Admin/deleteMessage',
+
+            'Admin/retrieveLogoInfo',
+            'Admin/addLogoInfo',
+            'Admin/updateLogoInfo',
+            'Admin/retriveAllSeoPropertyInfo',
+            'Admin/retriveSeoPropertyInfoById',
+            'Admin/retriveAllVisitorInfo',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
