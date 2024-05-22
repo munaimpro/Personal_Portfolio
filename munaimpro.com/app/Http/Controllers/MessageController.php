@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\Message;
 use Illuminate\Http\Request;
+use App\Mail\AdminMessageMail;
+use Illuminate\Support\Facades\Mail;
 
 class MessageController extends Controller
 {
-    /* Method for add interest information */
+    /* Method for send message from website */
 
     public function sendMessageFromWebsite(Request $request){
         try{
@@ -21,6 +23,44 @@ class MessageController extends Controller
             ]);
 
             $message = Message::create($validatedData);
+
+            if($message){
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Message sent successfully'
+                ]);
+            } else{
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Something went wrong'
+                ]);
+            }
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong'.$e->getMessage()
+            ]);
+        }
+    }
+
+
+
+    /* Method for send message from admin */
+
+    public function sendMessageFromAdmin(Request $request){
+        try{
+            // Input validation process for backend
+            $validatedData = $request->validate([
+                'email' => 'required|email|max:100',
+                'subject' => 'required|string|max:255',
+                'message' => 'required|string',
+            ]);
+
+            $email = $request->input('email');
+            $subject = $request->input('subject');
+            $message = $request->input('message');
+            
+            Mail::to($email)->send(new AdminMessageMail($email, $subject, $message));
 
             if($message){
                 return response()->json([
