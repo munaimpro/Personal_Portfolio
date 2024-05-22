@@ -58,11 +58,13 @@ class MessageController extends Controller
 
             $email = $request->input('email');
             $subject = $request->input('subject');
-            $message = $request->input('message');
+            $adminMessage = $request->input('message');
             
-            Mail::to($email)->send(new AdminMessageMail($email, $subject, $message));
+            // dd($message);
+            
+            $sendMessage = Mail::to($email)->send(new AdminMessageMail($email, $subject, $adminMessage));
 
-            if($message){
+            if($sendMessage){
                 return response()->json([
                     'status' => 'success',
                     'message' => 'Message sent successfully'

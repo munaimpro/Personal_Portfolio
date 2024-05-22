@@ -19,13 +19,14 @@ class AdminMessageMail extends Mailable
     
     public $email;
     public $subject;
-    public $message;
+    public $adminMessage;
     
-    public function __construct($email, $subject, $message)
+    public function __construct($email, $subject, $adminMessage)
     {
         $this->email = $email;
         $this->subject = $subject;
-        $this->message = $message;
+        $this->adminMessage = $adminMessage;
+        // dd($this->message);
     }
 
     /**
