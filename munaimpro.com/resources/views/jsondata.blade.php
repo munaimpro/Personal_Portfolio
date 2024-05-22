@@ -28,7 +28,7 @@
                 }
             })
             .then(response => {
-                document.getElementById('message').innerText = response.data.success;
+                document.getElementById('message').innerText = response.data.message;
                 document.getElementById('filesName').innerText = response.data.files;
             })
             .catch(error => {

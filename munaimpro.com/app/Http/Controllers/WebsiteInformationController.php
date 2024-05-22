@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\Logo;
+use App\Models\Post;
+use App\Models\User;
+use App\Models\Message;
+use App\Models\Category;
+use App\Models\Portfolio;
 use App\Models\Seoproperty;
 use Illuminate\Http\Request;
 use App\Models\VisitorInformations;
@@ -19,12 +24,34 @@ class WebsiteInformationController extends Controller
 
 
     /* Method for admin dashboard statistics */
-    public function websiteStatistics(){
-        
+
+    public function dashboardSummaryInfo(){
+        // Total user
+        $total_user = User::all()->count();
+        // Total portfolio
+        $total_portfolio = Portfolio::all()->count();
+        // Total category
+        $total_category = Category::all()->count();
+        // Total post
+        $total_post = Post::all()->count();
+        // Total visitor
+        $total_visitor = VisitorInformations::all()->count();
+        // Total new message
+        $total_message = Message::all()->count();
+
+        return response()->json([
+            'total_user' => $total_user,
+            'total_portfolio' => $total_portfolio,
+            'total_category' => $total_category,
+            'total_post' => $total_post,
+            'total_visitor' => $total_visitor,
+            'total_message' => $total_message,
+        ]);
     }
 
 
     /* Method for admin logo & seo property page */
+
     public function adminLogoWithSEOPropertyPage(){
         
     }

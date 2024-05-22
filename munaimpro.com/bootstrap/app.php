@@ -106,6 +106,12 @@ return Application::configure(basePath: dirname(__DIR__))
             'Admin/retriveSeoPropertyInfoById',
             'Admin/retriveAllVisitorInfo',
             'Admin/updateSeoPropertyInfo',
+            'Admin/dashboardSummaryInfo',
+
+
+
+
+            'upload',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

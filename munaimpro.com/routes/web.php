@@ -123,8 +123,8 @@ Route::group(['prefix' => 'Admin'], function(){
 
 
     // API Routes (Portfolio Controller)
-    Route::post('addPortfolioInfo', [PortfolioController::class, 'addPortfolioInfo'])->middleware(TokenVerificationMiddleware::class);
-    Route::put('updatePortfolioInfo', [PortfolioController::class, 'updatePortfolioInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::post('addPortfolioInfo', [PortfolioController::class, 'addPortfolioInfo']);
+    Route::post('updatePortfolioInfo', [PortfolioController::class, 'updatePortfolioInfo'])->middleware(TokenVerificationMiddleware::class);
     Route::get('retriveAllPortfolioInfo', [PortfolioController::class, 'retriveAllPortfolioInfo'])->middleware(TokenVerificationMiddleware::class);
     Route::get('retrivePortfolioInfoById', [PortfolioController::class, 'retrivePortfolioInfoById'])->middleware(TokenVerificationMiddleware::class);
     Route::delete('deletePortfolioInfo', [PortfolioController::class, 'deletePortfolioInfo'])->middleware(TokenVerificationMiddleware::class);
@@ -147,6 +147,7 @@ Route::group(['prefix' => 'Admin'], function(){
     Route::get('retriveSeoPropertyInfoById', [WebsiteInformationController::class, 'retriveSeoPropertyInfoById'])->middleware(TokenVerificationMiddleware::class);
     Route::get('retriveAllVisitorInfo', [WebsiteInformationController::class, 'retriveAllVisitorInfo'])->middleware(TokenVerificationMiddleware::class);
     Route::post('updateSeoPropertyInfo', [WebsiteInformationController::class, 'updateSeoPropertyInfo'])->middleware(TokenVerificationMiddleware::class);
+    Route::get('dashboardSummaryInfo', [WebsiteInformationController::class, 'dashboardSummaryInfo'])->middleware(TokenVerificationMiddleware::class);
 
 
 
@@ -159,3 +160,4 @@ Route::group(['prefix' => 'Admin'], function(){
 
 
 // Route for Website
+Route::post('/upload', [PortfolioController::class, 'upload']);

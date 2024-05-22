@@ -13,13 +13,12 @@ class PortfolioController extends Controller
     /* Method for add post information */
 
     public function addPortfolioInfo(Request $request){
-        // Log::info('Multiple file name - '.$request->file('project_ui_image'));
         try {
             // Input validation process for backend
             $validatedData = $request->validate([
                 'project_title' => 'required|string|max:255',
                 'project_thumbnail' => 'required|image',
-                'project_ui_image.*' => 'required|file|mimes:jpg,png,jpeg,svg|max:2048', // Allow multiple images
+                'project_ui_image.*' => 'required|image', // Allow multiple images
                 'project_type' => 'required|string|max:100',
                 'service_id' => 'required|integer',
                 'project_description' => 'required|string',
@@ -32,26 +31,7 @@ class PortfolioController extends Controller
                 'project_status' => 'required|string',
             ]);
 
-            $fileNames = [];
-
-            dd($request->hasfile('project_ui_image'));
-
-            // Getting project ui files with unique name
-            if ($request->hasfile('project_ui_image')) {
-                foreach ($request->file('project_ui_image') as $file) {
-                    $name = time() . '_' . $file->getClientOriginalName();
-                    // dd($name);
-                    // $request->file('project_ui_image')->move(public_path('uploads'), $name);
-                    $fileNames[] = $name; // Store the file name
-                    dd($fileNames[]);
-                }
-            }
-
-            $fileName=json_encode($fileNames);
-
-            dd($fileName);
-
-            if ($request->hasFile('project_thumbnail')) {
+            if ($request->hasFile('project_thumbnail') && $request->hasFile('project_ui_image')) {
                 // Getting thumbnail file
                 $portfolioThumbnail = $request->file('project_thumbnail');
                 
@@ -59,12 +39,13 @@ class PortfolioController extends Controller
                 $portfolioThumbnailName = $portfolioThumbnail->getClientOriginalName();
                 $portfolioThumbnailUniqueName = substr(md5(time()), 0, 5) . '-' . $portfolioThumbnailName;
 
-
+                $uiImage = $request->file('project_ui_image');
+                $uiJsonImage = json_encode($uiImage);
 
                 // Merge thumbnail image and UI images into array
                 $portfolioData = array_merge($validatedData, [
                     'project_thumbnail' => $portfolioThumbnailUniqueName,
-                    'project_ui_image' => $fileName
+                    'project_ui_image' => $uiJsonImage
                 ]);
 
                 // Create portfolio
@@ -81,10 +62,10 @@ class PortfolioController extends Controller
                 ]);
             }
 
-            // return response()->json([
-            //     'status' => 'failed',
-            //     'message' => 'Files are missing'
-            // ]);
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Files are missing'
+            ]);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'failed',
@@ -104,48 +85,50 @@ class PortfolioController extends Controller
             
             // Input validation process for backend
             $validatedData = $request->validate([
-                'post_heading' => 'required|string|max:255',
-                'post_slug' => 'required|string|max:255',
-                'post_thumbnail' => 'image',
-                'post_description' => 'required|string',
-                'category_id' => 'required|integer',
-                'user_id' => 'required|integer',
-                'publish_time' => 'required|string',
-                'post_status' => 'required|string',
+                'project_title' => 'required|string|max:255',
+                'project_thumbnail' => 'image',
+                'project_ui_image.*' => 'image', // Allow multiple images
+                'project_type' => 'required|string|max:100',
+                'service_id' => 'required|integer',
+                'project_description' => 'required|string',
+                'client_name' => 'required|string|max:100',
+                'client_designation' => 'nullable|string|max:100',
+                'project_starting_date' => 'required|string',
+                'project_ending_date' => 'required|string',
+                'project_url' => 'required|string|max:100',
+                'core_technology' => 'required|string|max:100',
+                'project_status' => 'required|string',
             ]);
 
-            $userIdFromHeader = (int) $request->header('userId'); // User ID from header
-            $userIdFromInput = $request->input('user_id'); // User ID from input
-
             // Matching both user id for validated post owner
-            if($userIdFromHeader === $userIdFromInput){
+            
 
-                if($request->hasFile('post_thumbnail')){
-                    // Retrive post thumbnail link from database
-                    $getPreviousPostThumbnail = Portfolio::where('id', '=', $portfolioInfoId)->first('post_thumbnail');
+                if($request->hasFile('project_thumbnail')){
+                    // Retrive project thumbnail link from database
+                    $getPreviousProjectThumbnail = Portfolio::where('id', '=', $portfolioInfoId)->first('project_thumbnail');
 
-                    // Remove previous post thumbnail file from storage
-                    if($getPreviousPostThumbnail){
-                        if(Storage::exists("public/post_thumbnail/".$getPreviousPostThumbnail->post_thumbnail)){
-                            Storage::delete("public/post_thumbnail/".$getPreviousPostThumbnail->post_thumbnail);
+                    // Remove previous portfolio thumbnail file from storage
+                    if($getPreviousProjectThumbnail){
+                        if(Storage::exists("public/portfolio/thumbnails/".$getPreviousProjectThumbnail->project_thumbnail)){
+                            Storage::delete("public/portfolio/thumbnails/".$getPreviousProjectThumbnail->project_thumbnail);
                         }
                     }
 
-                    // Getting new post thumbnail file
-                    $postThumbnail = $request->file('post_thumbnail');
+                    // Getting new project thumbnail file
+                    $projectThumbnail = $request->file('project_thumbnail');
 
                     /* Extract the original file name with extension */
-                    $postThumbnailName = $postThumbnail->getClientOriginalName();
-                    $postThumbnailUniqueName = substr(md5(time()), 0, 5).'-'.$postThumbnailName;
+                    $projectThumbnailName = $projectThumbnail->getClientOriginalName();
+                    $projectThumbnailUniqueName = substr(md5(time()), 0, 5).'-'.$projectThumbnail;
     
                     /* Merge thumbnail image into array */
-                    $portfolioData = array_merge($validatedData, ['post_thumbnail' => $postThumbnailUniqueName]);
+                    $portfolioData = array_merge($validatedData, ['project_thumbnail' => $projectThumbnailUniqueName]);
     
-                    $post = Portfolio::findOrFail($portfolioInfoId)->update($portfolioData);
+                    $portfolio = Portfolio::findOrFail($portfolioInfoId)->update($portfolioData);
     
-                    /* Store post thumbnail into storage/public/post_thumbnails folder */
-                    if ($post){
-                        $postThumbnail->storeAs('post_thumbnails', $postThumbnailUniqueName, 'public');
+                    /* Store project thumbnail into storage/public/project/thumbnails folder */
+                    if ($portfolio){
+                        $projectThumbnail->storeAs('post_thumbnails', $projectThumbnailUniqueName, 'public');
                     }
                 } else{
                     Portfolio::findOrFail($portfolioInfoId)->update($validatedData);
@@ -153,14 +136,8 @@ class PortfolioController extends Controller
                 
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'post updated'
+                    'message' => 'portfolio updated'
                 ]);
-
-            } else{
-                return redirect()->back();
-            }
-
-            
         } catch(Exception $e){
             return response()->json([
                 'status' => 'failed',
