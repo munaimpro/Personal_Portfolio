@@ -170,6 +170,8 @@ Route::group(['prefix' => 'Admin'], function(){
     Route::view('/pricing', 'admin.pages.pricing');
     Route::view('/message', 'admin.pages.message');
     Route::view('/category', 'admin.pages.category');
+    Route::view('/post', 'admin.pages.post');
+    Route::view('/user', 'admin.pages.user');
 });
 
 
