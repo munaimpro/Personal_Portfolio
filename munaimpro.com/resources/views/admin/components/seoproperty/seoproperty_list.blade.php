@@ -1,16 +1,11 @@
-{{-- Page header start --}}
+{{-- Page header - SEO Properties start --}}
 <div class="page-header">
     <div class="page-title">
-        <h4>Award Information</h4>
-        <h6>All about Award information</h6>
-    </div>
-    <div class="page-btn">
-        <button class="btn btn-added" data-bs-toggle="modal" data-bs-target="#createModal">
-            <img src="{{ asset('assets/img/icons/plus.svg') }}" class="me-1" alt="img">Add Award
-        </button>
+        <h4>SEO Properties</h4>
+        <h6>Used in title and social media</h6>
     </div>
 </div>
-{{-- Page header end --}}
+{{-- Page header - SEO Properties end --}}
 
 {{-- Table start --}}
 <div class="card">
@@ -40,7 +35,7 @@
         
         {{-- Table content start --}}
         <div class="table-responsive">
-            <table class="table datanew">
+            <table class="table  datanew">
                 <thead>
                     <tr>
                         <th>
@@ -49,9 +44,10 @@
                                 <span class="checkmarks"></span>
                             </label>
                         </th>
-                        <th>Award Type</th>
-                        <th>Name</th>
-                        <th>Issue Date</th>
+                        <th>Page Name</th>
+                        <th>Title</th>
+                        <th>Keywords </th>
+                        <th width="30%">Description</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -64,9 +60,10 @@
                                 <span class="checkmarks"></span>
                             </label>
                         </td>
-                        <td>Technical</td>
-                        <td>HTML</td>
-                        <td>98%</td>
+                        <td>Name</td>
+                        <td>Title</td>
+                        <td>Keyword 1, keywords 2</td>
+                        <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui aliquid vel quae at eligendi. Consectetur!</td>
                         <td>
                             <a class="me-3" data-bs-toggle="modal" data-bs-target="#editModal">
                                 <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
