@@ -169,6 +169,7 @@ Route::group(['prefix' => 'Admin'], function(){
     Route::view('/portfolio', 'admin.pages.portfolio');
     Route::view('/pricing', 'admin.pages.pricing');
     Route::view('/message', 'admin.pages.message');
+    Route::view('/category', 'admin.pages.category');
 });
 
 
