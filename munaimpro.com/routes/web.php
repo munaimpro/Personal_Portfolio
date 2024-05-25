@@ -158,6 +158,7 @@ Route::group(['prefix' => 'Admin'], function(){
     Route::view('/dashboard', 'admin.pages.dashboard');
     Route::view('/award', 'admin.pages.award');
     Route::view('/seoproperty', 'admin.pages.seoproperty');
+    Route::view('/visitor_information', 'admin.pages.visitorinfo');
 });
 
 

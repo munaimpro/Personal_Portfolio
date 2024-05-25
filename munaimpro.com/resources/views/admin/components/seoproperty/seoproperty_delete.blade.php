@@ -8,8 +8,8 @@
                 <input class="d-none" id="deleteID"/>
             </div>
             <div class="modal-footer justify-content-end">
-                <button type="button" class="btn btn-sm btn-primary">Yes, delete it!</button>
-                <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-sm btn-submit">Yes, delete it!</button>
+                <button type="button" class="btn btn-sm btn-cancel" data-bs-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>
