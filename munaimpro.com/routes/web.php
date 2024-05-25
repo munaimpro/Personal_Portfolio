@@ -172,6 +172,10 @@ Route::group(['prefix' => 'Admin'], function(){
     Route::view('/category', 'admin.pages.category');
     Route::view('/post', 'admin.pages.post');
     Route::view('/user', 'admin.pages.user');
+    Route::view('/signup', 'admin.pages.signup');
+    Route::view('/signin', 'admin.pages.signin');
+    Route::view('/sendotp', 'admin.pages.sendotp');
+    Route::view('/verifyotp', 'admin.pages.verifyotp');
 });
 
 
