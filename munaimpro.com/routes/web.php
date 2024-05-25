@@ -159,6 +159,8 @@ Route::group(['prefix' => 'Admin'], function(){
     Route::view('/award', 'admin.pages.award');
     Route::view('/seoproperty', 'admin.pages.seoproperty');
     Route::view('/visitor_information', 'admin.pages.visitorinfo');
+    Route::view('/basic_information', 'admin.pages.basicinfo');
+    Route::view('/education', 'admin.pages.education');
 });
 
 
