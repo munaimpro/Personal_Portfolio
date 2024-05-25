@@ -164,6 +164,7 @@ Route::group(['prefix' => 'Admin'], function(){
     Route::view('/skill', 'admin.pages.skill');
     Route::view('/experience', 'admin.pages.experience');
     Route::view('/interest', 'admin.pages.interest');
+    Route::view('/social_media', 'admin.pages.social_media');
 });
 
 
