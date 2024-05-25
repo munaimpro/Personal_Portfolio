@@ -1,0 +1,37 @@
+{{-- Create modal start --}}
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createModalLabel">Create Skill</h5>
+            </div>
+            <div class="modal-body">
+                <form id="update-form">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 p-1">
+                                <label class="form-label">Skill Type *</label>
+                                <select class="form-control" id="skillType">
+                                    <option value="">Programming Skill</option>
+                                    <option value="">Technical Skill</option>
+                                    <option value="">Other Skill</option>
+                                </select>
+
+                                <label class="form-label mt-3">Skill Name *</label>
+                                <input type="text" class="form-control" id="skillName">
+
+                                <label class="form-label mt-3">Percentage *</label>
+                                <input type="text" class="form-control" id="sillPercentage">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer justify-content-end">
+                <button type="button" class="btn btn-sm btn-submit">Create skill</button>
+                <button type="button" class="btn btn-sm btn-cancel" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{-- Create modal end --}}
