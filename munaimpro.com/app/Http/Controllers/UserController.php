@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\User;
 use App\Mail\OTPMail;
-use App\JWTController\JWTToken;
+use App\Models\Seoproperty;
 use Illuminate\Http\Request;
+use App\JWTController\JWTToken;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -17,7 +18,10 @@ class UserController extends Controller
     /* Method for signup page load */
     
     public function userSignupPage(){
-        return view();
+        // Getting SEO properties for specific view
+        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
+        dd($seoproperty);
+        return view('admin.pages.signup', compact(['seoproperty']));
     }
 
 
