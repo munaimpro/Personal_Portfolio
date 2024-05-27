@@ -11,6 +11,7 @@ use App\JWTController\JWTToken;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -20,8 +21,11 @@ class UserController extends Controller
     public function userSignupPage(){
         // Getting SEO properties for specific view
         $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
-        dd($seoproperty);
-        return view('admin.pages.signup', compact(['seoproperty']));
+        
+        // Getting view name from uri
+        $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+
+        return view('admin.pages.signup', compact(['seoproperty', 'routeName']));
     }
 
 
