@@ -83,11 +83,40 @@ function displayToast(icon, title){
     });
 }
 
-// Getting input data
-let first_name = $('#userFirstName');
-alert(first_name);
-// Front end validation process
+// Function for user signup
+async function signupUser(){
 
+    // Sanitize all input data
+    function sanitizeInput(input) {
+        return input.replace(/<\/?[^>]+(>|$)/g, "");
+    }
+
+    // Getting input data
+    let first_name = sanitizeInput($('#userFirstName').val().trim());
+    let last_name  = sanitizeInput($('#userLastName').val().trim());
+    let email      = sanitizeInput($('#userEmail').val().trim());
+    let password   = sanitizeInput($('#userPassword').val().trim());
+
+    // Regular expression for basic email validation
+    let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Front end validation process
+    if(first_name.length === 0){
+        displayToast('warning', 'First name is required');
+    } else if(last_name.length === 0){
+        displayToast('warning', 'Last name is required');
+    } else if(email.length === 0){
+        displayToast('warning', 'Mail address is required');
+    } else if(!emailPattern.test(email)){
+        displayToast('warning', 'Invalid email address');
+    } else if(password.length === 0){
+        displayToast('warning', 'Password is required');
+    } else if(password.length < 8){
+        displayToast('warning', 'Password should be at least 8 character long');
+    } else{
+        alert(first_name);
+    }
+}
 
 </script>
 
