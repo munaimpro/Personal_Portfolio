@@ -117,42 +117,42 @@ function sanitizeInput(input) {
 async function signupUser(){
     try{
         // Getting input data
-        let first_name      = sanitizeInput($('#userFirstName').val().trim());
-        let last_name       = sanitizeInput($('#userLastName').val().trim());
-        let email           = sanitizeInput($('#userEmail').val().trim());
-        let password        = sanitizeInput($('#userPassword').val().trim());
-        let profile_picture = sanitizeInput($('#userProfilePicture')[0].files[0]);
+        let user_first_name      = $('#userFirstName').val().trim();
+        let user_last_name       = $('#userLastName').val().trim();
+        let user_email           = $('#userEmail').val().trim();
+        let user_password        = $('#userPassword').val().trim();
+        let user_profile_picture = $('#userProfilePicture')[0].files[0];
 
-        console.log(profile_picture);
+        console.log(user_profile_picture);
 
         // Regular expression for basic email validation
         let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         // Front end validation process
-        if(first_name.length === 0){
+        if(user_first_name.length === 0){
             displayToast('warning', 'First name is required');
-        } else if(last_name.length === 0){
+        } else if(user_last_name.length === 0){
             displayToast('warning', 'Last name is required');
-        } else if(email.length === 0){
+        } else if(user_email.length === 0){
             displayToast('warning', 'Mail address is required');
-        } else if(!emailPattern.test(email)){
+        } else if(!emailPattern.test(user_email)){
             displayToast('warning', 'Invalid email address');
-        } else if(password.length === 0){
+        } else if(user_password.length === 0){
             displayToast('warning', 'Password is required');
-        } else if(password.length < 8){
+        } else if(user_password.length < 8){
             displayToast('warning', 'Password should be at least 8 character long');
-        } else if(!profile_picture){
+        } else if(!user_profile_picture){
             displayToast('warning', 'Profile picture is required');
         } else{
             // Form data object creation
             let formData = new FormData();
             
             // Organizing data in JSON format
-            formData.append('user_first_name', first_name);
-            formData.append('user_last_name', last_name);
-            formData.append('user_email', email);
-            formData.append('user_password', password);
-            formData.append('user_profile_picture', profile_picture);
+            formData.append('first_name', user_first_name);
+            formData.append('last_name', user_last_name);
+            formData.append('email', user_email);
+            formData.append('password', user_password);
+            formData.append('profile_picture', user_profile_picture);
 
             // Pssing data to controller and getting response
             showLoader();
@@ -165,7 +165,7 @@ async function signupUser(){
 
             if(response.data['status'] === 'success'){
                 displayToast('success', response.data['message']);
-                $('#signupForm').reset();
+                $('#signupForm')[0].reset();
             } else{
                 displayToast('error', response.data['message']);
             }

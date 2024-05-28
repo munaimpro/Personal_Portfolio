@@ -37,10 +37,10 @@ class UserController extends Controller
         try{
             // Input validation process for backend
             $validatedData = $request->validate([
-                'user_first_name' => 'required|string|max:50',
-                'user_last_name' => 'required|string|max:50',
-                'user_email' => 'required|email',
-                'user_password' => 'required|string|max:100',
+                'first_name' => 'required|string|max:50',
+                'last_name' => 'required|string|max:50',
+                'email' => 'required|email',
+                'password' => 'required|string|max:100',
                 'profile_picture' => 'required|image',
             ]);
 
