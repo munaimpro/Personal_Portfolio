@@ -1,4 +1,5 @@
 {{-- Signup form start --}}
+<form id="signupForm">
 <div class="form-login">
     <label>First Name</label>
     <div class="form-addons">
@@ -60,6 +61,7 @@
         </li>
     </ul>
 </div>
+</form>
 {{-- Signup form end --}}
 
 
@@ -83,39 +85,66 @@ function displayToast(icon, title){
     });
 }
 
+// Sanitize all input data
+function sanitizeInput(input) {
+    return input.replace(/<\/?[^>]+(>|$)/g, "");
+}
+
 // Function for user signup
 async function signupUser(){
+    try{
+        // Getting input data
+        let first_name = sanitizeInput($('#userFirstName').val().trim());
+        let last_name  = sanitizeInput($('#userLastName').val().trim());
+        let email      = sanitizeInput($('#userEmail').val().trim());
+        let password   = sanitizeInput($('#userPassword').val().trim());
 
-    // Sanitize all input data
-    function sanitizeInput(input) {
-        return input.replace(/<\/?[^>]+(>|$)/g, "");
+        // Regular expression for basic email validation
+        let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        // Front end validation process
+        if(first_name.length === 0){
+            displayToast('warning', 'First name is required');
+        } else if(last_name.length === 0){
+            displayToast('warning', 'Last name is required');
+        } else if(email.length === 0){
+            displayToast('warning', 'Mail address is required');
+        } else if(!emailPattern.test(email)){
+            displayToast('warning', 'Invalid email address');
+        } else if(password.length === 0){
+            displayToast('warning', 'Password is required');
+        } else if(password.length < 8){
+            displayToast('warning', 'Password should be at least 8 character long');
+        } else{
+            // Organizing data in JSON format
+            let signupData = {
+                'user_first_name' : first_name,
+                'user_last_name' : last_name,
+                'user_email' : email,
+                'user_password' : password,
+            }
+
+            // Pssing data to controller and getting response
+            showLoader();
+            let response = await axios.post('userSignup', signupData);
+            hideLoader();
+
+            if(response.data['status'] === 'success'){
+                displayToast('success', response.data['message']);
+                document.getElementById('save-form').reset();
+                await getList();
+            } else{
+                errorToast(response.data['message']);
+            }
+        }
+    } catch(e){
+        console.error('Something went wrong'.e->getMessage());
     }
+    
 
-    // Getting input data
-    let first_name = sanitizeInput($('#userFirstName').val().trim());
-    let last_name  = sanitizeInput($('#userLastName').val().trim());
-    let email      = sanitizeInput($('#userEmail').val().trim());
-    let password   = sanitizeInput($('#userPassword').val().trim());
+    
 
-    // Regular expression for basic email validation
-    let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    // Front end validation process
-    if(first_name.length === 0){
-        displayToast('warning', 'First name is required');
-    } else if(last_name.length === 0){
-        displayToast('warning', 'Last name is required');
-    } else if(email.length === 0){
-        displayToast('warning', 'Mail address is required');
-    } else if(!emailPattern.test(email)){
-        displayToast('warning', 'Invalid email address');
-    } else if(password.length === 0){
-        displayToast('warning', 'Password is required');
-    } else if(password.length < 8){
-        displayToast('warning', 'Password should be at least 8 character long');
-    } else{
-        alert(first_name);
-    }
+    
 }
 
 </script>
