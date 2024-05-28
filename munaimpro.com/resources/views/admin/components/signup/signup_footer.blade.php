@@ -12,6 +12,9 @@
 {{-- jQuery JS --}}
 <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
 
+{{-- Axios JS --}}
+<script src="{{ asset('assets/js/axios.min.js') }}"></script>
+
 {{-- Feather JS --}}
 <script src="{{ asset('assets/js/feather.min.js') }}"></script>
 

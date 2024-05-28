@@ -32,6 +32,29 @@
     </div>
 </div>
 
+<div class="form-group">
+    <label>Profile Picture</label>
+    <div class="product-list">
+        <ul>
+            <li class="p-0">
+                <div class="productviews">
+                    <div class="productviewsimg">
+                        <img id="profilePicture" class="mw-100 mh-100" src="{{ asset('assets/img/profiles/avatar-17.jpg') }}" alt="website logo">
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="image-upload ">
+        <input type="file" id="userProfilePicture" oninput="profilePicture.src=window.URL.createObjectURL(this.files[0])">
+        <div class="image-uploads">
+            <img src="{{ asset('assets/img/icons/upload.svg') }}" alt="img">
+            <h4>Drag and drop a file to upload</h4>
+        </div>
+    </div>
+</div>
+
 <div class="form-login">
     <a class="btn btn-login" onclick="signupUser()">Sign Up</a>
 </div>
@@ -94,10 +117,13 @@ function sanitizeInput(input) {
 async function signupUser(){
     try{
         // Getting input data
-        let first_name = sanitizeInput($('#userFirstName').val().trim());
-        let last_name  = sanitizeInput($('#userLastName').val().trim());
-        let email      = sanitizeInput($('#userEmail').val().trim());
-        let password   = sanitizeInput($('#userPassword').val().trim());
+        let first_name      = sanitizeInput($('#userFirstName').val().trim());
+        let last_name       = sanitizeInput($('#userLastName').val().trim());
+        let email           = sanitizeInput($('#userEmail').val().trim());
+        let password        = sanitizeInput($('#userPassword').val().trim());
+        let profile_picture = sanitizeInput($('#userProfilePicture')[0].files[0]);
+
+        console.log(profile_picture);
 
         // Regular expression for basic email validation
         let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -115,30 +141,37 @@ async function signupUser(){
             displayToast('warning', 'Password is required');
         } else if(password.length < 8){
             displayToast('warning', 'Password should be at least 8 character long');
+        } else if(!profile_picture){
+            displayToast('warning', 'Profile picture is required');
         } else{
+            // Form data object creation
+            let formData = new FormData();
+            
             // Organizing data in JSON format
-            let signupData = {
-                'user_first_name' : first_name,
-                'user_last_name' : last_name,
-                'user_email' : email,
-                'user_password' : password,
-            }
+            formData.append('user_first_name', first_name);
+            formData.append('user_last_name', last_name);
+            formData.append('user_email', email);
+            formData.append('user_password', password);
+            formData.append('user_profile_picture', profile_picture);
 
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.post('userSignup', signupData);
+            let response = await axios.post('../userSignup', formData, {
+                headers:{
+                    'content-type' : 'multipart/form-data'
+                }
+            });
             hideLoader();
 
             if(response.data['status'] === 'success'){
                 displayToast('success', response.data['message']);
-                document.getElementById('save-form').reset();
-                await getList();
+                $('#signupForm').reset();
             } else{
-                errorToast(response.data['message']);
+                displayToast('error', response.data['message']);
             }
         }
     } catch(e){
-        console.error('Something went wrong'.e->getMessage());
+        console.error('Something went wrong', e);
     }
     
 

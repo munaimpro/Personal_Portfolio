@@ -67,6 +67,11 @@
 </head>
 
 <body class="account-page">
+    {{-- Pre loader start --}}
+    <div id="global-loader" class="d-none">
+        <div class="whirly-loader"> </div>
+    </div>
+    {{-- Pre loader end --}}
 
 <div class="main-wrapper">
 <div class="account-content">

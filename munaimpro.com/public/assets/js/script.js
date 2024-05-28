@@ -4,7 +4,10 @@ if($('.datanew').length>0){$('.datanew').DataTable({"bFilter":true,"sDom":'fBtlp
 function readURL(input){if(input.files&&input.files[0]){var reader=new FileReader();reader.onload=function(e){$('#blah').attr('src',e.target.result);}
 reader.readAsDataURL(input.files[0]);}}
 $("#imgInp").change(function(){readURL(this);});if($('.datatable').length>0){$('.datatable').DataTable({"bFilter":false});}
-setTimeout(function(){$('#global-loader');setTimeout(function(){$("#global-loader").fadeOut("slow");},100);},500);if($('.datetimepicker').length>0){$('.datetimepicker').datetimepicker({format:'DD-MM-YYYY',icons:{up:"fas fa-angle-up",down:"fas fa-angle-down",next:'fas fa-angle-right',previous:'fas fa-angle-left'}});}
+
+// setTimeout(function(){$('#global-loader');setTimeout(function(){$("#global-loader").fadeOut("slow");},100);},500);
+
+if($('.datetimepicker').length>0){$('.datetimepicker').datetimepicker({format:'DD-MM-YYYY',icons:{up:"fas fa-angle-up",down:"fas fa-angle-down",next:'fas fa-angle-right',previous:'fas fa-angle-left'}});}
 if($('.toggle-password').length>0){$(document).on('click','.toggle-password',function(){$(this).toggleClass("fa-eye fa-eye-slash");var input=$(".pass-input");if(input.attr("type")=="password"){input.attr("type","text");}else{input.attr("type","password");}});}
 if($('.toggle-passwords').length>0){$(document).on('click','.toggle-passwords',function(){$(this).toggleClass("fa-eye fa-eye-slash");var input=$(".pass-inputs");if(input.attr("type")=="password"){input.attr("type","text");}else{input.attr("type","password");}});}
 if($('.toggle-passworda').length>0){$(document).on('click','.toggle-passworda',function(){$(this).toggleClass("fa-eye fa-eye-slash");var input=$(".pass-inputs");if(input.attr("type")=="password"){input.attr("type","text");}else{input.attr("type","password");}});}
@@ -99,3 +102,11 @@ toggleSwitch.addEventListener('change',switchTheme,false);}
 if(window.location.hash=="#LightMode"){localStorage.setItem('theme','dark');}
 else{if(window.location.hash=="#DarkMode"){localStorage.setItem('theme','light');}}
 $('ul.tabs li').click(function(){var $this=$(this);var $theTab=$(this).attr('id');console.log($theTab);if($this.hasClass('active')){}else{$this.closest('.tabs_wrapper').find('ul.tabs li, .tabs_container .tab_content').removeClass('active');$('.tabs_container .tab_content[data-tab="'+$theTab+'"], ul.tabs li[id="'+$theTab+'"]').addClass('active');}});});
+
+function showLoader(){
+    $('#global-loader').removeClass('d-none');
+}
+
+function hideLoader(){
+    $('#global-loader').addClass('d-none');
+}
