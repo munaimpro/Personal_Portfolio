@@ -82,7 +82,13 @@ class UserController extends Controller
     /* Method for signin page load */
     
     public function userSigninPage(){
-        return view();
+        // Getting SEO properties for specific view
+        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
+        
+        // Getting view name from uri
+        $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+
+        return view('admin.pages.signin', compact(['seoproperty', 'routeName']));
     }
 
 
@@ -92,6 +98,12 @@ class UserController extends Controller
     public function userSignin(Request $request){
         
         try{
+            // Input validation process for backend
+            $validatedData = $request->validate([
+                'email' => 'required|email',
+                'password' => 'required|string|max:100',
+            ]);
+
             $userCheck = User::where('email', '=', $request->email)->select('id', 'password')->first();
 
             if($userCheck != NULL && Hash::check($request->password, $userCheck->password)){

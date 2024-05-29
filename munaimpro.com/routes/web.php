@@ -157,7 +157,8 @@ Route::get('dashboardSummaryInfo', [WebsiteInformationController::class, 'dashbo
 
 Route::group(['prefix' => 'Admin'], function(){
     // Page Routes (User Controller)
-    Route::get('/signup', [UserController::class, 'userSignupPage']);
+    Route::get('/signup', [UserController::class, 'userSignupPage'])->middleware(TokenVerificationMiddleware::class);
+    Route::get('/signin', [UserController::class, 'userSigninPage'])->middleware(TokenVerificationMiddleware::class);
     Route::view('/testfile', 'jsondata');
     Route::view('/dashboard', 'admin.pages.dashboard');
     Route::view('/award', 'admin.pages.award');
@@ -176,7 +177,6 @@ Route::group(['prefix' => 'Admin'], function(){
     Route::view('/category', 'admin.pages.category');
     Route::view('/post', 'admin.pages.post');
     Route::view('/user', 'admin.pages.user');
-    Route::view('/signin', 'admin.pages.signin');
     Route::view('/sendotp', 'admin.pages.sendotp');
     Route::view('/verifyotp', 'admin.pages.verifyotp');
 });

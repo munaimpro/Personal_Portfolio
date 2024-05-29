@@ -25,11 +25,20 @@ class TokenVerificationMiddleware
         $result = JWTToken::VerifyToken($token);
 
         if($result == "Unauthorized"){
-            return redirect('/signin');
+            if($request->is('Admin/signup') || $request->is('Admin/signin') || $request->is('Admin/sendotp') || $request->is('Admin/verifyotp')){
+                return $next($request);
+            } else{
+                return redirect('/signin');
+            }
         } else{
-            $request->headers->set('userEmail', $result->userEmail);
-            $request->headers->set('userId', $result->userId);
-            return $next($request);
+            if($request->is('Admin/signup') || $request->is('Admin/signin') || $request->is('Admin/sendotp') || $request->is('Admin/verifyotp')){
+                return redirect('/');
+            } else{
+                $request->headers->set('userEmail', $result->userEmail);
+                $request->headers->set('userId', $result->userId);
+                return $next($request);
+            }
+            
         }
         
     }
