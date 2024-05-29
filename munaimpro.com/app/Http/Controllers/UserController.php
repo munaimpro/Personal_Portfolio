@@ -155,7 +155,13 @@ class UserController extends Controller
     /* Method for send OTP code */
 
     public function sendOTPCode(Request $request){
-        $email = $request->input('email'); // Email input
+        // Input validation process for backend
+        $validatedData = $request->validate([
+            'email' => 'required|email',
+            'otp' => 'required|string|max:10',
+        ]);
+
+        $email = $validatedData['email']; // Getting email
         $otp = rand(1000, 9999); // OTP number geneartion
         $userCount = User::where('email', '=', $email)->count(); // User count for availability in DB
 
@@ -180,7 +186,13 @@ class UserController extends Controller
     /* Method for verify OTP page load */
     
     public function verifyOTPPage(){
-        return view();
+        // Getting SEO properties for specific view
+        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
+        
+        // Getting view name from uri
+        $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+
+        return view('admin.pages.verifyotp', compact(['seoproperty', 'routeName']));
     }
 
 

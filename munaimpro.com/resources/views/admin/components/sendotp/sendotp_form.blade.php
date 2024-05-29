@@ -43,7 +43,7 @@
     async function sendotpUser(){
         try{
             // Getting input data
-            let user_email           = $('#userEmail').val().trim();
+            let user_email = $('#userEmail').val().trim();
     
             // Regular expression for basic email validation
             let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

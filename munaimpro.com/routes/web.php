@@ -160,7 +160,7 @@ Route::group(['prefix' => 'Admin'], function(){
     Route::get('/signup', [UserController::class, 'userSignupPage'])->middleware(TokenVerificationMiddleware::class);
     Route::get('/signin', [UserController::class, 'userSigninPage'])->middleware(TokenVerificationMiddleware::class);
     Route::get('/sendotp', [UserController::class, 'sendOtpPage']);
-    Route::view('/verifyotp', 'admin.pages.verifyotp');
+    Route::get('/verifyotp', [UserController::class, 'verifyOtpPage']);
     Route::view('/dashboard', 'admin.pages.dashboard');
     Route::view('/award', 'admin.pages.award');
     Route::view('/seoproperty', 'admin.pages.seoproperty');
