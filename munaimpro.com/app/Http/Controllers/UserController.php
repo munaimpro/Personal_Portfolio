@@ -141,7 +141,13 @@ class UserController extends Controller
     /* Method for send OTP page load */
     
     public function sendOTPPage(){
-        return view();
+        // Getting SEO properties for specific view
+        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
+        
+        // Getting view name from uri
+        $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+
+        return view('admin.pages.sendotp', compact(['seoproperty', 'routeName']));
     }
 
 

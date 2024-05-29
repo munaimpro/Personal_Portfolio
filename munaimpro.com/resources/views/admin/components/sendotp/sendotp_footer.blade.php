@@ -9,13 +9,21 @@
 </div>
 
 
+
+{{-- jQuery JS --}}
 <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
 
+{{-- Axios JS --}}
+<script src="{{ asset('assets/js/axios.min.js') }}"></script>
+
+{{-- Feather JS --}}
 <script src="{{ asset('assets/js/feather.min.js') }}"></script>
 
+{{-- Bootstrap JS --}}
 <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
 
+{{-- Custom JS --}}
 <script src="{{ asset('assets/js/script.js') }}"></script>
 </body>
 </html>
-{{-- Send OTP footer end --}}
+{{-- Footer end --}}

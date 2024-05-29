@@ -17,14 +17,14 @@
 </div>
 <div class="form-login">
     <div class="alreadyuser">
-        <h4><a href="{{ url('sendotp') }}" class="hover-a">Forgot Password?</a></h4>
+        <h4><a href="{{ url('Admin/sendotp') }}" class="hover-a">Forgot Password?</a></h4>
     </div>
 </div>
 <div class="form-login">
     <a class="btn btn-login" onclick="signinUser()">Sign In</a>
 </div>
 <div class="signinform text-center">
-    <h4>Don’t have an account? <a href="{{ url('signup') }}" class="hover-a">Sign Up</a></h4>
+    <h4>Don’t have an account? <a href="{{ url('Admin/signup') }}" class="hover-a">Sign Up</a></h4>
 </div>
 <div class="form-setlogin">
     <h4>Or sign up with</h4>
@@ -103,11 +103,7 @@ async function signinUser(){
 
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.post('../userSignin', signinData, {
-                headers:{
-                    'content-type' : 'multipart/form-data'
-                }
-            });
+            let response = await axios.post('../userSignin', signinData);
             hideLoader();
 
             if(response.data['status'] === 'success'){
