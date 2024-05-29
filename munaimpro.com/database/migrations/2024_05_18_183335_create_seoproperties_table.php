@@ -16,12 +16,16 @@ return new class extends Migration
             $table->enum('page_name', ['index','about','services','portfolio','portfolio_details','pricing','blog','blog_details','contact']);
             $table->string('site_title', 50);
             $table->string('site_keywords');
+            $table->string('author', 100);
             $table->tinyText('site_description');
             $table->string('og_site_name', 100);
             $table->string('og_url', 100);
             $table->string('og_title', 100);
             $table->text('og_description');
+            $table->string('og_type', 50);
             $table->string('og_image', 100);
+            $table->enum('robots', ['index, follow', 'noindex, nofollow', 'index, nofollow', 'noindex, follow']);
+            $table->string('canonical_url', 100);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });

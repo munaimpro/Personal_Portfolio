@@ -18,14 +18,14 @@
     <meta name="keywords" content="{{ $seoproperty->site_keywords }}">
 
     {{-- Author --}}
-    <meta name="author" content="Your Name">
+    <meta name="author" content="{{ $seoproperty->author }}">
 
     {{-- Open Graph Meta Tags --}}
     <meta property="og:title" content="{{ $seoproperty->og_title }}">
     <meta property="og:description" content="{{ $seoproperty->og_description }}">
     <meta property="og:url" content="{{ $seoproperty->og_url }}">
     <meta property="og:image" content="{{ $seoproperty->og_image }}">
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="{{ $seoproperty->og_type }}">
     <meta property="og:site_name" content="{{ $seoproperty->og_site_name }}">
 
     {{-- Twitter Card Meta Tags --}}
@@ -35,10 +35,10 @@
     <meta name="twitter:image" content="https://www.yourwebsite.com/images/twitter-image.jpg">
 
     {{-- Robots --}}
-    <meta name="robots" content="noindex, nofollow">
+    <meta name="robots" content="{{ $seoproperty->robots }}">
 
     {{-- Canonical URL --}}
-    <link rel="canonical" href="{{ $seoproperty->site_keywords }}">
+    <link rel="canonical" href="{{ $seoproperty->canonical_url }}">
 
     {{-- Content Language --}}
     <meta http-equiv="Content-Language" content="en">
