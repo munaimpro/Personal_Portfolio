@@ -158,7 +158,6 @@ class UserController extends Controller
         // Input validation process for backend
         $validatedData = $request->validate([
             'email' => 'required|email',
-            'otp' => 'required|string|max:10',
         ]);
 
         $email = $validatedData['email']; // Getting email
@@ -227,7 +226,13 @@ class UserController extends Controller
     /* Method for reset password page load */
     
     public function resetPasswordPage(){
-        return view();
+        // Getting SEO properties for specific view
+        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
+        
+        // Getting view name from uri
+        $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+
+        return view('admin.pages.resetpassword', compact(['seoproperty', 'routeName']));
     }
 
 
@@ -236,6 +241,11 @@ class UserController extends Controller
 
     public function resetPassword(Request $request){
         try{
+            $validate = $request->validate([
+                'password' => 'required|string|max:100',
+                'confirm_password' => 'required|string|max:100',
+            ]);
+
             $email = $request->header('userEmail'); // Email from request header
             $password = Hash::make($request->input('password')); // Password from input
             User::where('email', '=', $email)->update(['password' => $password]); // DB password update
@@ -244,10 +254,10 @@ class UserController extends Controller
                 'status' => 'success',
                 'message' => 'Password reset successfully',
             ])->cookie('VerifyOTPToken', '', -1);
-        } catch(Exception $exception){
+        } catch(Exception $e){
             return response()->json([
                 'status' => 'failed',
-                'message' => 'Something went wrong',
+                'message' => 'Something went wrong'. $e->getMessage(),
             ]);
         }
 
@@ -258,7 +268,13 @@ class UserController extends Controller
     /* Method for user profile page load */
     
     public function userProfilePage(){
-        return view();
+        // Getting SEO properties for specific view
+        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
+        
+        // Getting view name from uri
+        $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+
+        return view('admin.pages.userprofile', compact(['seoproperty', 'routeName']));
     }
 
 

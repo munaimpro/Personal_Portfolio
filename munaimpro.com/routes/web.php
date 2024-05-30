@@ -155,12 +155,14 @@ Route::get('dashboardSummaryInfo', [WebsiteInformationController::class, 'dashbo
  * Page Route for Admin Panel
 */
 
-Route::group(['prefix' => 'Admin'], function(){
+Route::group(['prefix' => 'Admin', 'middleware' => TokenVerificationMiddleware::class], function(){
     // Page Routes (User Controller)
-    Route::get('/signup', [UserController::class, 'userSignupPage'])->middleware(TokenVerificationMiddleware::class);
-    Route::get('/signin', [UserController::class, 'userSigninPage'])->middleware(TokenVerificationMiddleware::class);
+    Route::get('/signup', [UserController::class, 'userSignupPage']);
+    Route::get('/signin', [UserController::class, 'userSigninPage']);
     Route::get('/sendotp', [UserController::class, 'sendOtpPage']);
     Route::get('/verifyotp', [UserController::class, 'verifyOtpPage']);
+    Route::get('/password_reset', [UserController::class, 'resetPasswordPage']);
+    Route::get('/profile', [UserController::class, 'userProfilePage']);
     Route::view('/dashboard', 'admin.pages.dashboard');
     Route::view('/award', 'admin.pages.award');
     Route::view('/seoproperty', 'admin.pages.seoproperty');

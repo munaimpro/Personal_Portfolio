@@ -16,30 +16,43 @@ class TokenVerificationMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $token = $request->cookie('SigninToken');
+        $SigninToken    = $request->cookie('SigninToken');
+        $VerifyOTPToken = $request->cookie('VerifyOTPToken');
         
         /**
         * VerifyToken method call and token pass for check availability
         */
         
-        $result = JWTToken::VerifyToken($token);
+        $SigninTokenResult = JWTToken::VerifyToken($SigninToken); // Check sign in token 
+        $VerifyOTPTokenResult = JWTToken::VerifyToken($VerifyOTPToken); // Check otp verification token
 
-        if($result == "Unauthorized"){
-            if($request->is('Admin/signup') || $request->is('Admin/signin') || $request->is('Admin/sendotp') || $request->is('Admin/verifyotp')){
+        if($SigninTokenResult == "Unauthorized"){
+            if(($VerifyOTPTokenResult == "Unauthorized") && $request->is('Admin/password_reset')){
+                return redirect()->back();
+            } else{
+                return $next($request);
+            }
+
+            if($request->is('Admin/signup') || $request->is('Admin/signin') || $request->is('Admin/sendotp') || $request->is('Admin/verifyotp') || $request->is('Admin/password_reset')){
                 return $next($request);
             } else{
-                return redirect('/signin');
+                return redirect('Admin/signin');
             }
         } else{
-            if($request->is('Admin/signup') || $request->is('Admin/signin') || $request->is('Admin/sendotp') || $request->is('Admin/verifyotp')){
-                return redirect('/');
+            if($request->is('Admin/signup') || $request->is('Admin/signin') || $request->is('Admin/sendotp') || $request->is('Admin/verifyotp') || $request->is('Admin/password_reset')){
+                return redirect()->back();
             } else{
-                $request->headers->set('userEmail', $result->userEmail);
-                $request->headers->set('userId', $result->userId);
+                $request->headers->set('userEmail', $SigninTokenResult->userEmail);
+                $request->headers->set('userId', $SigninTokenResult->userId);
                 return $next($request);
             }
             
         }
         
+        if(($VerifyOTPTokenResult == "Unauthorized") && $request->is('Admin/password_reset')){
+            return redirect('/sendotp');
+        } else{
+            return $next($request);
+        }
     }
 }
