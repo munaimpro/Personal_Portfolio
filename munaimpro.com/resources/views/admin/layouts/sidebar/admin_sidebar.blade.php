@@ -3,62 +3,57 @@
     <div class="sidebar-inner slimscroll">
         <div id="sidebar-menu" class="sidebar-menu">
             <ul>
-                <li class="active">
-                    <a href="index.html"><img src="{{ asset('assets/img/icons/dashboard.svg') }}" alt="img"><span> Dashboard</span> </a>
+                <li>
+                    <a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/dashboard') }}"><img src="{{ asset('assets/img/icons/dashboard.svg') }}" alt="img"><span> Dashboard</span> </a>
                 </li>
                 
                 <li class="submenu">
                     <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/product.svg') }}" alt="img"><span> Website Details</span> <span class="menu-arrow"></span></a>
                     <ul>
-                        <li><a class="active" href="seoproperty.html">Logo & SEO Information</a></li>
-                        <li><a href="visitorinfo.html">Visitor Information</a></li>
+                        <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/seoproperty') }}">Logo & SEO Information</a></li>
+                        <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/visitorinfo') }}">Visitor Information</a></li>
                     </ul>
                 </li>
                 
                 <li class="submenu">
                     <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/sales1.svg') }}" alt="img"><span> About</span> <span class="menu-arrow"></span></a>
                     <ul>
-                        <li><a href="basicinfo.html">Basic Information</a></li>
-                        <li><a href="education.html">Education</a></li>
-                        <li><a href="skill.html">Skills</a></li>
-                        <li><a href="award.html">Awards</a></li>
-                        <li><a href="experience.html">Experience</a></li>
-                        <li><a href="interest.html">Interest</a></li>
-                        <li><a href="social_media.html">Social Media</a></li>
+                        <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/basicinfo') }}">Basic Information</a></li>
+                        <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/education') }}">Education</a></li>
+                        <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/skill') }}">Skills</a></li>
+                        <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/award') }}">Awards</a></li>
+                        <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/experience') }}">Experience</a></li>
+                        <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/interest') }}.html">Interest</a></li>
+                        <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/social_media') }}">Social Media</a></li>
                     </ul>
                 </li>
                 
                 <li>
-                    <a href="services.html"><i data-feather="file"></i><span> Service</span> </a>
+                    <a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/services') }}"><i data-feather="file"></i><span> Service</span> </a>
                 </li>
                 
                 <li>
-                    <a href="portfolio.html"><i data-feather="file"></i><span> Portfolio</span> </a>
+                    <a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/portfolio') }}"><i data-feather="file"></i><span> Portfolio</span> </a>
                 </li>
                 
                 <li>
-                    <a href="pricing.html"><i data-feather="file"></i><span> Pricing</span> </a>
+                    <a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/pricing') }}"><i data-feather="file"></i><span> Pricing</span> </a>
                 </li>
                 
                 <li>
-                    <a href="message.html"><i data-feather="file"></i><span> Message</span> </a>
+                    <a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/message') }}"><i data-feather="file"></i><span> Message</span> </a>
                 </li>
                 
                 <li class="submenu">
                     <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/expense1.svg') }}" alt="img"><span> Post</span> <span class="menu-arrow"></span></a>
                     <ul>
-                        <li><a href="addpost.html">Create Post</a></li>
-                        <li><a href="postlist.html">All Post</a></li>
-                        <li><a href="categorylist.html">Category List</a></li>
+                        <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/post') }}">All Post</a></li>
+                        <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/category') }}">Category List</a></li>
                     </ul>
                 </li>
-
-                <li class="submenu">
-                    <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/users1.svg') }}" alt="img"><span> Users</span> <span class="menu-arrow"></span></a>
-                    <ul>
-                        <li><a href="newuser.html">New User </a></li>
-                        <li><a href="userlists.html">Users List</a></li>
-                    </ul>
+                
+                <li>
+                    <a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/user') }}"><img src="{{ asset('assets/img/icons/users1.svg') }}" alt="img"><span> Users</span> </a>
                 </li>
 
                 <li class="submenu">
