@@ -60,7 +60,7 @@
 </div>
 
 <div class="signinform text-center">
-    <h4>Already a user? <a href="signin.html" class="hover-a">Sign In</a></h4>
+    <h4>Already a user? <a href="{{ url('Admin/signin') }}" class="hover-a">Sign In</a></h4>
 </div>
 
 <div class="form-setlogin">
@@ -101,7 +101,7 @@ function displayToast(icon, title){
         iconColor: 'white',
         title: title,
         showConfirmButton: false,
-        timer: 2000,
+        timer: 6000,
         customClass: {
             popup: 'colored-toast'
         }

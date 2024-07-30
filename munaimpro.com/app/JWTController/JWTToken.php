@@ -9,7 +9,7 @@ use Firebase\JWT\Key; // Use Built-in class Key
 class JWTToken
 {
     /** 
-     * Method for create token 
+     * Method for create token
     */
 		
     static function CreateToken($userEmail, $userId):string{

@@ -30,7 +30,10 @@ class TokenVerificationMiddleware
             if(($VerifyOTPTokenResult == "Unauthorized") && $request->is('Admin/password_reset')){
                 return redirect()->back();
             } else{
-                return $next($request);
+                if($VerifyOTPTokenResult != "Unauthorized"){
+                    $request->headers->set('userEmail', $VerifyOTPTokenResult->userEmail);
+                    return $next($request);
+                }
             }
 
             if($request->is('Admin/signup') || $request->is('Admin/signin') || $request->is('Admin/sendotp') || $request->is('Admin/verifyotp') || $request->is('Admin/password_reset')){

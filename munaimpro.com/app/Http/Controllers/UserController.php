@@ -39,9 +39,9 @@ class UserController extends Controller
             $validatedData = $request->validate([
                 'first_name' => 'required|string|max:50',
                 'last_name' => 'required|string|max:50',
-                'email' => 'required|email',
-                'password' => 'required|string|max:100',
-                'profile_picture' => 'required|image',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|string|min:8|max:100',
+                'profile_picture' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             ]);
 
             if($request->hasFile('profile_picture')){
@@ -71,7 +71,7 @@ class UserController extends Controller
         } catch(Exception $e){
             return response()->json([
                 'status' => 'failed',
-                'message' => 'Signup failed'.$e->getMessage()
+                'message' => 'Signup failed. '.$e->getMessage()
             ]);
         }
         
@@ -101,7 +101,7 @@ class UserController extends Controller
             // Input validation process for backend
             $validatedData = $request->validate([
                 'email' => 'required|email',
-                'password' => 'required|string|max:100',
+                'password' => 'required|string',
             ]);
 
             $userCheck = User::where('email', '=', $request->email)->select('id', 'password')->first();
@@ -123,7 +123,7 @@ class UserController extends Controller
         } catch(Exception $e){
             return response()->json([
                 'status' => 'failed',
-                'message' => 'Signin failed'.$e->getMessage()
+                'message' => 'Signin failed '.$e->getMessage()
             ]);
         }
     }
@@ -155,27 +155,34 @@ class UserController extends Controller
     /* Method for send OTP code */
 
     public function sendOTPCode(Request $request){
-        // Input validation process for backend
-        $validatedData = $request->validate([
-            'email' => 'required|email',
-        ]);
-
-        $email = $validatedData['email']; // Getting email
-        $otp = rand(1000, 9999); // OTP number geneartion
-        $userCount = User::where('email', '=', $email)->count(); // User count for availability in DB
-
-        if($userCount == 1){
-            Mail::to($email)->send(new OTPMail($otp)); // Sending mail to email address
-            User::where('email', '=', $email)->update(['otp' => $otp]); // Update OTP code in user table
-
-            return response()->json([
-                'status' => 'success',
-                'message' => '4 digit otp code has been send to your mail',
+        try{
+            // Input validation process for backend
+            $validatedData = $request->validate([
+                'email' => 'required|email',
             ]);
-        } else{
+
+            $email = $validatedData['email']; // Getting email
+            $otp = rand(1000, 9999); // OTP number geneartion
+            $userCount = User::where('email', '=', $email)->count(); // User count for availability in DB
+
+            if($userCount == 1){
+                Mail::to($email)->send(new OTPMail($otp)); // Sending mail to email address
+                User::where('email', '=', $email)->update(['otp' => $otp]); // Update OTP code in user table
+
+                return response()->json([
+                    'status' => 'success',
+                    'message' => '4 digit otp code has been send to your mail',
+                ]);
+            } else{
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Data not found',
+                ]);
+            }
+        } catch(Exception $e){
             return response()->json([
                 'status' => 'failed',
-                'message' => 'Data not found',
+                'message' => 'OTP could not be sent '.$e->getMessage()
             ]);
         }
     }
@@ -199,24 +206,38 @@ class UserController extends Controller
     /* Method for verify OTP code */
 
     public function verifyOTPCode(Request $request){
-        $email = $request->input('email');
-        $otp = $request->input('otp');
-
-        $countUser = User::where('email', '=', $email)->where('otp', '=', $otp)->count();
-
-        if($countUser == 1){
-            User::where('email', '=', $email)->update(['otp' => '0']);
+        try{
             
-            $token = JWTToken::createTokenForResetPassword($email);
-            
-            return response()->json([
-                'status' => 'success',
-                'message' => 'OTP Verification successful',
-            ])->cookie('VerifyOTPToken', $token, time()+60*5);
-        } else{
+            // Input validation process for backend
+            $validatedData = $request->validate([
+                'email' => 'required|email',
+                'otp'   => 'required',
+            ]);
+
+            $email = $validatedData['email'];
+            $otp = $validatedData['otp'];
+
+            $countUser = User::where('email', '=', $email)->where('otp', '=', $otp)->count();
+
+            if($countUser == 1){
+                User::where('email', '=', $email)->update(['otp' => '0']);
+                
+                $token = JWTToken::createTokenForResetPassword($email);
+                
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'OTP Verification successful',
+                ])->cookie('VerifyOTPToken', $token, time()+60*5);
+            } else{
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'OTP not found',
+                ]);
+            }
+        } catch(Exception $e){
             return response()->json([
                 'status' => 'failed',
-                'message' => 'OTP not found',
+                'message' => 'OTP could not be verified. '.$e->getMessage()
             ]);
         }
     }
@@ -241,23 +262,31 @@ class UserController extends Controller
 
     public function resetPassword(Request $request){
         try{
-            $validate = $request->validate([
-                'password' => 'required|string|max:100',
-                'confirm_password' => 'required|string|max:100',
+            $validateData = $request->validate([
+                'password' => 'required|string|min:8|max:100',
+                'confirm_password' => 'required|string|min:8|max:100',
             ]);
 
-            $email = $request->header('userEmail'); // Email from request header
-            $password = Hash::make($request->input('password')); // Password from input
-            User::where('email', '=', $email)->update(['password' => $password]); // DB password update
+            if($validateData['password'] !== $validateData['confirm_password']){
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Confirm password not matched',
+                ]);
+            } else{
+                $email = $request->header('userEmail'); // Email from request header
+                $password = Hash::make($validateData['password']); // Password from input
 
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Password reset successfully',
-            ])->cookie('VerifyOTPToken', '', -1);
+                User::where('email', '=', $email)->update(['password' => $password]); // DB password update
+
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Password reset successfully',
+                ])->cookie('VerifyOTPToken', '', -1);
+            }
         } catch(Exception $e){
             return response()->json([
                 'status' => 'failed',
-                'message' => 'Something went wrong'. $e->getMessage(),
+                'message' => 'Something went wrong. '. $e->getMessage(),
             ]);
         }
 

@@ -92,8 +92,6 @@ async function signinUser(){
             displayToast('warning', 'Invalid email address');
         } else if(user_password.length === 0){
             displayToast('warning', 'Password is required');
-        } else if(user_password.length < 8){
-            displayToast('warning', 'Password should be at least 8 character long');
         } else{
 
             let signinData = {

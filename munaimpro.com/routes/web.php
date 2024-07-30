@@ -30,7 +30,7 @@ Route::post('userSignin', [UserController::class, 'userSignin']);
 Route::get('userSignout', [UserController::class, 'userSignout']);
 Route::post('userSendOTP', [UserController::class, 'sendOTPCode']);
 Route::post('userOTPVerification', [UserController::class, 'verifyOTPCode']);
-Route::post('userResetPassword', [UserController::class, 'resetPassword']);
+Route::post('userResetPassword', [UserController::class, 'resetPassword'])->middleware(TokenVerificationMiddleware::class);
 Route::get('userProfile', [UserController::class, 'userProfile'])->middleware(TokenVerificationMiddleware::class);
 Route::post('userUpdateProfile', [UserController::class, 'updateProfile'])->middleware(TokenVerificationMiddleware::class);
 Route::get('retriveAllUserInfo', [EducationController::class, 'retriveAllUserInfo'])->middleware(TokenVerificationMiddleware::class);

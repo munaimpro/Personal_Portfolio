@@ -12,16 +12,16 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->validateCsrfTokens([
-            'Admin/userSignup',
-            'Admin/userSignin',
-            'Admin/userSignout',
-            'Admin/userSendOTP',
-            'Admin/userOTPVerification',
-            'Admin/userResetPassword',
-            'Admin/userProfile',
-            'Admin/userUpdateProfile',
-            'Admin/retriveAllUserInfo',
-            'Admin/retriveUserInfoById',
+            'userSignup',
+            'userSignin',
+            'userSignout',
+            'userSendOTP',
+            'userOTPVerification',
+            'userResetPassword',
+            'userProfile',
+            'userUpdateProfile',
+            'retriveAllUserInfo',
+            'retriveUserInfoById',
             
             'Admin/addAboutInfo',
             'Admin/updateAboutInfo',
