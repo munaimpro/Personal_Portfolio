@@ -14,49 +14,49 @@
             <div class="col-lg-6 col-sm-6 col-12">
                 <div class="form-group">
                     <label>Greetings</label>
-                    <input type="text" spellcheck="false" data-ms-editor="true" id="aboutGreetings">
+                    <input type="text" spellcheck="false" data-ms-editor="true" id="websiteGreetings">
                 </div>
             </div>
 
             <div class="col-lg-6 col-sm-6 col-12">
                 <div class="form-group">
                     <label>Full Name</label>
-                    <input type="text" spellcheck="false" data-ms-editor="true">
+                    <input type="text" spellcheck="false" data-ms-editor="true" id="websiteFullName">
                 </div>
             </div>
 
             <div class="col-lg-6 col-sm-6 col-12">
                 <div class="form-group">
                     <label>Designation</label>
-                    <input type="text" spellcheck="false" data-ms-editor="true">
+                    <input type="text" spellcheck="false" data-ms-editor="true" id="websiteDesignation">
                 </div>
             </div>
 
             <div class="col-lg-6 col-sm-6 col-12">
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="email" class="form-control" spellcheck="false" data-ms-editor="true">
+                    <input type="email" class="form-control" spellcheck="false" data-ms-editor="true" id="websiteEmail">
                 </div>
             </div>
 
             <div class="col-lg-6 col-sm-6 col-12">
                 <div class="form-group">
                     <label>Phone</label>
-                    <input type="phone" class="form-control" spellcheck="false" data-ms-editor="true">
+                    <input type="phone" class="form-control" spellcheck="false" data-ms-editor="true" id="websitePhone">
                 </div>
             </div>
 
             <div class="col-lg-6 col-sm-6 col-12">
                 <div class="form-group">
                     <label>Location</label>
-                    <textarea class="form-control" spellcheck="false" data-ms-editor="true"></textarea>
+                    <textarea class="form-control" spellcheck="false" data-ms-editor="true" id="websiteLocation"></textarea>
                 </div>
             </div>
 
             <div class="col-lg-12 col-sm-6 col-12">
                 <div class="form-group">
                     <label>Hero Description</label>
-                    <textarea class="form-control" spellcheck="false" data-ms-editor="true"></textarea>
+                    <textarea class="form-control" spellcheck="false" data-ms-editor="true" id="websiteHeroDescription"></textarea>
                 </div>
             </div>
 
@@ -68,7 +68,7 @@
                             <li class="p-0">
                                 <div class="productviews">
                                     <div class="productviewsimg">
-                                        <img class="mw-100 mh-100" src="{{ asset('assets/img/profiles/avatar-17.jpg') }}" alt="website logo">
+                                        <img class="mw-100 mh-100" src="{{ asset('assets/img/profiles/avatar-17.jpg') }}" alt="website logo" id="websiteHeroImage">
                                     </div>
                                 </div>
                             </li>
@@ -76,7 +76,7 @@
                     </div>
 
                     <div class="image-upload ">
-                        <input type="file">
+                        <input type="file" id="uploadHeroImage">
                         <div class="image-uploads">
                             <img src="{{ asset('assets/img/icons/upload.svg') }}" alt="img">
                             <h4>Drag and drop a file to upload</h4>
@@ -88,7 +88,7 @@
             <div class="col-lg-12 col-sm-6 col-12">
                 <div class="form-group">
                     <label>About Description</label>
-                    <textarea class="form-control" spellcheck="false" data-ms-editor="true"></textarea>
+                    <textarea class="form-control" spellcheck="false" data-ms-editor="true" id="websiteAboutDescription"></textarea>
                 </div>
             </div>
 
@@ -100,7 +100,7 @@
                             <li class="p-0">
                                 <div class="productviews">
                                     <div class="productviewsimg">
-                                        <img class="mw-100 mh-100" src="{{ asset('assets/img/profiles/avatar-17.jpg') }}" alt="website logo">
+                                        <img class="mw-100 mh-100" src="{{ asset('assets/img/profiles/avatar-17.jpg') }}" alt="website logo" id="websiteAboutImage">
                                     </div>
                                 </div>
                             </li>
@@ -108,7 +108,7 @@
                     </div>
 
                     <div class="image-upload ">
-                        <input type="file">
+                        <input type="file" id="uploadAboutImage">
                         <div class="image-uploads">
                             <img src="{{ asset('assets/img/icons/upload.svg') }}" alt="img">
                             <h4>Drag and drop a file to upload</h4>
@@ -118,8 +118,8 @@
             </div>
 
             <div class="col-lg-12">
-                <button class="btn btn-submit me-2">Update</button>
-                <button class="btn btn-cancel">Cancel</button>
+                <button class="btn btn-submit me-2" id="updateAboutBtn">Update</button>
+                <button class="btn btn-cancel" id="cancelAboutBtn">Cancel</button>
             </div>
         </div>
     </div>
@@ -148,19 +148,40 @@
     }
 
     // Fetching user data
+    getAboutInfo();
+
     async function getAboutInfo() {
         showLoader();
         let response = await axios.get('../retriveAboutInfo');
         hideLoader();
 
         if(response.data['status'] === 'success'){
-            document.getElementById('').value = response.data.data[''];
+            // Getting base URL of the system
+            let baseUrl = "{{ url('/') }}";
+
+            // Hero image
+            let heroImagePath = response.data.data['hero_image'];
+            
+            // Generating full path of the hero image
+            let heroImageFullPath = baseUrl + '/storage/website_pictures/hero/' + heroImagePath;
+
+            // About image
+            let aboutImagePath = response.data.data['about_image'];
+
+            // Generating full path of the about image
+            let aboutImageFullPath = baseUrl + '/storage/website_pictures/about/' + aboutImagePath;
+
+            document.getElementById('websiteGreetings').value = response.data.data['greetings'];
+            document.getElementById('websiteFullName').value = response.data.data['full_name'];
+            document.getElementById('websiteDesignation').value = response.data.data['designation'];
+            document.getElementById('websiteHeroDescription').value = response.data.data['hero_description'];
+            document.getElementById('websiteHeroImage').src = heroImageFullPath;
+            document.getElementById('websiteAboutDescription').value = response.data.data['about_description'];
+            document.getElementById('websiteAboutImage').src = aboutImageFullPath;
         } else{
             displayToast('error', response.data['message']);
         }
     }
-
-    getUserData();
 </script>
 
 {{-- Front end script end --}}

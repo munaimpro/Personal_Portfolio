@@ -75,12 +75,15 @@
 
     {{-- Axios JS --}}
     <script src="{{ asset('assets/js/axios.min.js') }}"></script>
+
+    {{-- Custom JS --}}
+    <script src="{{ asset('assets/js/script.js') }}"></script>
 </head>
 <body>
     {{-- Pre loader start --}}
-    {{-- <div id="global-loader">
+    <div id="global-loader">
         <div class="whirly-loader"> </div>
-    </div> --}}
+    </div>
     {{-- Pre loader end --}}
 
     {{-- Main body start --}}
@@ -128,7 +131,7 @@
 <script src="{{ asset('assets/plugins/apexchart/chart-data.js') }}"></script>
 
 {{-- Custom JS --}}
-<script src="{{ asset('assets/js/script.js') }}"></script>
+{{-- <script src="{{ asset('assets/js/script.js') }}"></script> --}}
 
 {{-- Script end --}}
 </body>
