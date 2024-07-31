@@ -75,7 +75,7 @@ function sanitizeInput(input) {
     return input.replace(/<\/?[^>]+(>|$)/g, "");
 }
 
-// Function for user signup
+// Function for user signin
 async function signinUser(){
     try{
         // Getting input data

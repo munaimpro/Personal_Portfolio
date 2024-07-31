@@ -118,7 +118,7 @@
             </div>
 
             <div class="col-lg-12">
-                <button class="btn btn-submit me-2" id="updateAboutBtn">Update</button>
+                <button class="btn btn-submit me-2" id="updateAboutBtn" onclick="updateAboutInfo()">Update</button>
                 <button class="btn btn-cancel" id="cancelAboutBtn">Cancel</button>
             </div>
         </div>
@@ -147,7 +147,7 @@
         });
     }
 
-    // Fetching user data
+    // Function for retriving about information
     getAboutInfo();
 
     async function getAboutInfo() {
@@ -158,18 +158,12 @@
         if(response.data['status'] === 'success'){
             // Getting base URL of the system
             let baseUrl = "{{ url('/') }}";
-
-            // Hero image
-            let heroImagePath = response.data.data['hero_image'];
             
             // Generating full path of the hero image
-            let heroImageFullPath = baseUrl + '/storage/website_pictures/hero/' + heroImagePath;
-
-            // About image
-            let aboutImagePath = response.data.data['about_image'];
+            let heroImageFullPath = baseUrl + '/storage/website_pictures/hero/' + response.data.data['hero_image'];
 
             // Generating full path of the about image
-            let aboutImageFullPath = baseUrl + '/storage/website_pictures/about/' + aboutImagePath;
+            let aboutImageFullPath = baseUrl + '/storage/website_pictures/about/' + response.data.data['about_image'];
 
             document.getElementById('websiteGreetings').value = response.data.data['greetings'];
             document.getElementById('websiteFullName').value = response.data.data['full_name'];
@@ -182,6 +176,66 @@
             displayToast('error', response.data['message']);
         }
     }
+
+    // Function for update about information
+    async function updateAboutInfo(){
+    try{
+        // Getting input data
+        let website_greetings = $('#websiteGreetings').val().trim();
+        let website_full_name = $('#websiteFullName').val().trim();
+        let website_designation = $('#websiteDesignation').val().trim();
+        let website_hero_description = $('#websiteHeroDescription').val().trim();
+        let website_hero_image = $('#websiteHeroImage').files[0];
+        let website_about_description = $('#websiteAboutDescription').val().trim();
+        let website_about_image = $('#websiteAboutImage').files[0];
+
+        // Front end validation process
+        if(website_greetings.length === 0){
+            displayToast('warning', 'Greetings text is required');
+        } else if(website_full_name.length === 0){
+            displayToast('warning', 'Full name is required');
+        } else if(website_designation.length === 0){
+            displayToast('warning', 'Designation is required');
+        } else if(website_hero_description.length === 0){
+            displayToast('warning', 'Hero description is required');
+        } else if(website_about_description.length === 0){
+            displayToast('warning', 'About description is required');
+        } else{
+            // FormData object
+            let formData = new formData();
+
+            // Data append to FormData
+            formData.append('greetings', website_greetings);
+            formData.append('full_name', website_full_name);
+            formData.append('designation', website_designation);
+            formData.append('hero_description', website_hero_description);
+            formData.append('hero_image', website_hero_image);
+            formData.append('about_description', website_about_description);
+            formData.append('about_image', website_about_image);
+
+            // Pssing data to controller and getting response
+            showLoader();
+            let response = await axios.post('../updateAboutInfo', formData, {
+                headers:{'content-type':'multipart/form-data'}
+            });
+            hideLoader();
+
+            if(response.data['status'] === 'success'){
+                $('#signinForm')[0].reset();
+                displayToast('success', response.data['message']);
+            } else{
+                displayToast('error', response.data['message']);
+            }
+        }
+    } catch(e){
+        console.error('Something went wrong', e);
+    }
+    
+
+    
+
+    
+}
 </script>
 
 {{-- Front end script end --}}

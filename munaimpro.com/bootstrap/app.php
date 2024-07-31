@@ -23,15 +23,15 @@ return Application::configure(basePath: dirname(__DIR__))
             'retriveAllUserInfo',
             'retriveUserInfoById',
             
-            'Admin/addAboutInfo',
-            'Admin/updateAboutInfo',
-            'Admin/retriveAboutInfo',
+            'addAboutInfo',
+            'updateAboutInfo',
+            'retriveAboutInfo',
             
-            'Admin/addEducationInfo',
-            'Admin/updateEducationInfo',
-            'Admin/retriveAllEducationInfo',
-            'Admin/retriveEducationInfoById',
-            'Admin/deleteEducationInfo',
+            'addEducationInfo',
+            'updateEducationInfo',
+            'retriveAllEducationInfo',
+            'retriveEducationInfoById',
+            'deleteEducationInfo',
             
             'Admin/addSkillInfo',
             'Admin/updateSkillInfo',

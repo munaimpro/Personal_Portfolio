@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Log;
 use Exception;
 use App\Models\About;
 use App\Models\Seoproperty;
@@ -68,6 +69,19 @@ class AboutController extends Controller
     /* Method for about information update */
 
     public function updateAboutInfo(Request $request){
+
+        // Input validation process for backend
+        // $validatedData = $request->validate([
+        //     'greetings' => 'required|string|max:100',
+        //     'full_name' => 'required|string|max:100',
+        //     'designation' => 'required|string|max:100',
+        //     'hero_description' => 'required|string',
+        //     'about_description' => 'required|string',
+        //     'resume_link' => 'string|max:100',
+        //     'hero_image' => 'image|mimes:jpeg,png,jpg|max:2048',
+        //     'about_image' => 'image|mimes:jpeg,png,jpg|max:2048',
+        // ]);
+
         try{
             $aboutId = About::pluck('id')->first();
 
@@ -82,26 +96,26 @@ class AboutController extends Controller
                     }
                 }
 
-                // Getting new hero file
+                // Getting new hero image
                 $heroImage = $request->file('hero_image');
 
-                /* Extract the original file name with extension */
+                // Extract the original image name with extension
                 $heroImageName = $heroImage->getClientOriginalName();
 
                 // Retrive about image link from database
                 $getPreviousAboutImage = About::where('id', '=', $aboutId)->first('about_image');
 
-                // Remove about file from storage
+                // Remove about image from storage
                 if($getPreviousAboutImage){
                     if(Storage::exists("public/website_pictures/about/".$getPreviousAboutImage->about_image)){
                         Storage::delete("public/website_pictures/about/".$getPreviousAboutImage->about_image);
                     }
                 }
 
-                // Getting new about file
+                // Getting new about image
                 $aboutImage = $request->file('about_image');
 
-                /* Extract the original file name with extension */
+                /* Extract the original image name with extension */
                 $aboutImageName = $aboutImage->getClientOriginalName();
 
                 $aboutData = array_merge($request->input(), ['hero_image' => $heroImageName, 'about_image' => $aboutImageName]);
@@ -117,17 +131,17 @@ class AboutController extends Controller
                 // Retrive hero image link from database
                 $getPreviousHeroImage = About::where('id', '=', $aboutId)->first('hero_image');
 
-                // Remove hero file from storage
+                // Remove hero image from storage
                 if($getPreviousHeroImage){
                     if(Storage::exists("public/website_pictures/hero/".$getPreviousHeroImage->hero_image)){
                         Storage::delete("public/website_pictures/hero/".$getPreviousHeroImage->hero_image);
                     }
                 }
 
-                // Getting new hero file
+                // Getting new hero image
                 $heroImage = $request->file('hero_image');
 
-                /* Extract the original file name with extension */
+                /* Extract the original image name with extension */
                 $heroImageName = $heroImage->getClientOriginalName();
 
                 $aboutData = array_merge($request->input(), ['hero_image' => $heroImageName]);
@@ -142,17 +156,17 @@ class AboutController extends Controller
                 // Retrive about image link from database
                 $getPreviousAboutImage = About::where('id', '=', $aboutId)->first('about_image');
 
-                // Remove about file from storage
+                // Remove about image from storage
                 if($getPreviousAboutImage){
                     if(Storage::exists("public/website_pictures/about/".$getPreviousAboutImage->about_image)){
                         Storage::delete("public/website_pictures/about/".$getPreviousAboutImage->about_image);
                     }
                 }
 
-                // Getting new about file
+                // Getting new about image
                 $aboutImage = $request->file('about_image');
 
-                /* Extract the original file name with extension */
+                // Extract the original image name with extension
                 $aboutImageName = $aboutImage->getClientOriginalName();
 
                 $aboutData = array_merge($request->input(), ['about_image' => $aboutImageName]);
