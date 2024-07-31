@@ -303,7 +303,7 @@ class UserController extends Controller
         // Getting view name from uri
         $routeName = last(explode('/', Route::getCurrentRoute()->uri));
 
-        return view('admin.pages.award', compact(['seoproperty', 'routeName']));
+        return view('admin.pages.userprofile', compact(['seoproperty', 'routeName']));
     }
 
 

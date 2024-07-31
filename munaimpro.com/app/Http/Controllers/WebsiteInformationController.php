@@ -12,6 +12,7 @@ use App\Models\Portfolio;
 use App\Models\Seoproperty;
 use Illuminate\Http\Request;
 use App\Models\VisitorInformations;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
 class WebsiteInformationController extends Controller
@@ -19,7 +20,13 @@ class WebsiteInformationController extends Controller
     /* Method for admin dashboard page */
 
     public function adminDashboardPage(){
+        // Getting SEO properties for specific view
+        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
         
+        // Getting view name from uri
+        $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+
+        return view('admin.pages.dashboard', compact(['seoproperty', 'routeName']));
     }
 
 
