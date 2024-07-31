@@ -100,9 +100,9 @@ async function signinUser(){
             }
 
             // Pssing data to controller and getting response
-            // showLoader();
+            showLoader();
             let response = await axios.post('../userSignin', signinData);
-            // hideLoader();
+            hideLoader();
 
             if(response.data['status'] === 'success'){
                 displayToast('success', response.data['message']);

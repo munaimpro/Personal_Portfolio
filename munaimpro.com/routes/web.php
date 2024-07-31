@@ -167,7 +167,7 @@ Route::group(['prefix' => 'Admin', 'middleware' => TokenVerificationMiddleware::
     Route::view('/award', 'admin.pages.award');
     Route::view('/seoproperty', 'admin.pages.seoproperty');
     Route::view('/visitor_information', 'admin.pages.visitorinfo');
-    Route::view('/basic_information', 'admin.pages.basicinfo');
+    Route::get('/about', [AboutController::class, 'aboutInfoPage']);
     Route::view('/education', 'admin.pages.education');
     Route::view('/skill', 'admin.pages.skill');
     Route::view('/experience', 'admin.pages.experience');

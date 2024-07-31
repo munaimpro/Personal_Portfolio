@@ -1,19 +1,20 @@
-<!-- Page header start -->
+{{-- Page header - About start --}}
 <div class="page-header">
     <div class="page-title">
         <h4>Basic Information</h4>
         <h6>Used for hero section and contact information</h6>
     </div>
 </div>
-<!-- Page header end -->
+{{-- Page header - About end --}}
 
+{{-- About form start --}}
 <div class="card">
     <div class="card-body">
         <div class="row">
             <div class="col-lg-6 col-sm-6 col-12">
                 <div class="form-group">
                     <label>Greetings</label>
-                    <input type="text" spellcheck="false" data-ms-editor="true">
+                    <input type="text" spellcheck="false" data-ms-editor="true" id="aboutGreetings">
                 </div>
             </div>
 
@@ -123,3 +124,43 @@
         </div>
     </div>
 </div>
+{{-- About form end --}}
+
+
+{{-- Front end script start --}}
+
+<script>
+
+    // Function for toast message common features
+    function displayToast(icon, title){
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: icon,
+            iconColor: 'white',
+            title: title,
+            showConfirmButton: false,
+            timer: 2000,
+            customClass: {
+                popup: 'colored-toast'
+            }
+        });
+    }
+
+    // Fetching user data
+    async function getAboutInfo() {
+        showLoader();
+        let response = await axios.get('../retriveAboutInfo');
+        hideLoader();
+
+        if(response.data['status'] === 'success'){
+            document.getElementById('').value = response.data.data[''];
+        } else{
+            displayToast('error', response.data['message']);
+        }
+    }
+
+    getUserData();
+</script>
+
+{{-- Front end script end --}}

@@ -18,7 +18,7 @@
                 <li class="submenu">
                     <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/sales1.svg') }}" alt="img"><span> About</span> <span class="menu-arrow"></span></a>
                     <ul>
-                        <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/basicinfo') }}">Basic Information</a></li>
+                        <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/about') }}">Basic Information</a></li>
                         <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/education') }}">Education</a></li>
                         <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/skill') }}">Skills</a></li>
                         <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/award') }}">Awards</a></li>

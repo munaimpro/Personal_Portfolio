@@ -4,12 +4,28 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\About;
+use App\Models\Seoproperty;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
 class AboutController extends Controller
 {
+    /* Method for signup page load */
+    
+    public function aboutInfoPage(){
+        // Getting SEO properties for specific view
+        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
+        
+        // Getting view name from uri
+        $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+
+        return view('admin.pages.basicinfo', compact(['seoproperty', 'routeName']));
+    }
+
+
+    
     /* Method for about information insert */
 
     public function addAboutInfo(Request $request){
