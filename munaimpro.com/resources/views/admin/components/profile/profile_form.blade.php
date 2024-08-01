@@ -104,9 +104,9 @@
     getUserInfo();
 
     async function getUserInfo() {
-        // showLoader();
+        showLoader();
         let response = await axios.get('../userProfile');
-        // hideLoader();
+        hideLoader();
 
         if(response.data['status'] === 'success'){
             // Getting base URL of the system
@@ -134,6 +134,7 @@
             let user_first_name = $('#userFirstName').val().trim();
             let user_last_name = $('#userLastName').val().trim();
             let user_email = $('#userEmail').val().trim();
+            let user_password = $('#userPassword').val().trim();
             let upload_profile_picture = document.getElementById('uploadProfilePicture').files[0];
 
             // Regular expression for basic email validation
@@ -156,17 +157,18 @@
                 formData.append('first_name', user_first_name);
                 formData.append('last_name', user_last_name);
                 formData.append('email', user_email);
+                if(user_password) formData.append('password', user_password);
                 if(upload_profile_picture) formData.append('profile_picture', upload_profile_picture);
 
                 // Pssing data to controller and getting response
                 showLoader();
-                let response = await axios.post('../updateAboutInfo', formData, {
+                let response = await axios.post('../userUpdateProfile', formData, {
                     headers:{'content-type':'multipart/form-data'}
                 });
                 hideLoader();
 
                 if(response.data['status'] === 'success'){
-                    getUserInfo();
+                    await getUserInfo();
                     displayToast('success', response.data['message']);
                 } else{
                     displayToast('error', response.data['message']);

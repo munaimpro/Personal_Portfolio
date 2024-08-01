@@ -343,14 +343,15 @@ class UserController extends Controller
     public function updateProfile(Request $request){
         try{
             // Input validation process for backend
-            $validatedData = $request->validate([
+            $request->validate([
                 'first_name' => 'required|string|max:50',
                 'last_name' => 'required|string|max:50',
                 'email' => 'required|email',
-                'password' => 'required|string|max:100',
+                'password' => 'string|min:8|max:100',
                 'profile_picture' => 'image|mimes:jpg,png,jpeg|max:2048',
             ]);
 
+            // Getting logedin user email
             $email = $request->header('userEmail');
 
             if($request->hasFile('profile_picture')){
@@ -368,7 +369,7 @@ class UserController extends Controller
                 // Getting new file
                 $profilePicture = $request->file('profile_picture');
 
-                /* Extract the original file name with extension */
+                // Extract the original file name with extension
                 $profilePictureName = substr(md5(time()), 0, 5).'-'.$profilePicture->getClientOriginalName();
 
                 $user = User::where('email', '=', $email)->update([
@@ -381,29 +382,37 @@ class UserController extends Controller
 
                 if($user){
                     $profilePicture->storeAs('profile_picture', $profilePictureName, 'public');
+                    
+                    return response()->json([
+                        'status' => 'success',
+                        'message' => 'Profile updated successfully'
+                    ]);
                 }
-        
-                return response()->json([
-                    'status' => 'success',
-                    'message' => 'Profile updated successfully'
-                ]);
+
             } else{
-                User::where('email', '=', $email)->update([
+                $user = User::where('email', '=', $email)->update([
                     'first_name' => $request->input('first_name'),
                     'last_name' => $request->input('last_name'),
                     'email' => $request->input('email'),
                     'password' => Hash::make($request->input('password')),
                 ]);
-        
-                return response()->json([
-                    'status' => 'success',
-                    'message' => 'Profile updated successfully'
-                ]);
+                
+                if($user){
+                    return response()->json([
+                        'status' => 'success',
+                        'message' => 'Profile updated successfully'
+                    ]);
+                } else{
+                    return response()->json([
+                        'status' => 'failed',
+                        'message' => 'Something went wrong'
+                    ]);
+                }
             }
         } catch(Exception $e){
             return response()->json([
                 'status' => 'failed',
-                'message' => 'Request failed'.$e->getMessage()
+                'message' => 'Request failed! '.$e->getMessage()
             ]);
         }
     }
