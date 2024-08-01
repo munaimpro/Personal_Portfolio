@@ -81,9 +81,9 @@
 </head>
 <body>
     {{-- Pre loader start --}}
-    <div id="global-loader">
+    {{-- <div id="global-loader">
         <div class="whirly-loader"> </div>
-    </div>
+    </div> --}}
     {{-- Pre loader end --}}
 
     {{-- Main body start --}}

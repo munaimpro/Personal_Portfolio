@@ -159,10 +159,10 @@
             // Getting base URL of the system
             let baseUrl = "{{ url('/') }}";
             
-            // Generating full path of the hero image
+            // Generating full path for the hero image
             let heroImageFullPath = baseUrl + '/storage/website_pictures/hero/' + response.data.data['hero_image'];
 
-            // Generating full path of the about image
+            // Generating full path for the about image
             let aboutImageFullPath = baseUrl + '/storage/website_pictures/about/' + response.data.data['about_image'];
 
             document.getElementById('websiteGreetings').value = response.data.data['greetings'];
@@ -178,7 +178,7 @@
     }
 
     // Function for update about information
-    async function updateAboutInfo(event){
+    async function updateAboutInfo(){
 
         try{
             // Getting input data

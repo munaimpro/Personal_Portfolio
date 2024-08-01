@@ -348,7 +348,7 @@ class UserController extends Controller
                 'last_name' => 'required|string|max:50',
                 'email' => 'required|email',
                 'password' => 'required|string|max:100',
-                'profile_picture' => 'image',
+                'profile_picture' => 'image|mimes:jpg,png,jpeg|max:2048',
             ]);
 
             $email = $request->header('userEmail');
