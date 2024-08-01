@@ -76,7 +76,7 @@
                     </div>
 
                     <div class="image-upload ">
-                        <input type="file" id="uploadHeroImage">
+                        <input type="file" id="uploadHeroImage" oninput="websiteHeroImage.src=window.URL.createObjectURL(this.files[0])">
                         <div class="image-uploads">
                             <img src="{{ asset('assets/img/icons/upload.svg') }}" alt="img">
                             <h4>Drag and drop a file to upload</h4>
@@ -108,7 +108,7 @@
                     </div>
 
                     <div class="image-upload ">
-                        <input type="file" id="uploadAboutImage">
+                        <input type="file" id="uploadAboutImage" oninput="websiteAboutImage.src=window.URL.createObjectURL(this.files[0])">
                         <div class="image-uploads">
                             <img src="{{ asset('assets/img/icons/upload.svg') }}" alt="img">
                             <h4>Drag and drop a file to upload</h4>
@@ -224,6 +224,7 @@
                 hideLoader();
 
                 if(response.data['status'] === 'success'){
+                    getAboutInfo();
                     displayToast('success', response.data['message']);
                 } else{
                     displayToast('error', response.data['message']);
