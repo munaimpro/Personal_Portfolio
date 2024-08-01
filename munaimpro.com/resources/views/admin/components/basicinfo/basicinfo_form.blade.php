@@ -118,7 +118,7 @@
             </div>
 
             <div class="col-lg-12">
-                <button class="btn btn-submit me-2" id="updateAboutBtn" onclick="updateAboutInfo()">Update</button>
+                <button class="btn btn-submit me-2" onclick="updateAboutInfo()">Update</button>
                 <button class="btn btn-cancel" id="cancelAboutBtn">Cancel</button>
             </div>
         </div>
@@ -140,7 +140,7 @@
             iconColor: 'white',
             title: title,
             showConfirmButton: false,
-            timer: 2000,
+            timer: 60000,
             customClass: {
                 popup: 'colored-toast'
             }
@@ -178,64 +178,66 @@
     }
 
     // Function for update about information
-    async function updateAboutInfo(){
-    try{
-        // Getting input data
-        let website_greetings = $('#websiteGreetings').val().trim();
-        let website_full_name = $('#websiteFullName').val().trim();
-        let website_designation = $('#websiteDesignation').val().trim();
-        let website_hero_description = $('#websiteHeroDescription').val().trim();
-        let website_hero_image = $('#websiteHeroImage').files[0];
-        let website_about_description = $('#websiteAboutDescription').val().trim();
-        let website_about_image = $('#websiteAboutImage').files[0];
+    async function updateAboutInfo(event){
 
-        // Front end validation process
-        if(website_greetings.length === 0){
-            displayToast('warning', 'Greetings text is required');
-        } else if(website_full_name.length === 0){
-            displayToast('warning', 'Full name is required');
-        } else if(website_designation.length === 0){
-            displayToast('warning', 'Designation is required');
-        } else if(website_hero_description.length === 0){
-            displayToast('warning', 'Hero description is required');
-        } else if(website_about_description.length === 0){
-            displayToast('warning', 'About description is required');
-        } else{
-            // FormData object
-            let formData = new formData();
+        try{
+            // Getting input data
+            let website_greetings = $('#websiteGreetings').val().trim();
+            let website_full_name = $('#websiteFullName').val().trim();
+            let website_designation = $('#websiteDesignation').val().trim();
+            let website_hero_description = $('#websiteHeroDescription').val().trim();
+            let upload_hero_image = document.getElementById('uploadHeroImage').files[0];
+            let website_about_description = $('#websiteAboutDescription').val().trim();
+            let upload_about_image = document.getElementById('uploadAboutImage').files[0];
+            let website_resume_link = "Link here";
 
-            // Data append to FormData
-            formData.append('greetings', website_greetings);
-            formData.append('full_name', website_full_name);
-            formData.append('designation', website_designation);
-            formData.append('hero_description', website_hero_description);
-            formData.append('hero_image', website_hero_image);
-            formData.append('about_description', website_about_description);
-            formData.append('about_image', website_about_image);
-
-            // Pssing data to controller and getting response
-            showLoader();
-            let response = await axios.post('../updateAboutInfo', formData, {
-                headers:{'content-type':'multipart/form-data'}
-            });
-            hideLoader();
-
-            if(response.data['status'] === 'success'){
-                $('#signinForm')[0].reset();
-                displayToast('success', response.data['message']);
+            // Front end validation process
+            if(website_greetings.length === 0){
+                displayToast('warning', 'Greetings text is required');
+            } else if(website_full_name.length === 0){
+                displayToast('warning', 'Full name is required');
+            } else if(website_designation.length === 0){
+                displayToast('warning', 'Designation is required');
+            } else if(website_hero_description.length === 0){
+                displayToast('warning', 'Hero description is required');
+            } else if(website_about_description.length === 0){
+                displayToast('warning', 'About description is required');
             } else{
-                displayToast('error', response.data['message']);
+                // FormData object
+                let formData = new FormData();
+
+                // Data append to FormData
+                formData.append('greetings', website_greetings);
+                formData.append('full_name', website_full_name);
+                formData.append('designation', website_designation);
+                formData.append('hero_description', website_hero_description);
+                if(upload_hero_image) formData.append('hero_image', upload_hero_image);
+                formData.append('about_description', website_about_description);
+                if(upload_about_image) formData.append('about_image', upload_about_image);
+                formData.append('resume_link', website_resume_link);
+
+                // Pssing data to controller and getting response
+                showLoader();
+                let response = await axios.post('../updateAboutInfo', formData, {
+                    headers:{'content-type':'multipart/form-data'}
+                });
+                hideLoader();
+
+                if(response.data['status'] === 'success'){
+                    displayToast('success', response.data['message']);
+                } else{
+                    displayToast('error', response.data['message']);
+                }
             }
+        } catch(e){
+            console.error('Something went wrong', e);
         }
-    } catch(e){
-        console.error('Something went wrong', e);
+    
+
+    
+
+    
     }
-    
-
-    
-
-    
-}
 </script>
 
 {{-- Front end script end --}}

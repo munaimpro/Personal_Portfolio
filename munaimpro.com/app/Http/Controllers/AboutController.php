@@ -71,16 +71,16 @@ class AboutController extends Controller
     public function updateAboutInfo(Request $request){
 
         // Input validation process for backend
-        // $validatedData = $request->validate([
-        //     'greetings' => 'required|string|max:100',
-        //     'full_name' => 'required|string|max:100',
-        //     'designation' => 'required|string|max:100',
-        //     'hero_description' => 'required|string',
-        //     'about_description' => 'required|string',
-        //     'resume_link' => 'string|max:100',
-        //     'hero_image' => 'image|mimes:jpeg,png,jpg|max:2048',
-        //     'about_image' => 'image|mimes:jpeg,png,jpg|max:2048',
-        // ]);
+        $validatedData = $request->validate([
+            'greetings' => 'required|string|max:100',
+            'full_name' => 'required|string|max:100',
+            'designation' => 'required|string|max:100',
+            'hero_description' => 'required|string',
+            'about_description' => 'required|string',
+            'resume_link' => 'string|max:100',
+            // 'hero_image' => 'image|mimes:jpeg,png,jpg|max:2048',
+            // 'about_image' => 'image|mimes:jpeg,png,jpg|max:2048',
+        ]);
 
         try{
             $aboutId = About::pluck('id')->first();
@@ -118,7 +118,7 @@ class AboutController extends Controller
                 /* Extract the original image name with extension */
                 $aboutImageName = $aboutImage->getClientOriginalName();
 
-                $aboutData = array_merge($request->input(), ['hero_image' => $heroImageName, 'about_image' => $aboutImageName]);
+                $aboutData = array_merge($validatedData, ['hero_image' => $heroImageName, 'about_image' => $aboutImageName]);
 
                 $about = About::where('id', '=', $aboutId)->update($aboutData);
 
@@ -144,7 +144,7 @@ class AboutController extends Controller
                 /* Extract the original image name with extension */
                 $heroImageName = $heroImage->getClientOriginalName();
 
-                $aboutData = array_merge($request->input(), ['hero_image' => $heroImageName]);
+                $aboutData = array_merge($validatedData, ['hero_image' => $heroImageName]);
 
                 $about = About::where('id', '=', $aboutId)->update($aboutData);
 
@@ -169,7 +169,7 @@ class AboutController extends Controller
                 // Extract the original image name with extension
                 $aboutImageName = $aboutImage->getClientOriginalName();
 
-                $aboutData = array_merge($request->input(), ['about_image' => $aboutImageName]);
+                $aboutData = array_merge($validatedData, ['about_image' => $aboutImageName]);
 
                 $about = About::where('id', '=', $aboutId)->update($aboutData);
 

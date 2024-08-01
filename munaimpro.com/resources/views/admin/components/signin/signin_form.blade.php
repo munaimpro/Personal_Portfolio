@@ -105,8 +105,8 @@ async function signinUser(){
             hideLoader();
 
             if(response.data['status'] === 'success'){
-                displayToast('success', response.data['message']);
                 $('#signinForm')[0].reset();
+                displayToast('success', response.data['message']);
                 window.location.href = "dashboard";
             } else{
                 displayToast('error', response.data['message']);
