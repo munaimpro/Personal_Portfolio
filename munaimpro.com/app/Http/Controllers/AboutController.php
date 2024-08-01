@@ -78,7 +78,7 @@ class AboutController extends Controller
             'hero_description' => 'required|string',
             'about_description' => 'required|string',
             'resume_link' => 'string|max:100',
-            'hero_image' => 'mimes:jpeg,jpg,png|max:2048',
+            'hero_image' => 'image|mimes:jpeg,jpg,png|max:2048',
             'about_image' => 'image|mimes:jpeg,jpg,png|max:2048',
         ]);
 
