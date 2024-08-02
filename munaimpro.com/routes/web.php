@@ -163,12 +163,17 @@ Route::group(['prefix' => 'Admin', 'middleware' => TokenVerificationMiddleware::
     Route::get('/verifyotp', [UserController::class, 'verifyOtpPage']);
     Route::get('/password_reset', [UserController::class, 'resetPasswordPage']);
     Route::get('/profile', [UserController::class, 'userProfilePage']);
+    
+    // Page Routes (Website Controller)
     Route::get('/dashboard', [WebsiteinformationController::class, 'adminDashboardPage']);
     Route::view('/award', 'admin.pages.award');
     Route::view('/seoproperty', 'admin.pages.seoproperty');
     Route::view('/visitor_information', 'admin.pages.visitorinfo');
     Route::get('/about', [AboutController::class, 'aboutInfoPage']);
-    Route::view('/education', 'admin.pages.education');
+
+    // Page Routes (Education Controller)
+    Route::get('/education', [EducationController::class, 'adminEducationPage']);
+
     Route::view('/skill', 'admin.pages.skill');
     Route::view('/experience', 'admin.pages.experience');
     Route::view('/interest', 'admin.pages.interest');

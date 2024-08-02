@@ -4,10 +4,25 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\Education;
+use App\Models\Seoproperty;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class EducationController extends Controller
 {
+    /* Method for signup page load */
+    
+    public function adminEducationPage(){
+        // Getting SEO properties for specific view
+        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
+        
+        // Getting view name from uri
+        $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+
+        return view('admin.pages.education', compact(['seoproperty', 'routeName']));
+    }
+
+
     /* Method for add education information */
 
     public function addEducationInfo(Request $request){

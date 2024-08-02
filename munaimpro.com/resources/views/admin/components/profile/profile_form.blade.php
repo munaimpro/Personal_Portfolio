@@ -171,11 +171,6 @@
         } catch(e){
             console.error('Something went wrong', e);
         }
-    
-
-    
-
-    
     }
         
     // Function for user reset password
@@ -225,3 +220,5 @@
         
     }
 </script>
+
+{{-- Front end script end --}}

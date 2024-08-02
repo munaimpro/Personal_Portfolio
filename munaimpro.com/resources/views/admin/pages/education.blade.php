@@ -4,4 +4,8 @@
     @include('admin.components.education.education_update')
     @include('admin.components.education.education_delete')
     @include('admin.components.education.education_list')
+
+    <script>
+        hideLoader();
+    </script>
 @endsection
