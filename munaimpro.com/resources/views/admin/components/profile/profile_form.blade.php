@@ -67,11 +67,7 @@
             </div>
             <div class="col-lg-6 col-sm-12">
                 <div class="form-group">
-                    <label>Password</label>
-                    <div class="pass-group">
-                        <input type="password" class="pass-input" id="userPassword">
-                        <span class="fas toggle-password fa-eye-slash"></span>
-                    </div>
+                    <button class="btn btn-submit" data-bs-toggle="modal" data-bs-target="#editModal">Change Password</button>
                 </div>
             </div>
         </div>
@@ -120,7 +116,7 @@
             document.getElementById('userFirstName').value = response.data.data['first_name'];
             document.getElementById('userLastName').value = response.data.data['last_name'];
             document.getElementById('userEmail').value = response.data.data['email'];
-            document.getElementById('userPassword').value = response.data.data['password'];
+            document.getElementById('currentPassword').value = response.data.data['password'];
         } else{
             displayToast('error', response.data['message']);
         }
@@ -134,7 +130,6 @@
             let user_first_name = $('#userFirstName').val().trim();
             let user_last_name = $('#userLastName').val().trim();
             let user_email = $('#userEmail').val().trim();
-            let user_password = $('#userPassword').val().trim();
             let upload_profile_picture = document.getElementById('uploadProfilePicture').files[0];
 
             // Regular expression for basic email validation
@@ -157,7 +152,6 @@
                 formData.append('first_name', user_first_name);
                 formData.append('last_name', user_last_name);
                 formData.append('email', user_email);
-                if(user_password) formData.append('password', user_password);
                 if(upload_profile_picture) formData.append('profile_picture', upload_profile_picture);
 
                 // Pssing data to controller and getting response
@@ -182,5 +176,52 @@
     
 
     
+    }
+        
+    // Function for user reset password
+    async function resetUserPassword(){
+        try{
+            // Getting input data
+            let user_password    = $('#userPassword').val().trim();
+            let confirm_password = $('#userConfirmPassword').val().trim();
+    
+            // Front end validation process
+            if(user_password.length === 0){
+                displayToast('warning', 'Password is required');
+            } else if(user_password.length < 8){
+                displayToast('warning', 'Password should at least 8 character');
+            } else if(confirm_password.length === 0){
+                displayToast('warning', 'Password confirmation is required');
+            } else if(user_password !== confirm_password){
+                displayToast('warning', 'Password confirmation failure, not matched');
+            } else{
+                // Closing modal
+                $('#editModal').modal('hide');
+
+                // Assigning data to variable in JSON format
+                let resetpasswordData = {
+                    "password" : user_password,
+                    "confirm_password" : confirm_password,
+                }
+    
+                // Pssing data to controller and getting response
+                showLoader();
+                let response = await axios.post('../userResetPassword', resetpasswordData);
+                hideLoader();
+    
+                if(response.data['status'] === 'success'){
+                    displayToast('success', response.data['message']);
+                } else{
+                    displayToast('error', response.data['message']);
+                }
+            }
+        } catch(e){
+            console.error('Something went wrong', e);
+        }
+        
+    
+        
+    
+        
     }
 </script>

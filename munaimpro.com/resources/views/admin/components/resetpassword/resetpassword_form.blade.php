@@ -17,7 +17,7 @@
     </div>
 
     <div class="form-login">
-        <a class="btn btn-login" onclick="resetpasswordUser()">Update</a>
+        <a class="btn btn-login" onclick="resetUserPassword()">Update</a>
     </div>
     </form>
     {{-- Send OTP form end --}}
@@ -48,8 +48,8 @@
             return input.replace(/<\/?[^>]+(>|$)/g, "");
         }
         
-        // Function for user signup
-        async function resetpasswordUser(){
+        // Function for user reset password
+        async function resetUserPassword(){
             try{
                 // Getting input data
                 let user_password    = $('#userPassword').val().trim();
@@ -60,6 +60,8 @@
                     displayToast('warning', 'Password is required');
                 } else if(user_password.length < 8){
                     displayToast('warning', 'Password should at least 8 character');
+                } else if(confirm_password.length === 0){
+                    displayToast('warning', 'Password confirmation is required');
                 } else if(user_password !== confirm_password){
                     displayToast('warning', 'Password confirmation failure, not matched');
                 } else{
@@ -92,6 +94,6 @@
             
         }
         
-        </script>
+    </script>
         
     {{-- Front end script end --}}

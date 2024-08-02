@@ -347,7 +347,6 @@ class UserController extends Controller
                 'first_name' => 'required|string|max:50',
                 'last_name' => 'required|string|max:50',
                 'email' => 'required|email',
-                'password' => 'string|min:8|max:100',
                 'profile_picture' => 'image|mimes:jpg,png,jpeg|max:2048',
             ]);
 
@@ -377,7 +376,6 @@ class UserController extends Controller
                     'last_name' => $request->input('last_name'),
                     'email' => $request->input('email'),
                     'profile_picture' => $profilePictureName,
-                    'password' => Hash::make($request->input('password')),
                 ]);
 
                 if($user){
@@ -394,7 +392,6 @@ class UserController extends Controller
                     'first_name' => $request->input('first_name'),
                     'last_name' => $request->input('last_name'),
                     'email' => $request->input('email'),
-                    'password' => Hash::make($request->input('password')),
                 ]);
                 
                 if($user){
