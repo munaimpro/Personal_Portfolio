@@ -84,6 +84,10 @@
                 displayToast('warning', 'Education starting date is required');
             } else if(education_ending_date.length === 0){
                 displayToast('warning', 'Education ending date is required');
+            } else if(education_starting_date === education_ending_date){
+                displayToast('warning', 'Dates should not be same');
+            } else if(education_starting_date > education_ending_date){
+                displayToast('warning', 'Invalid starting date');
             } else{
                 // Closing modal
                 $('#createModal').modal('hide');
@@ -103,7 +107,9 @@
                 hideLoader();
 
                 if(response.data['status'] === 'success'){
-                    // await getEducationInfo();
+                    // Call function to load new data
+                    await retriveAllEducationInfo();
+
                     displayToast('success', response.data['message']);
                 } else{
                     displayToast('error', response.data['message']);

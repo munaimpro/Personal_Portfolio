@@ -36,18 +36,30 @@ class EducationController extends Controller
                 'education_institution' => 'required|string|max:100',
             ]);
 
-            $education = Education::create($validatedData);
-
-            if($education){
+            if($validatedData['education_starting_date'] === $validatedData['education_ending_date']){
                 return response()->json([
-                    'status' => 'success',
-                    'message' => 'Education information added'
+                    'status' => 'failed',
+                    'message' => 'Dates should not be same'
+                ]);
+            } elseif($validatedData['education_starting_date'] > $validatedData['education_ending_date']){
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Invalid starting date'
                 ]);
             } else{
-                return response()->json([
-                    'status' => 'success',
-                    'message' => 'Something went wrong'
-                ]);
+                $education = Education::create($validatedData);
+
+                if($education){
+                    return response()->json([
+                        'status' => 'success',
+                        'message' => 'Education information added'
+                    ]);
+                } else{
+                    return response()->json([
+                        'status' => 'failed',
+                        'message' => 'Something went wrong'
+                    ]);
+                }
             }
         } catch(Exception $e){
             return response()->json([
