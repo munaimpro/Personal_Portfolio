@@ -64,7 +64,6 @@
 
     // Function for add education information
     async function addEducationInformation(){
-
         try{
             // Getting input data
             let education_type = $('#educationType').val().trim();

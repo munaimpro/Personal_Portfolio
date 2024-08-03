@@ -84,20 +84,33 @@ class EducationController extends Controller
                 'education_degree' => 'required|string|max:100',
                 'education_institution' => 'required|string|max:100',
             ]);
-        
-            $education = Education::findOrFail($educationInfoId);
-            $education->update($validatedData);
 
-            if($education){
+            if($validatedData['education_starting_date'] === $validatedData['education_ending_date']){
                 return response()->json([
-                    'status' => 'success',
-                    'message' => 'Education information updated'
+                    'status' => 'failed',
+                    'message' => 'Dates should not be same'
+                ]);
+            } elseif($validatedData['education_ending_date'] < $validatedData['education_starting_date']){
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Invalid ending date'
                 ]);
             } else{
-                return response()->json([
-                    'status' => 'filed',
-                    'message' => 'Something went wrong'
-                ]);
+        
+                $education = Education::findOrFail($educationInfoId);
+                $education->update($validatedData);
+
+                if($education){
+                    return response()->json([
+                        'status' => 'success',
+                        'message' => 'Education information updated'
+                    ]);
+                } else{
+                    return response()->json([
+                        'status' => 'filed',
+                        'message' => 'Something went wrong'
+                    ]);
+                }
             }
         } catch(Exception $e){
             return response()->json([
@@ -143,7 +156,7 @@ class EducationController extends Controller
             $educationInfoId = $request->input('education_info_id'); // Primary key id from input
         
             $education = Education::findOrFail($educationInfoId); // Getting education data by id
-
+            
             if($education){
                 return response()->json([
                     'status' => 'success',

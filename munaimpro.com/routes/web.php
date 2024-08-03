@@ -48,7 +48,7 @@ Route::get('retriveAboutInfo', [AboutController::class, 'retriveAboutInfo'])->mi
 Route::post('addEducationInfo', [EducationController::class, 'addEducationInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::put('updateEducationInfo', [EducationController::class, 'updateEducationInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::get('retriveAllEducationInfo', [EducationController::class, 'retriveAllEducationInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retriveEducationInfoById', [EducationController::class, 'retriveEducationInfoById'])->middleware(TokenVerificationMiddleware::class);
+Route::post('retriveEducationInfoById', [EducationController::class, 'retriveEducationInfoById'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deleteEducationInfo', [EducationController::class, 'deleteEducationInfo'])->middleware(TokenVerificationMiddleware::class);
 
 

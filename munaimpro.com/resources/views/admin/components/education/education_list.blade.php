@@ -109,7 +109,7 @@
                                 <td>${item['education_starting_date']}</td>
                                 <td>${item['education_ending_date']}</td>
                                 <td>
-                                    <a data-id=${item.id} class="me-3" data-bs-toggle="modal" data-bs-target="#editModal">
+                                    <a data-id=${item.id} class="editBtn me-3" data-bs-toggle="modal" data-bs-target="#editModal">
                                         <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
                                     </a>                                        
                                     <a data-id=${item.id} class="me-3" data-bs-toggle="modal" data-bs-target="#deleteModal">
@@ -118,6 +118,16 @@
                                 </td>
                             </tr>`
                 table_list.append(row);
+            });
+
+            // $('.deleteBtn').on('click', function(){
+            //     $('#deleteID').val($(this).data('id'));
+            //     $('#deleteFilePath').val($(this).data('path'));
+            // });
+
+            $('.editBtn').on('click', function(){
+                let education_info_id = $(this).data('id');
+                retriveEducationInfoById(education_info_id);
             });
 
             // table_data.DataTable();
