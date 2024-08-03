@@ -33,8 +33,8 @@
                 </form>
             </div>
             <div class="modal-footer justify-content-end">
-                <button type="button" class="btn btn-sm btn-submit">Create education</button>
-                <button type="button" class="btn btn-sm btn-cancel" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-sm btn-submit" onclick="addEducationInformation()">Add Education</button>
+                <button type="button" class="btn btn-sm btn-cancel" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -80,27 +80,30 @@
                 displayToast('warning', 'Education degree is required');
             } else if(education_institution.length === 0){
                 displayToast('warning', 'Education institution is required');
-            } else if(education_starting_date === 0){
+            } else if(education_starting_date.length === 0){
                 displayToast('warning', 'Education starting date is required');
+            } else if(education_ending_date.length === 0){
+                displayToast('warning', 'Education ending date is required');
             } else{
-                // FormData object
-                let formData = new FormData();
+                // Closing modal
+                $('#createModal').modal('hide');
 
-                // Data append to FormData
-                formData.append('first_name', user_first_name);
-                formData.append('last_name', user_last_name);
-                formData.append('email', user_email);
-                if(upload_profile_picture) formData.append('profile_picture', upload_profile_picture);
+                // Assigning education data to variable in JSON format
+                let educationData = {
+                    "education_type" : education_type,
+                    "education_degree" : education_degree,
+                    "education_institution" : education_institution,
+                    "education_starting_date" : education_starting_date,
+                    "education_ending_date" : education_ending_date,
+                }
 
                 // Pssing data to controller and getting response
                 showLoader();
-                let response = await axios.post('../userUpdateProfile', formData, {
-                    headers:{'content-type':'multipart/form-data'}
-                });
+                let response = await axios.post('../addEducationInfo', educationData);
                 hideLoader();
 
                 if(response.data['status'] === 'success'){
-                    await getUserInfo();
+                    // await getEducationInfo();
                     displayToast('success', response.data['message']);
                 } else{
                     displayToast('error', response.data['message']);

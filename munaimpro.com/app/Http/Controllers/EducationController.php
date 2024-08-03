@@ -41,7 +41,7 @@ class EducationController extends Controller
             if($education){
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'New education information added'
+                    'message' => 'Education information added'
                 ]);
             } else{
                 return response()->json([
