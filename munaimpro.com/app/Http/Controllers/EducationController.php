@@ -41,10 +41,10 @@ class EducationController extends Controller
                     'status' => 'failed',
                     'message' => 'Dates should not be same'
                 ]);
-            } elseif($validatedData['education_starting_date'] > $validatedData['education_ending_date']){
+            } elseif($validatedData['education_ending_date'] < $validatedData['education_starting_date']){
                 return response()->json([
                     'status' => 'failed',
-                    'message' => 'Invalid starting date'
+                    'message' => 'Invalid ending date'
                 ]);
             } else{
                 $education = Education::create($validatedData);

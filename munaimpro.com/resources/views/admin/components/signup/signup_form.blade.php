@@ -164,8 +164,8 @@ async function signupUser(){
             hideLoader();
 
             if(response.data['status'] === 'success'){
-                displayToast('success', response.data['message']);
                 $('#signupForm')[0].reset();
+                displayToast('success', response.data['message']);
             } else{
                 displayToast('error', response.data['message']);
             }

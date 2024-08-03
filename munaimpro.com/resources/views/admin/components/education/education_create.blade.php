@@ -6,7 +6,7 @@
                 <h5 class="modal-title" id="createModalLabel">Create Education</h5>
             </div>
             <div class="modal-body">
-                <form id="update-form">
+                <form id="addEducationForm">
                     <div class="container">
                         <div class="row">
                             <div class="col-12 p-1">
@@ -86,8 +86,8 @@
                 displayToast('warning', 'Education ending date is required');
             } else if(education_starting_date === education_ending_date){
                 displayToast('warning', 'Dates should not be same');
-            } else if(education_starting_date > education_ending_date){
-                displayToast('warning', 'Invalid starting date');
+            } else if(education_ending_date < education_starting_date){
+                displayToast('warning', 'Invalid ending date');
             } else{
                 // Closing modal
                 $('#createModal').modal('hide');
@@ -107,7 +107,10 @@
                 hideLoader();
 
                 if(response.data['status'] === 'success'){
-                    // Call function to load new data
+                    // Reset form
+                    $('#addEducationForm')[0].reset();
+
+                    // Call function to refresh education list
                     await retriveAllEducationInfo();
 
                     displayToast('success', response.data['message']);
