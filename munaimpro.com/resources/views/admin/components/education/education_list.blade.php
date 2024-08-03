@@ -107,12 +107,12 @@
                                 <td>${item['education_type']}</td>
                                 <td>${item['education_degree']}</td>
                                 <td>${item['education_starting_date']}</td>
-                                <td>${item['education_ending_date']}</td>
+                                <td>${item['education_ending_date'] ? item['education_ending_date'] : '<span class="bg-lightgreen badges">Present</span>'}</td>
                                 <td>
                                     <a data-id=${item.id} class="editBtn me-3" data-bs-toggle="modal" data-bs-target="#editModal">
                                         <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
                                     </a>                                        
-                                    <a data-id=${item.id} class="me-3" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                    <a data-id=${item.id} class="deleteBtn me-3" data-bs-toggle="modal" data-bs-target="#deleteModal">
                                         <img src="{{ asset('assets/img/icons/delete.svg') }}" alt="img">
                                     </a>
                                 </td>
@@ -120,10 +120,9 @@
                 table_list.append(row);
             });
 
-            // $('.deleteBtn').on('click', function(){
-            //     $('#deleteID').val($(this).data('id'));
-            //     $('#deleteFilePath').val($(this).data('path'));
-            // });
+            $('.deleteBtn').on('click', function(){
+                $('#educationInfoDeleteId').val($(this).data('id'));
+            });
 
             $('.editBtn').on('click', function(){
                 let education_info_id = $(this).data('id');

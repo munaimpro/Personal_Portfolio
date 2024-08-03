@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('experience_title', 50);
             $table->string('experience_institution', 100);
             $table->date('experience_starting_date');
-            $table->date('experience_ending_date');
+            $table->date('experience_ending_date')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });

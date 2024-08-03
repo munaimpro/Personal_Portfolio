@@ -31,17 +31,17 @@ class EducationController extends Controller
             $validatedData = $request->validate([
                 'education_type' => 'required|string|max:100',
                 'education_starting_date' => 'required|date',
-                'education_ending_date' => 'required|date',
+                'education_ending_date' => '',
                 'education_degree' => 'required|string|max:100',
                 'education_institution' => 'required|string|max:100',
             ]);
 
-            if($validatedData['education_starting_date'] === $validatedData['education_ending_date']){
+            if($validatedData['education_ending_date'] && $validatedData['education_starting_date'] === $validatedData['education_ending_date']){
                 return response()->json([
                     'status' => 'failed',
                     'message' => 'Dates should not be same'
                 ]);
-            } elseif($validatedData['education_ending_date'] < $validatedData['education_starting_date']){
+            } elseif($validatedData['education_ending_date'] && $validatedData['education_ending_date'] < $validatedData['education_starting_date']){
                 return response()->json([
                     'status' => 'failed',
                     'message' => 'Invalid ending date'
@@ -80,17 +80,17 @@ class EducationController extends Controller
             $validatedData = $request->validate([
                 'education_type' => 'required|string|max:100',
                 'education_starting_date' => 'required|date',
-                'education_ending_date' => 'required|date',
+                'education_ending_date' => '',
                 'education_degree' => 'required|string|max:100',
                 'education_institution' => 'required|string|max:100',
             ]);
 
-            if($validatedData['education_starting_date'] === $validatedData['education_ending_date']){
+            if($validatedData['education_ending_date'] && $validatedData['education_starting_date'] === $validatedData['education_ending_date']){
                 return response()->json([
                     'status' => 'failed',
                     'message' => 'Dates should not be same'
                 ]);
-            } elseif($validatedData['education_ending_date'] < $validatedData['education_starting_date']){
+            } elseif($validatedData['education_ending_date'] && $validatedData['education_ending_date'] < $validatedData['education_starting_date']){
                 return response()->json([
                     'status' => 'failed',
                     'message' => 'Invalid ending date'

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('education_type', 100);
             $table->date('education_starting_date');
-            $table->date('education_ending_date');
+            $table->date('education_ending_date')->nullable();
             $table->string('education_degree', 100);
             $table->string('education_institution', 100);
             $table->timestamp('created_at')->useCurrent();
