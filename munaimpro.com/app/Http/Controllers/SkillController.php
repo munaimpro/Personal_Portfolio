@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 class SkillController extends Controller
 {
-    /* Method for skill page load */
+    /* Method for admin skill page load */
     
     public function adminSkillPage(){
         // Getting SEO properties for specific view

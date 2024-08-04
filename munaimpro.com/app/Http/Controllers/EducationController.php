@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 class EducationController extends Controller
 {
-    /* Method for education page load */
+    /* Method for admin education page load */
     
     public function adminEducationPage(){
         // Getting SEO properties for specific view

@@ -108,7 +108,7 @@ Route::get('retriveLatestPostInfo', [PostController::class, 'retriveLatestPostIn
 Route::post('addAwardInfo', [AwardController::class, 'addAwardInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::put('updateAwardInfo', [AwardController::class, 'updateAwardInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::get('retriveAllAwardInfo', [AwardController::class, 'retriveAllAwardInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retriveAwardInfoById', [AwardController::class, 'retriveAwardInfoById'])->middleware(TokenVerificationMiddleware::class);
+Route::post('retriveAwardInfoById', [AwardController::class, 'retriveAwardInfoById'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deleteAwardInfo', [AwardController::class, 'deleteAwardInfo'])->middleware(TokenVerificationMiddleware::class);
 
 
@@ -166,7 +166,10 @@ Route::group(['prefix' => 'Admin', 'middleware' => TokenVerificationMiddleware::
     
     // Page Routes (Website Controller)
     Route::get('/dashboard', [WebsiteinformationController::class, 'adminDashboardPage']);
-    Route::view('/award', 'admin.pages.award');
+    
+    // Page Routes (Award Controller)
+    Route::get('/award', [AwardController::class, 'adminAwardPage']);
+    
     Route::view('/seoproperty', 'admin.pages.seoproperty');
     Route::view('/visitor_information', 'admin.pages.visitorinfo');
     Route::get('/about', [AboutController::class, 'aboutInfoPage']);

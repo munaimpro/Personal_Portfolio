@@ -4,10 +4,25 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\Award;
+use App\Models\Seoproperty;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class AwardController extends Controller
 {
+    /* Method for admin award page load */
+    
+    public function adminAwardPage(){
+        // Getting SEO properties for specific view
+        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
+        
+        // Getting view name from uri
+        $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+
+        return view('admin.pages.award', compact(['seoproperty', 'routeName']));
+    }
+
+
     /* Method for add award information */
 
     public function addAwardInfo(Request $request){
@@ -16,7 +31,7 @@ class AwardController extends Controller
             $validatedData = $request->validate([
                 'award_type' => 'required|string|max:50',
                 'award_title' => 'required|string|max:100',
-                'award_date' => 'required|string',
+                'award_date' => 'required|date',
                 'award_provider' => 'required|string|max:255',
                 'award_for' => 'required|string|max:255',
             ]);
@@ -47,8 +62,6 @@ class AwardController extends Controller
 
     public function updateAwardInfo(Request $request){
         try{
-            $awardInfoId = $request->input('award_info_id');
-            
             // Input validation process for backend
             $validatedData = $request->validate([
                 'award_type' => 'required|string|max:50',
@@ -56,15 +69,16 @@ class AwardController extends Controller
                 'award_date' => 'required|string',
                 'award_provider' => 'required|string|max:255',
                 'award_for' => 'required|string|max:255',
+                'award_info_id' => '',
             ]);
         
-            $award = Award::findOrFail($awardInfoId);
+            $award = Award::findOrFail($validatedData['award_info_id']);
             $award->update($validatedData);
 
             if($award){
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'award updated'
+                    'message' => 'Award information updated'
                 ]);
             } else{
                 return response()->json([
@@ -152,7 +166,7 @@ class AwardController extends Controller
             if($awardDelete){
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'award deleted'
+                    'message' => 'Award deleted'
                 ]);
             } else{
                 return response()->json([
