@@ -53,9 +53,8 @@
 
             if(response.data['status'] === 'success'){
                 // Assigning retrived values
-                document.getElementById('updateSkillType').value = response.data.data['skill_type'];
-                document.getElementById('updateSkillName').value = response.data.data['skill_name'];
-                document.getElementById('updateSkillPercentage').value = response.data.data['skill_percentage'];
+                document.getElementById('updateInterestTitle').value = response.data.data['interest_title'];
+                document.getElementById('updateInterestIcon').value = response.data.data['interest_icon'];
             } else{
                 displayToast('error', response.data['message']);
             }
@@ -64,45 +63,41 @@
         }
     }
 
-    // Function for update skill details
+    // Function for update interest details
     async function updateInterestInfo() {
         try{
             // Getting input data
-            let skill_type = $('#updateSkillType').val().trim();
-            let skill_name = $('#updateSkillName').val().trim();
-            let skill_percentage = $('#updateSkillPercentage').val().trim();
-            let skill_info_id = $('#skillInfoId').val().trim();
+            let interest_title = $('#updateInterestTitle').val().trim();
+            let interest_icon = $('#updateInterestIcon').val().trim();
+            let interest_info_id = $('#interestInfoId').val().trim();
 
             // Front end validation process
-            if(skill_type.length === 0){
-                displayToast('warning', 'Skill type is required');
-            } else if(skill_name.length === 0){
-                displayToast('warning', 'Skill name is required');
-            } else if(skill_percentage.length === 0){
-                displayToast('warning', 'Skill percentage is required');
+            if(interest_title.length === 0){
+                displayToast('warning', 'Interest title is required');
+            } else if(interest_icon === ''){
+                displayToast('warning', 'Interest icon is required');
             } else{
                 // Closing modal
                 $('#editModal').modal('hide');
 
-                // Assigning skill data to variable in JSON format
-                let skillData = {
-                    "skill_type" : skill_type,
-                    "skill_name" : skill_name,
-                    "skill_percentage" : skill_percentage,
-                    "skill_info_id" : skill_info_id,
+                // Assigning interest data to variable in JSON format
+                let interestData = {
+                    "interest_title" : interest_title,
+                    "interest_icon" : interest_icon,
+                    "interest_info_id" : interest_info_id,
                 }
 
                 // Pssing data to controller and getting response
                 showLoader();
-                let response = await axios.put('/updateSkillInfo', skillData);
+                let response = await axios.put('/updateInterestInfo', interestData);
                 hideLoader();
 
                 if(response.data['status'] === 'success'){
                     // Reset form
-                    $('#updateSkillForm')[0].reset();
+                    $('#updateInterestForm')[0].reset();
 
-                    // Call function to refresh skill list
-                    await retriveAllSkillInfo();
+                    // Call function to refresh interest list
+                    await retriveAllInterestInfo();
 
                     displayToast('success', response.data['message']);
                 } else{

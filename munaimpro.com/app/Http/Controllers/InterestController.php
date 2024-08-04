@@ -59,21 +59,20 @@ class InterestController extends Controller
 
     public function updateInterestInfo(Request $request){
         try{
-            $interestInfoId = $request->input('interest_info_id');
-            
             // Input validation process for backend
             $validatedData = $request->validate([
                 'interest_title' => 'required|string|max:100',
                 'interest_icon' => 'required|string|max:50',
+                'interest_info_id' => '',
             ]);
         
-            $interest = Interest::findOrFail($interestInfoId);
+            $interest = Interest::findOrFail($validatedData['interest_info_id']);
             $interest->update($validatedData);
 
             if($interest){
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'Interest item updated'
+                    'message' => 'Interest details updated'
                 ]);
             } else{
                 return response()->json([
@@ -161,7 +160,7 @@ class InterestController extends Controller
             if($interestDelete){
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'Interest item deleted'
+                    'message' => 'Interest information deleted'
                 ]);
             } else{
                 return response()->json([
