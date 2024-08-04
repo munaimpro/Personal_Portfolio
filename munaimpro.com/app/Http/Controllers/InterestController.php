@@ -4,10 +4,25 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\Interest;
+use App\Models\Seoproperty;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class InterestController extends Controller
 {
+    /* Method for admin interest page load */
+    
+    public function adminInterestPage(){
+        // Getting SEO properties for specific view
+        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
+        
+        // Getting view name from uri
+        $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+
+        return view('admin.pages.interest', compact(['seoproperty', 'routeName']));
+    }
+
+
     /* Method for add interest information */
 
     public function addInterestInfo(Request $request){

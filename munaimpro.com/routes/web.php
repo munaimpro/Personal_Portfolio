@@ -172,6 +172,8 @@ Route::group(['prefix' => 'Admin', 'middleware' => TokenVerificationMiddleware::
     
     Route::view('/seoproperty', 'admin.pages.seoproperty');
     Route::view('/visitor_information', 'admin.pages.visitorinfo');
+
+    // Page Routes (About Controller)
     Route::get('/about', [AboutController::class, 'aboutInfoPage']);
 
     // Page Routes (Education Controller)
@@ -183,7 +185,9 @@ Route::group(['prefix' => 'Admin', 'middleware' => TokenVerificationMiddleware::
     // Page Routes (Experience Controller)
     Route::get('/experience', [ExperienceController::class, 'adminExperiencePage']);
 
-    Route::view('/interest', 'admin.pages.interest');
+    // Page Routes (Interest Controller)
+    Route::get('/interest', [InterestController::class, 'adminInterestPage']);
+
     Route::view('/social_media', 'admin.pages.social_media');
     Route::view('/service', 'admin.pages.services');
     Route::view('/portfolio', 'admin.pages.portfolio');

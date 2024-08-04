@@ -23,7 +23,7 @@
                         <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/skill') }}">Skills</a></li>
                         <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/award') }}">Awards</a></li>
                         <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/experience') }}">Experience</a></li>
-                        <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/interest') }}.html">Interest</a></li>
+                        <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/interest') }}">Interest</a></li>
                         <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/social_media') }}">Social Media</a></li>
                     </ul>
                 </li>
