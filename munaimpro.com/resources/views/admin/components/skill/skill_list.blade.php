@@ -40,7 +40,7 @@
         
         <!-- Table content start -->
         <div class="table-responsive">
-            <table class="table datanew">
+            <table class="table datanew" id="tableData">
                 <thead>
                     <tr>
                         <th>
@@ -51,31 +51,13 @@
                         </th>
                         <th>Skill Type</th>
                         <th>Name</th>
-                        <th>Percentage</th>
+                        <th>Streanth</th>
                         <th>Action</th>
                     </tr>
                 </thead>
 
-                <tbody>
-                    <tr>
-                        <td>
-                            <label class="checkboxs">
-                                <input type="checkbox">
-                                <span class="checkmarks"></span>
-                            </label>
-                        </td>
-                        <td>Technical</td>
-                        <td>HTML</td>
-                        <td>98%</td>
-                        <td>
-                            <a class="me-3" data-bs-toggle="modal" data-bs-target="#editModal">
-                                <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
-                            </a>                                        
-                            <a lass="me-3" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                                <img src="{{ asset('assets/img/icons/delete.svg') }}" alt="img">
-                            </a>
-                        </td>
-                    </tr>
+                <tbody id="tableList">
+                    
                 </tbody>
             </table>
         </div>
@@ -83,3 +65,73 @@
     </div>
 </div>
 {{-- Table end --}}
+
+
+{{-- Front end script start --}}
+
+<script>
+
+    // Function for retrive education information
+    
+    retriveAllSkillInfo();
+
+    async function retriveAllSkillInfo(){
+
+        try{
+            // Getting data table
+            let table_data = $('#tableData');
+
+            // Getting table rows
+            let table_list = $('#tableList');
+
+            // Destroy data table
+            // table_data.DataTable().destroy();
+
+            // Make data table empty
+            table_list.empty();
+
+            // Pssing data to controller and getting response
+            showLoader();
+            let response = await axios.get('/retriveAllSkillInfo');
+            hideLoader();
+
+            response.data.data.forEach(function(item, index){
+                let row = `<tr>
+                                <td>
+                                    <label class="checkboxs">
+                                        <input type="checkbox">
+                                        <span class="checkmarks"></span>
+                                    </label>
+                                </td>
+                                <td>${item['skill_type']}</td>
+                                <td>${item['skill_name']}</td>
+                                <td>${item['skill_percentage']}%</td>
+                                <td>
+                                    <a data-id=${item.id} class="editBtn me-3" data-bs-toggle="modal" data-bs-target="#editModal">
+                                        <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
+                                    </a>                                        
+                                    <a data-id=${item.id} class="deleteBtn me-3" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                        <img src="{{ asset('assets/img/icons/delete.svg') }}" alt="img">
+                                    </a>
+                                </td>
+                            </tr>`
+                table_list.append(row);
+            });
+
+            $('.deleteBtn').on('click', function(){
+                $('#skillInfoDeleteId').val($(this).data('id'));
+            });
+
+            $('.editBtn').on('click', function(){
+                let skill_info_id = $(this).data('id');
+                retriveSkillInfoById(skill_info_id);
+            });
+
+            // table_data.DataTable();
+        } catch(e){
+            console.error('Something went wrong', e);
+        }
+    }
+</script>
+
+{{-- Front end script end --}}

@@ -56,7 +56,7 @@ Route::delete('deleteEducationInfo', [EducationController::class, 'deleteEducati
 Route::post('addSkillInfo', [SkillController::class, 'addSkillInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::put('updateSkillInfo', [SkillController::class, 'updateSkillInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::get('retriveAllSkillInfo', [SkillController::class, 'retriveAllSkillInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retriveSkillInfoById', [SkillController::class, 'retriveSkillInfoById'])->middleware(TokenVerificationMiddleware::class);
+Route::post('retriveSkillInfoById', [SkillController::class, 'retriveSkillInfoById'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deleteSkillInfo', [SkillController::class, 'deleteSkillInfo'])->middleware(TokenVerificationMiddleware::class);
 
 
@@ -174,7 +174,8 @@ Route::group(['prefix' => 'Admin', 'middleware' => TokenVerificationMiddleware::
     // Page Routes (Education Controller)
     Route::get('/education', [EducationController::class, 'adminEducationPage']);
 
-    Route::view('/skill', 'admin.pages.skill');
+    // Page Routes (Skill Controller)
+    Route::get('/skill', [SkillController::class, 'adminSkillPage']);
 
     // Page Routes (Experience Controller)
     Route::get('/experience', [ExperienceController::class, 'adminExperiencePage']);

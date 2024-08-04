@@ -4,10 +4,25 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\Skill;
+use App\Models\Seoproperty;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class SkillController extends Controller
 {
+    /* Method for skill page load */
+    
+    public function adminSkillPage(){
+        // Getting SEO properties for specific view
+        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
+        
+        // Getting view name from uri
+        $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+
+        return view('admin.pages.skill', compact(['seoproperty', 'routeName']));
+    }
+
+
     /* Method for add skill information */
 
     public function addSkillInfo(Request $request){
@@ -24,7 +39,7 @@ class SkillController extends Controller
             if($skill){
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'New skill information added'
+                    'message' => 'New skill added'
                 ]);
             } else{
                 return response()->json([
@@ -45,16 +60,15 @@ class SkillController extends Controller
 
     public function updateSkillInfo(Request $request){
         try{
-            $skillInfoId = $request->input('skill_info_id');
-            
             // Input validation process for backend
             $validatedData = $request->validate([
                 'skill_type' => 'required|string|max:50',
                 'skill_name' => 'required|string|max:50',
                 'skill_percentage' => 'required|int',
+                'skill_info_id' => '',
             ]);
         
-            $skill = Skill::findOrFail($skillInfoId);
+            $skill = Skill::findOrFail($validatedData['skill_info_id']);
             $skill->update($validatedData);
 
             if($skill){

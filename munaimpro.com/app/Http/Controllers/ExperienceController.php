@@ -88,7 +88,7 @@ class ExperienceController extends Controller
             if($experience){
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'Experience updated'
+                    'message' => 'Experience details updated'
                 ]);
             } else{
                 return response()->json([

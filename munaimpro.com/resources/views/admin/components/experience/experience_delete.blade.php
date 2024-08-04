@@ -21,7 +21,7 @@
 
 <script>
 
-    // Function for delete education information
+    // Function for delete experience information
     async function deleteExperienceInfo() {
         try{
             // Getting input data
