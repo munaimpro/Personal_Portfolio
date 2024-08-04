@@ -36,7 +36,7 @@
             </div>
             <div class="modal-footer justify-content-end">
                 <button type="button" class="btn btn-sm btn-submit" onclick="updateEducationInfo()">Save changes</button>
-                <button type="button" class="btn btn-sm btn-cancel" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-sm btn-cancel" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -47,23 +47,6 @@
 {{-- Front end script start --}}
 
 <script>
-
-    // Function for toast message common features
-    function displayToast(icon, title){
-        Swal.fire({
-            toast: true,
-            position: 'top-end',
-            icon: icon,
-            iconColor: 'white',
-            title: title,
-            showConfirmButton: false,
-            timer: 2000,
-            customClass: {
-                popup: 'colored-toast'
-            }
-        });
-    }
-
     // Function for retrive education details
     async function retriveEducationInfoById(education_info_id){
 

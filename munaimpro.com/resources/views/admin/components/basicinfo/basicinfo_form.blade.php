@@ -130,23 +130,6 @@
 {{-- Front end script start --}}
 
 <script>
-
-    // Function for toast message common features
-    function displayToast(icon, title){
-        Swal.fire({
-            toast: true,
-            position: 'top-end',
-            icon: icon,
-            iconColor: 'white',
-            title: title,
-            showConfirmButton: false,
-            timer: 60000,
-            customClass: {
-                popup: 'colored-toast'
-            }
-        });
-    }
-
     // Function for retriving about information
     getAboutInfo();
 

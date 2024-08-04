@@ -137,6 +137,24 @@
 {{-- Custom JS --}}
 {{-- <script src="{{ asset('assets/js/script.js') }}"></script> --}}
 
+<script>
+    // Function for toast message common features
+    function displayToast(icon, title){
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: icon,
+            iconColor: 'white',
+            title: title,
+            showConfirmButton: false,
+            timer: 2000,
+            customClass: {
+                popup: 'colored-toast'
+            }
+        });
+    }
+</script>
+
 {{-- Script end --}}
 </body>
 </html>

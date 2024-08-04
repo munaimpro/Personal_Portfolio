@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 class EducationController extends Controller
 {
-    /* Method for signup page load */
+    /* Method for education page load */
     
     public function adminEducationPage(){
         // Getting SEO properties for specific view
@@ -74,8 +74,6 @@ class EducationController extends Controller
 
     public function updateEducationInfo(Request $request){
         try{
-            $educationInfoId = $request->input('education_info_id');
-            
             // Input validation process for backend
             $validatedData = $request->validate([
                 'education_type' => 'required|string|max:100',
@@ -83,6 +81,7 @@ class EducationController extends Controller
                 'education_ending_date' => '',
                 'education_degree' => 'required|string|max:100',
                 'education_institution' => 'required|string|max:100',
+                'education_info_id' => '',
             ]);
 
             if($validatedData['education_ending_date'] && $validatedData['education_starting_date'] === $validatedData['education_ending_date']){
@@ -97,7 +96,7 @@ class EducationController extends Controller
                 ]);
             } else{
         
-                $education = Education::findOrFail($educationInfoId);
+                $education = Education::findOrFail($validatedData['education_info_id']);
                 $education->update($validatedData);
 
                 if($education){
@@ -125,7 +124,7 @@ class EducationController extends Controller
 
     public function retriveAllEducationInfo(){
         try{
-            $education = Education::get(); // Getting all education data
+            $education = Education::get(['id', 'education_type', 'education_starting_date', 'education_ending_date', 'education_degree', 'education_institution']); // Getting all education data
 
             if($education){
                 return response()->json([
@@ -155,7 +154,7 @@ class EducationController extends Controller
         try{
             $educationInfoId = $request->input('education_info_id'); // Primary key id from input
         
-            $education = Education::findOrFail($educationInfoId); // Getting education data by id
+            $education = Education::findOrFail($educationInfoId, ['id', 'education_type', 'education_starting_date', 'education_degree', 'education_institution']); // Getting education data by id
             
             if($education){
                 return response()->json([

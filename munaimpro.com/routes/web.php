@@ -80,7 +80,7 @@ Route::delete('deleteCategoryInfo', [CategoryController::class, 'deleteCategoryI
 Route::post('addExperienceInfo', [ExperienceController::class, 'addExperienceInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::put('updateExperienceInfo', [ExperienceController::class, 'updateExperienceInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::get('retriveAllExperienceInfo', [ExperienceController::class, 'retriveAllExperienceInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retriveExperienceInfoById', [ExperienceController::class, 'retriveExperienceInfoById'])->middleware(TokenVerificationMiddleware::class);
+Route::post('retriveExperienceInfoById', [ExperienceController::class, 'retriveExperienceInfoById'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deleteExperienceInfo', [ExperienceController::class, 'deleteExperienceInfo'])->middleware(TokenVerificationMiddleware::class);
 
 
@@ -175,7 +175,10 @@ Route::group(['prefix' => 'Admin', 'middleware' => TokenVerificationMiddleware::
     Route::get('/education', [EducationController::class, 'adminEducationPage']);
 
     Route::view('/skill', 'admin.pages.skill');
-    Route::view('/experience', 'admin.pages.experience');
+
+    // Page Routes (Experience Controller)
+    Route::get('/experience', [ExperienceController::class, 'adminExperiencePage']);
+
     Route::view('/interest', 'admin.pages.interest');
     Route::view('/social_media', 'admin.pages.social_media');
     Route::view('/service', 'admin.pages.services');

@@ -33,7 +33,7 @@
                 </form>
             </div>
             <div class="modal-footer justify-content-end">
-                <button type="button" class="btn btn-sm btn-submit" onclick="addEducationInformation()">Add Education</button>
+                <button type="button" class="btn btn-sm btn-submit" onclick="addEducationInfo()">Add Education</button>
                 <button type="button" class="btn btn-sm btn-cancel" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
@@ -46,24 +46,8 @@
 
 <script>
 
-    // Function for toast message common features
-    function displayToast(icon, title){
-        Swal.fire({
-            toast: true,
-            position: 'top-end',
-            icon: icon,
-            iconColor: 'white',
-            title: title,
-            showConfirmButton: false,
-            timer: 2000,
-            customClass: {
-                popup: 'colored-toast'
-            }
-        });
-    }
-
     // Function for add education information
-    async function addEducationInformation(){
+    async function addEducationInfo(){
         try{
             // Getting input data
             let education_type = $('#educationType').val().trim();
@@ -119,6 +103,7 @@
             console.error('Something went wrong', e);
         }
     }
+
 </script>
 
 {{-- Front end script end --}}
