@@ -188,7 +188,9 @@ Route::group(['prefix' => 'Admin', 'middleware' => TokenVerificationMiddleware::
     // Page Routes (Interest Controller)
     Route::get('/interest', [InterestController::class, 'adminInterestPage']);
 
-    Route::view('/social_media', 'admin.pages.social_media');
+    // Page Routes (Interest Controller)
+    Route::get('/social_media', [SocialMediaController::class, 'adminSocialMediaPage']);
+
     Route::view('/service', 'admin.pages.services');
     Route::view('/portfolio', 'admin.pages.portfolio');
     Route::view('/pricing', 'admin.pages.pricing');

@@ -3,11 +3,26 @@
 namespace App\Http\Controllers;
 
 use Exception;
+use App\Models\Seoproperty;
 use App\Models\SocialMedias;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class SocialMediaController extends Controller
 {
+    /* Method for admin social media page load */
+    
+    public function adminSocialMediaPage(){
+        // Getting SEO properties for specific view
+        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
+        
+        // Getting view name from uri
+        $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+
+        return view('admin.pages.social_media', compact(['seoproperty', 'routeName']));
+    }
+
+
     /* Method for add social media information */
 
     public function addSocialMediaInfo(Request $request){
