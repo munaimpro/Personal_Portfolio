@@ -88,7 +88,7 @@ Route::delete('deleteExperienceInfo', [ExperienceController::class, 'deleteExper
 Route::post('addServiceInfo', [ServiceController::class, 'addServiceInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::put('updateServiceInfo', [ServiceController::class, 'updateServiceInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::get('retriveAllServiceInfo', [ServiceController::class, 'retriveAllServiceInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retriveServiceInfoById', [ServiceController::class, 'retriveServiceInfoById'])->middleware(TokenVerificationMiddleware::class);
+Route::post('retriveServiceInfoById', [ServiceController::class, 'retriveServiceInfoById'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deleteServiceInfo', [ServiceController::class, 'deleteServiceInfo'])->middleware(TokenVerificationMiddleware::class);
 
 
@@ -188,10 +188,12 @@ Route::group(['prefix' => 'Admin', 'middleware' => TokenVerificationMiddleware::
     // Page Routes (Interest Controller)
     Route::get('/interest', [InterestController::class, 'adminInterestPage']);
 
-    // Page Routes (Interest Controller)
+    // Page Routes (SocialMedia Controller)
     Route::get('/social_media', [SocialMediaController::class, 'adminSocialMediaPage']);
 
-    Route::view('/service', 'admin.pages.services');
+    // Page Routes (Service Controller)
+    Route::get('/service', [ServiceController::class, 'adminServicePage']);
+
     Route::view('/portfolio', 'admin.pages.portfolio');
     Route::view('/pricing', 'admin.pages.pricing');
     Route::view('/message', 'admin.pages.message');

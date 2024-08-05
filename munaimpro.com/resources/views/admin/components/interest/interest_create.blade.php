@@ -10,15 +10,19 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12 p-1">
-                                <label class="form-label">Interest *</label>
-                                <input type="text" class="form-control" id="interestTitle">
-
-                                <label class="form-label">Icon *</label>
-                                <select class="form-control" id="interestIcon">
-                                    <option value="<i class='fas fa-phone'></i>">Icon</option>
-                                    <option value="<i class='fas fa-phone'></i>">Icon</option>
-                                    <option value="<i class='fas fa-phone'></i>">Icon</option>
-                                </select>
+                                <div class="form-group">
+                                    <label class="form-label">Interest *</label>
+                                    <input type="text" class="form-control" id="interestTitle">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Icon *</label>
+                                    <select class="form-control" id="interestIcon">
+                                        <option value="<i class='fas fa-phone'></i>">Icon</option>
+                                        <option value="<i class='fas fa-phone'></i>">Icon</option>
+                                        <option value="<i class='fas fa-phone'></i>">Icon</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>

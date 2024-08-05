@@ -4,10 +4,25 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\Service;
+use App\Models\Seoproperty;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class ServiceController extends Controller
 {
+    /* Method for admin skill page load */
+    
+    public function adminServicePage(){
+        // Getting SEO properties for specific view
+        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
+        
+        // Getting view name from uri
+        $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+
+        return view('admin.pages.services', compact(['seoproperty', 'routeName']));
+    }
+
+
     /* Method for add service information */
 
     public function addServiceInfo(Request $request){
@@ -45,22 +60,21 @@ class ServiceController extends Controller
 
     public function updateServiceInfo(Request $request){
         try{
-            $serviceInfoId = $request->input('service_info_id');
-            
             // Input validation process for backend
             $validatedData = $request->validate([
                 'service_icon' => 'required|string|max:255',
                 'service_title' => 'required|string|max:100',
                 'service_description' => 'required|string',
+                'service_info_id' => '',
             ]);
         
-            $service = Service::findOrFail($serviceInfoId);
+            $service = Service::findOrFail($validatedData['service_info_id']);
             $service->update($validatedData);
 
             if($service){
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'Service updated'
+                    'message' => 'Service details updated'
                 ]);
             } else{
                 return response()->json([

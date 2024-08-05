@@ -29,7 +29,7 @@
                 </li>
                 
                 <li>
-                    <a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/services') }}"><i data-feather="file"></i><span> Service</span> </a>
+                    <a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/service') }}"><i data-feather="file"></i><span> Service</span> </a>
                 </li>
                 
                 <li>
