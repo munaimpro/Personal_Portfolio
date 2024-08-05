@@ -10,24 +10,32 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12 p-1">
-                                <label class="form-label">Media Name *</label>
-                                <input type="text" class="form-control" id="socialMediaTitle">
+                                <div class="form-group">
+                                    <label class="form-label">Media Name *</label>
+                                    <input type="text" class="form-control" id="socialMediaTitle">
+                                </div>
 
-                                <label class="form-label">Media Link *</label>
-                                <input type="text" class="form-control" id="socialMediaLink">
-                                
-                                <label class="form-label">Media Icon *</label>
-                                <select class="form-control" id="socialMediaIcon">
-                                    <option value="<i class='fas fa-phone'></i>">Icon</option>
-                                    <option value="<i class='fas fa-phone'></i>">Icon</option>
-                                    <option value="<i class='fas fa-phone'></i>">Icon</option>
-                                </select>
+                                <div class="form-group">
+                                    <label class="form-label">Media Link *</label>
+                                    <input type="text" class="form-control" id="socialMediaLink">
+                                </div>
 
-                                <label class="form-label">Global Media</label>
-                                <select class="form-control" id="globalSocialMedia">
-                                    <option value = "0">No</option>
-                                    <option value = "1">Yes</option>
-                                </select>
+                                <div class="form-group">
+                                    <label class="form-label">Media Icon *</label>
+                                    <select class="form-control" id="socialMediaIcon">
+                                        <option value="<i class='fas fa-phone'></i>">Icon</option>
+                                        <option value="<i class='fas fa-phone'></i>">Icon</option>
+                                        <option value="<i class='fas fa-phone'></i>">Icon</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Global Media</label>
+                                    <select class="form-control" id="globalSocialMedia">
+                                        <option value = "0">No</option>
+                                        <option value = "1">Yes</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>

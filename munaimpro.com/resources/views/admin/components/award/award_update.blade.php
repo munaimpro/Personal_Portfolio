@@ -10,24 +10,34 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12 p-1">
-                                <label class="form-label">Award Type *</label>
-                                <select class="form-control" id="updateAwardType">
-                                    <option value="Programming">Programming Award</option>
-                                    <option value="Technical">Technical Award</option>
-                                    <option value="Other">Other Award</option>
-                                </select>
+                                <div class="form-group">
+                                    <label class="form-label">Award Type *</label>
+                                    <select class="form-control" id="updateAwardType">
+                                        <option value="Programming">Programming Award</option>
+                                        <option value="Technical">Technical Award</option>
+                                        <option value="Other">Other Award</option>
+                                    </select>
+                                </div>
 
-                                <label class="form-label mt-3">Award Name *</label>
-                                <input type="text" class="form-control" id="updateAwardTitle">
+                                <div class="form-group">
+                                    <label class="form-label mt-3">Award Name *</label>
+                                    <input type="text" class="form-control" id="updateAwardTitle">
+                                </div>
 
-                                <label class="form-label mt-3">Award Issue Date *</label>
-                                <input type="date" class="form-control" id="updateAwardDate">
+                                <div class="form-group">
+                                    <label class="form-label mt-3">Award Issue Date *</label>
+                                    <input type="date" class="form-control" id="updateAwardDate">
+                                </div>
 
-                                <label class="form-label mt-3">Award Provider *</label>
-                                <input type="text" class="form-control" id="updateAwardProvider">
+                                <div class="form-group">
+                                    <label class="form-label mt-3">Award Provider *</label>
+                                    <input type="text" class="form-control" id="updateAwardProvider">
+                                </div>
 
-                                <label class="form-label mt-3">Award For *</label>
-                                <textarea class="form-control" id="updateAwardFor"></textarea>
+                                <div class="form-group">
+                                    <label class="form-label mt-3">Award For *</label>
+                                    <textarea class="form-control" id="updateAwardFor"></textarea>
+                                </div>
 
                                 <input type="text" class="form-control" id="awardInfoId">
                             </div>

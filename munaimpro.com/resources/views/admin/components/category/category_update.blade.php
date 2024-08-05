@@ -9,13 +9,13 @@
                 <div class="col-lg-12">
                     <div class="form-group">
                         <label>Category Name</label>
-                        <input type="text">
+                        <input type="text" id="updateCategoryName">
                     </div>
                 </div>
             </div>
             <div class="modal-footer justify-content-end">
-                <button type="button" class="btn btn-submit">Update</button>
-                <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-submit" onclick="">Save Changes</button>
+                <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

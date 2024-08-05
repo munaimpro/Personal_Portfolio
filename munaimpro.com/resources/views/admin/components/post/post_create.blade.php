@@ -11,16 +11,12 @@
                         <label>Title</label>
                         <input type="text">
                     </div>
-                </div>
 
-                <div class="col-lg-12">
                     <div class="form-group">
                         <label>Slug</label>
                         <input type="text">
                     </div>
-                </div>
 
-                <div class="col-lg-12">
                     <div class="form-group">
                         <label>Category</label>
                         <select class="form-control" id="">
@@ -29,9 +25,7 @@
                             <option value="">Category Name</option>
                         </select>
                     </div>
-                </div>
 
-                <div class="col-lg-12">
                     <div class="form-group">
                         <label>Thumbnail</label>
                         <div class="image-upload">
@@ -42,9 +36,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-lg-12">
                     <div class="form-group">
                         <label>Description</label>
                         <textarea class="form-control" id="postDescription"></textarea>

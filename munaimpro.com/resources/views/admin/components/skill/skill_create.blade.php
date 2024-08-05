@@ -10,18 +10,24 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12 p-1">
-                                <label class="form-label">Skill Type *</label>
-                                <select class="form-control" id="skillType">
-                                    <option value="Programming">Programming Skill</option>
-                                    <option value="Technical">Technical Skill</option>
-                                    <option value="Other">Other Skill</option>
-                                </select>
+                                <div class="form-group">
+                                    <label class="form-label">Skill Type *</label>
+                                    <select class="form-control" id="skillType">
+                                        <option value="Programming">Programming Skill</option>
+                                        <option value="Technical">Technical Skill</option>
+                                        <option value="Other">Other Skill</option>
+                                    </select>
+                                </div>
 
-                                <label class="form-label mt-3">Skill Name *</label>
-                                <input type="text" class="form-control" id="skillName">
-
-                                <label class="form-label mt-3">Percentage *</label>
-                                <input type="text" class="form-control" id="skillPercentage">
+                                <div class="form-group">
+                                    <label class="form-label mt-3">Skill Name *</label>
+                                    <input type="text" class="form-control" id="skillName">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label mt-3">Percentage *</label>
+                                    <input type="text" class="form-control" id="skillPercentage">
+                                </div>
                             </div>
                         </div>
                     </div>

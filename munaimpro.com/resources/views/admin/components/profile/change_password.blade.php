@@ -11,9 +11,7 @@
                         <label>Current Password</label>
                         <input readonly type="password" id="currentPassword">
                     </div>
-                </div>
 
-                <div class="col-lg-12">
                     <div class="form-group">
                         <label>New Password</label>
                         <div class="pass-group">
@@ -21,9 +19,7 @@
                             <span class="fas toggle-password fa-eye-slash"></span>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-lg-12">
                     <div class="form-group">
                         <label>Confirm Password</label>
                         <div class="pass-group">

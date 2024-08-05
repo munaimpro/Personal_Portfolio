@@ -10,23 +10,33 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12 p-1">
-                                <label class="form-label">Education Type *</label>
-                                <select class="form-control" id="educationType">
-                                    <option value="Academic">Academic Education</option>
-                                    <option value="Technical">Technical Education</option>
-                                </select>
+                                <div class="form-group">
+                                    <label class="form-label">Education Type *</label>
+                                    <select class="form-control" id="educationType">
+                                        <option value="Academic">Academic Education</option>
+                                        <option value="Technical">Technical Education</option>
+                                    </select>
+                                </div>
 
-                                <label class="form-label mt-3">Degree *</label>
-                                <input type="text" class="form-control" id="educationDegree">
+                                <div class="form-group">
+                                    <label class="form-label mt-3">Degree *</label>
+                                    <input type="text" class="form-control" id="educationDegree">
+                                </div>
 
-                                <label class="form-label mt-3">Institution *</label>
-                                <input type="text" class="form-control" id="educationInstitution">
+                                <div class="form-group">
+                                    <label class="form-label mt-3">Institution *</label>
+                                    <input type="text" class="form-control" id="educationInstitution">
+                                </div>
 
-                                <label class="form-label mt-3">Starting Date *</label>
-                                <input type="date" class="form-control" id="educationStartingDate">
+                                <div class="form-group">
+                                    <label class="form-label mt-3">Starting Date *</label>
+                                    <input type="date" class="form-control" id="educationStartingDate">
+                                </div>
 
-                                <label class="form-label mt-3">Ending Date *</label>
-                                <input type="date" class="form-control" id="educationEndingDate">
+                                <div class="form-group">
+                                    <label class="form-label mt-3">Ending Date *</label>
+                                    <input type="date" class="form-control" id="educationEndingDate">
+                                </div>
                             </div>
                         </div>
                     </div>

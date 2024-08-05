@@ -10,17 +10,25 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12 p-1">
-                                <label class="form-label">Designation *</label>
-                                <input type="text" class="form-control" id="updateExperienceTitle">
+                                <div class="form-group">
+                                    <label class="form-label">Designation *</label>
+                                    <input type="text" class="form-control" id="updateExperienceTitle">
+                                </div>
 
-                                <label class="form-label mt-3">Working Place *</label>
-                                <input type="text" class="form-control" id="updateExperienceInstitution">
+                                <div class="form-group">
+                                    <label class="form-label mt-3">Working Place *</label>
+                                    <input type="text" class="form-control" id="updateExperienceInstitution">
+                                </div>
 
-                                <label class="form-label mt-3">Starting Date *</label>
-                                <input type="date" class="form-control" id="updateExperienceStartingDate">
+                                <div class="form-group">
+                                    <label class="form-label mt-3">Starting Date *</label>
+                                    <input type="date" class="form-control" id="updateExperienceStartingDate">
+                                </div>
 
-                                <label class="form-label mt-3">Ending Date *</label>
-                                <input type="date" class="form-control" id="updateExperienceEndingDate">
+                                <div class="form-group">
+                                    <label class="form-label mt-3">Ending Date *</label>
+                                    <input type="date" class="form-control" id="updateExperienceEndingDate">
+                                </div>
 
                                 <input type="text" class="form-control" id="experienceInfoId">
                             </div>

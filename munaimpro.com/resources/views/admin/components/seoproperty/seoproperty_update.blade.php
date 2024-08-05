@@ -10,26 +10,40 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12 p-1">
-                                <label class="form-label">Title *</label>
-                                <input type="text" class="form-control" id="siteTitle">
+                                <div class="form-group">
+                                    <label class="form-label">Title *</label>
+                                    <input type="text" class="form-control" id="siteTitle">
+                                </div>
 
-                                <label class="form-label mt-3">Keywords *</label>
-                                <input type="text" class="form-control" id="siteKeywords">
+                                <div class="form-group">
+                                    <label class="form-label mt-3">Keywords *</label>
+                                    <input type="text" class="form-control" id="siteKeywords">
+                                </div>
 
-                                <label class="form-label mt-3">Description *</label>
-                                <textarea class="form-control" id="siteDescription"></textarea>
+                                <div class="form-group">
+                                    <label class="form-label mt-3">Description *</label>
+                                    <textarea class="form-control" id="siteDescription"></textarea>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label mt-3">Open Graph Website Name *</label>
+                                    <input type="text" class="form-control" id="ogSitename">
+                                </div>
 
-                                <label class="form-label mt-3">Open Graph Website Name *</label>
-                                <input type="text" class="form-control" id="ogSitename">
+                                <div class="form-group">
+                                    <label class="form-label mt-3">Open Graph Website Title *</label>
+                                    <input type="text" class="form-control" id="ogSitetitle">
+                                </div>
 
-                                <label class="form-label mt-3">Open Graph Website Title *</label>
-                                <input type="text" class="form-control" id="ogSitetitle">
+                                <div class="form-group">
+                                    <label class="form-label mt-3">Open Graph Website URL *</label>
+                                    <input type="text" class="form-control" id="ogSiteURL">
+                                </div>
 
-                                <label class="form-label mt-3">Open Graph Website URL *</label>
-                                <input type="text" class="form-control" id="ogSiteURL">
-
-                                <label class="form-label mt-3">Open Graph Website Image *</label>
-                                <input type="file" class="form-control" id="ogSiteimage">
+                                <div class="form-group">
+                                    <label class="form-label mt-3">Open Graph Website Image *</label>
+                                    <input type="file" class="form-control" id="ogSiteimage">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -37,7 +51,7 @@
             </div>
             <div class="modal-footer justify-content-end">
                 <button type="button" class="btn btn-sm btn-submit">Save changes</button>
-                <button type="button" class="btn btn-sm btn-cancel" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-sm btn-cancel" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

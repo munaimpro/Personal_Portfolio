@@ -10,17 +10,25 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12 p-1">
-                                <label class="form-label">Designation *</label>
-                                <input type="text" class="form-control" id="experienceTitle">
+                                <div class="form-group">
+                                    <label class="form-label">Designation *</label>
+                                    <input type="text" class="form-control" id="experienceTitle">
+                                </div>
 
-                                <label class="form-label mt-3">Working Place *</label>
-                                <input type="text" class="form-control" id="experienceInstitution">
+                                <div class="form-group">
+                                    <label class="form-label mt-3">Working Place *</label>
+                                    <input type="text" class="form-control" id="experienceInstitution">
+                                </div>
 
-                                <label class="form-label mt-3">Starting Date *</label>
-                                <input type="date" class="form-control" id="experienceStarttingDate">
+                                <div class="form-group">
+                                    <label class="form-label mt-3">Starting Date *</label>
+                                    <input type="date" class="form-control" id="experienceStarttingDate">
+                                </div>
 
-                                <label class="form-label mt-3">Ending Date *</label>
-                                <input type="date" class="form-control" id="experienceEndingDate">
+                                <div class="form-group">
+                                    <label class="form-label mt-3">Ending Date *</label>
+                                    <input type="date" class="form-control" id="experienceEndingDate">
+                                </div>
                             </div>
                         </div>
                     </div>
