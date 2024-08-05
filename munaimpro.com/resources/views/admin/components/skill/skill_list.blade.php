@@ -71,7 +71,7 @@
 
 <script>
 
-    // Function for retrive education information
+    // Function for retrive skill information
     
     retriveAllSkillInfo();
 

@@ -31,8 +31,13 @@ class SocialMediaController extends Controller
             $validatedData = $request->validate([
                 'social_media_title' => 'required|string|max:100',
                 'social_media_link' => 'required|string|max:100',
-                'social_media_icon' => 'required|string|max:50'
+                'social_media_icon' => 'required|string|max:50',
             ]);
+
+            // Global social media added to validation array for condition - Yes
+            if($request->input('global_social_media') === "1"){
+                $validatedData = array_merge($validatedData, $request->validate(['global_social_media' => 'int']));
+            }
 
             $social_media = SocialMedias::create($validatedData);
 
@@ -60,17 +65,16 @@ class SocialMediaController extends Controller
 
     public function updateSocialMediaInfo(Request $request){
         try{
-            $socialMediaInfoId = $request->input('social_media_info_id');
-            
             // Input validation process for backend
             $validatedData = $request->validate([
                 'social_media_title' => 'required|string|max:100',
                 'social_media_link' => 'required|string|max:100',
                 'social_media_icon' => 'required|string|max:50',
                 'global_social_media' => 'required',
+                'social_media_info_id' => 'required',
             ]);
         
-            $social_media = SocialMedias::findOrFail($socialMediaInfoId);
+            $social_media = SocialMedias::findOrFail($validatedData['social_media_info_id']);
             $social_media->update($validatedData);
 
             if($social_media){
@@ -127,7 +131,7 @@ class SocialMediaController extends Controller
         try{
             $socialMediaInfoId = $request->input('social_media_info_id'); // Primary key id from input
         
-            $social_media = SocialMedias::findOrFail($socialMediaInfoId, ['id', 'social_media_title', 'social_media_link', 'social_media_icon']); // Getting social media data by id
+            $social_media = SocialMedias::findOrFail($socialMediaInfoId, ['id', 'social_media_title', 'social_media_link', 'social_media_icon', 'global_social_media']); // Getting social media data by id
 
             if($social_media){
                 return response()->json([
