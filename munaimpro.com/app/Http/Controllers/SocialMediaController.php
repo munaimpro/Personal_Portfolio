@@ -80,7 +80,7 @@ class SocialMediaController extends Controller
             if($social_media){
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'social media updated'
+                    'message' => 'Social media details updated'
                 ]);
             } else{
                 return response()->json([
