@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('visitor_informations', function (Blueprint $table) {
+        Schema::create('client_feedbacks', function (Blueprint $table) {
             $table->id();
-            $table->string('ip_address', 100);
-            $table->string('visitor_country', 100);
-            $table->string('visitor_browser', 100);
-            $table->integer('total_visit')->default(0);
-            $table->timestamp('last_visiting_time');
+            $table->string('client_first_name', 50);
+            $table->string('client_last_name', 50);
+            $table->string('client_designation', 100);
+            $table->string('client_image', 100);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('visitor_informations');
+        Schema::dropIfExists('client_feedbacks');
     }
 };
