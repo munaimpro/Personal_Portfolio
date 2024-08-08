@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('service_icon');
             $table->string('service_title', 100);
             $table->text('service_description');
-            $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('service_status')->default(0);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });

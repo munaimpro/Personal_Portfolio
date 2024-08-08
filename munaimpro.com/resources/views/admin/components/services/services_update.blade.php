@@ -28,6 +28,14 @@
                                     <label>Service Description</label>
                                     <textarea id="updateServiceDescription"></textarea>
                                 </div>
+                                
+                                <div class="form-group">
+                                    <label>Service Status</label>
+                                    <select class="form-control" id="updateServiceStatus">
+                                        <option value="1">Activate</option>
+                                        <option value="0">Deactivate</option>
+                                    </select>
+                                </div>
 
                                 <input type="text" class="form-control" id="serviceInfoId">
                             </div>
@@ -65,6 +73,7 @@
                 document.getElementById('updateServiceTitle').value = response.data.data['service_title'];
                 document.getElementById('updateServiceIcon').value = response.data.data['service_icon'];
                 document.getElementById('updateServiceDescription').value = response.data.data['service_description'];
+                document.getElementById('updateServiceStatus').value = response.data.data['service_status'];
             } else{
                 displayToast('error', response.data['message']);
             }
@@ -80,6 +89,7 @@
             let service_title = $('#updateServiceTitle').val().trim();
             let service_icon = $('#updateServiceIcon').val().trim();
             let service_description = $('#updateServiceDescription').val().trim();
+            let service_status = $('#updateServiceStatus').val().trim();
             let service_info_id = $('#serviceInfoId').val().trim();
 
             // Front end validation process
@@ -98,6 +108,7 @@
                     "service_title" : service_title,
                     "service_icon" : service_icon,
                     "service_description" : service_description,
+                    "service_status" : service_status,
                     "service_info_id" : service_info_id,
                 }
 

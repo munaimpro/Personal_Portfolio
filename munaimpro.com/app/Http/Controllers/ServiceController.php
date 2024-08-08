@@ -65,6 +65,7 @@ class ServiceController extends Controller
                 'service_icon' => 'required|string|max:255',
                 'service_title' => 'required|string|max:100',
                 'service_description' => 'required|string',
+                'service_status' => 'required',
                 'service_info_id' => '',
             ]);
         
@@ -95,7 +96,7 @@ class ServiceController extends Controller
 
     public function retriveAllServiceInfo(Request $request){
         try{
-            $service = Service::get(['id', 'service_icon', 'service_title', 'service_description']); // Getting all service data
+            $service = Service::get(['id', 'service_icon', 'service_title', 'service_description', 'service_status']); // Getting all service data
 
             if($service){
                 return response()->json([

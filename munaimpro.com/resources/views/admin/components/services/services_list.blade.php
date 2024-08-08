@@ -49,6 +49,7 @@
                             </label>
                         </th>
                         <th>Service Name</th>
+                        <th>Service Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -110,6 +111,7 @@
                                     </label>
                                 </td>
                                 <td>${item['service_title']}</td>
+                                <td>${item['service_status'] == 0 ? '<span class="bg-lightred badges">Inactive</span>' : '<span class="bg-lightgreen badges">Active</span>'}</td>
                                 <td>
                                     <a data-id=${item.id} class="editBtn me-3" data-bs-toggle="modal" data-bs-target="#editModal">
                                         <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
