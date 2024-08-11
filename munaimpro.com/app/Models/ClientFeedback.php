@@ -9,5 +9,5 @@ class ClientFeedback extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['client_first_name', 'client_last_name', 'client_designation', 'client_image'];
+    protected $fillable = ['client_first_name', 'client_last_name', 'client_designation', 'client_image', 'client_feedback'];
 }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('client_last_name', 50);
             $table->string('client_designation', 100);
             $table->string('client_image', 100);
+            $table->text('client_feedback');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
