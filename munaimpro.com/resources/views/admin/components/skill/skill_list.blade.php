@@ -36,9 +36,9 @@
                 </ul>
             </div>
         </div>
-        <!-- Table search end -->
+        {{-- Table search end --}}
         
-        <!-- Table content start -->
+        {{-- Table content start --}}
         <div class="table-responsive">
             <table class="table datanew" id="tableData">
                 <thead>

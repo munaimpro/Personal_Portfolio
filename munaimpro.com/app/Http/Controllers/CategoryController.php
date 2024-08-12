@@ -4,10 +4,25 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\Category;
+use App\Models\Seoproperty;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class CategoryController extends Controller
 {
+    /* Method for admin skill page load */
+    
+    public function adminCategoryPage(){
+        // Getting SEO properties for specific view
+        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
+        
+        // Getting view name from uri
+        $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+
+        return view('admin.pages.category', compact(['seoproperty', 'routeName']));
+    }
+
+    
     /* Method for add category information */
 
     public function addCategoryInfo(Request $request){
@@ -17,6 +32,17 @@ class CategoryController extends Controller
                 'category_name' => 'required|string|max:255',
             ]);
 
+            // Finding & validating duplicate category name
+            $duplicateCategoryName = Category::where('category_name', $validatedData['category_name'])->first();
+
+            if($duplicateCategoryName){
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Category already exist'
+                ]);
+            }
+
+            // Inserting category data
             $category = Category::create($validatedData);
 
             if($category){

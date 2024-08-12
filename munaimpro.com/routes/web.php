@@ -197,7 +197,10 @@ Route::group(['prefix' => 'Admin', 'middleware' => TokenVerificationMiddleware::
     Route::view('/portfolio', 'admin.pages.portfolio');
     Route::view('/pricing', 'admin.pages.pricing');
     Route::view('/message', 'admin.pages.message');
-    Route::view('/category', 'admin.pages.category');
+
+    // Page Routes (Service Controller)
+    Route::get('/category', [CategoryController::class, 'adminCategoryPage']);
+
     Route::view('/post', 'admin.pages.post');
     Route::view('/user', 'admin.pages.user');
 });
