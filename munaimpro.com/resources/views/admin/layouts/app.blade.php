@@ -143,7 +143,7 @@
 <script src="{{ asset('assets/plugins/apexchart/chart-data.js') }}"></script>
 
 {{-- TinyMCE Editor JS --}}
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="{{ asset('assets/js/tinymce/tinymce.min.js') }}"></script>
 
 {{-- Custom JS --}}
 <script src="{{ asset('assets/js/script.js') }}"></script>

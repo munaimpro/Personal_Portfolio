@@ -112,8 +112,9 @@ $('ul.tabs li').click(function(){var $this=$(this);var $theTab=$(this).attr('id'
         selector: 'textarea',
         height: 300,
         menubar: false,
-        plugins: 'advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code fullscreen insertdatetime media table paste code help wordcount',
-        toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+        statusbar: false,
+        toolbar: 'alignnone aligncenter alignjustify alignleft alignright blockquote backcolor blocks bold copy cut fontfamily fontsize fontsizeinput forecolor h1 h2 h3 h4 h5 h6 hr indent italic language lineheight newdocument outdent paste pastetext print redo remove removeformat selectall strikethrough styles subscript superscript underline undo',
+        plugins: 'code a11ycheck accordion accordiontoggle accordionremove aidialog aishortcuts advtablerownumbering typopgraphy anchor restoredraft casechange charmap checklist codesample addcomment showcomments ltr rtl emoticons exportpdf exportword footnotes footnotesupdate formatpainter fullscreen help image importword editimage fliph flipv imageoptions rotateleft rotateright insertdatetime link openlink unlink bullist numlist math media mergetags nonbreaking pagebreak pageembed permanentpen preview quickimage quicklink quicktable revisionhistory cancel save searchreplace spellcheckdialog spellchecker table tablecellprops tablecopyrow tablecutrow tabledelete tabledeletecol tabledeleterow tableinsertdialog tableinsertcolafter tableinsertcolbefore tableinsertrowafter tableinsertrowbefore tablemergecells tablepasterowafter tablepasterowbefore tableprops tablerowprops tablesplitcells tableclass tablecellclass tablecellvalign tablecellborderwidth tablecellborderstyle tablecaption tablecellbackgroundcolor tablecellbordercolor tablerowheader tablecolheader insertfile visualblocks visualchars wordcount',
         content_css: '//www.tiny.cloud/css/codepen.min.css',
         readonly: false  // Make sure readonly is not set to true
     });
