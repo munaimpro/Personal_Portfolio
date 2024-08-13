@@ -102,3 +102,18 @@ toggleSwitch.addEventListener('change',switchTheme,false);}
 if(window.location.hash=="#LightMode"){localStorage.setItem('theme','dark');}
 else{if(window.location.hash=="#DarkMode"){localStorage.setItem('theme','light');}}
 $('ul.tabs li').click(function(){var $this=$(this);var $theTab=$(this).attr('id');console.log($theTab);if($this.hasClass('active')){}else{$this.closest('.tabs_wrapper').find('ul.tabs li, .tabs_container .tab_content').removeClass('active');$('.tabs_container .tab_content[data-tab="'+$theTab+'"], ul.tabs li[id="'+$theTab+'"]').addClass('active');}});});
+
+/**
+ * TinyMCE Editor Configuration
+ */
+
+
+    tinymce.init({
+        selector: 'textarea',
+        height: 300,
+        menubar: false,
+        plugins: 'advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code fullscreen insertdatetime media table paste code help wordcount',
+        toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+        content_css: '//www.tiny.cloud/css/codepen.min.css',
+        readonly: false  // Make sure readonly is not set to true
+    });
