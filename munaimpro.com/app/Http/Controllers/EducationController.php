@@ -152,9 +152,11 @@ class EducationController extends Controller
 
     public function retriveEducationInfoById(Request $request){
         try{
-            $educationInfoId = $request->input('education_info_id'); // Primary key id from input
-        
-            $education = Education::findOrFail($educationInfoId, ['id', 'education_type', 'education_starting_date', 'education_degree', 'education_institution']); // Getting education data by id
+            // Primary key id from input
+            $educationInfoId = $request->input('education_info_id');
+            
+            // Getting education data by id
+            $education = Education::findOrFail($educationInfoId, ['id', 'education_type', 'education_starting_date', 'education_ending_date', 'education_degree', 'education_institution']);
             
             if($education){
                 return response()->json([
