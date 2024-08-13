@@ -64,6 +64,17 @@
 
     {{-- Custom CSS --}}
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+
+    {{-- Pre loader Configuration --}}
+    <script>
+        function showLoader(){
+            $('#global-loader').removeClass('d-none');
+        }
+
+        function hideLoader(){
+            $('#global-loader').addClass('d-none');
+        }
+    </script>
 </head>
 
 <body class="account-page">

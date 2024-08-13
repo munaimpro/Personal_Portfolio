@@ -143,7 +143,7 @@
 <script src="{{ asset('assets/plugins/apexchart/chart-data.js') }}"></script>
 
 {{-- CKEditor JS --}}
-<script src="{{ asset('assets/js/ckeditor.js') }}"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
 
 {{-- Custom JS --}}
 <script src="{{ asset('assets/js/script.js') }}"></script>
