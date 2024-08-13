@@ -99,3 +99,28 @@ toggleSwitch.addEventListener('change',switchTheme,false);}
 if(window.location.hash=="#LightMode"){localStorage.setItem('theme','dark');}
 else{if(window.location.hash=="#DarkMode"){localStorage.setItem('theme','light');}}
 $('ul.tabs li').click(function(){var $this=$(this);var $theTab=$(this).attr('id');console.log($theTab);if($this.hasClass('active')){}else{$this.closest('.tabs_wrapper').find('ul.tabs li, .tabs_container .tab_content').removeClass('active');$('.tabs_container .tab_content[data-tab="'+$theTab+'"], ul.tabs li[id="'+$theTab+'"]').addClass('active');}});});
+
+/**
+ * CK Editor Configuration
+ */
+let theEditor;
+
+ClassicEditor.create(document.querySelector('#contentDetails'), {
+    ckfinder: {
+        uploadUrl:
+        "ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json",
+    },
+    mediaEmbed:{
+        previewsInData: true,
+    },
+})
+.then((editor) => {
+    theEditor = editor;
+})
+.catch((error) => {
+    console.error(error);
+})
+
+function getDataFromTheEditor(){
+    return theEditor.getData();
+}
