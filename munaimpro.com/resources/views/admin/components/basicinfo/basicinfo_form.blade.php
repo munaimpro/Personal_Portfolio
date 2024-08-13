@@ -56,7 +56,7 @@
             <div class="col-lg-12 col-sm-6 col-12">
                 <div class="form-group">
                     <label>Hero Description</label>
-                    <textarea class="form-control" spellcheck="false" data-ms-editor="true" id="websiteHeroDescription"></textarea>
+                    <textarea class="form-control contentDetails" spellcheck="false" data-ms-editor="true" id="websiteHeroDescription"></textarea>
                 </div>
             </div>
 
@@ -88,7 +88,7 @@
             <div class="col-lg-12 col-sm-6 col-12">
                 <div class="form-group">
                     <label>About Description</label>
-                    <textarea class="form-control" spellcheck="false" data-ms-editor="true" id="websiteAboutDescription"></textarea>
+                    <textarea class="form-control contentDetails" spellcheck="false" data-ms-editor="true" id="websiteAboutDescription"></textarea>
                 </div>
             </div>
 

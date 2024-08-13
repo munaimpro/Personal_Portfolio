@@ -80,8 +80,16 @@
     {{-- Axios JS --}}
     <script src="{{ asset('assets/js/axios.min.js') }}"></script>
 
-    {{-- Custom JS --}}
-    <script src="{{ asset('assets/js/script.js') }}"></script>
+    {{-- Pre loader Configuration --}}
+    <script>
+        function showLoader(){
+            $('#global-loader').removeClass('d-none');
+        }
+
+        function hideLoader(){
+            $('#global-loader').addClass('d-none');
+        }
+    </script>
 </head>
 <body>
     {{-- Pre loader start --}}
@@ -134,8 +142,11 @@
 <script src="{{ asset('assets/plugins/apexchart/apexcharts.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/apexchart/chart-data.js') }}"></script>
 
+{{-- CKEditor JS --}}
+<script src="{{ asset('assets/js/ckeditor.js') }}"></script>
+
 {{-- Custom JS --}}
-{{-- <script src="{{ asset('assets/js/script.js') }}"></script> --}}
+<script src="{{ asset('assets/js/script.js') }}"></script>
 
 <script>
     // Function for toast message common features
