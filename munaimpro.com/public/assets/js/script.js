@@ -109,16 +109,27 @@ $('ul.tabs li').click(function(){var $this=$(this);var $theTab=$(this).attr('id'
 
 tinymce.init({
     selector: '.contentDetails',
+
     license_key: 'gpl',
+
     height: 300,
-    menubar: true,  // Enable menubar for more options
+
+    menubar: false,  // Enable menubar for more options
+
     statusbar: true,  // Enable statusbar for additional information
-    toolbar: 'newdocument print undo redo cut copy paste pastetext selectall visualaids hr bold italic underline strikethrough subscript superscript code h1 h2 h3 h4 h5 h6 paragraph blockquote alignnone aligncenter alignjustify alignleft alignright blockquote backcolor blocks bold code codesample copy cut fontfamily fontsize fontsizeinput forecolor h1 h2 h3 h4 h5 h6 hr indent italic language lineheight newdocument outdent paste pastetext print redo remove removeformat selectall strikethrough styles subscript superscript underline undo bullist numlist checklist link image media charmap table emoticons fullscreen preview code',
-    // plugins: 'code codesample link image media charmap table emoticons fullscreen preview lists',
+
+    toolbar: 'newdocument print undo redo cut copy paste pastetext selectall bold italic underline strikethrough subscript superscript codesample code ltr rtl visualblocks visualchars fontfamily fontsize fontsizeinput forecolor backcolor bullist numlist checklist link image media charmap table emoticons fullscreen preview blockquote blocks alignnone aligncenter alignjustify alignleft alignright hr indent outdent remove removeformat searchreplace insertdatetime pagebreak restoredraft',
+
+    plugins: 'code codesample link image media charmap table emoticons fullscreen preview lists directionality visualblocks visualchars insertdatetime searchreplace pagebreak advlist',
+
     content_css: '//www.tiny.cloud/css/codepen.min.css',
+
     readonly: false,  // Ensure readonly is not set to true
+
     branding: false,  // Remove "Powered by TinyMCE"
+
     paste_as_text: true,  // Paste as plain text by default
+
     codesample_languages: [
         {text: 'HTML/XML', value: 'markup'},
         {text: 'JavaScript', value: 'javascript'},
@@ -131,12 +142,20 @@ tinymce.init({
         {text: 'C#', value: 'csharp'},
         {text: 'C++', value: 'cpp'}
     ],  // List of programming languages for code samples
-    toolbar_mode: 'floating',  // Adaptive toolbar display
+
+    toolbar_mode: 'sliding',  // Adaptive toolbar display
+
     automatic_uploads: true,  // Enable automatic uploads for media
+
     file_picker_types: 'image media',  // File types for file picker
+
     image_advtab: true,  // Advanced image tab options
+
     image_caption: true,  // Allow image captions
+
     media_live_embeds: true,  // Enable live media embeds
+
     fullscreen_native: true,  // Native fullscreen support
+
     table_default_styles: { width: '100%' },  // Default table styles
 });
