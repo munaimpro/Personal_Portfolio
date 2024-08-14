@@ -81,7 +81,7 @@ class CategoryController extends Controller
             // Finding & validating duplicate category name
             $duplicateCategoryName = Category::where('category_name', $validatedData['category_name'])->first();
 
-            if($duplicateCategoryName){
+            if($duplicateCategoryName && $duplicateCategoryName->category_name === $validatedData['category_name']){
                 return response()->json([
                     'status' => 'failed',
                     'message' => 'Category already exist'

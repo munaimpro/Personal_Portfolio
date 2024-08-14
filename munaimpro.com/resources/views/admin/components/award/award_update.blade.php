@@ -36,7 +36,7 @@
 
                                 <div class="form-group">
                                     <label class="form-label mt-3">Award For *</label>
-                                    <textarea class="form-control contentDetails" id="updateAwardFor"></textarea>
+                                    <textarea class="form-control" id="updateAwardFor"></textarea>
                                 </div>
 
                                 <input type="text" class="form-control" id="awardInfoId">

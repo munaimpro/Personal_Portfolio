@@ -27,8 +27,8 @@
                 </form>
             </div>
             <div class="modal-footer justify-content-end">
-                <button type="button" class="btn btn-sm btn-submit" onclick="updateInterestInfo()">Save changes</button>
-                <button type="button" class="btn btn-sm btn-cancel" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-sm btn-submit" onclick="updateInterestInfo()">Save Changes</button>
+                <button type="button" class="btn btn-sm btn-cancel" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

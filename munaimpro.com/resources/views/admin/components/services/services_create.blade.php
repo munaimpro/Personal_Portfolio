@@ -26,7 +26,7 @@
 
                                 <div class="form-group">
                                     <label>Service Description</label>
-                                    <textarea class="form-control contentDetails" id="serviceDescription"></textarea>
+                                    <textarea class="form-control" id="serviceDescription"></textarea>
                                 </div>
                             </div>
                         </div>
