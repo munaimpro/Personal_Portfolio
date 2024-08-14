@@ -107,14 +107,36 @@ $('ul.tabs li').click(function(){var $this=$(this);var $theTab=$(this).attr('id'
  * TinyMCE Editor Configuration
  */
 
-
-    tinymce.init({
-        selector: 'textarea',
-        height: 300,
-        menubar: false,
-        statusbar: false,
-        toolbar: 'alignnone aligncenter alignjustify alignleft alignright blockquote backcolor blocks bold copy cut fontfamily fontsize fontsizeinput forecolor h1 h2 h3 h4 h5 h6 hr indent italic language lineheight newdocument outdent paste pastetext print redo remove removeformat selectall strikethrough styles subscript superscript underline undo',
-        plugins: 'code a11ycheck accordion accordiontoggle accordionremove aidialog aishortcuts advtablerownumbering typopgraphy anchor restoredraft casechange charmap checklist codesample addcomment showcomments ltr rtl emoticons exportpdf exportword footnotes footnotesupdate formatpainter fullscreen help image importword editimage fliph flipv imageoptions rotateleft rotateright insertdatetime link openlink unlink bullist numlist math media mergetags nonbreaking pagebreak pageembed permanentpen preview quickimage quicklink quicktable revisionhistory cancel save searchreplace spellcheckdialog spellchecker table tablecellprops tablecopyrow tablecutrow tabledelete tabledeletecol tabledeleterow tableinsertdialog tableinsertcolafter tableinsertcolbefore tableinsertrowafter tableinsertrowbefore tablemergecells tablepasterowafter tablepasterowbefore tableprops tablerowprops tablesplitcells tableclass tablecellclass tablecellvalign tablecellborderwidth tablecellborderstyle tablecaption tablecellbackgroundcolor tablecellbordercolor tablerowheader tablecolheader insertfile visualblocks visualchars wordcount',
-        content_css: '//www.tiny.cloud/css/codepen.min.css',
-        readonly: false  // Make sure readonly is not set to true
-    });
+tinymce.init({
+    selector: '.contentDetails',
+    license_key: 'gpl',
+    height: 300,
+    menubar: true,  // Enable menubar for more options
+    statusbar: true,  // Enable statusbar for additional information
+    toolbar: 'newdocument print undo redo cut copy paste pastetext selectall visualaids hr bold italic underline strikethrough subscript superscript code h1 h2 h3 h4 h5 h6 paragraph blockquote alignnone aligncenter alignjustify alignleft alignright blockquote backcolor blocks bold code codesample copy cut fontfamily fontsize fontsizeinput forecolor h1 h2 h3 h4 h5 h6 hr indent italic language lineheight newdocument outdent paste pastetext print redo remove removeformat selectall strikethrough styles subscript superscript underline undo bullist numlist checklist link image media charmap table emoticons fullscreen preview code',
+    // plugins: 'code codesample link image media charmap table emoticons fullscreen preview lists',
+    content_css: '//www.tiny.cloud/css/codepen.min.css',
+    readonly: false,  // Ensure readonly is not set to true
+    branding: false,  // Remove "Powered by TinyMCE"
+    paste_as_text: true,  // Paste as plain text by default
+    codesample_languages: [
+        {text: 'HTML/XML', value: 'markup'},
+        {text: 'JavaScript', value: 'javascript'},
+        {text: 'CSS', value: 'css'},
+        {text: 'PHP', value: 'php'},
+        {text: 'Ruby', value: 'ruby'},
+        {text: 'Python', value: 'python'},
+        {text: 'Java', value: 'java'},
+        {text: 'C', value: 'c'},
+        {text: 'C#', value: 'csharp'},
+        {text: 'C++', value: 'cpp'}
+    ],  // List of programming languages for code samples
+    toolbar_mode: 'floating',  // Adaptive toolbar display
+    automatic_uploads: true,  // Enable automatic uploads for media
+    file_picker_types: 'image media',  // File types for file picker
+    image_advtab: true,  // Advanced image tab options
+    image_caption: true,  // Allow image captions
+    media_live_embeds: true,  // Enable live media embeds
+    fullscreen_native: true,  // Native fullscreen support
+    table_default_styles: { width: '100%' },  // Default table styles
+});

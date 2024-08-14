@@ -168,9 +168,9 @@
             let website_greetings = $('#websiteGreetings').val().trim();
             let website_full_name = $('#websiteFullName').val().trim();
             let website_designation = $('#websiteDesignation').val().trim();
-            let website_hero_description = $('#websiteHeroDescription').val().trim();
+            let website_hero_description = tinymce.get('websiteHeroDescription').getContent().trim();
             let upload_hero_image = document.getElementById('uploadHeroImage').files[0];
-            let website_about_description = $('#websiteAboutDescription').val().trim();
+            let website_about_description = tinymce.get('websiteAboutDescription').getContent().trim();
             let upload_about_image = document.getElementById('uploadAboutImage').files[0];
             let website_resume_link = "Link here";
 
