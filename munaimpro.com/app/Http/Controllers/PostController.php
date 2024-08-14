@@ -4,11 +4,26 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\Post;
+use App\Models\Seoproperty;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
+    /* Method for admin skill page load */
+        
+    public function adminPostPage(){
+        // Getting SEO properties for specific view
+        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
+        
+        // Getting view name from uri
+        $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+
+        return view('admin.pages.post', compact(['seoproperty', 'routeName']));
+    }
+    
+    
     /* Method for add post information */
 
     public function addPostInfo(Request $request){

@@ -201,7 +201,9 @@ Route::group(['prefix' => 'Admin', 'middleware' => TokenVerificationMiddleware::
     // Page Routes (Service Controller)
     Route::get('/category', [CategoryController::class, 'adminCategoryPage']);
 
-    Route::view('/post', 'admin.pages.post');
+    // Page Routes (Post Controller)
+    Route::get('/post', [PostController::class, 'adminPostPage']);
+    
     Route::view('/user', 'admin.pages.user');
 });
 
