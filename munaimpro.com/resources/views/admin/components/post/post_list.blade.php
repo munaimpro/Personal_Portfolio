@@ -39,47 +39,135 @@
         </div>
 
         <div class="table-responsive">
-            <table class="table  datanew">
-            <thead>
-            <tr>
-                <th>Heading</th>
-                <th>Category</th>
-                <th>Created By</th>
-                <th>Date</th>
-                <th>Status</th>
-                <th>View</th>
-                <th>Action</th>
-            </tr>
-            </thead>
+            <table class="table datanew" id="tableData">
+                <thead>
+                    <tr>
+                        <th>Heading</th>
+                        <th>Category</th>
+                        <th>Created By</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>View</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
 
-            <tbody>
-                <tr>
-                    <td class="productimgname">
-                        <a href="javascript:void(0);" class="post image">
-                            <img src="{{ asset('assets/img/product/product17.jpg') }}" alt="post thumbnail">
-                        </a>
-                        Post heading will be go here
-                    </td>
-                    <td>Post category</td>
-                    <td>Created by</td>
-                    <td>Date</td>
-                    <td>
-                        <span class="bg-lightgreen badges">Published</span>
-                        <span class="bg-lightred badges">Drafted</span>
-                    </td>
-                    <td>22</td>
-                    <td>
-                        <a class="me-3" data-bs-toggle="modal" data-bs-target="#editModal">
-                            <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
-                        </a>                                        
-                        <a lass="me-3" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                            <img src="{{ asset('assets/img/icons/delete.svg') }}" alt="img">
-                        </a>
-                    </td>
-                </tr>
-            </tbody>
+                <tbody id="tableList">
+                    {{-- <tr>
+                        <td class="productimgname">
+                            <a href="javascript:void(0);" class="post image">
+                                <img src="{{ asset('assets/img/product/product17.jpg') }}" alt="post thumbnail">
+                            </a>
+                            Post heading will be go here
+                        </td>
+                        <td>Post category</td>
+                        <td>Created by</td>
+                        <td>Date</td>
+                        <td>
+                            <span class="bg-lightgreen badges">Published</span>
+                            <span class="bg-lightred badges">Drafted</span>
+                        </td>
+                        <td>22</td>
+                        <td>
+                            <a class="me-3" data-bs-toggle="modal" data-bs-target="#editModal">
+                                <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
+                            </a>                                        
+                            <a lass="me-3" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                <img src="{{ asset('assets/img/icons/delete.svg') }}" alt="img">
+                            </a>
+                        </td>
+                    </tr> --}}
+                </tbody>
             </table>
-            </div>
+        </div>
     </div>
 </div>
 {{-- Table end --}}
+
+
+{{-- Front end script start --}}
+
+<script>
+
+    // Function for retrive post information
+    
+    retriveAllPostInfo();
+
+    async function retriveAllPostInfo(){
+
+        try{
+            // Getting data table
+            let table_data = $('#tableData');
+
+            // Getting table rows
+            let table_list = $('#tableList');
+
+            // Destroy data table
+            // table_data.DataTable().destroy();
+
+            // Make data table empty
+            table_list.empty();
+
+            // Pssing data to controller and getting response
+            showLoader();
+            let response = await axios.get('/retriveAllPostInfo');
+            hideLoader();
+
+            // Getting base URL of the system
+            let baseUrl = "{{ url('/') }}";
+
+            response.data.data.forEach(function(item, index){
+                // Generating full path for the post thumbnail
+                let postThumbnailFullPath = baseUrl + '/storage/post_thumbnails/' + item['post_thumbnail'];
+
+                // Formatting the created_at date
+                let createdAt = new Date(item['created_at']);
+                let formattedDate = createdAt.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+
+                let row = `<tr>
+                                <td class="productimgname d-block">
+                                    <a href="javascript:void(0);" class="post image">
+                                        <img src=${postThumbnailFullPath} alt="post thumbnail">
+                                    </a>
+                                    <p class="fw-bold">Lorem ipsum dolor sit amet</p>
+                                </td>
+                                <td>${item.category['category_name']}</td>
+                                <td>${item.user['first_name']} ${item.user['last_name']}</td>
+                                <td>${formattedDate}</td>
+                                <td>${item['post_status'] === 'published' ? '<span class="bg-lightgreen badges">Published</span>' : '<span class="bg-lightred badges">Drafted</span>'}</td>
+                                <td>${item['post_view']}</td>
+                                <td>
+                                    <a data-id=${item.id} class="editBtn me-3" data-bs-toggle="modal" data-bs-target="#editModal">
+                                        <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
+                                    </a>                                        
+                                    <a data-id=${item.id} class="deleteBtn me-3" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                        <img src="{{ asset('assets/img/icons/delete.svg') }}" alt="img">
+                                    </a>
+                                </td>
+                            </tr>`
+                table_list.append(row);
+            });
+
+            $('.deleteBtn').on('click', function(){
+                $('#postInfoDeleteId').val($(this).data('id'));
+            });
+
+            $('.editBtn').on('click', function(){
+                let post_info_id = $(this).data('id');
+                retrivePostInfoById(post_info_id);
+            });
+
+            // table_data.DataTable();
+        } catch(e){
+            console.error('Something went wrong', e);
+        }
+    }
+</script>
+
+{{-- Front end script end --}}

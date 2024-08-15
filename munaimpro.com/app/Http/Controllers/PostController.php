@@ -39,7 +39,8 @@ class PostController extends Controller
                 'post_status' => 'required|string',
             ]);
 
-            $userId = $request->header('userId'); // User ID from header
+            // User ID from header
+            $userId = $request->header('userId');
 
             if($request->hasFile('post_thumbnail')){
                 /* Getting file */
@@ -160,7 +161,7 @@ class PostController extends Controller
     public function retriveAllPostInfo(Request $request){
         try{
             // Getting all post data with category and user
-            $post = Post::with(['category:id,category_name', 'user:id'])->get();
+            $post = Post::with(['category:id,category_name', 'user:id,first_name,last_name'])->get();
 
             if($post){
                 return response()->json([
@@ -188,7 +189,8 @@ class PostController extends Controller
 
     public function retrivePostInfoById(Request $request){
         try{
-            $postInfoId = $request->input('post_info_id'); // Primary key id from input
+            // Primary key id from input
+            $postInfoId = $request->input('post_info_id');
             
             // Getting post data by id with category and user
             $post = Post::with(['category:id,category_name', 'user:id'])->findOrFail($postInfoId);
