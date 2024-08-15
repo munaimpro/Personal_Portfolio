@@ -36,7 +36,7 @@
 
                                 <div class="form-group">
                                     <label class="form-label mt-3">Award For *</label>
-                                    <textarea class="form-control" id="updateAwardFor"></textarea>
+                                    <textarea class="contentDetails" id="updateAwardFor"></textarea>
                                 </div>
 
                                 <input type="text" class="form-control" id="awardInfoId">
@@ -76,7 +76,7 @@
                 document.getElementById('updateAwardTitle').value = response.data.data['award_title'];
                 document.getElementById('updateAwardDate').value = response.data.data['award_date'];
                 document.getElementById('updateAwardProvider').value = response.data.data['award_provider'];
-                document.getElementById('updateAwardFor').value = response.data.data['award_for'];
+                tinymce.get('updateAwardFor').setContent(response.data.data['award_for']);
             } else{
                 displayToast('error', response.data['message']);
             }
@@ -93,7 +93,7 @@
             let award_title = $('#updateAwardTitle').val().trim();
             let award_date = $('#updateAwardDate').val().trim();
             let award_provider = $('#updateAwardProvider').val().trim();
-            let award_for = $('#updateAwardFor').val().trim();
+            let award_for = tinymce.get('updateAwardFor').getContent().trim();
             let award_info_id = $('#awardInfoId').val().trim();
 
             // Front end validation process

@@ -120,7 +120,7 @@ tinymce.init({
 
     toolbar: 'newdocument print undo redo cut copy paste pastetext selectall bold italic underline strikethrough subscript superscript codesample code ltr rtl visualblocks visualchars fontfamily fontsize fontsizeinput forecolor backcolor bullist numlist checklist link image media charmap table emoticons fullscreen preview blockquote blocks alignnone aligncenter alignjustify alignleft alignright hr indent outdent remove removeformat searchreplace insertdatetime pagebreak restoredraft',
 
-    plugins: 'code codesample link image media charmap table emoticons fullscreen preview lists directionality visualblocks visualchars insertdatetime searchreplace pagebreak advlist',
+    plugins: 'code codesample link image media charmap table emoticons fullscreen preview lists directionality visualblocks visualchars insertdatetime searchreplace pagebreak advlist autoresize',
 
     content_css: '//www.tiny.cloud/css/codepen.min.css',
 

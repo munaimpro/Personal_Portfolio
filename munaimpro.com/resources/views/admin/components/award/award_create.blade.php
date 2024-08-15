@@ -36,7 +36,7 @@
 
                                 <div class="form-group">
                                     <label class="form-label mt-3">Award For *</label>
-                                    <textarea class="form-control" id="awardFor"></textarea>
+                                    <textarea class="contentDetails" id="awardFor"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -65,7 +65,7 @@
             let award_title = $('#awardTitle').val().trim();
             let award_date = $('#awardDate').val().trim();
             let award_provider = $('#awardProvider').val().trim();
-            let award_for = $('#awardFor').val().trim();
+            let award_for = tinymce.get('awardFor').getContent().trim();
 
             // Front end validation process
             if(award_type.length === 0){
