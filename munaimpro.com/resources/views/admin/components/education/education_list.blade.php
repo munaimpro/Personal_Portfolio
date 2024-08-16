@@ -97,6 +97,23 @@
             hideLoader();
 
             response.data.data.forEach(function(item, index){
+
+                // Formatting the starting date
+                let startingDate = new Date(item['education_starting_date']);
+                let formattedStartingDate = startingDate.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                });
+
+                // Formatting the ending date
+                let endingDate = new Date(item['education_ending_date']);
+                let formattedEndingDate = endingDate.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                });
+
                 let row = `<tr>
                                 <td>
                                     <label class="checkboxs">
@@ -106,8 +123,8 @@
                                 </td>
                                 <td>${item['education_type']}</td>
                                 <td>${item['education_degree']}</td>
-                                <td>${item['education_starting_date']}</td>
-                                <td>${item['education_ending_date'] ? item['education_ending_date'] : '<span class="bg-lightgreen badges">Present</span>'}</td>
+                                <td>${formattedStartingDate}</td>
+                                <td>${item['education_ending_date'] ? formattedEndingDate : '<span class="bg-lightgreen badges">Present</span>'}</td>
                                 <td>
                                     <a data-id=${item.id} class="editBtn me-3" data-bs-toggle="modal" data-bs-target="#editModal">
                                         <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">

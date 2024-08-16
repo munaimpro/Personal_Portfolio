@@ -96,6 +96,15 @@
             hideLoader();
 
             response.data.data.forEach(function(item, index){
+
+                // Formatting the issue date
+                let awardDate = new Date(item['award_date']);
+                let formattedAwardDate = awardDate.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                });
+
                 let row = `<tr>
                                 <td>
                                     <label class="checkboxs">
@@ -105,7 +114,7 @@
                                 </td>
                                 <td>${item['award_type']}</td>
                                 <td>${item['award_title']}</td>
-                                <td>${item['award_date']}</td>
+                                <td>${formattedAwardDate}</td>
                                 <td>
                                     <a data-id=${item.id} class="editBtn me-3" data-bs-toggle="modal" data-bs-target="#editModal">
                                         <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">

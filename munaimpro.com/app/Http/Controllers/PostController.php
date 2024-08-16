@@ -79,7 +79,6 @@ class PostController extends Controller
             ]);
         }
     }
-    
 
 
     /* Method for update post information */

@@ -71,7 +71,7 @@
 
 <script>
 
-    // Function for retrive skill information
+    // Function for retrive category information
     
     retriveAllCategoryInfo();
 
