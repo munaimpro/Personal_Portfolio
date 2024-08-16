@@ -140,7 +140,7 @@
                                 <td>${item.category['category_name']}</td>
                                 <td>${item.user['first_name']} ${item.user['last_name']}</td>
                                 <td>${formattedDate}</td>
-                                <td>${item['post_status'] === 'published' ? '<span class="bg-lightgreen badges">Published</span>' : '<span class="bg-lightred badges">Drafted</span>'}</td>
+                                <td>${item['post_status'] === 'published' ? '<span class="bg-lightgreen badges">Published</span>' : item['post_status'] === 'scheduled' ? '<span class="bg-lightblue badges">Scheduled</span>' : '<span class="bg-lightred badges">Drafted</span>'}</td>
                                 <td>${item['post_view']}</td>
                                 <td>
                                     <a data-id=${item.id} class="editBtn me-3" data-bs-toggle="modal" data-bs-target="#editModal">

@@ -36,7 +36,7 @@ class PostController extends Controller
                 'post_description' => 'required|string',
                 'category_id' => 'required|integer',
                 'publish_time' => 'string',
-                'post_status' => 'required|string',
+                'post_status' => 'string',
             ]);
 
             // User ID from header
@@ -52,6 +52,16 @@ class PostController extends Controller
 
                 /* Merge thumbnail image into array */
                 $postData = array_merge($validatedData, ['post_thumbnail' => $postThumbnailUniqueName, 'user_id' => $userId]);
+
+                /* Merge publish time into array */
+                if($request->input('publish_time')){
+                    $postData = array_merge($validatedData, ['post_thumbnail' => $postThumbnailUniqueName, 'publish_time' => $request->input('publish_time'), 'user_id' => $userId]);
+                }
+
+                /* Merge publish time and post status into array */
+                if($request->input('publish_time') && $request->input('post_status')){
+                    $postData = array_merge($validatedData, ['post_thumbnail' => $postThumbnailUniqueName, 'publish_time' => $request->input('publish_time'), 'post_status' => $request->input('post_status'), 'user_id' => $userId]);
+                }
 
                 $post = Post::create($postData);
 

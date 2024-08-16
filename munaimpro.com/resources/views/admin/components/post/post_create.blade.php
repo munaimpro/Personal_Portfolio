@@ -46,7 +46,7 @@
                             <input class="form-control" type="datetime-local" id="publishTime" onchange="togglePostButton()">
                         </div>
 
-                        <input type="text" id="publishStatus">
+                        <input type="text" id="postStatus">
                     </div>
                 </form>
             </div>
@@ -95,7 +95,7 @@
     function togglePostButton(){
         const publishBtn = $('#publishBtn');
         const scheduleBtn = $('#scheduleBtn');
-        const publishStatus = $('#publishStatus');
+        const postStatus = $('#postStatus');
         const publishTimeInput = $('#publishTime').val();
         const selectedTime = new Date(publishTimeInput);
         const currentTime = new Date();
@@ -113,13 +113,16 @@
             publishBtn.addClass('disabled');
             publishBtn.removeClass('d-none');
             scheduleBtn.addClass('d-none');
+            postStatus.val('');
         } else if (publishTimeInput && selectedTime.getTime() > currentTime.getTime()) {
             publishBtn.addClass('d-none');
             scheduleBtn.removeClass('d-none');
+            postStatus.val('scheduled');
         } else{
             publishBtn.removeClass('disabled');
             publishBtn.removeClass('d-none');
             scheduleBtn.addClass('d-none');
+            postStatus.val('');
         }
     }
 
@@ -138,6 +141,9 @@
             let post_thumbnail = $('#postThumbnail')[0].files[0];
             let post_description = tinymce.get('postDescription').getContent().trim();
             let publish_time = $('#publishTime').val().trim();
+            let post_status = $('#postStatus').val().trim();
+
+            console.log(post_status);
             
             // Front end validation process
             if(post_heading.length === 0){
@@ -164,6 +170,7 @@
                 formData.append('post_thumbnail', post_thumbnail);
                 formData.append('post_description', post_description);
                 if(publish_time) formData.append('publish_time', publish_time);
+                if(post_status) formData.append('post_status', post_status);
 
                 // Pssing data to controller and getting response
                 showLoader();
