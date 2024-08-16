@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('post_view')->default(0);
             $table->foreignId('category_id')->constrained();
             $table->foreignId('user_id')->constrained();
-            $table->dateTime('publish_time');
+            $table->dateTime('publish_time')->useCurrent();
             $table->enum('post_status', ['published', 'unpublished']);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();

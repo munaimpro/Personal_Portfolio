@@ -32,10 +32,10 @@ class PostController extends Controller
             $validatedData = $request->validate([
                 'post_heading' => 'required|string|max:255',
                 'post_slug' => 'required|string|max:255',
-                'post_thumbnail' => 'required|image',
+                'post_thumbnail' => 'required|image|mimes:jpeg,jpg,png|max:2048',
                 'post_description' => 'required|string',
                 'category_id' => 'required|integer',
-                'publish_time' => 'required|string',
+                'publish_time' => 'string',
                 'post_status' => 'required|string',
             ]);
 

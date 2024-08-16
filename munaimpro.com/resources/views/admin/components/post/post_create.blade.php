@@ -45,6 +45,8 @@
                             <label>Publish Time</label>
                             <input class="form-control" type="datetime-local" id="publishTime" onchange="togglePostButton()">
                         </div>
+
+                        <input type="text" id="publishStatus">
                     </div>
                 </form>
             </div>
@@ -89,10 +91,11 @@
 
 
     // Function for toggle shedule and publish button
-
+    
     function togglePostButton(){
         const publishBtn = $('#publishBtn');
         const scheduleBtn = $('#scheduleBtn');
+        const publishStatus = $('#publishStatus');
         const publishTimeInput = $('#publishTime').val();
         const selectedTime = new Date(publishTimeInput);
         const currentTime = new Date();
@@ -108,11 +111,20 @@
         // Compare the selected time with the current time
         if(publishTimeInput && selectedTime.getTime() < currentTime.getTime()){
             publishBtn.addClass('disabled');
+            publishBtn.removeClass('d-none');
+            scheduleBtn.addClass('d-none');
         } else if (publishTimeInput && selectedTime.getTime() > currentTime.getTime()) {
             publishBtn.addClass('d-none');
             scheduleBtn.removeClass('d-none');
+        } else{
+            publishBtn.removeClass('disabled');
+            publishBtn.removeClass('d-none');
+            scheduleBtn.addClass('d-none');
         }
     }
+
+    // Update the publish time with the current time every second
+    setInterval(togglePostButton, 1000);
     
     
     // Function for add blog post
@@ -124,16 +136,17 @@
             let post_slug = $('#postSlug').val().trim();
             let category_id = $('#categoryId').val().trim();
             let post_thumbnail = $('#postThumbnail')[0].files[0];
-            let post_description = tinymce.get('#postDescription').getContent().trim();
-
+            let post_description = tinymce.get('postDescription').getContent().trim();
+            let publish_time = $('#publishTime').val().trim();
+            
             // Front end validation process
             if(post_heading.length === 0){
                 displayToast('warning', 'Post heading is required');
             } else if(post_slug.length === 0){
                 displayToast('warning', 'Post slug is required');
-            } else if(category_id == ''){
+            } else if(category_id === ''){
                 displayToast('warning', 'Post category is required');
-            } else if(post_thumbnail.length === 0){
+            } else if(!post_thumbnail){
                 displayToast('warning', 'Post thumbnail is required');
             } else if(post_description.length === 0){
                 displayToast('warning', 'Post details is required');
@@ -150,10 +163,11 @@
                 formData.append('category_id', category_id);
                 formData.append('post_thumbnail', post_thumbnail);
                 formData.append('post_description', post_description);
+                if(publish_time) formData.append('publish_time', publish_time);
 
                 // Pssing data to controller and getting response
                 showLoader();
-                let response = await axios.post('addPostInfo', formData, {
+                let response = await axios.post('../addPostInfo', formData, {
                     headers:{'content-type':'multipart/form-data'}
                 });
                 hideLoader();
