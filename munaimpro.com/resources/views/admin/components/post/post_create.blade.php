@@ -28,13 +28,25 @@
                         <div class="form-group">
                             <label>Thumbnail</label>
                             <div class="image-upload">
-                                <input class="form-control" type="file" id="postThumbnail">
+                                <input class="form-control" type="file" id="postThumbnail" oninput="postThumbnailPreview.src=window.URL.createObjectURL(this.files[0])">
                                 <div class="image-uploads">
                                     <img src="{{ asset('assets/img/icons/upload.svg') }}" alt="img">
                                     <h4>Drag and drop a file to upload</h4>
                                 </div>
                             </div>
                         </div>
+
+                        <div class="product-list">
+                            <ul class="row">
+                                <li class="ps-0">
+                                    <div class="productviewset">
+                                        <div class="productviewsimg">
+                                            <img src="{{ asset('assets/img/customer/profile2.jpg') }}" alt="img" id="postThumbnailPreview">
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>    
 
                         <div class="form-group">
                             <label>Description</label>
@@ -104,9 +116,9 @@
         selectedTime.setSeconds(0, 0);
         currentTime.setSeconds(0, 0);
 
-        console.log(selectedTime.getTime())
-        console.log(currentTime.getTime())
-        console.log(selectedTime.getTime() < currentTime.getTime())
+        // console.log(selectedTime.getTime())
+        // console.log(currentTime.getTime())
+        // console.log(selectedTime.getTime() < currentTime.getTime())
         
         // Compare the selected time with the current time
         if(publishTimeInput && selectedTime.getTime() < currentTime.getTime()){
@@ -195,6 +207,31 @@
             console.error('Something went wrong', e);
         }
     }
+
+
+    // Function for publish schedule post
+    
+    async function publishSchedulePost(){
+        const currentTime = new Date();
+
+        // Remove seconds and milliseconds for comparison
+        currentTime.setSeconds(0, 0);
+
+        // Pssing data to controller and getting response
+        let response = await axios.post('../publishSchedulePost', {'current_time' : currentTime});
+
+        if(response.data['status'] === 'success'){
+            // Call function to refresh post list
+            await retriveAllPostInfo();
+
+            console.log(response.data['message']);
+        } else{
+            console.log(response.data['message']);
+        }
+    }
+
+    // Call the function every second for tracking schedule posting
+    setInterval(publishSchedulePost, 60000);
     
 </script>
 

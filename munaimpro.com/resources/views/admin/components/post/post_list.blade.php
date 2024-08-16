@@ -53,30 +53,7 @@
                 </thead>
 
                 <tbody id="tableList">
-                    {{-- <tr>
-                        <td class="productimgname">
-                            <a href="javascript:void(0);" class="post image">
-                                <img src="{{ asset('assets/img/product/product17.jpg') }}" alt="post thumbnail">
-                            </a>
-                            Post heading will be go here
-                        </td>
-                        <td>Post category</td>
-                        <td>Created by</td>
-                        <td>Date</td>
-                        <td>
-                            <span class="bg-lightgreen badges">Published</span>
-                            <span class="bg-lightred badges">Drafted</span>
-                        </td>
-                        <td>22</td>
-                        <td>
-                            <a class="me-3" data-bs-toggle="modal" data-bs-target="#editModal">
-                                <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
-                            </a>                                        
-                            <a lass="me-3" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                                <img src="{{ asset('assets/img/icons/delete.svg') }}" alt="img">
-                            </a>
-                        </td>
-                    </tr> --}}
+                    
                 </tbody>
             </table>
         </div>
@@ -109,9 +86,9 @@
             table_list.empty();
 
             // Pssing data to controller and getting response
-            showLoader();
+            // showLoader();
             let response = await axios.get('/retriveAllPostInfo');
-            hideLoader();
+            // hideLoader();
 
             // Getting base URL of the system
             let baseUrl = "{{ url('/') }}";
@@ -140,7 +117,7 @@
                                 <td>${item.category['category_name']}</td>
                                 <td>${item.user['first_name']} ${item.user['last_name']}</td>
                                 <td>${formattedDate}</td>
-                                <td>${item['post_status'] === 'published' ? '<span class="bg-lightgreen badges">Published</span>' : item['post_status'] === 'scheduled' ? '<span class="bg-lightblue badges">Scheduled</span>' : '<span class="bg-lightred badges">Drafted</span>'}</td>
+                                <td>${item['post_status'] === 'published' ? '<span class="bg-lightgreen badges">Published</span>' : item['post_status'] === 'scheduled' ? '<span class="bg-lightgrey badges">Scheduled</span>' : '<span class="bg-lightred badges">Drafted</span>'}</td>
                                 <td>${item['post_view']}</td>
                                 <td>
                                     <a data-id=${item.id} class="editBtn me-3" data-bs-toggle="modal" data-bs-target="#editModal">

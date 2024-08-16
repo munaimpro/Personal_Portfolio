@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Exception;
+use Carbon\Carbon;
 use App\Models\Post;
 use App\Models\Seoproperty;
 use Illuminate\Http\Request;
@@ -82,6 +83,42 @@ class PostController extends Controller
                     'message' => 'Something went wrong'
                 ]);
             }
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong'.$e->getMessage()
+            ]);
+        }
+    }
+    
+    
+    /* Method for publish schedule post */
+
+    public function publishSchedulePost(Request $request){
+        try{
+            // Input validation process for backend
+            $validatedData = $request->validate([
+                'current_time' => 'required',
+            ]);
+
+            // Getting the current time
+            $currentTime = Carbon::parse($validatedData['current_time'])->setTimezone('Asia/Dhaka')->format('Y-m-d H:i:s');
+
+            // Update the status of posts that are scheduled to be published at the current time
+            $publishedPost = Post::where('publish_time', '=', $currentTime)->where('post_status', 'scheduled')->update(['post_status' => 'published']);
+
+            if($publishedPost){
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Scheduled posts have been published successfully'
+                ]);
+            } else{
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Something went wrong'.' - '.$currentTime
+                ]);
+            }
+
         } catch(Exception $e){
             return response()->json([
                 'status' => 'failed',
