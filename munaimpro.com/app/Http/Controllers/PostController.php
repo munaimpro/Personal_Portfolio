@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use App\Models\Post;
 use App\Models\Seoproperty;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -291,60 +292,49 @@ class PostController extends Controller
         try{
             // Getting post id from input
             $postInfoId = $request->input('post_info_id');
-
-            // Retrive post thumbnail link from database
+    
+            // Start a DB transaction
+            DB::beginTransaction();
+    
+            // Retrieve post thumbnail link from database
             $getPreviousPostThumbnail = Post::where('id', '=', $postInfoId)->first('post_thumbnail');
-
-            // Remove previous post thumbnail file from storage
-            if($getPreviousPostThumbnail){
+    
+            // Remove previous post thumbnail file from storage if it exists
+            if($getPreviousPostThumbnail && $getPreviousPostThumbnail->post_thumbnail){
                 if(Storage::exists("public/post_thumbnails/".$getPreviousPostThumbnail->post_thumbnail)){
                     $deleteThumbnail = Storage::delete("public/post_thumbnails/".$getPreviousPostThumbnail->post_thumbnail);
-
-                    if($deleteThumbnail){
-                        // Delete post data by id
-                        $postDelete = Post::findOrFail($postInfoId)->delete();
-
-                        if($postDelete){
-                            return response()->json([
-                                'status' => 'success',
-                                'message' => 'Post deleted'
-                            ]);
-                        } else{
-                            return response()->json([
-                                'status' => 'failed',
-                                'message' => 'Something went wrong'
-                            ]);
-                        }
-                    } else{
-                        return response()->json([
-                            'status' => 'failed',
-                            'message' => 'Something went wrong'
-                        ]);
+                    
+                    if(!$deleteThumbnail){
+                        throw new Exception('Failed to delete post thumbnail.');
                     }
                 }
-            } else{
-                // Delete post data by id
-                $postDelete = Post::findOrFail($postInfoId)->delete();
-
-                if($postDelete){
-                    return response()->json([
-                        'status' => 'success',
-                        'message' => 'Post deleted'
-                    ]);
-                } else{
-                    return response()->json([
-                        'status' => 'failed',
-                        'message' => 'Something went wrong'
-                    ]);
-                }
             }
+    
+            // Delete post data by id
+            $postDelete = Post::findOrFail($postInfoId)->delete();
+    
+            if(!$postDelete){
+                throw new Exception('Failed to delete post data.');
+            }
+    
+            // Commit the DB transaction
+            DB::commit();
+    
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Post deleted'
+            ]);
+    
         } catch(Exception $e){
+            // Rollback the transaction
+            DB::rollBack();
+    
             return response()->json([
                 'status' => 'failed',
-                'message' => 'Something went wrong'.$e->getMessage()
+                'message' => 'Something went wrong: '.$e->getMessage()
             ]);
         }
-    }
+    }    
 
 
     /* Method for retrive post information by slug */
