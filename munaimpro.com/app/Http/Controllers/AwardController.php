@@ -82,7 +82,7 @@ class AwardController extends Controller
                 ]);
             } else{
                 return response()->json([
-                    'status' => 'filed',
+                    'status' => 'failed',
                     'message' => 'Something went wrong'
                 ]);
             }

@@ -110,14 +110,14 @@
                 let row = `<tr>
                                 <td class="productimgname d-block">
                                     <a href="javascript:void(0);" class="post image">
-                                        <img src=${postThumbnailFullPath} alt="post thumbnail">
+                                        <img src=${postThumbnailFullPath} alt="post thumbnail" class="h-50 w-75">
                                     </a>
                                     <p class="fw-bold">Lorem ipsum dolor sit amet</p>
                                 </td>
                                 <td>${item.category['category_name']}</td>
                                 <td>${item.user['first_name']} ${item.user['last_name']}</td>
                                 <td>${formattedDate}</td>
-                                <td>${item['post_status'] === 'published' ? '<span class="bg-lightgreen badges">Published</span>' : item['post_status'] === 'scheduled' ? '<span class="bg-lightgrey badges">Scheduled</span>' : '<span class="bg-lightred badges">Drafted</span>'}</td>
+                                <td>${item['post_status'] === 'published' ? '<span class="bg-lightgreen badges">Published</span>' : item['post_status'] === 'scheduled' ? '<span class="bg-lightgrey badges">Scheduled</span>' : '<span class="bg-lightred badges">Private</span>'}</td>
                                 <td>${item['post_view']}</td>
                                 <td>
                                     <a data-id=${item.id} class="editBtn me-3" data-bs-toggle="modal" data-bs-target="#editModal">

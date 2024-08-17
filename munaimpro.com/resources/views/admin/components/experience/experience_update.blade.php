@@ -49,7 +49,7 @@
 {{-- Front end script start --}}
 
 <script>
-    // Function for retrive education details
+    // Function for retrive experience details
     async function retriveExperienceInfoById(experience_info_id){
 
         try{

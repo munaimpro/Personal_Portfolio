@@ -115,7 +115,7 @@ class PostController extends Controller
             } else{
                 return response()->json([
                     'status' => 'failed',
-                    'message' => 'Something went wrong'.' - '.$currentTime
+                    'message' => 'Something went wrong'
                 ]);
             }
 
@@ -132,34 +132,36 @@ class PostController extends Controller
 
     public function updatePostInfo(Request $request){
         try{
-            $postInfoId = $request->input('post_info_id');
-            
             // Input validation process for backend
             $validatedData = $request->validate([
                 'post_heading' => 'required|string|max:255',
                 'post_slug' => 'required|string|max:255',
-                'post_thumbnail' => 'image',
+                'post_thumbnail' => $request->hasFile('post_thumbnail') ? 'image|mimes:jpeg,jpg,png|max:2048' : '',
                 'post_description' => 'required|string',
                 'category_id' => 'required|integer',
                 'user_id' => 'required|integer',
-                'publish_time' => 'required|string',
+                'publish_time' => 'string',
                 'post_status' => 'required|string',
+                'post_info_id' => 'required|integer',
             ]);
 
-            $userIdFromHeader = (int) $request->header('userId'); // User ID from header
-            $userIdFromInput = $request->input('user_id'); // User ID from input
+            // User ID from header
+            $userIdFromHeader = (int) $request->header('userId');
+
+            // User ID from input
+            $userIdFromInput = $request->input('user_id');
 
             // Matching both user id for validated post owner
             if($userIdFromHeader === $userIdFromInput){
 
                 if($request->hasFile('post_thumbnail')){
                     // Retrive post thumbnail link from database
-                    $getPreviousPostThumbnail = Post::where('id', '=', $postInfoId)->first('post_thumbnail');
+                    $getPreviousPostThumbnail = Post::where('id', '=', $validatedData['post_info_id'])->first('post_thumbnail');
 
                     // Remove previous post thumbnail file from storage
                     if($getPreviousPostThumbnail){
-                        if(Storage::exists("public/post_thumbnail/".$getPreviousPostThumbnail->post_thumbnail)){
-                            Storage::delete("public/post_thumbnail/".$getPreviousPostThumbnail->post_thumbnail);
+                        if(Storage::exists("public/post_thumbnails/".$getPreviousPostThumbnail->post_thumbnail)){
+                            Storage::delete("public/post_thumbnails/".$getPreviousPostThumbnail->post_thumbnail);
                         }
                     }
 
@@ -173,23 +175,43 @@ class PostController extends Controller
                     /* Merge thumbnail image into array */
                     $postData = array_merge($validatedData, ['post_thumbnail' => $postThumbnailUniqueName]);
     
-                    $post = Post::findOrFail($postInfoId)->update($postData);
+                    $post = Post::findOrFail($validatedData['post_info_id'])->update($postData);
     
                     /* Store post thumbnail into storage/public/post_thumbnails folder */
                     if ($post){
                         $postThumbnail->storeAs('post_thumbnails', $postThumbnailUniqueName, 'public');
+
+                        return response()->json([
+                            'status' => 'success',
+                            'message' => 'Post updated'
+                        ]);
+                    } else{
+                        return response()->json([
+                            'status' => 'failed',
+                            'message' => 'Something went wrong'
+                        ]);
                     }
                 } else{
-                    Post::findOrFail($postInfoId)->update($validatedData);
+                    $post = Post::findOrFail($validatedData['post_info_id'])->update($validatedData);
+
+                    if($post){
+                        return response()->json([
+                            'status' => 'success',
+                            'message' => 'Post updated'
+                        ]);
+                    } else{
+                        return response()->json([
+                            'status' => 'failed',
+                            'message' => 'Something went wrong'
+                        ]);
+                    }
                 }
-                
-                return response()->json([
-                    'status' => 'success',
-                    'message' => 'post updated'
-                ]);
 
             } else{
-                return redirect()->back();
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'User not matched'
+                ]);
             }
 
             
