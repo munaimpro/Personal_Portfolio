@@ -106,7 +106,7 @@ class PostController extends Controller
             $currentTime = Carbon::parse($validatedData['current_time'])->setTimezone('Asia/Dhaka')->format('Y-m-d H:i:s');
 
             // Update the status of posts that are scheduled to be published at the current time
-            $publishedPost = Post::where('publish_time', '=', $currentTime)->where('post_status', 'scheduled')->update(['post_status' => 'published']);
+            $publishedPost = Post::where('publish_time', '<=', $currentTime)->where('post_status', 'scheduled')->update(['post_status' => 'published']);
 
             if($publishedPost){
                 return response()->json([
@@ -150,7 +150,7 @@ class PostController extends Controller
             $userIdFromHeader = (int) $request->header('userId');
 
             // User ID from input
-            $userIdFromInput = $request->input('user_id');
+            $userIdFromInput = (int) $validatedData['user_id'];
 
             // Matching both user id for validated post owner
             if($userIdFromHeader === $userIdFromInput){
