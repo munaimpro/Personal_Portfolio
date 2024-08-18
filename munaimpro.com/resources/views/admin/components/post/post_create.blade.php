@@ -84,7 +84,7 @@
     async function retriveAllCategoryInfo(){
 
         try{
-            // Getting data table
+            // Getting input field
             let category_id = $('#categoryId');
 
             // Pssing request to controller and getting response

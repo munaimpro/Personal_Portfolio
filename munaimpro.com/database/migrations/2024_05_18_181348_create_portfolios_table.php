@@ -22,11 +22,11 @@ return new class extends Migration
             $table->string('client_name', 100);
             $table->string('client_designation', 100)->nullable();
             $table->date('project_starting_date');
-            $table->date('project_ending_date');
+            $table->date('project_ending_date')->nullable();
             $table->string('project_url', 100);
             $table->string('core_technology', 100);
             $table->integer('project_view')->default(0);
-            $table->enum('project_status', ['published', 'unpublished']);
+            $table->enum('project_status', ['published', 'unpublished', 'running'])->default('running');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });

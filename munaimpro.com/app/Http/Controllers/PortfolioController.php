@@ -40,59 +40,65 @@ class PortfolioController extends Controller
                 'client_name' => 'required|string|max:100',
                 'client_designation' => 'nullable|string|max:100',
                 'project_starting_date' => 'required|date',
-                'project_ending_date' => 'required|date',
+                'project_ending_date' => '',
                 'project_url' => 'required|string|max:100',
                 'core_technology' => 'required|string|max:100',
                 'project_status' => 'required|string',
             ]);
 
-            if ($request->hasFile('project_thumbnail') && $request->hasFile('project_ui_image')) {
-                // Getting thumbnail file
-                $portfolioThumbnail = $request->file('project_thumbnail');
-                
-                // Generate unique name for thumbnail
-                $portfolioThumbnailName = $portfolioThumbnail->getClientOriginalName();
-                $portfolioThumbnailUniqueName = substr(md5(time()), 0, 5) . '-' . $portfolioThumbnailName;
-
-                // Getting UI images
-                $uiImages = $request->file('project_ui_image');
-                $uiImageNames = [];
-
-                foreach($uiImages as $uiImage){
-                    $uiImageName = substr(md5(time()), 0, 5) . '-' . $uiImage->getClientOriginalName();
-                    $uiImage->storeAs('portfolio/ui_images', $uiImageName, 'public');
-                    $uiImageNames[] = $uiImageName;
-                }
-
-                // Convert the array of image names to JSON
-                $uiJsonImage = json_encode($uiImageNames);
-
-                dd($uiJsonImage);
-
-                // Merge thumbnail image and UI images into array
-                $portfolioData = array_merge($validatedData, [
-                    'project_thumbnail' => $portfolioThumbnailUniqueName,
-                    'project_ui_image' => $uiJsonImage
+            if($validatedData['project_ending_date'] && $validatedData['project_ending_date'] < $validatedData['project_starting_date']){
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Invalid ending date'
                 ]);
+            } else{
+                if ($request->hasFile('project_thumbnail') && $request->hasFile('project_ui_image')) {
+                    // Getting thumbnail file
+                    $portfolioThumbnail = $request->file('project_thumbnail');
+                    
+                    // Generating unique name for thumbnail
+                    $portfolioThumbnailName = $portfolioThumbnail->getClientOriginalName();
+                    $portfolioThumbnailUniqueName = substr(md5(time()), 0, 5) . '-' . $portfolioThumbnailName;
 
-                // Create portfolio
-                $portfolio = Portfolio::create($portfolioData);
+                    // Getting UI images
+                    $uiImages = $request->file('project_ui_image');
+                    $uiImageNames = [];
 
-                // Store portfolio thumbnail into storage/public/post_thumbnails folder
-                if ($portfolio) {
-                    $portfolioThumbnail->storeAs('portfolio/thumbnails', $portfolioThumbnailUniqueName, 'public');
+                    // Generating unique name for UI images
+                    foreach($uiImages as $uiImage){
+                        $uiImageName = substr(md5(time()), 0, 5) . '-' . $uiImage->getClientOriginalName();
+                        $uiImage->storeAs('portfolio/ui_images', $uiImageName, 'public');
+                        $uiImageNames[] = $uiImageName;
+                    }
+
+                    // Convert the array of image names to JSON
+                    $uiJsonImage = json_encode($uiImageNames);
+
+                    // Merge thumbnail image and UI images into array
+                    $portfolioData = array_merge($validatedData, [
+                        'project_thumbnail' => $portfolioThumbnailUniqueName,
+                        'project_ui_image' => $uiJsonImage
+                    ]);
+
+                    // Create portfolio
+                    $portfolio = Portfolio::create($portfolioData);
+
+                    // Store portfolio thumbnail into storage/public/post_thumbnails folder
+                    if ($portfolio) {
+                        $portfolioThumbnail->storeAs('portfolio/thumbnails', $portfolioThumbnailUniqueName, 'public');
+                    }
+
+                    return response()->json([
+                        'status' => 'success',
+                        'message' => 'New portfolio added'
+                    ]);
                 }
 
                 return response()->json([
-                    'status' => 'success',
-                    'message' => 'New portfolio added'
+                    'status' => 'failed',
+                    'message' => 'Files are missing'
                 ]);
             }
-
-            return response()->json([
-                'status' => 'failed',
-                'message' => 'Files are missing'
-            ]);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'failed',
