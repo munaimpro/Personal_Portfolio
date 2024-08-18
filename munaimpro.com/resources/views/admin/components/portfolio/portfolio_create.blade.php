@@ -144,6 +144,8 @@
 {{-- Create modal end --}}
 
 
+{{-- Front end script start --}}
+
 <script>
 
     // Function for retrive category(service) information
@@ -296,3 +298,5 @@
 
 
 </script>
+
+{{-- Front end script end --}}

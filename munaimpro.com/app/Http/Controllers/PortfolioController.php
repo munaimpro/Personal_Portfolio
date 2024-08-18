@@ -211,16 +211,17 @@ class PortfolioController extends Controller
 
     public function retrivePortfolioInfoById(Request $request){
         try{
-            $portfolioInfoId = $request->input('portfolio_info_id'); // Primary key id from input
+            // Primary key id from input
+            $portfolioInfoId = $request->input('portfolio_info_id');
             
-            // Getting post data by id with category and user
-            $post = Portfolio::with(['category:id,category_name', 'user:id'])->findOrFail($portfolioInfoId);
+            // Getting portfolio data by id with service id and name
+            $portfolio = Portfolio::with(['service:id,service_title'])->findOrFail($portfolioInfoId);
 
-            if($post){
+            if($portfolio){
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'Post data found',
-                    'data' => $post,
+                    'message' => 'Portfolio data found',
+                    'data' => $portfolio,
                 ]);
             } else{
                 return response()->json([
@@ -238,11 +239,65 @@ class PortfolioController extends Controller
     }
 
 
+    /* Method for removing a UI image from a portfolio */
+
+    public function removePortfolioUiImage(Request $request){
+        try {
+            // Getting portfolio id & image name from input
+            $portfolioInfoId = $request->input('portfolio_info_id');
+            $uiImageName = $request->input('ui_image_name');
+
+            // Retrieve the portfolio
+            $portfolio = Portfolio::findOrFail($portfolioInfoId);
+
+            // Decode the JSON object
+            $uiImages = json_decode($portfolio->project_ui_image);
+
+            if(count($uiImages) > 1){
+
+                // Remove the image from the array
+                $updatedImages = array_filter($uiImages, function($image) use ($uiImageName) {
+                    return $image !== $uiImageName;
+                });
+
+                // Re-encode the array to JSON
+                $portfolio->project_ui_image = json_encode(array_values($updatedImages));
+
+                // Save the updated portfolio
+                $portfolioSave = $portfolio->save();
+
+                if ($portfolioSave) {
+                    return response()->json([
+                        'status' => 'success',
+                        'message' => 'Image removed successfully'
+                    ]);
+                } else{
+                    return response()->json([
+                        'status' => 'failed',
+                        'message' => 'Failed to update portfolio'
+                    ]);
+                }
+
+            } else{
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Minimum 1 UI image required'
+                ]);
+            }
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong: ' . $e->getMessage()
+            ]);
+        }
+    }
+
+
     /* Method for delete post information */
 
     public function deletePortfolioInfo(Request $request){
         try{
-            // Getting post id from input
+            // Getting portfolio id from input
             $portfolioInfoId = $request->input('portfolio_info_id');
 
             // Retrive post thumbnail link from database
