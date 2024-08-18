@@ -195,7 +195,9 @@ Route::group(['prefix' => 'Admin', 'middleware' => TokenVerificationMiddleware::
     // Page Routes (Service Controller)
     Route::get('/service', [ServiceController::class, 'adminServicePage']);
 
-    Route::view('/portfolio', 'admin.pages.portfolio');
+    // Page Routes (Portfolio Controller)
+    Route::get('/portfolio', [PortfolioController::class, 'adminPortfolioPage']);
+
     Route::view('/pricing', 'admin.pages.pricing');
     Route::view('/message', 'admin.pages.message');
 

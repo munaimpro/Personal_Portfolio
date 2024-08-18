@@ -4,13 +4,28 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\Portfolio;
+use App\Models\Seoproperty;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
 class PortfolioController extends Controller
 {
-    /* Method for add post information */
+    /* Method for admin portfolio page load */
+        
+    public function adminPortfolioPage(){
+        // Getting SEO properties for specific view
+        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
+        
+        // Getting view name from uri
+        $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+
+        return view('admin.pages.portfolio', compact(['seoproperty', 'routeName']));
+    }
+
+
+    /* Method for add portfolio information */
 
     public function addPortfolioInfo(Request $request){
         try {
@@ -24,8 +39,8 @@ class PortfolioController extends Controller
                 'project_description' => 'required|string',
                 'client_name' => 'required|string|max:100',
                 'client_designation' => 'nullable|string|max:100',
-                'project_starting_date' => 'required|string',
-                'project_ending_date' => 'required|string',
+                'project_starting_date' => 'required|date',
+                'project_ending_date' => 'required|date',
                 'project_url' => 'required|string|max:100',
                 'core_technology' => 'required|string|max:100',
                 'project_status' => 'required|string',
@@ -39,8 +54,20 @@ class PortfolioController extends Controller
                 $portfolioThumbnailName = $portfolioThumbnail->getClientOriginalName();
                 $portfolioThumbnailUniqueName = substr(md5(time()), 0, 5) . '-' . $portfolioThumbnailName;
 
-                $uiImage = $request->file('project_ui_image');
-                $uiJsonImage = json_encode($uiImage);
+                // Getting UI images
+                $uiImages = $request->file('project_ui_image');
+                $uiImageNames = [];
+
+                foreach($uiImages as $uiImage){
+                    $uiImageName = substr(md5(time()), 0, 5) . '-' . $uiImage->getClientOriginalName();
+                    $uiImage->storeAs('portfolio/ui_images', $uiImageName, 'public');
+                    $uiImageNames[] = $uiImageName;
+                }
+
+                // Convert the array of image names to JSON
+                $uiJsonImage = json_encode($uiImageNames);
+
+                dd($uiJsonImage);
 
                 // Merge thumbnail image and UI images into array
                 $portfolioData = array_merge($validatedData, [
@@ -74,10 +101,8 @@ class PortfolioController extends Controller
         }
     }
 
-    
 
-
-    /* Method for update post information */
+    /* Method for update portfolio information */
 
     public function updatePortfolioInfo(Request $request){
         try{
@@ -149,16 +174,16 @@ class PortfolioController extends Controller
 
     /* Method for retrive all post information */
 
-    public function retriveAllPostInfo(Request $request){
+    public function retriveAllPortfolioInfo(Request $request){
         try{
-            // Getting all post data with category and user
-            $post = Portfolio::with(['category:id,category_name', 'user:id'])->get();
+            // Getting all portfolio data with category and user
+            $portfolio = Portfolio::with(['service:id,service_title'])->get();
 
-            if($post){
+            if($portfolio){
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'Post data found',
-                    'data' => $post,
+                    'message' => 'Portfolio data found',
+                    'data' => $portfolio,
                 ]);
             } else{
                 return response()->json([

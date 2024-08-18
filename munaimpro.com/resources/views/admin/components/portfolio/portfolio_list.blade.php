@@ -39,7 +39,7 @@
         </div>
 
         <div class="table-responsive">
-            <table class="table  datanew">
+            <table class="table datanew" id="tableData">
             <thead>
             <tr>
                 <th>Title</th>
@@ -52,7 +52,7 @@
             </tr>
             </thead>
 
-            <tbody>
+            <tbody id="tableList">
                 <tr>
                     <td class="productimgname sorting_1">
                         <a href="javascript:void(0);" class="post image">
@@ -86,3 +86,97 @@
     </div>
 </div>
 {{-- Table end --}}
+
+
+{{-- Front end script start --}}
+
+<script>
+
+    // Function for retrive portfolio information
+    
+    retriveAllPortfolioInfo();
+
+    async function retriveAllPortfolioInfo(){
+
+        try{
+            // Getting data table
+            let table_data = $('#tableData');
+
+            // Getting table rows
+            let table_list = $('#tableList');
+
+            // Destroy data table
+            // table_data.DataTable().destroy();
+
+            // Make data table empty
+            table_list.empty();
+
+            // Pssing data to controller and getting response
+            showLoader();
+            let response = await axios.get('/retriveAllPortfolioInfo');
+            hideLoader();
+
+            // Getting base URL of the system
+            let baseUrl = "{{ url('/') }}";
+
+            response.data.data.forEach(function(item, index){
+                // Generating full path for the project thumbnail
+                let projectThumbnailFullPath = baseUrl + '/storage/portfolio/thumbnails/' + item['project_thumbnail'];
+
+                // Formatting the project starting date date
+                let startingDate = new Date(item['project_starting_date']);
+                let formattedStartingDate = startingDate.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                });
+
+                // Formatting the project ending date date
+                let endingDate = new Date(item['project_ending_date']);
+                let formattedEndingDate = endingDate.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                });
+
+                let row = `<tr>
+                                <td class="productimgname d-block">
+                                    <a href="javascript:void(0);" class="post image">
+                                        <img src=${projectThumbnailFullPath} alt="project thumbnail" class="h-50 w-75">
+                                    </a>
+                                    <p class="fw-bold">Lorem ipsum dolor sit amet</p>
+                                </td>
+                                <td>${item['project_type']}</td>
+                                <td>${item['project_url']}</td>
+                                <td>${formattedStartingDate} to ${formattedEndingDate}</td>
+                                <td>${item['project_view']}</td>
+                                <td>${item['project_status'] === 'published' ? '<span class="bg-lightgreen badges">Published</span>' : '<span class="bg-lightred badges">Private</span>'}</td>
+                                <td>
+                                    <a data-id=${item.id} class="editBtn me-3" data-bs-toggle="modal" data-bs-target="#editModal">
+                                        <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
+                                    </a>                                        
+                                    <a data-id=${item.id} class="deleteBtn me-3" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                        <img src="{{ asset('assets/img/icons/delete.svg') }}" alt="img">
+                                    </a>
+                                </td>
+                            </tr>`
+                table_list.append(row);
+            });
+
+            $('.deleteBtn').on('click', function(){
+                $('#portfolioInfoDeleteId').val($(this).data('id'));
+            });
+
+            $('.editBtn').on('click', function(){
+                let post_info_id = $(this).data('id');
+                retrivePortfolioInfoById(post_info_id);
+            });
+
+            // table_data.DataTable();
+        } catch(e){
+            console.error('Something went wrong', e);
+        }
+    }
+</script>
+
+{{-- Front end script end --}}
