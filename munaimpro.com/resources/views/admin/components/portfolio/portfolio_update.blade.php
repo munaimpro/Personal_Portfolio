@@ -6,7 +6,7 @@
                 <h5 class="modal-title" id="editModalLabel">Update Project</h5>
             </div>
             <div class="modal-body">
-                <form id="addPortfolioForm">
+                <form id="updatePortfolioForm">
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label>Title</label>
@@ -40,7 +40,7 @@
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label>Ending Date</label>
-                            <input class="form-control" type="date" id="updateProjectEndingDate" onchange="toggleProjectStatus()">
+                            <input class="form-control" type="date" id="updateProjectEndingDate" onchange="toggleUpdateProjectStatus()">
                         </div>
                     </div>
 
@@ -114,7 +114,7 @@
 
                     <div class="form-group">
                         <label>Portfolio Visibility</label>
-                        <select class="form-control" id="updateProjectStatus" onchange="toggleProjectStatus()">
+                        <select class="form-control" id="updateProjectStatus" onchange="toggleUpdateProjectStatus()">
                             <option value="running">Running</option>
                             <option value="published">Published</option>
                         </select>
@@ -301,7 +301,7 @@
 
     // Function for toggle portfolio status
         
-    function toggleProjectStatus(){
+    function toggleUpdateProjectStatus(){
         const updateProjectStatus = $('#updateProjectStatus');
         const updateEndingDateInput = $('#updateProjectEndingDate').val();
         const updateSelectedDate = new Date(updateEndingDateInput);
@@ -375,7 +375,7 @@
                 displayToast('warning', 'Client institution is required');
             } else {
                 // Closing modal
-                $('#createModal').modal('hide');
+                $('#editModal').modal('hide');
 
                 // FormData object
                 let formData = new FormData();
@@ -400,14 +400,14 @@
 
                 // Sending data to the controller and getting response
                 showLoader();
-                let response = await axios.post('/addPortfolioInfo', formData, {
+                let response = await axios.post('/updatePortfolioInfo', formData, {
                     headers: {'Content-Type': 'multipart/form-data'}
                 });
                 hideLoader();
 
                 if (response.data['status'] === 'success') {
                     // Reset form
-                    $('#addPortfolioForm')[0].reset();
+                    $('#updatePortfolioForm')[0].reset();
 
                     // Call function to refresh the portfolio list (if applicable)
                     await retriveAllPortfolioInfo();

@@ -150,7 +150,7 @@
                                 <td>${item['project_url']}</td>
                                 <td>${formattedStartingDate} to ${formattedEndingDate}</td>
                                 <td>${item['project_view']}</td>
-                                <td>${item['project_status'] === 'published' ? '<span class="bg-lightgreen badges">Published</span>' : '<span class="bg-lightred badges">Private</span>'}</td>
+                                <td>${item['project_status'] === 'published' ? '<span class="bg-lightgreen badges">Published</span>' : item['project_status'] === 'running' ? '<span class="bg-lightgrey badges">Running</span>' : '<span class="bg-lightred badges">Private</span>'}</td>
                                 <td>
                                     <a data-id=${item.id} class="editBtn me-3" data-bs-toggle="modal" data-bs-target="#editModal">
                                         <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
