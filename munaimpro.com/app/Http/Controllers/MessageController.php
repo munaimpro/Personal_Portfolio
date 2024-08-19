@@ -3,13 +3,30 @@
 namespace App\Http\Controllers;
 
 use Exception;
+use App\Models\User;
 use App\Models\Message;
+use App\Models\Seoproperty;
 use Illuminate\Http\Request;
 use App\Mail\AdminMessageMail;
+use App\Mail\ClientMessageMail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Route;
 
 class MessageController extends Controller
 {
+    /* Method for admin interest page load */
+    
+    public function adminMessagePage(){
+        // Getting SEO properties for specific view
+        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
+        
+        // Getting view name from uri
+        $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+
+        return view('admin.pages.message', compact(['seoproperty', 'routeName']));
+    }
+
+
     /* Method for send message from website */
 
     public function sendMessageFromWebsite(Request $request){
@@ -25,13 +42,19 @@ class MessageController extends Controller
             $message = Message::create($validatedData);
 
             if($message){
+                // Getting admin email
+                $adminEmail = User::where('role', 'admin')->value('email');
+                
+                // Send email notification
+                Mail::to($adminEmail)->send(new ClientMessageMail($validatedData['email'], $validatedData['subject'], $validatedData['message']));
+
                 return response()->json([
                     'status' => 'success',
                     'message' => 'Message sent successfully'
                 ]);
             } else{
                 return response()->json([
-                    'status' => 'success',
+                    'status' => 'failed',
                     'message' => 'Something went wrong'
                 ]);
             }
@@ -55,14 +78,10 @@ class MessageController extends Controller
                 'subject' => 'required|string|max:255',
                 'message' => 'required|string',
             ]);
-
-            $email = $request->input('email');
-            $subject = $request->input('subject');
-            $adminMessage = $request->input('message');
             
             // dd($message);
             
-            $sendMessage = Mail::to($email)->send(new AdminMessageMail($email, $subject, $adminMessage));
+            $sendMessage = Mail::to($validatedData['email'])->send(new AdminMessageMail($validatedData['email'], $validatedData['subject'], $validatedData['message']));
 
             if($sendMessage){
                 return response()->json([
@@ -71,7 +90,7 @@ class MessageController extends Controller
                 ]);
             } else{
                 return response()->json([
-                    'status' => 'success',
+                    'status' => 'failed',
                     'message' => 'Something went wrong'
                 ]);
             }
@@ -127,7 +146,7 @@ class MessageController extends Controller
 
     /* Method for retrive message by id */
 
-    public function retriveMessageById(Request $request){
+    public function retriveMessageInfoById(Request $request){
         try{
             $messageId = $request->input('message_id'); // Primary key id from input
         
@@ -160,10 +179,10 @@ class MessageController extends Controller
 
     /* Method for retrive all message */
 
-    public function retriveAllMessage(){
+    public function retriveAllMessageInfo(){
         try{
             // Getting all message
-            $message = Message::get(['id', 'name', 'email', 'subject', 'message']);
+            $message = Message::get(['id', 'name', 'email', 'subject', 'message', 'created_at']);
 
             if($message){
                 return response()->json([

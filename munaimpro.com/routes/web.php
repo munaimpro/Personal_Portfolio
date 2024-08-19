@@ -135,8 +135,8 @@ Route::delete('removePortfolioUiImage', [PortfolioController::class, 'removePort
 Route::post('sendMessageFromWebsite', [MessageController::class, 'sendMessageFromWebsite']);
 Route::post('sendMessageFromAdmin', [MessageController::class, 'sendMessageFromAdmin'])->middleware(TokenVerificationMiddleware::class);
 Route::post('replyMessageFromAdmin', [MessageController::class, 'replyMessageFromAdmin'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retriveMessageById', [MessageController::class, 'retriveMessageById'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retriveAllMessage', [MessageController::class, 'retriveAllMessage'])->middleware(TokenVerificationMiddleware::class);
+Route::get('retriveMessageInfoById', [MessageController::class, 'retriveMessageInfoById'])->middleware(TokenVerificationMiddleware::class);
+Route::get('retriveAllMessageInfo', [MessageController::class, 'retriveAllMessageInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deleteMessage', [MessageController::class, 'deleteMessage'])->middleware(TokenVerificationMiddleware::class);
 
 
@@ -200,7 +200,9 @@ Route::group(['prefix' => 'Admin', 'middleware' => TokenVerificationMiddleware::
     Route::get('/portfolio', [PortfolioController::class, 'adminPortfolioPage']);
 
     Route::view('/pricing', 'admin.pages.pricing');
-    Route::view('/message', 'admin.pages.message');
+
+    // Page Routes (Service Controller)
+    Route::get('/message', [MessageController::class, 'adminMessagePage']);
 
     // Page Routes (Service Controller)
     Route::get('/category', [CategoryController::class, 'adminCategoryPage']);

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('password', 50);
             $table->string('profile_picture', 100)->nullable();
             $table->string('otp', 10)->nullable();
+            $table->enum('role', ['admin', 'user'])->default('user');
             $table->rememberToken();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
