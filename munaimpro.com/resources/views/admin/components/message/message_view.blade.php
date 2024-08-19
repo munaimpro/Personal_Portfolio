@@ -65,6 +65,7 @@
                 // Assigning retrived values
                 document.getElementById('messageClientName').value = response.data.data['name'];
                 document.getElementById('messageMail').value = response.data.data['email'];
+                document.getElementById('replyMessageMail').value = response.data.data['email'];
                 document.getElementById('messageSubject').value = response.data.data['subject'];
                 tinymce.get('messageDescription').setContent(response.data.data['message']);
                 

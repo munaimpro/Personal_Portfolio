@@ -114,16 +114,12 @@ class MessageController extends Controller
                 'subject' => 'required|string|max:255',
                 'message' => 'required|string',
             ]);
-
-            $email = $request->input('email');
-            $subject = $request->input('subject');
-            $adminMessage = $request->input('message');
             
-            $replyMessage = Mail::to($email)->send(new AdminMessageMail($email, $subject, $adminMessage)); 
+            $replyMessage = Mail::to($validatedData['email'])->send(new AdminMessageMail($validatedData['email'], $validatedData['subject'], $validatedData['message'])); 
 
             if($replyMessage){
                 // Update message status to "replied" in message table
-                Message::where('email', '=', $email)->update(['message_status' => 'replied']);
+                Message::where('email', '=', $validatedData['email'])->update(['message_status' => 'replied']);
 
                 return response()->json([
                     'status' => 'success',
