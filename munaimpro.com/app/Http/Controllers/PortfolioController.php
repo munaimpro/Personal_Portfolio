@@ -272,9 +272,9 @@ class PortfolioController extends Controller
             // Decode the JSON object
             $uiImages = json_decode($portfolio->project_ui_image, true);
     
-            if (count($uiImages) > 1) {
+            if(count($uiImages) > 1){
                 // Remove the image from the array
-                $updatedImages = array_filter($uiImages, function($image) use ($uiImageName) {
+                $updatedImages = array_filter($uiImages, function($image) use ($uiImageName){
                     return $image !== $uiImageName;
                 });
     
@@ -318,60 +318,75 @@ class PortfolioController extends Controller
     /* Method for delete post information */
 
     public function deletePortfolioInfo(Request $request){
+        // Start transaction
+        DB::beginTransaction();
+    
         try{
             // Getting portfolio id from input
             $portfolioInfoId = $request->input('portfolio_info_id');
+    
+            // Retrieve portfolio from the database
+            $portfolio = Portfolio::findOrFail($portfolioInfoId);
+    
+            // Retrieve and delete the portfolio thumbnail
+            $portfolioThumbnail = $portfolio->project_thumbnail;
 
-            // Retrive post thumbnail link from database
-            $getPreviousPortfolioThumbnail = Portfolio::where('id', '=', $portfolioInfoId)->first('post_thumbnail');
+            if($portfolioThumbnail && Storage::exists("public/portfolio/thumbnails/" . $portfolioThumbnail)){
+                if (!Storage::delete("public/portfolio/thumbnails/" . $portfolioThumbnail)){
+                    // Rollback the transaction
+                    DB::rollBack();
 
-            // Remove previous post thumbnail file from storage
-            if($getPreviousPortfolioThumbnail){
-                if(Storage::exists("public/portfolio/thumbnails".$getPreviousPortfolioThumbnail->portfolio_thumbnail)){
-                    $deleteThumbnail = Storage::delete("public/portfolio/thumbnails".$getPreviousPortfolioThumbnail->portfolio_thumbnail);
-
-                    if($deleteThumbnail){
-                        // Delete post data by id
-                        $portfolioDelete = Portfolio::findOrFail($portfolioInfoId)->delete();
-
-                        if($portfolioDelete){
-                            return response()->json([
-                                'status' => 'success',
-                                'message' => 'Portfolio deleted'
-                            ]);
-                        } else{
-                            return response()->json([
-                                'status' => 'failed',
-                                'message' => 'Something went wrong'
-                            ]);
-                        }
-                    } else{
-                        return response()->json([
-                            'status' => 'failed',
-                            'message' => 'Something went wrong'
-                        ]);
-                    }
-                }
-            } else{
-                // Delete portfolio data by id
-                $postDelete = Portfolio::findOrFail($portfolioInfoId)->delete();
-
-                if($postDelete){
-                    return response()->json([
-                        'status' => 'success',
-                        'message' => 'Post deleted'
-                    ]);
-                } else{
                     return response()->json([
                         'status' => 'failed',
-                        'message' => 'Something went wrong'
+                        'message' => 'Failed to delete portfolio thumbnail'
                     ]);
                 }
             }
-        } catch(Exception $e){
+    
+            // Retrieve and delete all UI images
+            $uiImages = json_decode($portfolio->project_ui_image, true);
+
+            if (!empty($uiImages)){
+                foreach($uiImages as $uiImage){
+                    if (Storage::exists("public/portfolio/ui_images/" . $uiImage)){
+                        if (!Storage::delete("public/portfolio/ui_images/" . $uiImage)){
+                            // Rollback the transaction
+                            DB::rollBack();
+
+                            return response()->json([
+                                'status' => 'failed',
+                                'message' => 'Failed to delete UI images'
+                            ]);
+                        }
+                    }
+                }
+            }
+    
+            // Delete portfolio data by id
+            if (!$portfolio->delete()){
+                DB::rollBack();
+
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Failed to delete portfolio'
+                ]);
+            }
+
+            // Commit the transaction
+            DB::commit();
+            
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Portfolio deleted'
+            ]);
+    
+        } catch (Exception $e){
+            // Rollback the transaction
+            DB::rollBack();
+
             return response()->json([
                 'status' => 'failed',
-                'message' => 'Something went wrong'.$e->getMessage()
+                'message' => 'Something went wrong: ' . $e->getMessage()
             ]);
         }
     }
