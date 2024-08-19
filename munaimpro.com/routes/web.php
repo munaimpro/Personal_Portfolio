@@ -135,7 +135,7 @@ Route::delete('removePortfolioUiImage', [PortfolioController::class, 'removePort
 Route::post('sendMessageFromWebsite', [MessageController::class, 'sendMessageFromWebsite']);
 Route::post('sendMessageFromAdmin', [MessageController::class, 'sendMessageFromAdmin'])->middleware(TokenVerificationMiddleware::class);
 Route::post('replyMessageFromAdmin', [MessageController::class, 'replyMessageFromAdmin'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retriveMessageInfoById', [MessageController::class, 'retriveMessageInfoById'])->middleware(TokenVerificationMiddleware::class);
+Route::post('retriveMessageInfoById', [MessageController::class, 'retriveMessageInfoById'])->middleware(TokenVerificationMiddleware::class);
 Route::get('retriveAllMessageInfo', [MessageController::class, 'retriveAllMessageInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deleteMessage', [MessageController::class, 'deleteMessage'])->middleware(TokenVerificationMiddleware::class);
 

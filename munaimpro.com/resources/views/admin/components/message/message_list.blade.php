@@ -46,6 +46,7 @@
                         <th>Email</th>
                         <th>Subject</th>
                         <th>Date</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -96,6 +97,7 @@
                                 <td>${item['email']}</td>
                                 <td>${item['subject']}</td>
                                 <td>${formattedDate}</td>
+                                <td>${item['message_status'] === 'new' ? '<span class="bg-lightgreen badges">New</span>' : item['message_status'] === 'viewed' ? '<span class="bg-lightgrey badges">Seen</span>' : '<span class="bg-lightred badges">Replied</span>'}</td>
                                 <td>
                                     <a data-id="${item.id}" class="viewBtn me-3" data-bs-toggle="modal" data-bs-target="#viewModal">
                                         <img src="{{ asset('assets/img/icons/eye.svg') }}" alt="img">
@@ -117,12 +119,12 @@
 
             $('.viewBtn').on('click', function(){
                 let message_info_id = $(this).data('id');
-                retrieveMessageInfoById(message_info_id);
+                retriveMessageInfoById(message_info_id);
             });
 
             $('.replyBtn').on('click', function(){
                 let message_info_id = $(this).data('id');
-                retrieveMessageInfoById(message_info_id);
+                retriveMessageInfoById(message_info_id);
             });
 
         } catch (e){
