@@ -6,6 +6,7 @@ use Exception;
 use App\Models\Portfolio;
 use App\Models\Seoproperty;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -52,7 +53,7 @@ class PortfolioController extends Controller
                     'message' => 'Invalid ending date'
                 ]);
             } else{
-                if ($request->hasFile('project_thumbnail') && $request->hasFile('project_ui_image')) {
+                if ($request->hasFile('project_thumbnail') && $request->hasFile('project_ui_image')){
                     // Getting thumbnail file
                     $portfolioThumbnail = $request->file('project_thumbnail');
                     
@@ -83,8 +84,8 @@ class PortfolioController extends Controller
                     // Create portfolio
                     $portfolio = Portfolio::create($portfolioData);
 
-                    // Store portfolio thumbnail into storage/public/post_thumbnails folder
-                    if ($portfolio) {
+                    // Store portfolio thumbnail into storage/public/portfolio/thumbnails folder
+                    if ($portfolio){
                         $portfolioThumbnail->storeAs('portfolio/thumbnails', $portfolioThumbnailUniqueName, 'public');
                     }
 
@@ -111,71 +112,89 @@ class PortfolioController extends Controller
     /* Method for update portfolio information */
 
     public function updatePortfolioInfo(Request $request){
-        try{
-            $portfolioInfoId = $request->input('portfolio_info_id');
-            
+        try {
+            // Start DB transaction
+            DB::beginTransaction();
+
             // Input validation process for backend
             $validatedData = $request->validate([
                 'project_title' => 'required|string|max:255',
-                'project_thumbnail' => 'image',
-                'project_ui_image.*' => 'image', // Allow multiple images
                 'project_type' => 'required|string|max:100',
                 'service_id' => 'required|integer',
                 'project_description' => 'required|string',
                 'client_name' => 'required|string|max:100',
                 'client_designation' => 'nullable|string|max:100',
-                'project_starting_date' => 'required|string',
-                'project_ending_date' => 'required|string',
+                'project_starting_date' => 'required|date',
+                'project_ending_date' => 'nullable|date',
                 'project_url' => 'required|string|max:100',
                 'core_technology' => 'required|string|max:100',
                 'project_status' => 'required|string',
+                'portfolio_info_id' => 'required|integer|exists:portfolios,id',
             ]);
-
-            // Matching both user id for validated post owner
-            
-
-                if($request->hasFile('project_thumbnail')){
-                    // Retrive project thumbnail link from database
-                    $getPreviousProjectThumbnail = Portfolio::where('id', '=', $portfolioInfoId)->first('project_thumbnail');
-
-                    // Remove previous portfolio thumbnail file from storage
-                    if($getPreviousProjectThumbnail){
-                        if(Storage::exists("public/portfolio/thumbnails/".$getPreviousProjectThumbnail->project_thumbnail)){
-                            Storage::delete("public/portfolio/thumbnails/".$getPreviousProjectThumbnail->project_thumbnail);
-                        }
-                    }
-
-                    // Getting new project thumbnail file
-                    $projectThumbnail = $request->file('project_thumbnail');
-
-                    /* Extract the original file name with extension */
-                    $projectThumbnailName = $projectThumbnail->getClientOriginalName();
-                    $projectThumbnailUniqueName = substr(md5(time()), 0, 5).'-'.$projectThumbnail;
     
-                    /* Merge thumbnail image into array */
-                    $portfolioData = array_merge($validatedData, ['project_thumbnail' => $projectThumbnailUniqueName]);
+            // Retrieve portfolio instance only once
+            $portfolio = Portfolio::findOrFail($validatedData['portfolio_info_id']);
     
-                    $portfolio = Portfolio::findOrFail($portfolioInfoId)->update($portfolioData);
+            // Handle project thumbnail
+            if ($request->hasFile('project_thumbnail')) {
+                // Validate thumbnail
+                $request->validate(['project_thumbnail' => 'image']);
     
-                    /* Store project thumbnail into storage/public/project/thumbnails folder */
-                    if ($portfolio){
-                        $projectThumbnail->storeAs('post_thumbnails', $projectThumbnailUniqueName, 'public');
-                    }
-                } else{
-                    Portfolio::findOrFail($portfolioInfoId)->update($validatedData);
+                // Remove previous thumbnail from storage
+                if ($portfolio->project_thumbnail && Storage::exists("public/portfolio/thumbnails/".$portfolio->project_thumbnail)) {
+                    Storage::delete("public/portfolio/thumbnails/".$portfolio->project_thumbnail);
                 }
-                
-                return response()->json([
-                    'status' => 'success',
-                    'message' => 'portfolio updated'
-                ]);
-        } catch(Exception $e){
+    
+                // Store new thumbnail
+                $projectThumbnail = $request->file('project_thumbnail');
+                $projectThumbnailName = substr(md5(time()), 0, 5) . '-' . $projectThumbnail->getClientOriginalName();
+                $projectThumbnail->storeAs('portfolio/thumbnails', $projectThumbnailName, 'public');
+                $validatedData['project_thumbnail'] = $projectThumbnailName;
+            }
+    
+            // Handle UI images
+            if ($request->hasFile('project_ui_image')) {
+                // Validate UI images
+                $request->validate(['project_ui_image.*' => 'image']);
+    
+                $projectUiImages = $request->file('project_ui_image');
+    
+                // Convert existing UI images JSON to array, or initialize an empty array
+                $existingUiImages = json_decode($portfolio->project_ui_image, true) ?: [];
+    
+                // Add new UI images to array
+                foreach ($projectUiImages as $uiImage) {
+                    $uiImageName = substr(md5(time()), 0, 5) . '-' . $uiImage->getClientOriginalName();
+                    $uiImage->storeAs('portfolio/ui_images', $uiImageName, 'public');
+                    $existingUiImages[] = $uiImageName;
+                }
+    
+                // Convert back to JSON and update validated data
+                $validatedData['project_ui_image'] = json_encode($existingUiImages);
+            }
+    
+            // Update portfolio with validated data
+            $portfolio->update($validatedData);
+
+            // Commit the transaction
+            DB::commit();
+    
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Portfolio details updated'
+            ]);
+    
+        } catch(Exception $e) {
+            // Rollback the transaction
+            DB::rollBack();
+
+            // Catch and handle exceptions
             return response()->json([
                 'status' => 'failed',
-                'message' => 'Something went wrong'.$e->getMessage()
+                'message' => 'Something went wrong: ' . $e->getMessage()
             ]);
         }
-    }
+    }    
 
 
     /* Method for retrive all post information */
@@ -246,39 +265,42 @@ class PortfolioController extends Controller
             // Getting portfolio id & image name from input
             $portfolioInfoId = $request->input('portfolio_info_id');
             $uiImageName = $request->input('ui_image_name');
-
+    
             // Retrieve the portfolio
             $portfolio = Portfolio::findOrFail($portfolioInfoId);
-
+    
             // Decode the JSON object
-            $uiImages = json_decode($portfolio->project_ui_image);
-
-            if(count($uiImages) > 1){
-
+            $uiImages = json_decode($portfolio->project_ui_image, true);
+    
+            if (count($uiImages) > 1) {
                 // Remove the image from the array
                 $updatedImages = array_filter($uiImages, function($image) use ($uiImageName) {
                     return $image !== $uiImageName;
                 });
-
-                // Re-encode the array to JSON
+    
+                // Encode the array to JSON after re-indexing
                 $portfolio->project_ui_image = json_encode(array_values($updatedImages));
-
+    
+                // Remove the image from storage
+                if (Storage::exists("public/portfolio/ui_images/" . $uiImageName)) {
+                    Storage::delete("public/portfolio/ui_images/" . $uiImageName);
+                }
+    
                 // Save the updated portfolio
                 $portfolioSave = $portfolio->save();
-
+    
                 if ($portfolioSave) {
                     return response()->json([
                         'status' => 'success',
-                        'message' => 'Image removed successfully'
+                        'message' => 'UI image removed successfully'
                     ]);
-                } else{
+                } else {
                     return response()->json([
                         'status' => 'failed',
                         'message' => 'Failed to update portfolio'
                     ]);
                 }
-
-            } else{
+            } else {
                 return response()->json([
                     'status' => 'failed',
                     'message' => 'Minimum 1 UI image required'
@@ -290,7 +312,7 @@ class PortfolioController extends Controller
                 'message' => 'Something went wrong: ' . $e->getMessage()
             ]);
         }
-    }
+    }    
 
 
     /* Method for delete post information */

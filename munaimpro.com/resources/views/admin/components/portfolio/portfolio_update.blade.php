@@ -218,7 +218,6 @@
                 $('#updateProjectStatus').val(response.data.data['project_status']);
                 $('#updateClientName').val(response.data.data['client_name']);
                 $('#updateClientDesignation').val(response.data.data['client_designation']);
-                $('#updateClientInstitution').val(response.data.data['client_institution']);
             } else{
                 displayToast('error', response.data['message']);
             }
@@ -313,7 +312,7 @@
 
         console.log(updateSelectedDate.getDate())
         console.log(updateCurrentDate.getDate())
-        console.log(selectedDate.getDate() < updateCurrentDate.getDate())
+        console.log(updateSelectedDate.getDate() < updateCurrentDate.getDate())
         
         // Compare the selected date with the current date
         if(updateEndingDateInput && updateSelectedDate.getDate() < updateCurrentDate.getDate()){
@@ -331,20 +330,21 @@
     async function updatePortfolioInfo(){
         try{
             // Getting input data
-            let project_title = $('#projectTitle').val().trim();
-            let project_type = $('#projectType').val().trim();
-            let project_starting_date = $('#projectStartingDate').val().trim();
-            let project_ending_date = $('#projectEndingDate').val().trim();
-            let project_thumbnail = $('#projectThumbnail')[0].files[0];
-            let project_ui_image = $('#projectUiImage')[0].files;
-            let service_id = $('#serviceId').val().trim();
-            let project_description = tinymce.get('projectDescription').getContent().trim();
-            let project_url = $('#projectUrl').val().trim();
-            let project_technology = $('#projectTechnology').val().trim();
-            let project_status = $('#projectStatus').val().trim();
-            let client_name = $('#clientName').val().trim();
-            let client_designation = $('#clientDesignation').val().trim();
-            let client_institution = $('#clientInstitution').val().trim();
+            let project_title = $('#updateProjectTitle').val().trim();
+            let project_type = $('#updateProjectType').val().trim();
+            let project_starting_date = $('#updateProjectStartingDate').val().trim();
+            let project_ending_date = $('#updateProjectEndingDate').val().trim();
+            let project_thumbnail = $('#updateProjectThumbnail')[0].files[0];
+            let project_ui_image = $('#updateProjectUiImage')[0].files;
+            let service_id = $('#updateServiceId').val().trim();
+            let project_description = tinymce.get('updateProjectDescription').getContent().trim();
+            let project_url = $('#updateProjectUrl').val().trim();
+            let project_technology = $('#updateProjectTechnology').val().trim();
+            let project_status = $('#updateProjectStatus').val().trim();
+            let client_name = $('#updateClientName').val().trim();
+            let client_designation = $('#updateClientDesignation').val().trim();
+            let client_institution = $('#updateClientInstitution').val().trim();
+            let portfolio_info_id = $('#portfolioInfoId').val().trim();
 
             // Front-end validation process
             if (project_title.length === 0) {
@@ -363,10 +363,6 @@
                 displayToast('warning', 'Project technology is required');
             } else if (project_description.length === 0) {
                 displayToast('warning', 'Project description is required');
-            } else if (!project_thumbnail) {
-                displayToast('warning', 'Project thumbnail is required');
-            } else if (project_ui_image.length === 0) {
-                displayToast('warning', 'At least one UI image is required');
             } else if (client_name.length === 0) {
                 displayToast('warning', 'Client name is required');
             } else if (client_designation.length === 0) {
@@ -385,10 +381,11 @@
                 formData.append('project_type', project_type);
                 formData.append('project_starting_date', project_starting_date);
                 formData.append('project_ending_date', project_ending_date);
-                formData.append('project_thumbnail', project_thumbnail);
-                for (let i = 0; i < project_ui_image.length; i++) {
-                    formData.append('project_ui_image[]', project_ui_image[i]);
-                }
+                if(project_thumbnail) formData.append('project_thumbnail', project_thumbnail);
+                if(project_ui_image)
+                    for (let i = 0; i < project_ui_image.length; i++){
+                        formData.append('project_ui_image[]', project_ui_image[i]);
+                    }
                 formData.append('service_id', service_id);
                 formData.append('project_description', project_description);
                 formData.append('project_url', project_url);
@@ -397,6 +394,7 @@
                 formData.append('client_name', client_name);
                 formData.append('client_designation', client_designation);
                 formData.append('client_institution', client_institution);
+                formData.append('portfolio_info_id', portfolio_info_id);
 
                 // Sending data to the controller and getting response
                 showLoader();
