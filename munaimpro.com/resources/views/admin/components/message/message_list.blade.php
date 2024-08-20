@@ -99,10 +99,10 @@
                                 <td>${formattedDate}</td>
                                 <td>${item['message_status'] === 'new' ? '<span class="bg-lightgreen badges">New</span>' : item['message_status'] === 'viewed' ? '<span class="bg-lightgrey badges">Seen</span>' : '<span class="bg-lightred badges">Replied</span>'}</td>
                                 <td>
-                                    <a data-id="${item.id}" class="viewBtn me-3" data-bs-toggle="modal" data-bs-target="#viewModal">
+                                    <a data-id="${item.id}" data-action="viewMessage" class="viewBtn me-3" data-bs-toggle="modal" data-bs-target="#viewModal">
                                         <img src="{{ asset('assets/img/icons/eye.svg') }}" alt="img">
                                     </a>                                        
-                                    <a data-id="${item.id}" class="replyBtn me-3" data-bs-toggle="modal" data-bs-target="#replyModal">
+                                    <a data-id="${item.id}" data-action="replyMessage" class="replyBtn me-3" data-bs-toggle="modal" data-bs-target="#replyModal">
                                         <img src="{{ asset('assets/img/icons/reply.svg') }}" alt="img">
                                     </a>                                        
                                     <a data-id="${item.id}" class="deleteBtn me-3" data-bs-toggle="modal" data-bs-target="#deleteModal">
@@ -119,12 +119,14 @@
 
             $('.viewBtn').on('click', function(){
                 let message_info_id = $(this).data('id');
-                retriveMessageInfoById(message_info_id);
+                let message_info_action = $(this).data('action');
+                retriveMessageInfoById(message_info_id, message_info_action);
             });
 
             $('.replyBtn').on('click', function(){
                 let message_info_id = $(this).data('id');
-                retriveMessageInfoById(message_info_id);
+                let message_info_action = $(this).data('action');
+                retriveMessageInfoById(message_info_id, message_info_action);
             });
 
         } catch (e){

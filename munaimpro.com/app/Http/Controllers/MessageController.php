@@ -145,12 +145,15 @@ class MessageController extends Controller
     public function retriveMessageInfoById(Request $request){
         try{
             $messageId = $request->input('message_info_id'); // Primary key id from input
+            $messageAction = $request->input('message_info_action'); // Message action from input
         
             $message = Message::findOrFail($messageId, ['id', 'name', 'email', 'subject', 'message', 'message_status']); // Getting message data by id
 
             if($message){
                 // Update message status to "viewed" in message table
-                Message::where('id', '=', $messageId)->update(['message_status' => 'viewed']);
+                if($messageAction === "viewMessage" && $message->message_status !== 'replied'){
+                    Message::where('id', '=', $messageId)->update(['message_status' => 'viewed']);
+                }
 
                 return response()->json([
                     'status' => 'success',

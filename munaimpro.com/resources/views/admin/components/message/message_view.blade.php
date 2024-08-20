@@ -50,7 +50,7 @@
 
 <script>
     // Function for retrive message details
-    async function retriveMessageInfoById(message_info_id){
+    async function retriveMessageInfoById(message_info_id, message_info_action){
 
         try{
             // Assigning id to hidden field
@@ -58,7 +58,7 @@
 
             // Pssing id to controller and getting response
             showLoader();
-            let response = await axios.post('/retriveMessageInfoById', {message_info_id:message_info_id});
+            let response = await axios.post('/retriveMessageInfoById', {message_info_id:message_info_id, message_info_action:message_info_action});
             hideLoader();
 
             if(response.data['status'] === 'success'){
