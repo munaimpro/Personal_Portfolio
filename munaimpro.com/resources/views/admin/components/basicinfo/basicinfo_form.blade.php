@@ -56,7 +56,7 @@
             <div class="col-lg-12 col-sm-6 col-12">
                 <div class="form-group">
                     <label>Hero Description</label>
-                    <textarea class="form-control contentDetails" spellcheck="false" data-ms-editor="true" id="websiteHeroDescription"></textarea>
+                    <textarea class="contentDetails" spellcheck="false" data-ms-editor="true" id="websiteHeroDescription"></textarea>
                 </div>
             </div>
 
@@ -85,10 +85,35 @@
                 </div>
             </div>
 
+            <div class="col-lg-12 col-sm-12 col-12">
+                <div class="form-group">
+                    <label>Resume</label>
+                    <div class="product-list">
+                        <ul>
+                            <li class="p-0">
+                                <div class="productviews">
+                                    <div class="productviewsimg" id="resumePreview">
+                                        
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="image-upload">
+                        <input type="file" id="uploadResume" accept="application/pdf">
+                        <div class="image-uploads">
+                            <img src="{{ asset('assets/img/icons/upload.svg') }}" alt="upload icon">
+                            <h4>Drag and drop a file to upload</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+
             <div class="col-lg-12 col-sm-6 col-12">
                 <div class="form-group">
                     <label>About Description</label>
-                    <textarea class="form-control contentDetails" spellcheck="false" data-ms-editor="true" id="websiteAboutDescription"></textarea>
+                    <textarea class="contentDetails" spellcheck="false" data-ms-editor="true" id="websiteAboutDescription"></textarea>
                 </div>
             </div>
 
@@ -135,7 +160,7 @@
 
     async function getAboutInfo() {
         showLoader();
-        let response = await axios.get('../retriveAboutInfo');
+        let response = await axios.get('/retriveAboutInfo');
         hideLoader();
 
         if(response.data['status'] === 'success'){
@@ -151,10 +176,14 @@
             document.getElementById('websiteGreetings').value = response.data.data['greetings'];
             document.getElementById('websiteFullName').value = response.data.data['full_name'];
             document.getElementById('websiteDesignation').value = response.data.data['designation'];
+            document.getElementById('websiteEmail').value = response.data.data['email'];
+            document.getElementById('websitePhone').value = response.data.data['phone'];
+            document.getElementById('websiteLocation').value = response.data.data['location'];
             document.getElementById('websiteHeroDescription').value = response.data.data['hero_description'];
             document.getElementById('websiteHeroImage').src = heroImageFullPath;
             document.getElementById('websiteAboutDescription').value = response.data.data['about_description'];
             document.getElementById('websiteAboutImage').src = aboutImageFullPath;
+            document.getElementById('resumePreview').innerHTML = response.data.data['resume_link'];
         } else{
             displayToast('error', response.data['message']);
         }
@@ -168,11 +197,17 @@
             let website_greetings = $('#websiteGreetings').val().trim();
             let website_full_name = $('#websiteFullName').val().trim();
             let website_designation = $('#websiteDesignation').val().trim();
+            let website_email = $('#websiteEmail').val().trim();
+            let website_phone = $('#websitePhone').val().trim();
+            let website_location = $('#websiteLocation').val().trim();
             let website_hero_description = tinymce.get('websiteHeroDescription').getContent().trim();
             let upload_hero_image = document.getElementById('uploadHeroImage').files[0];
             let website_about_description = tinymce.get('websiteAboutDescription').getContent().trim();
             let upload_about_image = document.getElementById('uploadAboutImage').files[0];
-            let website_resume_link = "Link here";
+            let website_resume = document.getElementById('uploadResume').files[0];
+
+            // Regular expression for basic email validation
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
             // Front end validation process
             if(website_greetings.length === 0){
@@ -181,6 +216,14 @@
                 displayToast('warning', 'Full name is required');
             } else if(website_designation.length === 0){
                 displayToast('warning', 'Designation is required');
+            } else if(website_email.length === 0){
+                displayToast('warning', 'Email is required');
+            } else if(!emailPattern.test(website_email)){
+                displayToast('warning', 'Invalid email address');
+            } else if(website_phone.length === 0){
+                displayToast('warning', 'Phone number is required');
+            } else if(website_location.length === 0){
+                displayToast('warning', 'Location is required');
             } else if(website_hero_description.length === 0){
                 displayToast('warning', 'Hero description is required');
             } else if(website_about_description.length === 0){
@@ -193,11 +236,14 @@
                 formData.append('greetings', website_greetings);
                 formData.append('full_name', website_full_name);
                 formData.append('designation', website_designation);
+                formData.append('email', website_email);
+                formData.append('phone', website_phone);
+                formData.append('location', website_location);
                 formData.append('hero_description', website_hero_description);
                 if(upload_hero_image) formData.append('hero_image', upload_hero_image);
                 formData.append('about_description', website_about_description);
                 if(upload_about_image) formData.append('about_image', upload_about_image);
-                formData.append('resume_link', website_resume_link);
+                if(website_resume) formData.append('resume_link', website_resume);
 
                 // Pssing data to controller and getting response
                 showLoader();

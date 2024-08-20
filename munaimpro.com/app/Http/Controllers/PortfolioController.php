@@ -184,7 +184,7 @@ class PortfolioController extends Controller
                 'message' => 'Portfolio details updated'
             ]);
     
-        } catch(Exception $e) {
+        } catch(Exception $e){
             // Rollback the transaction
             DB::rollBack();
 
