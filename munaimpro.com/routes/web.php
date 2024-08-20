@@ -137,7 +137,7 @@ Route::post('sendMessageFromAdmin', [MessageController::class, 'sendMessageFromA
 Route::post('replyMessageFromAdmin', [MessageController::class, 'replyMessageFromAdmin'])->middleware(TokenVerificationMiddleware::class);
 Route::post('retriveMessageInfoById', [MessageController::class, 'retriveMessageInfoById'])->middleware(TokenVerificationMiddleware::class);
 Route::get('retriveAllMessageInfo', [MessageController::class, 'retriveAllMessageInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::delete('deleteMessage', [MessageController::class, 'deleteMessage'])->middleware(TokenVerificationMiddleware::class);
+Route::delete('deleteMessageInfo', [MessageController::class, 'deleteMessageInfo'])->middleware(TokenVerificationMiddleware::class);
 
 
 // API Routes (WebsiteInformation Controller)

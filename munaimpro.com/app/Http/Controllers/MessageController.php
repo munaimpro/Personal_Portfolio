@@ -207,10 +207,10 @@ class MessageController extends Controller
 
     /* Method for delete message */
 
-    public function deleteMessage(Request $request){
+    public function deleteMessageInfo(Request $request){
         try{
             // Getting message id from input
-            $messageId = $request->input('message_id');
+            $messageId = $request->input('message_info_id');
             
             // Delete message by id
             $messageDelete = Message::findOrFail($messageId)->delete(); 
