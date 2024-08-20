@@ -60,7 +60,13 @@ class WebsiteInformationController extends Controller
     /* Method for admin logo & seo property page */
 
     public function adminLogoWithSEOPropertyPage(){
+        // Getting SEO properties for specific view
+        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
         
+        // Getting view name from uri
+        $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+
+        return view('admin.pages.seoproperty', compact(['seoproperty', 'routeName']));
     }
 
 
@@ -186,7 +192,7 @@ class WebsiteInformationController extends Controller
 
     /* Method for retrieve SEO property */
     
-    public function retriveAllSeoPropertyInfo(){
+    public function retreiveAllSeoPropertyInfo(){
         try{
             $seoproperty = Seoproperty::get(['page_name', 'site_title', 'site_keywords', 'site_description']);
             
@@ -214,7 +220,7 @@ class WebsiteInformationController extends Controller
 
     /* Method for retrive SEO property information by id */
 
-    public function retriveSeoPropertyInfoById(Request $request){
+    public function retreiveSeoPropertyInfoById(Request $request){
         try{
             $seopropertyInfoId = $request->input('seoproperty_info_id'); // Primary key id from input
         
