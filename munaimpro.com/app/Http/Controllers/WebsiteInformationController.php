@@ -194,7 +194,7 @@ class WebsiteInformationController extends Controller
     
     public function retreiveAllSeoPropertyInfo(){
         try{
-            $seoproperty = Seoproperty::get(['page_name', 'site_title', 'site_keywords', 'site_description']);
+            $seoproperty = Seoproperty::get(['id', 'page_name', 'site_title', 'site_keywords', 'site_description']);
             
             if($seoproperty){
                 return response()->json([
@@ -220,11 +220,11 @@ class WebsiteInformationController extends Controller
 
     /* Method for retrive SEO property information by id */
 
-    public function retreiveSeoPropertyInfoById(Request $request){
+    public function retrieveSeoPropertyInfoById(Request $request){
         try{
             $seopropertyInfoId = $request->input('seoproperty_info_id'); // Primary key id from input
         
-            $seoproperty = Seoproperty::findOrFail($seopropertyInfoId, ['page_name', 'site_title', 'site_keywords', 'site_description', 'og_site_name', 'og_url', 'og_title', 'og_description', 'og_image']); // Getting SEO property data by id
+            $seoproperty = Seoproperty::findOrFail($seopropertyInfoId, ['page_name', 'site_title', 'site_keywords', 'site_description', 'author', 'og_site_name', 'og_url', 'og_title', 'og_description', 'og_type', 'og_image', 'twitter_card', 'twitter_title', 'twitter_description', 'twitter_image', 'robots', 'canonical_url', 'application_name', 'theme_color', 'google_site_verification', 'referrer']); // Getting SEO property data by id
 
             if($seoproperty){
                 return response()->json([

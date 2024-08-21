@@ -40,7 +40,7 @@
     <link rel="canonical" href="{{ $seoproperty->canonical_url }}">
 
     {{-- Content Security Policy --}}
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; script-src 'self' https://cdn.jsdelivr.net 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
+    {{-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; script-src 'self' https://cdn.jsdelivr.net 'unsafe-inline'; style-src 'self' 'unsafe-inline';"> --}}
 
     {{-- Content Language --}}
     <meta http-equiv="Content-Language" content="en">

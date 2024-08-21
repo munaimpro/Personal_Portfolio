@@ -62,7 +62,7 @@ return new class extends Migration
             $table->string('canonical_url', 100);
             $table->string('application_name', 100);
             $table->string('theme_color', 100);
-            $table->string('google_site_verification', 100);
+            $table->string('google_site_verification', 100)->nullable();
             $table->enum('referrer', [
                 'no-referrer', 'no-referrer-when-downgrade', 
                 'origin', 'origin-when-cross-origin', 
