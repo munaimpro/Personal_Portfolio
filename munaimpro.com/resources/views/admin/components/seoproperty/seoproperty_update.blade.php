@@ -6,7 +6,7 @@
                 <h5 class="modal-title" id="editModalLabel">SEO Properties</h5>
             </div>
             <div class="modal-body">
-                <form id="update-form">
+                <form id="updateSEOPropertyForm">
                     <div class="container">
                         <div class="row">
                             <div class="col-12 p-1">
@@ -189,7 +189,7 @@
             </div>
             <div class="modal-footer justify-content-end">
                 <button type="button" class="btn btn-sm btn-cancel" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-sm btn-submit">Save Changes</button>
+                <button type="button" class="btn btn-sm btn-submit" onclick="updateSeoPropertyInfo()">Save Changes</button>
             </div>
         </div>
     </div>
@@ -200,6 +200,8 @@
 {{-- Front end script start --}}
 
 <script>
+
+    // Function for retrive SEO property details
 
     async function retrieveSeoPropertyInfoById(seoproperty_info_id){
 
@@ -217,31 +219,31 @@
                 let baseUrl = "{{ url('/') }}";
                 
                 // Generating full path for the open graph website image
-                let ogSiteImageFullPath = baseUrl + '/storage/website_pictures/open_graph_images/' + response.data.data['og_image'];
+                let ogSiteImageFullPath = baseUrl + '/storage/website_pictures/website_social_images/' + response.data.data['og_image'];
                 
                 // Generating full path for the og site image
-                let twitterImageFullPath = baseUrl + '/storage/website_pictures/twitter_images/' + response.data.data['twitter_image'];
+                let twitterImageFullPath = baseUrl + '/storage/website_pictures/website_social_images/' + response.data.data['twitter_image'];
 
-                document.getElementById('siteTitle').value = response.data.data['site_title'];
-                document.getElementById('siteKeywords').value = response.data.data['site_keywords'];
-                document.getElementById('siteDescription').value = response.data.data['site_description'];
-                document.getElementById('siteAuthor').value = response.data.data['author'];
-                document.getElementById('ogSiteName').value = response.data.data['og_site_name'];
-                document.getElementById('ogSiteTitle').value = response.data.data['og_title'];
-                document.getElementById('ogSiteURL').value = response.data.data['og_url'];
-                document.getElementById('ogSiteType').value = response.data.data['og_type'];
-                document.getElementById('ogSiteDescription').value = response.data.data['og_description'];
-                document.getElementById('ogSiteImagePreview').src = ogSiteImageFullPath;
-                document.getElementById('twitterCard').value = response.data.data['twitter_card'];
-                document.getElementById('twitterTitle').value = response.data.data['twitter_title'];
-                document.getElementById('twitterDescription').value = response.data.data['twitter_description'];
-                document.getElementById('twitterImagePreview').src = twitterImageFullPath;
-                document.getElementById('robots').value = response.data.data['robots'];
-                document.getElementById('canonicalUrl').value = response.data.data['canonical_url'];
-                document.getElementById('applicationName').value = response.data.data['application_name'];
-                document.getElementById('themeColor').value = response.data.data['theme_color'];
-                document.getElementById('googleSiteVerification').value = response.data.data['google_site_verification'];
-                document.getElementById('referrerPolicy').value = response.data.data['referrer'];
+                $('#siteTitle').val(response.data.data['site_title']);
+                $('#siteKeywords').val(response.data.data['site_keywords']);
+                $('#siteDescription').val(response.data.data['site_description']);
+                $('#siteAuthor').val(response.data.data['author']);
+                $('#ogSiteName').val(response.data.data['og_site_name']);
+                $('#ogSiteTitle').val(response.data.data['og_title']);
+                $('#ogSiteURL').val(response.data.data['og_url']);
+                $('#ogSiteType').val(response.data.data['og_type']);
+                $('#ogSiteDescription').val(response.data.data['og_description']);
+                $('#ogSiteImagePreview')[0].src = ogSiteImageFullPath;
+                $('#twitterCard').val(response.data.data['twitter_card']);
+                $('#twitterTitle').val(response.data.data['twitter_title']);
+                $('#twitterDescription').val(response.data.data['twitter_description']);
+                $('#twitterImagePreview')[0].src = twitterImageFullPath;
+                $('#robots').val(response.data.data['robots']);
+                $('#canonicalUrl').val(response.data.data['canonical_url']);
+                $('#applicationName').val(response.data.data['application_name']);
+                $('#themeColor').val(response.data.data['theme_color']);
+                $('#googleSiteVerification').val(response.data.data['google_site_verification']);
+                $('#referrerPolicy').val(response.data.data['referrer']);
             } else{
                 displayToast('error', response.data['message']);
             }
@@ -250,73 +252,115 @@
         }
     }
 
-    // Function for update about information
-    async function updateAboutInfo(){
+
+    // Function for update SEO property information
+
+    async function updateSeoPropertyInfo(){
 
         try{
             // Getting input data
-            let website_greetings = $('#websiteGreetings').val().trim();
-            let website_full_name = $('#websiteFullName').val().trim();
-            let website_designation = $('#websiteDesignation').val().trim();
-            let website_email = $('#websiteEmail').val().trim();
-            let website_phone = $('#websitePhone').val().trim();
-            let website_location = $('#websiteLocation').val().trim();
-            let website_hero_description = tinymce.get('websiteHeroDescription').getContent().trim();
-            let upload_hero_image = document.getElementById('uploadHeroImage').files[0];
-            let website_about_description = tinymce.get('websiteAboutDescription').getContent().trim();
-            let upload_about_image = document.getElementById('uploadAboutImage').files[0];
-            let website_resume = document.getElementById('uploadResume').files[0];
-
-            // Regular expression for basic email validation
-            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            let site_title = $('#siteTitle').val().trim();
+            let site_keywords = $('#siteKeywords').val().trim();
+            let site_description = $('#siteDescription').val().trim();
+            let site_author = $('#siteAuthor').val().trim();
+            let og_site_name = $('#ogSiteName').val().trim();
+            let og_site_title = $('#ogSiteTitle').val().trim();
+            let og_site_url = $('#ogSiteURL').val().trim();
+            let og_site_type = $('#ogSiteType').val().trim();
+            let og_site_description = $('#ogSiteDescription').val().trim();
+            let og_site_image = $('#ogSiteImage')[0].files[0];
+            let twitter_card = $('#twitterCard').val().trim();
+            let twitter_title = $('#twitterTitle').val().trim();
+            let twitter_description = $('#twitterDescription').val().trim();
+            let twitter_image = $('#twitterImage')[0].files[0];
+            let robots = $('#robots').val().trim();
+            let canonical_url = $('#canonicalUrl').val().trim();
+            let application_name = $('#applicationName').val().trim();
+            let theme_color = $('#themeColor').val().trim();
+            let google_site_verification = $('#googleSiteVerification').val().trim();
+            let referrer_policy = $('#referrerPolicy').val().trim();
+            let seoproperty_info_id = $('#seoPropertyInfoId').val().trim();
 
             // Front end validation process
-            if(website_greetings.length === 0){
-                displayToast('warning', 'Greetings text is required');
-            } else if(website_full_name.length === 0){
-                displayToast('warning', 'Full name is required');
-            } else if(website_designation.length === 0){
-                displayToast('warning', 'Designation is required');
-            } else if(website_email.length === 0){
-                displayToast('warning', 'Email is required');
-            } else if(!emailPattern.test(website_email)){
-                displayToast('warning', 'Invalid email address');
-            } else if(website_phone.length === 0){
-                displayToast('warning', 'Phone number is required');
-            } else if(website_location.length === 0){
-                displayToast('warning', 'Location is required');
-            } else if(website_hero_description.length === 0){
-                displayToast('warning', 'Hero description is required');
-            } else if(website_about_description.length === 0){
-                displayToast('warning', 'About description is required');
+            if(site_title.length === 0){
+                displayToast('warning', 'Page title is required');
+            } else if(site_keywords.length === 0){
+                displayToast('warning', 'Page meta keywords are required');
+            } else if(site_description.length === 0){
+                displayToast('warning', 'Page description is required');
+            } else if(site_author.length === 0){
+                displayToast('warning', 'Author is required');
+            } else if(og_site_name.length === 0){
+                displayToast('warning', 'Open Graph name is required');
+            } else if(og_site_title.length === 0){
+                displayToast('warning', 'Open Graph title is required');
+            } else if(og_site_url.length === 0){
+                displayToast('warning', 'Open Graph URL is required');
+            } else if(og_site_type === ''){
+                displayToast('warning', 'Open Graph type is required');
+            } else if(og_site_description.length === 0){
+                displayToast('warning', 'Open Graph description is required');
+            } else if(twitter_card === ''){
+                displayToast('warning', 'Twitter card is required');
+            } else if(twitter_title.length === 0){
+                displayToast('warning', 'Twitter title is required');
+            } else if(twitter_description.length === 0){
+                displayToast('warning', 'Twitter description is required');
+            } else if(robots === ''){
+                displayToast('warning', 'Robot type is required');
+            } else if(canonical_url.length === 0){
+                displayToast('warning', 'Canonical URL is required');
+            } else if(application_name.length === 0){
+                displayToast('warning', 'Application name is required');
+            } else if(theme_color.length === 0){
+                displayToast('warning', 'Theme color is required');
+            } else if(referrer_policy === ''){
+                displayToast('warning', 'Referrer policy is required');
             } else{
+                // Closing modal
+                $('#editModal').modal('hide');
+
                 // FormData object
                 let formData = new FormData();
 
-                // Data append to FormData
-                formData.append('greetings', website_greetings);
-                formData.append('full_name', website_full_name);
-                formData.append('designation', website_designation);
-                formData.append('email', website_email);
-                formData.append('phone', website_phone);
-                formData.append('location', website_location);
-                formData.append('hero_description', website_hero_description);
-                if(upload_hero_image) formData.append('hero_image', upload_hero_image);
-                formData.append('about_description', website_about_description);
-                if(upload_about_image) formData.append('about_image', upload_about_image);
-                if(website_resume) formData.append('resume_link', website_resume);
+                formData.append('site_title', site_title);
+                formData.append('site_keywords', site_keywords);
+                formData.append('site_description', site_description);
+                formData.append('author', site_author);
+                formData.append('og_site_name', og_site_name);
+                formData.append('og_title', og_site_title);
+                formData.append('og_url', og_site_url);
+                formData.append('og_type', og_site_type);
+                formData.append('og_description', og_site_description);
+                if(og_site_image) formData.append('og_image', og_site_image);
+                formData.append('twitter_card', twitter_card);
+                formData.append('twitter_title', twitter_title);
+                formData.append('twitter_description', twitter_description);
+                if(twitter_image) formData.append('twitter_image', twitter_image);
+                formData.append('robots', robots);
+                formData.append('canonical_url', canonical_url);
+                formData.append('application_name', application_name);
+                formData.append('theme_color', theme_color);
+                if(google_site_verification) formData.append('google_site_verification', google_site_verification);
+                formData.append('referrer', referrer_policy);
+                formData.append('seoproperty_info_id', seoproperty_info_id);
 
-                // Pssing data to controller and getting response
+                // Passing data to controller and getting response
                 showLoader();
-                let response = await axios.post('../updateAboutInfo', formData, {
-                    headers:{'content-type':'multipart/form-data'}
+                let response = await axios.post('/updateSeoPropertyInfo', formData, {
+                    headers: {'content-type': 'multipart/form-data'}
                 });
                 hideLoader();
 
                 if(response.data['status'] === 'success'){
-                    getAboutInfo();
+                    // Reset form
+                    $('#updateSEOPropertyForm')[0].reset();
+
+                    // Refresh the SEO properties list or update UI accordingly
+                    retrieveAllSeoPropertyInfo();
+
                     displayToast('success', response.data['message']);
-                } else{
+                } else {
                     displayToast('error', response.data['message']);
                 }
             }

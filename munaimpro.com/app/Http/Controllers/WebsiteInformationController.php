@@ -11,6 +11,7 @@ use App\Models\Category;
 use App\Models\Portfolio;
 use App\Models\Seoproperty;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Models\VisitorInformations;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -255,47 +256,86 @@ class WebsiteInformationController extends Controller
         try{
             // Input validation process for backend
             $validatedData = $request->validate([
-                'page_name' => 'required|string|',
                 'site_title' => 'required|string|max:50',
-                'site_keywords' => 'required|string|max:255',
-                'site_description' => 'required|string',
+                'site_keywords' => 'required|string',
+                'site_description' => 'required|string|max:255',
+                'author' => 'required|string|max:100',
                 'og_site_name' => 'required|string|max:100',
                 'og_url' => 'required|string|max:100',
                 'og_title' => 'required|string|max:100',
-                'og_description' => 'required|string',
-                'og_image' => 'image|mimes:png,jpg,jpeg',
+                'og_type' => [
+                    'required',
+                    Rule::in(['website', 'article', 'video.movie', 'video.episode', 'video.tv_show', 'video.other', 'music.song', 'music.album', 'profile', 'product'])
+                ],
+                'og_description' => 'required|string|max:255',
+                'twitter_card' => [
+                    'required',
+                    Rule::in(['summary', 'summary_large_image', 'app', 'player'])
+                ],
+                'twitter_title' => 'required|string|max:100',
+                'twitter_description' => 'required|string|max:255',
+                'robots' => [
+                    'required',
+                    Rule::in([
+                        'index, follow', 'noindex, follow', 'index, nofollow', 'noindex, nofollow',
+                        'noarchive', 'nosnippet', 'noodp', 'noimageindex', 'nocache'
+                    ])
+                ],
+                'canonical_url' => 'required|string|max:100',
+                'application_name' => 'required|string|max:100',
+                'theme_color' => 'required|string|max:100',
+                'google_site_verification' => 'nullable|string|max:100',
+                'referrer' => [
+                    'required',
+                    Rule::in([
+                        'no-referrer', 'no-referrer-when-downgrade', 'origin', 'origin-when-cross-origin',
+                        'same-origin', 'strict-origin', 'strict-origin-when-cross-origin', 'unsafe-url'
+                        ])
+                    ],
+                'seoproperty_info_id' => '',
             ]);
+    
+            // Retrieve SEO property instance only once
+            $seoproperty = Seoproperty::findOrFail($validatedData['seoproperty_info_id']);
 
-            $seopropertyId = $request->input('seoproperty_info_id');
-
+            // Handle Open Graph image
             if($request->hasFile('og_image')){
-                // Retrive og image link from database
-                $getPreviousOGImage = SeoProperty::where('id', '=', $seopropertyId)->first('og_image');
+                // Validate Open Graph image
+                $request->validate(['og_image' => 'required|image|mimes:png,jpg,jpeg|max:2048']);
 
-                // Remove og image file from storage
-                if($getPreviousOGImage){
-                    if(Storage::exists("public/website_pictures/open_graph_images/".$getPreviousOGImage->og_image)){
-                        Storage::delete("public/website_pictures/open_graph_images/".$getPreviousOGImage->og_image);
-                    }
+                // Remove Open Graph image file from storage
+                if($seoproperty->og_image && Storage::exists("public/website_pictures/website_social_images/".$seoproperty->og_image)) {
+                    Storage::delete("public/website_pictures/website_social_images/".$seoproperty->og_image);
                 }
-
-                // Getting new og file
+    
+                // Store new OG image
                 $ogImage = $request->file('og_image');
+                $ogImageName = substr(md5(time()), 0, 5) . '-' . $ogImage->getClientOriginalName();
+                $ogImage->storeAs('website_pictures/website_social_images', $ogImageName, 'public');
+                $validatedData['og_image'] = $ogImageName;
 
-                /* Extract the original file name with extension */
-                $ogImageName = $ogImage->getClientOriginalName();
-
-                $seopropertyData = array_merge($validatedData, ['og_image' => $ogImageName]);
-
-                $seoproperty = Seoproperty::where('id', '=', $seopropertyId)->update($seopropertyData);
-
-                if($seoproperty){
-                    $ogImage->storeAs('website_pictures/open_graph_images', $ogImageName, 'public');
-                }
-
-            } else{
-                Seoproperty::where('id', '=', $seopropertyId)->update($validatedData);
             }
+
+            // Handle Twitter image
+            if($request->hasFile('twitter_image')){
+                // Validate Twitter image
+                $request->validate(['twitter_image' => 'required|image|mimes:png,jpg,jpeg|max:2048']);
+
+                // Remove Twitter image file from storage
+                if($seoproperty->twitter_image && Storage::exists("public/website_pictures/website_social_images/".$seoproperty->twitter_image)) {
+                    Storage::delete("public/website_pictures/website_social_images/".$seoproperty->twitter_image);
+                }
+    
+                // Store new Twitter image
+                $twitterImage = $request->file('twitter_image');
+                $twitterImageName = substr(md5(time()), 0, 5) . '-' . $twitterImage->getClientOriginalName();
+                $twitterImage->storeAs('website_pictures/website_social_images', $twitterImageName, 'public');
+                $validatedData['twitter_image'] = $twitterImageName;
+
+            }
+    
+            // Update SEO property with validated data
+            $seoproperty->update($validatedData);
         
             return response()->json([
                 'status' => 'success',
