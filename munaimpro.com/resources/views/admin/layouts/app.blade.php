@@ -39,8 +39,23 @@
     {{-- Canonical URL --}}
     <link rel="canonical" href="{{ $seoproperty->canonical_url }}">
 
+    {{-- Content Security Policy --}}
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; script-src 'self' https://cdn.jsdelivr.net 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
+
     {{-- Content Language --}}
     <meta http-equiv="Content-Language" content="en">
+
+    {{-- Application Name --}}
+    <meta name="application-name" content="Munaim">
+
+    {{-- Theme Color --}}
+    <meta name="theme-color" content="#ffffff">
+
+    {{-- Google Site Verification --}}
+    <meta name="google-site-verification" content="your_verification_token_here">
+
+    {{-- Cache Control --}}
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
 
     {{-- Referrer Policy --}}
     <meta name="referrer" content="no-referrer-when-downgrade">

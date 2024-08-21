@@ -21,18 +21,39 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label class="form-label mt-3">Author *</label>
+                                    <input type="text" class="form-control" id="siteAuthor">
+                                </div>
+
+                                <div class="form-group">
                                     <label class="form-label mt-3">Description *</label>
                                     <textarea class="form-control" id="siteDescription"></textarea>
                                 </div>
                                 
                                 <div class="form-group">
                                     <label class="form-label mt-3">Open Graph Website Name *</label>
-                                    <input type="text" class="form-control" id="ogSitename">
+                                    <input type="text" class="form-control" id="ogSiteName">
                                 </div>
 
                                 <div class="form-group">
                                     <label class="form-label mt-3">Open Graph Website Title *</label>
-                                    <input type="text" class="form-control" id="ogSitetitle">
+                                    <input type="text" class="form-control" id="ogSiteTitle">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label mt-3">Open Graph Type *</label>
+                                    <select class="form-control" id="ogSiteType">
+                                        <option value="website">Website (General web page)</option>
+                                        <option value="article">Article (News or blog post)</option>
+                                        <option value="profile">Profile (Personal or company profile)</option>
+                                        <option value="video.movie">Video: Movie (A full-length film)</option>
+                                        <option value="video.episode">Video: Episode (A TV show episode)</option>
+                                        <option value="video.tv_show">Video: TV Show (A TV show)</option>
+                                        <option value="video.other">Video: Other (Other types of video content)</option>
+                                        <option value="music.song">Music: Song (A single song)</option>
+                                        <option value="music.album">Music: Album (A music album)</option>
+                                        <option value="product">Product (A product page)</option>
+                                    </select>
                                 </div>
 
                                 <div class="form-group">
@@ -41,8 +62,89 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label class="form-label mt-3">Open Graph Website Description *</label>
+                                    <textarea class="form-control" id="ogSiteDescription"></textarea>
+                                </div>
+
+                                <div class="form-group">
                                     <label class="form-label mt-3">Open Graph Website Image *</label>
-                                    <input type="file" class="form-control" id="ogSiteimage">
+                                    <div class="product-list">
+                                        <ul>
+                                            <li class="p-0">
+                                                <div class="productviews">
+                                                    <div class="productviewsimg">
+                                                        <img class="mw-100 mh-100" src="{{ asset('assets/img/profiles/avatar-17.jpg') }}" alt="website logo" id="ogSiteImagePreview">
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="image-upload ">
+                                        <input type="file" id="uploadogSiteImage" oninput="ogSiteImagePreview.src=window.URL.createObjectURL(this.files[0])">
+                                        <div class="image-uploads">
+                                            <img src="{{ asset('assets/img/icons/upload.svg') }}" alt="img">
+                                            <h4>Drag and drop a file to upload</h4>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label mt-3">Twitter Card Type *</label>
+                                    <select class="form-control" id="twitterCardType">
+                                        <option value="summary">Summary (small image and text)</option>
+                                        <option value="summary_large_image">Summary Large Image (large image and text)</option>
+                                        <option value="app">App (mobile app promotion)</option>
+                                        <option value="player">Player (multimedia content)</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Twitter Title *</label>
+                                    <input type="text" class="form-control" id="twitterTitle">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Twitter Description *</label>
+                                    <textarea class="form-control" id="twitterDescription"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label mt-3">Twitter Image *</label>
+                                    <div class="product-list">
+                                        <ul>
+                                            <li class="p-0">
+                                                <div class="productviews">
+                                                    <div class="productviewsimg">
+                                                        <img class="mw-100 mh-100" src="{{ asset('assets/img/profiles/avatar-17.jpg') }}" alt="website logo" id="twitterImagePreview">
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="image-upload ">
+                                        <input type="file" id="uploadTwitterImage" oninput="twitterImagePreview.src=window.URL.createObjectURL(this.files[0])">
+                                        <div class="image-uploads">
+                                            <img src="{{ asset('assets/img/icons/upload.svg') }}" alt="img">
+                                            <h4>Drag and drop a file to upload</h4>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label mt-3">Robots Type *</label>
+                                    <select class="form-control" id="twitterCardType">
+                                        <option value="index, follow">Index, Follow (Default behavior)</option>
+                                        <option value="noindex, follow">No Index, Follow (Do not index this page, but follow links)</option>
+                                        <option value="index, nofollow">Index, No Follow (Index this page, but do not follow links)</option>
+                                        <option value="noindex, nofollow">No Index, No Follow (Do not index this page or follow links)</option>
+                                        <option value="noarchive">No Archive (Do not cache a copy of this page)</option>
+                                        <option value="nosnippet">No Snippet (Do not show a snippet in search results)</option>
+                                        <option value="noodp">No ODP (Do not use the Open Directory Project description for this page)</option>
+                                        <option value="noimageindex">No Image Index (Do not index images on this page)</option>
+                                        <option value="nocache">No Cache (Do not cache this page)</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -50,10 +152,124 @@
                 </form>
             </div>
             <div class="modal-footer justify-content-end">
-                <button type="button" class="btn btn-sm btn-submit">Save changes</button>
                 <button type="button" class="btn btn-sm btn-cancel" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-sm btn-submit">Save Changes</button>
             </div>
         </div>
     </div>
 </div>
 {{-- Edit modal end --}}
+
+
+{{-- Front end script start --}}
+
+<script>
+    // Function for retreive SEO property information
+    retriveSeoPropertyInfoById();
+
+    async function retriveSeoPropertyInfoById() {
+        showLoader();
+        let response = await axios.get('/retriveSeoPropertyInfoById');
+        hideLoader();
+
+        if(response.data['status'] === 'success'){
+            // Getting base URL of the system
+            let baseUrl = "{{ url('/') }}";
+            
+            // Generating full path for the og site image
+            let ogSiteImageFullPath = baseUrl + '/storage/website_pictures/open_graph_images/' + response.data.data['og_image'];
+
+            document.getElementById('siteTitle').value = response.data.data['site_title'];
+            document.getElementById('siteKeywords').value = response.data.data['site_keywords'];
+            document.getElementById('siteDescription').value = response.data.data['site_description'];
+            document.getElementById('ogSiteName').value = response.data.data['og_site_name'];
+            document.getElementById('ogSiteTitle').value = response.data.data['og_title'];
+            document.getElementById('ogSiteURL').value = response.data.data['og_url'];
+            document.getElementById('ogSiteImagePreview').src = ogSiteImageFullPath;
+        } else{
+            displayToast('error', response.data['message']);
+        }
+    }
+
+    // Function for update about information
+    async function updateAboutInfo(){
+
+        try{
+            // Getting input data
+            let website_greetings = $('#websiteGreetings').val().trim();
+            let website_full_name = $('#websiteFullName').val().trim();
+            let website_designation = $('#websiteDesignation').val().trim();
+            let website_email = $('#websiteEmail').val().trim();
+            let website_phone = $('#websitePhone').val().trim();
+            let website_location = $('#websiteLocation').val().trim();
+            let website_hero_description = tinymce.get('websiteHeroDescription').getContent().trim();
+            let upload_hero_image = document.getElementById('uploadHeroImage').files[0];
+            let website_about_description = tinymce.get('websiteAboutDescription').getContent().trim();
+            let upload_about_image = document.getElementById('uploadAboutImage').files[0];
+            let website_resume = document.getElementById('uploadResume').files[0];
+
+            // Regular expression for basic email validation
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            // Front end validation process
+            if(website_greetings.length === 0){
+                displayToast('warning', 'Greetings text is required');
+            } else if(website_full_name.length === 0){
+                displayToast('warning', 'Full name is required');
+            } else if(website_designation.length === 0){
+                displayToast('warning', 'Designation is required');
+            } else if(website_email.length === 0){
+                displayToast('warning', 'Email is required');
+            } else if(!emailPattern.test(website_email)){
+                displayToast('warning', 'Invalid email address');
+            } else if(website_phone.length === 0){
+                displayToast('warning', 'Phone number is required');
+            } else if(website_location.length === 0){
+                displayToast('warning', 'Location is required');
+            } else if(website_hero_description.length === 0){
+                displayToast('warning', 'Hero description is required');
+            } else if(website_about_description.length === 0){
+                displayToast('warning', 'About description is required');
+            } else{
+                // FormData object
+                let formData = new FormData();
+
+                // Data append to FormData
+                formData.append('greetings', website_greetings);
+                formData.append('full_name', website_full_name);
+                formData.append('designation', website_designation);
+                formData.append('email', website_email);
+                formData.append('phone', website_phone);
+                formData.append('location', website_location);
+                formData.append('hero_description', website_hero_description);
+                if(upload_hero_image) formData.append('hero_image', upload_hero_image);
+                formData.append('about_description', website_about_description);
+                if(upload_about_image) formData.append('about_image', upload_about_image);
+                if(website_resume) formData.append('resume_link', website_resume);
+
+                // Pssing data to controller and getting response
+                showLoader();
+                let response = await axios.post('../updateAboutInfo', formData, {
+                    headers:{'content-type':'multipart/form-data'}
+                });
+                hideLoader();
+
+                if(response.data['status'] === 'success'){
+                    getAboutInfo();
+                    displayToast('success', response.data['message']);
+                } else{
+                    displayToast('error', response.data['message']);
+                }
+            }
+        } catch(e){
+            console.error('Something went wrong', e);
+        }
+    
+
+    
+
+    
+    }
+</script>
+
+{{-- Front end script end --}}
