@@ -12,6 +12,7 @@ use App\Models\Portfolio;
 use App\Models\Seoproperty;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 use App\Models\VisitorInformations;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -345,6 +346,79 @@ class WebsiteInformationController extends Controller
             return response()->json([
                 'status' => 'failed',
                 'message' => 'Request failed'.$e->getMessage()
+            ]);
+        }
+    }    
+
+
+    /* Method for delete SEO property information */
+
+    public function deleteSeoPropertyInfo(Request $request){
+        // Start transaction
+        DB::beginTransaction();
+    
+        try{
+            // Getting SEO property id from input
+            $seopropertyInfoId = $request->input('seoproperty_info_id');
+    
+            // Retrieve SEO property from the database
+            $seoproperty = Seoproperty::findOrFail($seopropertyInfoId);
+    
+            // Retrieve and delete the Open Graph image
+            $ogImage = $seoproperty->og_image;
+
+            if($ogImage && Storage::exists("public/website_pictures/website_social_images/" . $ogImage)){
+                if (!Storage::delete("public/website_pictures/website_social_images/" . $ogImage)){
+                    // Rollback the transaction
+                    DB::rollBack();
+
+                    return response()->json([
+                        'status' => 'failed',
+                        'message' => 'Failed to delete Open Graph image'
+                    ]);
+                }
+            }
+    
+            // Retrieve and delete the Twitter image
+            $twiterImage = $seoproperty->twitter_image;
+
+            if($twiterImage && Storage::exists("public/website_pictures/website_social_images/" . $twiterImage)){
+                if (!Storage::delete("public/website_pictures/website_social_images/" . $twiterImage)){
+                    // Rollback the transaction
+                    DB::rollBack();
+
+                    return response()->json([
+                        'status' => 'failed',
+                        'message' => 'Failed to delete Twitter image'
+                    ]);
+                }
+            }
+    
+            // Delete SEO data by id
+            if (!$seoproperty->delete()){
+                DB::rollBack();
+
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Failed to delete portfolio'
+                ]);
+            }
+
+            // Commit the transaction
+            DB::commit();
+            
+            return response()->json([
+                'status' => 'success',
+                'message' => 'SEO Property deleted'
+            ]);
+    
+        } catch (Exception $e){
+            // Rollback the transaction
+            DB::rollBack();
+
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong: ' . $e->getMessage()
             ]);
         }
     }
