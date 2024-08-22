@@ -7,11 +7,11 @@
             </div>
             <div class="modal-body">
                 <div class="product-list">
-                    <ul class="row">
-                        <li class="ps-0">
-                            <div class="productviewset">
-                                <div class="productviewsimg">
-                                    <img src="{{ asset('assets/img/customer/profile2.jpg') }}" alt="img" id="clientImage">
+                    <ul class="row justify-content-center">
+                        <li class="p-0">
+                            <div class="productviewset p-0">
+                                <div class="productviewsimg rounded-circle overflow-hidden m-auto" style="max-width: 120px; height: 120px;">
+                                    <img class="h-100" src="{{ asset('assets/img/customer/profile2.jpg') }}" alt="img" id="clientImage">
                                 </div>
                             </div>
                         </li>

@@ -5,11 +5,11 @@
             <div class="modal-body text-center">
                 <h3 class="mt-3">Are you sure?</h3>
                 <p class="mb-3">You won't be able to revert this!</p>
-                <input class="" id="portfolioInfoDeleteId"/>
+                <input class="" id="clientFeedbackInfoDeleteId"/>
             </div>
             <div class="modal-footer justify-content-end">
                 <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-submit" onclick="deletePortfolioInfo()">Yes, delete it!</button>
+                <button type="button" class="btn btn-submit" onclick="deleteClientFeedbackInfo()">Yes, delete it!</button>
             </div>
         </div>
     </div>
@@ -21,27 +21,27 @@
 
 <script>
 
-    // Function for delete portfolio information
-    async function deletePortfolioInfo() {
+    // Function for delete client feedback information
+    async function deleteClientFeedbackInfo() {
         try{
             // Getting input data
-            let portfolio_info_id = $('#portfolioInfoDeleteId').val().trim();
+            let clientfeedback_info_id = $('#clientFeedbackInfoDeleteId').val().trim();
 
             // Front end validation process
-            if(portfolio_info_id.length === 0){
-                displayToast('warning', 'Portfolio details id missing');
+            if(clientfeedback_info_id.length === 0){
+                displayToast('warning', 'Feedback details id missing');
             } else{
                 // Closing modal
                 $('#deleteModal').modal('hide');
 
                 // Pssing data to controller and getting response
                 showLoader();
-                let response = await axios.delete('../deletePortfolioInfo', { data: { portfolio_info_id: portfolio_info_id } });
+                let response = await axios.delete('../deleteClientFeedbackInfo', { data: { clientfeedback_info_id: clientfeedback_info_id } });
                 hideLoader();
 
                 if(response.data['status'] === 'success'){
-                    // Call function to refresh portfolio list
-                    await retriveAllPortfolioInfo();
+                    // Call function to refresh feedback list
+                    await retrieveAllClientFeedbackInfo();
 
                     displayToast('success', response.data['message']);
                 } else{
