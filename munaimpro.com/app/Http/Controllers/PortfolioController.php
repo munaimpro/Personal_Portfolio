@@ -312,7 +312,7 @@ class PortfolioController extends Controller
                 'message' => 'Something went wrong: ' . $e->getMessage()
             ]);
         }
-    }    
+    }  
 
 
     /* Method for delete post information */

@@ -14,6 +14,7 @@ use App\Http\Controllers\EducationController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\SocialMediaController;
+use App\Http\Controllers\ClientFeedbackController;
 use App\Http\Middleware\TokenVerificationMiddleware;
 use App\Http\Controllers\WebsiteInformationController;
 
@@ -150,6 +151,15 @@ Route::get('retrieveAllVisitorInfo', [WebsiteInformationController::class, 'retr
 Route::post('updateSeoPropertyInfo', [WebsiteInformationController::class, 'updateSeoPropertyInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::get('dashboardSummaryInfo', [WebsiteInformationController::class, 'dashboardSummaryInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deleteSeoPropertyInfo', [WebsiteInformationController::class, 'deleteSeoPropertyInfo'])->middleware(TokenVerificationMiddleware::class);
+
+
+// API Routes (ClientFeedback Controller)
+Route::post('addClientFeedbackInfo', [ClientFeedbackController::class, 'addClientFeedbackInfo'])->middleware(TokenVerificationMiddleware::class);
+// Route::post('updateClientFeedbackInfo', [PortfolioController::class, 'updatePortfolioInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::get('retrieveAllClientFeedbackInfo', [ClientFeedbackController::class, 'retrieveAllClientFeedbackInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::post('retrieveClientFeedbackInfoById', [ClientFeedbackController::class, 'retrieveClientFeedbackInfoById'])->middleware(TokenVerificationMiddleware::class);
+Route::delete('deleteClientFeedbackInfo', [ClientFeedbackController::class, 'deleteClientFeedbackInfo'])->middleware(TokenVerificationMiddleware::class);
+// Route::delete('removePortfolioUiImage', [PortfolioController::class, 'removePortfolioUiImage'])->middleware(TokenVerificationMiddleware::class);
 
 
 
