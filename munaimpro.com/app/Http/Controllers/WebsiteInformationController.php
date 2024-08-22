@@ -426,11 +426,24 @@ class WebsiteInformationController extends Controller
     }
 
 
+    /* Method for admin visitor information page */
+
+    public function adminVisitorInformationPage(){
+        // Getting SEO properties for specific view
+        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
+        
+        // Getting view name from uri
+        $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+
+        return view('admin.pages.visitorinfo', compact(['seoproperty', 'routeName']));
+    }
+
+
     /* Method for retrieve website visitor information */
     
-    public function retriveAllVisitorInfo(){
+    public function retrieveAllVisitorInfo(){
         try{
-            $visitor = VisitorInformations::get(['id_address', 'visitor_country', 'visitor_browser', 'total_visit', 'last_visiting_time']);
+            $visitor = VisitorInformations::get(['ip_address', 'visitor_country', 'visitor_browser', 'total_visit', 'last_visiting_time']);
             
             if($visitor){
                 return response()->json([

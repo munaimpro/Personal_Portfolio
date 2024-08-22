@@ -146,7 +146,7 @@ Route::post('addLogoInfo', [WebsiteInformationController::class, 'addLogoInfo'])
 Route::post('updateLogoInfo', [WebsiteInformationController::class, 'updateLogoInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::get('retreiveAllSeoPropertyInfo', [WebsiteInformationController::class, 'retreiveAllSeoPropertyInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::post('retrieveSeoPropertyInfoById', [WebsiteInformationController::class, 'retrieveSeoPropertyInfoById'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retriveAllVisitorInfo', [WebsiteInformationController::class, 'retriveAllVisitorInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::get('retrieveAllVisitorInfo', [WebsiteInformationController::class, 'retrieveAllVisitorInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::post('updateSeoPropertyInfo', [WebsiteInformationController::class, 'updateSeoPropertyInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::get('dashboardSummaryInfo', [WebsiteInformationController::class, 'dashboardSummaryInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deleteSeoPropertyInfo', [WebsiteInformationController::class, 'deleteSeoPropertyInfo'])->middleware(TokenVerificationMiddleware::class);
@@ -173,12 +173,11 @@ Route::group(['prefix' => 'Admin', 'middleware' => TokenVerificationMiddleware::
     // Page Routes (Award Controller)
     Route::get('/award', [AwardController::class, 'adminAwardPage']);
     
-    Route::view('/seoproperty', 'admin.pages.seoproperty');
-    
     // Page Routes (WebsiteInformation Controller)
     Route::get('/seoproperty', [WebsiteInformationController::class, 'adminLogoWithSEOPropertyPage']);
-
-    Route::view('/visitor_information', 'admin.pages.visitorinfo');
+    
+    // Page Routes (WebsiteInformation Controller)
+    Route::get('/visitorinfo', [WebsiteInformationController::class, 'adminVisitorInformationPage']);
 
     // Page Routes (About Controller)
     Route::get('/about', [AboutController::class, 'aboutInfoPage']);

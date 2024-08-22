@@ -35,7 +35,7 @@
         
         {{-- Table content start --}}
         <div class="table-responsive">
-            <table class="table  datanew">
+            <table class="table datanew" id="tableData">
                 <thead>
                     <tr>
                         <th>
@@ -53,7 +53,7 @@
                     </tr>
                 </thead>
 
-                <tbody>
+                <tbody id="tableList">
                     <tr>
                         <td>
                             <label class="checkboxs">
@@ -75,3 +75,69 @@
     </div>
 </div>
 {{-- Table end --}}
+
+
+{{-- Front end script start --}}
+
+<script>
+
+    // Function for retrive visitor information
+    
+    retrieveAllVisitorInfo();
+
+    async function retrieveAllVisitorInfo(){
+
+        try{
+            // Getting data table
+            let table_data = $('#tableData');
+
+            // Getting table rows
+            let table_list = $('#tableList');
+
+            // Destroy data table
+            // table_data.DataTable().destroy();
+
+            // Make data table empty
+            table_list.empty();
+
+            // Pssing data to controller and getting response
+            showLoader();
+            let response = await axios.get('/retrieveAllVisitorInfo');
+            hideLoader();
+
+            response.data.data.forEach(function(item, index){
+
+                // Formatting the last visiting time
+                let lastVisit = new Date(item['last_visiting_time']);
+                let formattedDate = lastVisit.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+
+                let row = `<tr>
+                                <td>
+                                    <label class="checkboxs">
+                                        <input type="checkbox">
+                                        <span class="checkmarks"></span>
+                                    </label>
+                                </td>
+                                <td>${item['ip_address']}</td>
+                                <td>${item['visitor_country']}</td>
+                                <td>${item['visitor_browser']}</td>
+                                <td>${item['total_visit']}</td>
+                                <td>${formattedDate}</td>
+                            </tr>`
+                table_list.append(row);
+            });
+
+            // table_data.DataTable();
+        } catch(e){
+            console.error('Something went wrong', e);
+        }
+    }
+</script>
+
+{{-- Front end script end --}}
