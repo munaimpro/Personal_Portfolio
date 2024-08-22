@@ -76,7 +76,8 @@ class WebsiteInformationController extends Controller
     
     public function retrieveLogoInfo(){
         try{
-            $logo = Logo::get(); // Primary key id from logo table
+            // Get the first row from the logo table
+            $logo = Logo::first();
             
             if($logo){
                 return response()->json([

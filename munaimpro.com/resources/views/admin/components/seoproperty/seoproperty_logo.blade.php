@@ -56,15 +56,14 @@
 
     // Function for retrive website logo
 
-    async function retrieveLogoInfo(seoproperty_info_id){
+    retrieveLogoInfo();
+
+    async function retrieveLogoInfo(){
 
         try{
-            // Assigning id to hidden field
-            $('#seoPropertyInfoId').val(seoproperty_info_id);
-
             // Pssing id to controller and getting response
             showLoader();
-            let response = await axios.post('/retrieveSeoPropertyInfoById', {seoproperty_info_id:seoproperty_info_id});
+            let response = await axios.get('/retrieveLogoInfo',);
             hideLoader();
 
             if(response.data['status'] === 'success'){
@@ -72,31 +71,9 @@
                 let baseUrl = "{{ url('/') }}";
                 
                 // Generating full path for the open graph website image
-                let ogSiteImageFullPath = baseUrl + '/storage/website_pictures/website_social_images/' + response.data.data['og_image'];
-                
-                // Generating full path for the og site image
-                let twitterImageFullPath = baseUrl + '/storage/website_pictures/website_social_images/' + response.data.data['twitter_image'];
+                let logoImageFullPath = baseUrl + '/storage/website_logo/' + response.data.data['logo'];
 
-                $('#siteTitle').val(response.data.data['site_title']);
-                $('#siteKeywords').val(response.data.data['site_keywords']);
-                $('#siteDescription').val(response.data.data['site_description']);
-                $('#siteAuthor').val(response.data.data['author']);
-                $('#ogSiteName').val(response.data.data['og_site_name']);
-                $('#ogSiteTitle').val(response.data.data['og_title']);
-                $('#ogSiteURL').val(response.data.data['og_url']);
-                $('#ogSiteType').val(response.data.data['og_type']);
-                $('#ogSiteDescription').val(response.data.data['og_description']);
-                $('#ogSiteImagePreview')[0].src = ogSiteImageFullPath;
-                $('#twitterCard').val(response.data.data['twitter_card']);
-                $('#twitterTitle').val(response.data.data['twitter_title']);
-                $('#twitterDescription').val(response.data.data['twitter_description']);
-                $('#twitterImagePreview')[0].src = twitterImageFullPath;
-                $('#robots').val(response.data.data['robots']);
-                $('#canonicalUrl').val(response.data.data['canonical_url']);
-                $('#applicationName').val(response.data.data['application_name']);
-                $('#themeColor').val(response.data.data['theme_color']);
-                $('#googleSiteVerification').val(response.data.data['google_site_verification']);
-                $('#referrerPolicy').val(response.data.data['referrer']);
+                $('#websiteLogoPreview')[0].src = logoImageFullPath;
             } else{
                 displayToast('error', response.data['message']);
             }
@@ -139,7 +116,7 @@
                     $('#updateSEOPropertyForm')[0].reset();
 
                     // Refresh the logo
-                    // retrieveLogoInfo();
+                    retrieveLogoInfo();
 
                     displayToast('success', response.data['message']);
                 } else {
