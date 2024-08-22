@@ -14,15 +14,15 @@ class ClientFeedbackController extends Controller
 {
     /* Method for admin client feedback page load */
         
-    // public function adminClientFeedbackPage(){
-    //     // Getting SEO properties for specific view
-    //     $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
+    public function adminClientFeedbackPage(){
+        // Getting SEO properties for specific view
+        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
         
-    //     // Getting view name from uri
-    //     $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+        // Getting view name from uri
+        $routeName = last(explode('/', Route::getCurrentRoute()->uri));
 
-    //     return view('admin.pages.client_feedback', compact(['seoproperty', 'routeName']));
-    // }
+        return view('admin.pages.client_feedback', compact(['seoproperty', 'routeName']));
+    }
 
 
     /* Method for add client feedback information */
