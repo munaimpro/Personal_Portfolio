@@ -341,7 +341,7 @@
                 formData.append('canonical_url', canonical_url);
                 formData.append('application_name', application_name);
                 formData.append('theme_color', theme_color);
-                if(google_site_verification) formData.append('google_site_verification', google_site_verification);
+                formData.append('google_site_verification', google_site_verification);
                 formData.append('referrer', referrer_policy);
                 formData.append('seoproperty_info_id', seoproperty_info_id);
 

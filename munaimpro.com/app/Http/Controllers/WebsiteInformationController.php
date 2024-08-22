@@ -144,16 +144,16 @@ class WebsiteInformationController extends Controller
 
     public function updateLogoInfo(Request $request){
         try{
-            $logoId = Logo::pluck('id')->first();
-
             // Input validation process for backend
             $validatedData = $request->validate([
                 'logo' => 'required|image|mimes:png,jpg,jpeg',
             ]);
 
+            $logo = Logo::first();
+
             if($request->hasFile('logo')){
-                // Retrive logo link from database
-                $getPreviousLogoImage = Logo::where('id', '=', $logoId)->first('logo');
+                // Retrive previous logo link from database
+                $getPreviousLogoImage = Logo::where('id', '=', $logo->id)->first('logo');
 
                 // Remove logo file from storage
                 if($getPreviousLogoImage){
@@ -162,19 +162,19 @@ class WebsiteInformationController extends Controller
                     }
                 }
 
-                /* Getting new file */
+                // Getting new file
                 $logoImage = $request->file('logo');
 
-                /* Extract the original file name with extension */
+                // Extract the original file name with extension
                 $logoName = $logoImage->getClientOriginalName();
 
-                /* Merge logo image into array */
-                $logoData = array_merge($validatedData, ['logo' => $logoName]);
+                // Assign logo name to validated data
+                $validatedData['logo'] = $logoName;
                 
-                $logo = Logo::where('id',$logoId)->update($logoData);
+                $logoUpdate = $logo->update($validatedData);
 
-                /* Store logo image into storage/public/website_logo folder */
-                if ($logo){
+                // Store logo image into storage/public/website_logo folder
+                if ($logoUpdate){
                     $logoImage->storeAs('website_logo', $logoName, 'public');
                 }
             }
@@ -220,6 +220,7 @@ class WebsiteInformationController extends Controller
     }
 
 
+    
     /* Method for retrive SEO property information by id */
 
     public function retrieveSeoPropertyInfoById(Request $request){
