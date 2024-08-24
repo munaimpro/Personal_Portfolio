@@ -211,13 +211,10 @@ class ClientFeedbackController extends Controller
         if (!$portfolioInfoId){
             return abort(404, 'This feedback link has expired or is invalid');
         }
-    
-        // Getting SEO properties for specific view
-        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
         
         // Getting view name from uri
         $routeName = last(explode('/', Route::getCurrentRoute()->uri));
 
-        return view('admin.pages.client_feedback', compact(['seoproperty', 'routeName', 'portfolioInfoId', 'token']));
+        return view('admin.pages.client_feedback', compact(['routeName', 'portfolioInfoId', 'token']));
     }
 }

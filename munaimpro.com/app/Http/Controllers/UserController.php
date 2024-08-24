@@ -398,6 +398,17 @@ class UserController extends Controller
 
 
 
+    /* Method for user page load */
+    
+    public function adminUserPage(){
+        // Getting view name from uri
+        $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+
+        return view('admin.pages.user', compact(['routeName']));
+    }
+
+
+
     /* Method for retreive all user */
 
     public function retriveAllUserInfo(Request $request){

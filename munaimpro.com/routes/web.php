@@ -226,8 +226,9 @@ Route::group(['prefix' => 'Admin', 'middleware' => TokenVerificationMiddleware::
 
     // Page Routes (ClientFeedback Controller)
     Route::get('/client_feedback', [ClientFeedbackController::class, 'adminClientFeedbackPage']);
-    
-    Route::view('/user', 'admin.pages.user');
+
+    // Page Routes (User Controller)
+    Route::get('/user', [UserController::class, 'adminUserPage']);
 });
 
 // Page Routes (ClientFeedback Controller)
