@@ -91,6 +91,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'retriveAllPortfolioInfo',
             'retrivePortfolioInfoById',
             'deletePortfolioInfo',
+            'generateFeedbackUrl',
 
             'sendMessageFromWebsite',
             'sendMessageFromAdmin',

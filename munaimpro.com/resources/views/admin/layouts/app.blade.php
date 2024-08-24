@@ -115,17 +115,28 @@
 
     {{-- Main body start --}}
     <div class="main-wrapper">
+        @if ($routeName == $seoproperty->page_name)
+            {{-- Header start --}}
+            @include('admin.layouts.header.admin_header')
+            {{-- Header end --}}
 
-        {{-- Header start --}}
-        @include('admin.layouts.header.admin_header')
-        {{-- Header end --}}
+            {{-- Sidebar start --}}
+            @include('admin.layouts.sidebar.admin_sidebar')
+            {{-- Sidebar end --}}
 
-        {{-- Sidebar start --}}
-        @include('admin.layouts.sidebar.admin_sidebar')
-        {{-- Sidebar end --}}
+            {{-- Page content start --}}
+            <div class="page-wrapper">
+                <div class="content">
+
+                    @yield('content')
+                
+                </div>
+            </div>
+            {{-- Page content end --}}
+        @endif
 
         {{-- Page content start --}}
-        <div class="page-wrapper">
+        <div class="page-wrapper" style="margin: auto 100px">
             <div class="content">
 
                 @yield('content')

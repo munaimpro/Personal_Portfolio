@@ -130,6 +130,7 @@ Route::get('retriveAllPortfolioInfo', [PortfolioController::class, 'retriveAllPo
 Route::post('retrivePortfolioInfoById', [PortfolioController::class, 'retrivePortfolioInfoById'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deletePortfolioInfo', [PortfolioController::class, 'deletePortfolioInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('removePortfolioUiImage', [PortfolioController::class, 'removePortfolioUiImage'])->middleware(TokenVerificationMiddleware::class);
+Route::post('/generateFeedbackUrl', [PortfolioController::class, 'generateFeedbackUrl']);
 
 
 // API Routes (Message Controller)
@@ -229,6 +230,9 @@ Route::group(['prefix' => 'Admin', 'middleware' => TokenVerificationMiddleware::
     
     Route::view('/user', 'admin.pages.user');
 });
+
+// Page Routes (ClientFeedback Controller)
+Route::get('/feedback/{token}', [ClientFeedbackController::class, 'clientFeedbackPage']);
 
 
 

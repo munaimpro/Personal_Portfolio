@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\Portfolio;
 use App\Models\Seoproperty;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -234,7 +237,10 @@ class PortfolioController extends Controller
             $portfolioInfoId = $request->input('portfolio_info_id');
             
             // Getting portfolio data by id with service id and name
-            $portfolio = Portfolio::with(['service:id,service_title'])->findOrFail($portfolioInfoId);
+            $portfolio = Portfolio::with([
+                'service:id,service_title',
+                'client_feedback:id,client_first_name,client_last_name,client_image,client_feedback,client_designation,portfolio_id,created_at'
+            ])->findOrFail($portfolioInfoId);
 
             if($portfolio){
                 return response()->json([
@@ -315,7 +321,7 @@ class PortfolioController extends Controller
     }  
 
 
-    /* Method for delete post information */
+    /* Method for delete portfolio information */
 
     public function deletePortfolioInfo(Request $request){
         // Start transaction
@@ -387,6 +393,36 @@ class PortfolioController extends Controller
             return response()->json([
                 'status' => 'failed',
                 'message' => 'Something went wrong: ' . $e->getMessage()
+            ]);
+        }
+    }
+
+
+    /* Method for generate feedback URL */
+    
+    public function generateFeedbackUrl(Request $request){
+        // Primary key id from input
+        $portfolioInfoId = $request->input('portfolio_info_id');
+
+        // Generating random token
+        $token = Str::random(40);
+
+        // Expire date generation
+        $expiresAt = Carbon::now()->addHours(24);
+
+        // Putting information to cache
+        $cache = Cache::put($token, $portfolioInfoId, $expiresAt);
+
+        if($cache){
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Feedback URL generated',
+                'cache' => $token,
+            ]);
+        } else{
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong',
             ]);
         }
     }

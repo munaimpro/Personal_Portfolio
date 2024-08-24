@@ -7,6 +7,7 @@ use App\Models\Seoproperty;
 use Illuminate\Http\Request;
 use App\Models\ClientFeedback;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -196,5 +197,25 @@ class ClientFeedbackController extends Controller
                 'message' => 'Something went wrong: ' . $e->getMessage()
             ]);
         }
+    }  
+
+
+    /* Method for client feedback page load */
+
+    public function clientFeedbackPage(Request $request, $token){
+        // Getting portfolio id from cached token
+        $portfolioInfoId = Cache::get($token);
+
+        if (!$portfolioInfoId) {
+            return abort(404, 'This feedback link has expired or is invalid.');
+        }
+    
+        // Getting SEO properties for specific view
+        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
+        
+        // Getting view name from uri
+        $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+
+        return view('admin.pages.client_feedback', compact(['seoproperty', 'routeName']));
     }
 }

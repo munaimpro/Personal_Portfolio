@@ -142,6 +142,63 @@
                         </div>
                     </div>
 
+                    <h6 class="text-center mt-5 mb-1">Client Feedback</h6>
+
+                    <div class="row">
+                        <div class="client-feedbacks">
+                            <div class="product-list">
+                                <ul class="row justify-content-center">
+                                    <li class="p-0">
+                                        <div class="productviewset p-0">
+                                            <div class="productviewsimg rounded-circle overflow-hidden m-auto" style="max-width: 120px; height: 120px;">
+                                                <img class="h-100" src="" alt="client image" id="clientImage">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+            
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <input type="text" class="form-control" id="clientFirstName">
+                                </div>
+                            </div>
+            
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input type="text" class="form-control" id="clientLastName">
+                                </div>
+                            </div>
+            
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Designation</label>
+                                    <input type="text" class="form-control" id="clientDesignation">
+                                </div>
+                            </div>
+            
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Feedback</label>
+                                    <textarea class="form-control" id="clientFeedback"></textarea>
+                                </div>
+                            </div>
+            
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Date</label>
+                                    <input type="text" class="form-control" id="clientFeedbackDate">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="justify-content-end mt-2">
+                        <button type="button" class="btn btn-success" onclick="generateFeedbackUrl()">Get Feedback</button>
+                    </div>
+
                     <input type="text" id="portfolioInfoId">
                 </form>
             </div>
@@ -187,24 +244,26 @@
     // Function for retrive post details
 
     async function retrivePortfolioInfoById(portfolio_info_id){
-
-        try{
+        try {
             // Assigning id to hidden field
             document.getElementById('portfolioInfoId').value = portfolio_info_id;
 
-            // Pssing id to controller and getting response
+            // Sending id to controller and getting response
             showLoader();
-            let response = await axios.post('../retrivePortfolioInfoById', {portfolio_info_id:portfolio_info_id});
+            let response = await axios.post('../retrivePortfolioInfoById', { portfolio_info_id: portfolio_info_id });
             hideLoader();
 
-            if(response.data['status'] === 'success'){
+            if (response.data['status'] === 'success'){
                 // Getting base URL of the system
                 let baseUrl = "{{ url('/') }}";
                 
                 // Generating full path for the project thumbnail
                 let projectThumbnailFullPath = baseUrl + '/storage/portfolio/thumbnails/' + response.data.data['project_thumbnail'];
+                
+                // Generating full path for the client image
+                let clientImageFullPath = baseUrl + '/storage/profile_picture/client_images/' + response.data.data['client_feedback'][0]['client_image'];
             
-                // Assigning retrived values
+                // Assigning retrieved values
                 $('#updateProjectTitle').val(response.data.data['project_title']);
                 $('#updateProjectType').val(response.data.data['project_type']);
                 $('#updateProjectStartingDate').val(response.data.data['project_starting_date']);
@@ -218,10 +277,10 @@
                 $('#updateProjectStatus').val(response.data.data['project_status']);
                 $('#updateClientName').val(response.data.data['client_name']);
                 $('#updateClientDesignation').val(response.data.data['client_designation']);
-            } else{
+            } else {
                 displayToast('error', response.data['message']);
             }
-        } catch(e){
+        } catch (e) {
             console.error('Something went wrong', e);
         }
     }
@@ -420,6 +479,30 @@
         }
     }
 
+
+    // Function for generate feedback URL
+
+    async function generateFeedbackUrl(){
+        // Getting portfolio id
+        let portfolio_info_id = $('#portfolioInfoId').val();
+    
+        // Passing data to controller and getting response
+        showLoader();
+        let response = await axios.post('/generateFeedbackUrl', { portfolio_info_id: portfolio_info_id });
+        hideLoader();
+
+        if (response.data['status'] === 'success'){
+            // Closing modal
+            $('#editModal').modal('hide');
+
+            // Redirect to the generated feedback URL
+            window.location.href = '../feedback/'+response.data.cache;
+
+            displayToast('success', response.data['message']);
+        } else {
+            displayToast('error', response.data['message']);
+        }
+    }
 
 </script>
 
