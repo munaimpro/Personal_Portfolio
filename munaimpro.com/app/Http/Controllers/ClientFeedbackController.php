@@ -29,6 +29,7 @@ class ClientFeedbackController extends Controller
     /* Method for add client feedback information */
 
     public function addClientFeedbackInfo(Request $request){
+        
         try {
             // Input validation process for backend
             $validatedData = $request->validate([
@@ -38,6 +39,7 @@ class ClientFeedbackController extends Controller
                 'client_image' => 'required|image|mimes:jpg,png,jpeg',
                 'client_feedback' => 'required|string',
                 'portfolio_id' => 'required|integer',
+                'token' => 'required',
             ]);
 
             if ($request->hasFile('client_image')){
@@ -59,6 +61,9 @@ class ClientFeedbackController extends Controller
                 // Store client image into storage/profile_picture/client_images folder
                 if ($clientFeedback){
                     $clientImage->storeAs('profile_picture/client_images', $clientImageUniqueName, 'public');
+
+                    // Invalidate the token once feedback is submitted
+                    Cache::forget($validatedData['token']);
                 }
 
                 return response()->json([
@@ -205,9 +210,9 @@ class ClientFeedbackController extends Controller
     public function clientFeedbackPage(Request $request, $token){
         // Getting portfolio id from cached token
         $portfolioInfoId = Cache::get($token);
-
-        if (!$portfolioInfoId) {
-            return abort(404, 'This feedback link has expired or is invalid.');
+        
+        if (!$portfolioInfoId){
+            return abort(404, 'This feedback link has expired or is invalid');
         }
     
         // Getting SEO properties for specific view
@@ -216,6 +221,6 @@ class ClientFeedbackController extends Controller
         // Getting view name from uri
         $routeName = last(explode('/', Route::getCurrentRoute()->uri));
 
-        return view('admin.pages.client_feedback', compact(['seoproperty', 'routeName']));
+        return view('admin.pages.client_feedback', compact(['seoproperty', 'routeName', 'portfolioInfoId', 'token']));
     }
 }

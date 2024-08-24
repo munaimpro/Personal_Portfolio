@@ -1,3 +1,4 @@
+<div id="feedback-body">
 {{-- Page header - Profile start --}}
 <div class="page-header">
     <div class="page-title">
@@ -16,9 +17,9 @@
             <div class="profile-top">
                 <div class="profile-content">
                     <div class="profile-contentimg">
-                        <img src="{{ asset('assets/img/customer/customer5.jpg') }}" alt="img" id="userProfileImage">
+                        <img src="{{ asset('assets/img/customer/customer5.jpg') }}" alt="img" id="clientImage">
                         <div class="profileupload">
-                            <input type="file" id="uploadProfilePicture" oninput="userProfileImage.src=window.URL.createObjectURL(this.files[0])">
+                            <input type="file" id="uploadClientImage" oninput="clientImage.src=window.URL.createObjectURL(this.files[0])">
                             <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/edit-set.svg') }}" alt="img"></a>
                         </div>
                     </div>
@@ -51,18 +52,34 @@
                     <textarea class="form-control" id="clientFeedback"></textarea>
                 </div>
             </div>
+
+            <input type="text" id="portfolioInfoId" value="{{ $portfolioInfoId }}">
+            <input type="text" id="token" value="{{ $token }}">
+
             <div class="ms-auto">
-                <a href="javascript:void(0);" class="btn btn-submit me-2 float-end" onclick="updateUserProfile()">Send</a>
+                <button type="button" class="btn btn-submit me-2 float-end" onclick="addClientFeedback()">Send</button>
             </div>
         </div>
     </div>
 </div>
 {{-- Profile form end --}}
+</div>
+
+<div id="feedback-message" class="d-flex d-none" style="min-height:100vh">
+    <div class="card w-50 m-auto">
+        <div class="card-body text-center">
+            <h1 style="color: #ff9f43">Thank you!</h1>
+            <h5>For your feedback. Stay connected with us.</h5>
+        </div>
+    </div>
+</div>
 
 
 {{-- Front end script start --}}
 
 <script>
+    
+    hideLoader();
 
     // Function for toast message common features
     function displayToast(icon, title){
@@ -80,116 +97,54 @@
         });
     }
 
-    // Function for getting user data
-    getUserInfo();
-
-    async function getUserInfo() {
-        showLoader();
-        let response = await axios.get('../userProfile');
-        hideLoader();
-
-        if(response.data['status'] === 'success'){
-            // Getting base URL of the system
-            let baseUrl = "{{ url('/') }}";
-            
-            // Generating full path for the profile picture
-            let profilePictureFullPath = baseUrl + '/storage/profile_picture/' + response.data.data['profile_picture'];
-            
-            document.getElementById('userFullName').innerText = response.data.data['first_name']+" "+response.data.data['last_name'];
-            document.getElementById('userProfileImage').src = profilePictureFullPath;
-            document.getElementById('userFirstName').value = response.data.data['first_name'];
-            document.getElementById('userLastName').value = response.data.data['last_name'];
-            document.getElementById('userEmail').value = response.data.data['email'];
-            document.getElementById('currentPassword').value = response.data.data['password'];
-        } else{
-            displayToast('error', response.data['message']);
-        }
-    }
-
-    // Function for update user data
-    async function updateUserProfile(){
+    // Function for add client feedback
+    async function addClientFeedback(){
 
         try{
             // Getting input data
-            let user_first_name = $('#userFirstName').val().trim();
-            let user_last_name = $('#userLastName').val().trim();
-            let user_email = $('#userEmail').val().trim();
-            let upload_profile_picture = document.getElementById('uploadProfilePicture').files[0];
-
-            // Regular expression for basic email validation
-            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            let client_first_name = $('#clientFirstName').val().trim();
+            let client_last_name = $('#clientLastName').val().trim();
+            let client_designation = $('#clientDesignation').val().trim();
+            let client_feedback = $('#clientFeedback').val().trim();
+            let upload_client_image = $('#uploadClientImage')[0].files[0];
+            let portfolio_info_id = $('#portfolioInfoId').val().trim();
+            let token = $('#token').val().trim();
 
             // Front end validation process
-            if(user_first_name.length === 0){
+            if(client_first_name.length === 0){
                 displayToast('warning', 'First name is required');
-            } else if(user_last_name.length === 0){
+            } else if(client_last_name.length === 0){
                 displayToast('warning', 'Last name is required');
-            } else if(user_email.length === 0){
-                displayToast('warning', 'Mail address is required');
-            } else if(!emailPattern.test(user_email)){
-                displayToast('warning', 'Invalid email address');
+            } else if(client_designation.length === 0){
+                displayToast('warning', 'Designation is required');
+            } else if(client_feedback.length === 0){
+                displayToast('warning', 'Feedback is required');
+            } else if(!upload_client_image){
+                displayToast('warning', 'Image is required');
             } else{
                 // FormData object
                 let formData = new FormData();
 
                 // Data append to FormData
-                formData.append('first_name', user_first_name);
-                formData.append('last_name', user_last_name);
-                formData.append('email', user_email);
-                if(upload_profile_picture) formData.append('profile_picture', upload_profile_picture);
+                formData.append('client_first_name', client_first_name);
+                formData.append('client_last_name', client_last_name);
+                formData.append('client_designation', client_designation);
+                formData.append('client_feedback', client_feedback);
+                formData.append('client_image', upload_client_image);
+                formData.append('portfolio_id', portfolio_info_id);
+                formData.append('token', token);
 
                 // Pssing data to controller and getting response
                 showLoader();
-                let response = await axios.post('../userUpdateProfile', formData, {
+                let response = await axios.post('../addClientFeedbackInfo', formData, {
                     headers:{'content-type':'multipart/form-data'}
                 });
                 hideLoader();
 
                 if(response.data['status'] === 'success'){
-                    await getUserInfo();
-                    displayToast('success', response.data['message']);
-                } else{
-                    displayToast('error', response.data['message']);
-                }
-            }
-        } catch(e){
-            console.error('Something went wrong', e);
-        }
-    }
-        
-    // Function for user reset password
-    async function resetUserPassword(){
-        try{
-            // Getting input data
-            let user_password    = $('#userPassword').val().trim();
-            let confirm_password = $('#userConfirmPassword').val().trim();
-    
-            // Front end validation process
-            if(user_password.length === 0){
-                displayToast('warning', 'Password is required');
-            } else if(user_password.length < 8){
-                displayToast('warning', 'Password should at least 8 character');
-            } else if(confirm_password.length === 0){
-                displayToast('warning', 'Password confirmation is required');
-            } else if(user_password !== confirm_password){
-                displayToast('warning', 'Password confirmation failure, not matched');
-            } else{
-                // Closing modal
-                $('#editModal').modal('hide');
-
-                // Assigning data to variable in JSON format
-                let resetpasswordData = {
-                    "password" : user_password,
-                    "confirm_password" : confirm_password,
-                }
-    
-                // Pssing data to controller and getting response
-                showLoader();
-                let response = await axios.post('../userResetPassword', resetpasswordData);
-                hideLoader();
-    
-                if(response.data['status'] === 'success'){
-                    displayToast('success', response.data['message']);
+                    // displayToast('success', response.data['message']);
+                    $('#feedback-body').addClass('d-none');
+                    $('#feedback-message').removeClass('d-none');
                 } else{
                     displayToast('error', response.data['message']);
                 }

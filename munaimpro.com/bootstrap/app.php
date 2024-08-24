@@ -93,6 +93,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'deletePortfolioInfo',
             'generateFeedbackUrl',
 
+            'addClientFeedbackInfo',
+
             'sendMessageFromWebsite',
             'sendMessageFromAdmin',
             'replyMessageFromAdmin',

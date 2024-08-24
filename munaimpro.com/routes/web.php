@@ -155,12 +155,11 @@ Route::delete('deleteSeoPropertyInfo', [WebsiteInformationController::class, 'de
 
 
 // API Routes (ClientFeedback Controller)
-Route::post('addClientFeedbackInfo', [ClientFeedbackController::class, 'addClientFeedbackInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::post('addClientFeedbackInfo', [ClientFeedbackController::class, 'addClientFeedbackInfo']);
 // Route::post('updateClientFeedbackInfo', [PortfolioController::class, 'updatePortfolioInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::get('retrieveAllClientFeedbackInfo', [ClientFeedbackController::class, 'retrieveAllClientFeedbackInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::post('retrieveClientFeedbackInfoById', [ClientFeedbackController::class, 'retrieveClientFeedbackInfoById'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deleteClientFeedbackInfo', [ClientFeedbackController::class, 'deleteClientFeedbackInfo'])->middleware(TokenVerificationMiddleware::class);
-// Route::delete('removePortfolioUiImage', [PortfolioController::class, 'removePortfolioUiImage'])->middleware(TokenVerificationMiddleware::class);
 
 
 

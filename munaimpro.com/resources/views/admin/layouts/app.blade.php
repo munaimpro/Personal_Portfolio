@@ -115,7 +115,7 @@
 
     {{-- Main body start --}}
     <div class="main-wrapper">
-        @if ($routeName == $seoproperty->page_name)
+        @if ($routeName != $seoproperty->page_name)
             {{-- Header start --}}
             @include('admin.layouts.header.admin_header')
             {{-- Header end --}}
@@ -133,17 +133,17 @@
                 </div>
             </div>
             {{-- Page content end --}}
-        @endif
+        @else
+            {{-- Page content start --}}
+            <div class="page-wrapper" style="margin: auto 100px">
+                <div class="content">
 
-        {{-- Page content start --}}
-        <div class="page-wrapper" style="margin: auto 100px">
-            <div class="content">
-
-                @yield('content')
-            
+                    @yield('content')
+                
+                </div>
             </div>
-        </div>
-        {{-- Page content end --}}
+            {{-- Page content end --}}
+        @endif
     </div>
     {{-- Main body end --}}
 

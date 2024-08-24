@@ -408,7 +408,7 @@ class PortfolioController extends Controller
         $token = Str::random(40);
 
         // Expire date generation
-        $expiresAt = Carbon::now()->addHours(24);
+        $expiresAt = Carbon::now()->addMinutes(5);
 
         // Putting information to cache
         $cache = Cache::put($token, $portfolioInfoId, $expiresAt);
