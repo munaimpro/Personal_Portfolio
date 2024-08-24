@@ -4,56 +4,56 @@
         <div id="sidebar-menu" class="sidebar-menu">
             <ul>
                 <li>
-                    <a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/dashboard') }}"><img src="{{ asset('assets/img/icons/dashboard.svg') }}" alt="img"><span> Dashboard</span> </a>
+                    <a @if($routeName === 'dashboard') class="active" @endif href="{{ url('Admin/dashboard') }}"><img src="{{ asset('assets/img/icons/dashboard.svg') }}" alt="img"><span> Dashboard</span> </a>
                 </li>
                 
                 <li class="submenu">
                     <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/product.svg') }}" alt="img"><span> Website Details</span> <span class="menu-arrow"></span></a>
                     <ul>
-                        <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/seoproperty') }}">Logo & SEO Information</a></li>
-                        <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/visitorinfo') }}">Visitor Information</a></li>
+                        <li><a @if($routeName === 'seoproperty') class="active" @endif href="{{ url('Admin/seoproperty') }}">Logo & SEO Information</a></li>
+                        <li><a @if($routeName === 'visitorinfo') class="active" @endif href="{{ url('Admin/visitorinfo') }}">Visitor Information</a></li>
                     </ul>
                 </li>
                 
                 <li class="submenu">
                     <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/sales1.svg') }}" alt="img"><span> About</span> <span class="menu-arrow"></span></a>
                     <ul>
-                        <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/about') }}">Basic Information</a></li>
-                        <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/education') }}">Education</a></li>
-                        <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/skill') }}">Skills</a></li>
-                        <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/award') }}">Awards</a></li>
-                        <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/experience') }}">Experience</a></li>
-                        <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/interest') }}">Interest</a></li>
-                        <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/social_media') }}">Social Media</a></li>
+                        <li><a @if($routeName === 'about') class="active" @endif href="{{ url('Admin/about') }}">Basic Information</a></li>
+                        <li><a @if($routeName === 'education') class="active" @endif href="{{ url('Admin/education') }}">Education</a></li>
+                        <li><a @if($routeName === 'skill') class="active" @endif href="{{ url('Admin/skill') }}">Skills</a></li>
+                        <li><a @if($routeName === 'award') class="active" @endif href="{{ url('Admin/award') }}">Awards</a></li>
+                        <li><a @if($routeName === 'experience') class="active" @endif href="{{ url('Admin/experience') }}">Experience</a></li>
+                        <li><a @if($routeName === 'interest') class="active" @endif href="{{ url('Admin/interest') }}">Interest</a></li>
+                        <li><a @if($routeName === 'social_media') class="active" @endif href="{{ url('Admin/social_media') }}">Social Media</a></li>
                     </ul>
                 </li>
                 
                 <li>
-                    <a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/service') }}"><i data-feather="file"></i><span> Service</span> </a>
+                    <a @if($routeName === 'service') class="active" @endif href="{{ url('Admin/service') }}"><i data-feather="file"></i><span> Service</span> </a>
                 </li>
                 
                 <li>
-                    <a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/portfolio') }}"><i data-feather="file"></i><span> Portfolio</span> </a>
+                    <a @if($routeName === 'portfolio') class="active" @endif href="{{ url('Admin/portfolio') }}"><i data-feather="file"></i><span> Portfolio</span> </a>
                 </li>
                 
                 <li>
-                    <a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/pricing') }}"><i data-feather="file"></i><span> Pricing</span> </a>
+                    <a @if($routeName === 'pricing') class="active" @endif href="{{ url('Admin/pricing') }}"><i data-feather="file"></i><span> Pricing</span> </a>
                 </li>
                 
                 <li>
-                    <a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/message') }}"><i data-feather="file"></i><span> Message</span> </a>
+                    <a @if($routeName === 'message') class="active" @endif href="{{ url('Admin/message') }}"><i data-feather="file"></i><span> Message</span> </a>
                 </li>
                 
                 <li class="submenu">
                     <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/expense1.svg') }}" alt="img"><span> Post</span> <span class="menu-arrow"></span></a>
                     <ul>
-                        <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/post') }}">All Post</a></li>
-                        <li><a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/category') }}">Category List</a></li>
+                        <li><a @if($routeName === 'post') class="active" @endif href="{{ url('Admin/post') }}">All Post</a></li>
+                        <li><a @if($routeName === 'category') class="active" @endif href="{{ url('Admin/category') }}">Category List</a></li>
                     </ul>
                 </li>
                 
                 <li>
-                    <a @if($seoproperty->page_name === $routeName) class="active" @endif href="{{ url('Admin/user') }}"><img src="{{ asset('assets/img/icons/users1.svg') }}" alt="img"><span> Users</span> </a>
+                    <a @if($routeName === 'user') class="active" @endif href="{{ url('Admin/user') }}"><img src="{{ asset('assets/img/icons/users1.svg') }}" alt="img"><span> Users</span> </a>
                 </li>
 
                 <li class="submenu">

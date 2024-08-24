@@ -22,13 +22,10 @@ class WebsiteInformationController extends Controller
     /* Method for admin dashboard page */
 
     public function adminDashboardPage(){
-        // Getting SEO properties for specific view
-        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
-        
         // Getting view name from uri
         $routeName = last(explode('/', Route::getCurrentRoute()->uri));
 
-        return view('admin.pages.dashboard', compact(['seoproperty', 'routeName']));
+        return view('admin.pages.dashboard', compact(['routeName']));
     }
 
 
@@ -429,13 +426,10 @@ class WebsiteInformationController extends Controller
     /* Method for admin visitor information page */
 
     public function adminVisitorInformationPage(){
-        // Getting SEO properties for specific view
-        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
-        
         // Getting view name from uri
         $routeName = last(explode('/', Route::getCurrentRoute()->uri));
 
-        return view('admin.pages.visitorinfo', compact(['seoproperty', 'routeName']));
+        return view('admin.pages.visitorinfo', compact(['routeName']));
     }
 
 

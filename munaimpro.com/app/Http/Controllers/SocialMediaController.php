@@ -13,13 +13,10 @@ class SocialMediaController extends Controller
     /* Method for admin social media page load */
     
     public function adminSocialMediaPage(){
-        // Getting SEO properties for specific view
-        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
-        
         // Getting view name from uri
         $routeName = last(explode('/', Route::getCurrentRoute()->uri));
 
-        return view('admin.pages.social_media', compact(['seoproperty', 'routeName']));
+        return view('admin.pages.social_media', compact(['routeName']));
     }
 
 

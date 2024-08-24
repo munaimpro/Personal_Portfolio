@@ -19,13 +19,10 @@ class UserController extends Controller
     /* Method for signup page load */
     
     public function userSignupPage(){
-        // Getting SEO properties for specific view
-        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
-        
         // Getting view name from uri
         $routeName = last(explode('/', Route::getCurrentRoute()->uri));
 
-        return view('admin.pages.signup', compact(['seoproperty', 'routeName']));
+        return view('admin.pages.signup', compact(['routeName']));
     }
 
 
@@ -82,13 +79,10 @@ class UserController extends Controller
     /* Method for signin page load */
     
     public function userSigninPage(){
-        // Getting SEO properties for specific view
-        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
-        
         // Getting view name from uri
         $routeName = last(explode('/', Route::getCurrentRoute()->uri));
 
-        return view('admin.pages.signin', compact(['seoproperty', 'routeName']));
+        return view('admin.pages.signin', compact(['routeName']));
     }
 
 
@@ -141,13 +135,10 @@ class UserController extends Controller
     /* Method for send OTP page load */
     
     public function sendOTPPage(){
-        // Getting SEO properties for specific view
-        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
-        
         // Getting view name from uri
         $routeName = last(explode('/', Route::getCurrentRoute()->uri));
 
-        return view('admin.pages.sendotp', compact(['seoproperty', 'routeName']));
+        return view('admin.pages.sendotp', compact(['routeName']));
     }
 
 
@@ -192,13 +183,10 @@ class UserController extends Controller
     /* Method for verify OTP page load */
     
     public function verifyOTPPage(){
-        // Getting SEO properties for specific view
-        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
-        
         // Getting view name from uri
         $routeName = last(explode('/', Route::getCurrentRoute()->uri));
 
-        return view('admin.pages.verifyotp', compact(['seoproperty', 'routeName']));
+        return view('admin.pages.verifyotp', compact(['routeName']));
     }
 
 
@@ -247,13 +235,10 @@ class UserController extends Controller
     /* Method for reset password page load */
     
     public function resetPasswordPage(){
-        // Getting SEO properties for specific view
-        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
-        
         // Getting view name from uri
         $routeName = last(explode('/', Route::getCurrentRoute()->uri));
 
-        return view('admin.pages.resetpassword', compact(['seoproperty', 'routeName']));
+        return view('admin.pages.resetpassword', compact(['routeName']));
     }
 
 
@@ -297,13 +282,10 @@ class UserController extends Controller
     /* Method for user profile page load */
     
     public function userProfilePage(){
-        // Getting SEO properties for specific view
-        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
-        
         // Getting view name from uri
         $routeName = last(explode('/', Route::getCurrentRoute()->uri));
 
-        return view('admin.pages.userprofile', compact(['seoproperty', 'routeName']));
+        return view('admin.pages.userprofile', compact(['routeName']));
     }
 
 

@@ -16,13 +16,10 @@ class CategoryController extends Controller
     /* Method for admin skill page load */
     
     public function adminCategoryPage(){
-        // Getting SEO properties for specific view
-        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
-        
         // Getting view name from uri
         $routeName = last(explode('/', Route::getCurrentRoute()->uri));
 
-        return view('admin.pages.category', compact(['seoproperty', 'routeName']));
+        return view('admin.pages.category', compact(['routeName']));
     }
 
     

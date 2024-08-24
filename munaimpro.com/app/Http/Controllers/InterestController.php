@@ -13,13 +13,10 @@ class InterestController extends Controller
     /* Method for admin interest page load */
     
     public function adminInterestPage(){
-        // Getting SEO properties for specific view
-        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
-        
         // Getting view name from uri
         $routeName = last(explode('/', Route::getCurrentRoute()->uri));
 
-        return view('admin.pages.interest', compact(['seoproperty', 'routeName']));
+        return view('admin.pages.interest', compact(['routeName']));
     }
 
 

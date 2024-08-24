@@ -13,13 +13,10 @@ class ExperienceController extends Controller
     /* Method for experience page load */
     
     public function adminExperiencePage(){
-        // Getting SEO properties for specific view
-        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
-        
         // Getting view name from uri
         $routeName = last(explode('/', Route::getCurrentRoute()->uri));
 
-        return view('admin.pages.experience', compact(['seoproperty', 'routeName']));
+        return view('admin.pages.experience', compact(['routeName']));
     }
 
 
