@@ -59,13 +59,10 @@ class WebsiteInformationController extends Controller
     /* Method for admin logo & seo property page */
 
     public function adminLogoWithSEOPropertyPage(){
-        // Getting SEO properties for specific view
-        $seoproperty = Seoproperty::where('page_name', 'index')->firstOrFail();
-        
         // Getting view name from uri
         $routeName = last(explode('/', Route::getCurrentRoute()->uri));
 
-        return view('admin.pages.seoproperty', compact(['seoproperty', 'routeName']));
+        return view('admin.pages.seoproperty', compact(['routeName']));
     }
 
 

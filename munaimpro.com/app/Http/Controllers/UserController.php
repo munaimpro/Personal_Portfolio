@@ -8,6 +8,7 @@ use App\Mail\OTPMail;
 use App\Models\Seoproperty;
 use Illuminate\Http\Request;
 use App\JWTController\JWTToken;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -440,11 +441,11 @@ class UserController extends Controller
 
     /* Method for retreive user by id */
 
-    public function retriveUserInfoById(Request $request){
+    public function retrieveUserInfoById(Request $request){
         try{
             $userInfoId = $request->input('user_info_id'); // Primary key id from input
         
-            $user = User::findOrFail($userInfoId, ['id', 'first_name', 'last_name', 'email', 'profile_picture']); // Getting User data by id
+            $user = User::findOrFail($userInfoId, ['id', 'first_name', 'last_name', 'email', 'phone', 'profile_picture', 'role']); // Getting User data by id
 
             if($user){
                 return response()->json([
@@ -465,5 +466,36 @@ class UserController extends Controller
             ]);
         }
 
+    }
+
+
+    /* Method for update user information */
+
+    public function updateUserInfo(Request $request){
+        try {
+            // Input validation process for backend
+            $validatedData = $request->validate([
+                'role' => 'required', Rule::in(['admin', 'user']),
+                'user_info_id' => 'required|integer|exists:users,id',
+            ]);
+            
+            // Retrieve user instance only once
+            $user = User::findOrFail($validatedData['user_info_id']);
+    
+            // Update user with validated data
+            $user->update($validatedData);
+    
+            return response()->json([
+                'status' => 'success',
+                'message' => 'User updated'
+            ]);
+    
+        } catch(Exception $e){
+            // Catch and handle exceptions
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong: ' . $e->getMessage()
+            ]);
+        }
     }
 }

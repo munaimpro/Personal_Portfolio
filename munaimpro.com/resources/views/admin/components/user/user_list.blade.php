@@ -43,12 +43,6 @@
             <table class="table datanew" id="tableData">
                 <thead>
                     <tr>
-                        <th>
-                            <label class="checkboxs">
-                                <input type="checkbox">
-                                <span class="checkmarks"></span>
-                            </label>
-                        </th>
                         <th>Profile</th>
                         <th>Name </th>
                         <th>Phone</th>
@@ -109,19 +103,17 @@
                                     <a href="javascript:void(0);" class="product-img">
                                         <img src="${userImageFullPath}" alt="profile picture">
                                     </a>
-                                    <p class="fw-bold">Lorem ipsum dolor sit amet</p>
                                 </td>
                                 <td>${item['first_name']} ${item['last_name']}</td>
                                 <td>${item['phone']}</td>
                                 <td>${item['email']}</td>
-                                <td>${item['email']}</td>
                                 <td>${item['role'] === 'admin' ? '<span class="bg-lightgreen badges">Admin</span>' : '<span class="bg-lightgrey badges">User</span>'}</td>
                                 <td>
-                                    <a data-id=${item.id} class="editBtn me-3" data-bs-toggle="modal" data-bs-target="#editModal">
-                                        <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
+                                    <a data-id="${item.id}" class="editBtn me-3" data-bs-toggle="modal" data-bs-target="#editModal">
+                                        <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="Edit">
                                     </a>                                        
-                                    <a data-id=${item.id} class="deleteBtn me-3" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                                        <img src="{{ asset('assets/img/icons/delete.svg') }}" alt="img">
+                                    <a data-id="${item.id}" class="deleteBtn me-3" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                        <img src="{{ asset('assets/img/icons/delete.svg') }}" alt="Delete">
                                     </a>
                                 </td>
                             </tr>`
