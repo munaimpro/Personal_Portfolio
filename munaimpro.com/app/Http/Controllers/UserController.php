@@ -411,9 +411,9 @@ class UserController extends Controller
 
     /* Method for retreive all user */
 
-    public function retriveAllUserInfo(Request $request){
+    public function retrieveAllUserInfo(){
         try{
-            $user = User::get(['id', 'first_name', 'last_name', 'email', 'profile_picture']); // Getting all user data
+            $user = User::get(['id', 'first_name', 'last_name', 'phone', 'email', 'profile_picture', 'role']); // Getting all user data
 
             if($user){
                 return response()->json([

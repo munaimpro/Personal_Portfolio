@@ -168,8 +168,8 @@
             });
 
             $('.editBtn').on('click', function(){
-                let post_info_id = $(this).data('id');
-                retrivePortfolioInfoById(post_info_id);
+                let portfolio_info_id = $(this).data('id');
+                retrivePortfolioInfoById(portfolio_info_id);
             });
 
             // table_data.DataTable();

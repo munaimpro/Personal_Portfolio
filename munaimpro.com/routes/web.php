@@ -34,9 +34,9 @@ Route::post('userOTPVerification', [UserController::class, 'verifyOTPCode']);
 Route::post('userResetPassword', [UserController::class, 'resetPassword'])->middleware(TokenVerificationMiddleware::class);
 Route::get('userProfile', [UserController::class, 'userProfile'])->middleware(TokenVerificationMiddleware::class);
 Route::post('userUpdateProfile', [UserController::class, 'updateProfile'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retriveAllUserInfo', [EducationController::class, 'retriveAllUserInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retriveUserInfoById', [EducationController::class, 'retriveUserInfoById'])->middleware(TokenVerificationMiddleware::class);
-Route::delete('deleteUserInfo', [EducationController::class, 'deleteUserInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::get('retrieveAllUserInfo', [UserController::class, 'retrieveAllUserInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::get('retrieveUserInfoById', [UserController::class, 'retrieveUserInfoById'])->middleware(TokenVerificationMiddleware::class);
+Route::delete('deleteUserInfo', [UserController::class, 'deleteUserInfo'])->middleware(TokenVerificationMiddleware::class);
 
 
 // API Routes (About Controller)

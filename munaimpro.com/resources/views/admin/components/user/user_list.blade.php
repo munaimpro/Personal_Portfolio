@@ -40,7 +40,7 @@
         </div>
 
         <div class="table-responsive">
-            <table class="table  datanew">
+            <table class="table datanew" id="tableData">
                 <thead>
                     <tr>
                         <th>
@@ -51,48 +51,15 @@
                         </th>
                         <th>Profile</th>
                         <th>Name </th>
-                        <th>User name </th>
                         <th>Phone</th>
                         <th>Email</th>
                         <th>Role</th>
-                        <th>Joined On</th>
-                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
 
-                <tbody>
-                    <tr>
-                        <td>
-                            <label class="checkboxs">
-                                <input type="checkbox">
-                                <span class="checkmarks"></span>
-                            </label>
-                        </td>
-                        <td class="productimgname">
-                            <a href="javascript:void(0);" class="product-img">
-                                <img src="{{ asset('assets/img/customer/customer1.jpg') }}" alt="product">
-                            </a>
-                        </td>
-                        <td>Thomas</td>
-                        <td>Thomas21 </td>
-                        <td>+12163547758 </td>
-                        <td>email</td>
-                        <td>Admin</td>
-                        <td>2024-3-5</td>
-                        <td>
-                            <span class="bg-lightgreen badges">Active</span>
-                            <span class="bg-lightred badges">Restricted</span>
-                        </td>
-                        <td>
-                            <a class="me-3" data-bs-toggle="modal" data-bs-target="#editModal">
-                                <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
-                            </a>                                        
-                            <a lass="me-3" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                                <img src="{{ asset('assets/img/icons/delete.svg') }}" alt="img">
-                            </a>
-                        </td>
-                    </tr>
+                <tbody id="tableList">
+                    
                 </tbody>
             </table>
         </div>
@@ -100,3 +67,81 @@
 </div>
 
 {{-- Table end --}}
+
+
+{{-- Front end script start --}}
+
+<script>
+
+    // Function for retrive user information
+    
+    retrieveAllUserInfo();
+
+    async function retrieveAllUserInfo(){
+
+        try{
+            // Getting data table
+            let table_data = $('#tableData');
+
+            // Getting table rows
+            let table_list = $('#tableList');
+
+            // Destroy data table
+            // table_data.DataTable().destroy();
+
+            // Make data table empty
+            table_list.empty();
+
+            // Pssing data to controller and getting response
+            showLoader();
+            let response = await axios.get('/retrieveAllUserInfo');
+            hideLoader();
+
+            // Getting base URL of the system
+            let baseUrl = "{{ url('/') }}";
+
+            response.data.data.forEach(function(item, index){
+                // Generating full path for the user image
+                let userImageFullPath = baseUrl + '/storage/profile_picture/user_images/' + item['profile_picture'];
+
+                let row = `<tr>
+                                <td class="productimgname d-block">
+                                    <a href="javascript:void(0);" class="product-img">
+                                        <img src="${userImageFullPath}" alt="profile picture">
+                                    </a>
+                                    <p class="fw-bold">Lorem ipsum dolor sit amet</p>
+                                </td>
+                                <td>${item['first_name']} ${item['last_name']}</td>
+                                <td>${item['phone']}</td>
+                                <td>${item['email']}</td>
+                                <td>${item['email']}</td>
+                                <td>${item['role'] === 'admin' ? '<span class="bg-lightgreen badges">Admin</span>' : '<span class="bg-lightgrey badges">User</span>'}</td>
+                                <td>
+                                    <a data-id=${item.id} class="editBtn me-3" data-bs-toggle="modal" data-bs-target="#editModal">
+                                        <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
+                                    </a>                                        
+                                    <a data-id=${item.id} class="deleteBtn me-3" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                        <img src="{{ asset('assets/img/icons/delete.svg') }}" alt="img">
+                                    </a>
+                                </td>
+                            </tr>`
+                table_list.append(row);
+            });
+
+            $('.deleteBtn').on('click', function(){
+                $('#userInfoDeleteId').val($(this).data('id'));
+            });
+
+            $('.editBtn').on('click', function(){
+                let user_info_id = $(this).data('id');
+                retrieveUserInfoById(user_info_id);
+            });
+
+            // table_data.DataTable();
+        } catch(e){
+            console.error('Something went wrong', e);
+        }
+    }
+</script>
+
+{{-- Front end script end --}}
