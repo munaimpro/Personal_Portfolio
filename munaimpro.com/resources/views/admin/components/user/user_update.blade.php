@@ -64,8 +64,8 @@
                 </form>
             </div>
             <div class="modal-footer justify-content-end">
-                <button type="button" class="btn btn-submit" onclick="updateUserInfo()">Update User</button>
                 <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-submit" onclick="updateUserInfo()">Update User</button>
             </div>
         </div>
     </div>

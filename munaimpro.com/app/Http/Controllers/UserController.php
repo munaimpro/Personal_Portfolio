@@ -497,5 +497,63 @@ class UserController extends Controller
                 'message' => 'Something went wrong: ' . $e->getMessage()
             ]);
         }
+    }  
+
+
+    /* Method for delete user information */
+
+    public function deleteUserInfo(Request $request){
+        try{
+            // Start transaction
+            DB::beginTransaction();
+        
+            // Getting user id from input
+            $userInfoId = $request->input('user_info_id');
+    
+            // Retrieve user from the database
+            $user = User::findOrFail($userInfoId);
+    
+            // Retrieve and delete the user image
+            $userImage = $user->profile_picture;
+
+            if($userImage && Storage::exists("public/profile_picture/user_images/" . $userImage)){
+                if (!Storage::delete("public/profile_picture/user_images/" . $userImage)){
+                    // Rollback the transaction
+                    DB::rollBack();
+
+                    return response()->json([
+                        'status' => 'failed',
+                        'message' => 'Failed to delete user image'
+                    ]);
+                }
+            }
+    
+            // Delete user data by id
+            if (!$user->delete()){
+                DB::rollBack();
+
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Failed to delete user'
+                ]);
+            }
+
+            // Commit the transaction
+            DB::commit();
+            
+            return response()->json([
+                'status' => 'success',
+                'message' => 'User deleted'
+            ]);
+    
+        } catch (Exception $e){
+            // Rollback the transaction
+            DB::rollBack();
+
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong: ' . $e->getMessage()
+            ]);
+        }
     }
 }
