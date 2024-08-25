@@ -19,8 +19,16 @@
 <div class="form-login">
     <label>Email</label>
     <div class="form-addons">
-        <input type="text" placeholder="Enter your email address" id="userEmail">
+        <input type="email" placeholder="Enter your email address" id="userEmail">
         <img src="{{ asset('assets/img/icons/mail.svg') }}" alt="img">
+    </div>
+</div>
+
+<div class="form-login">
+    <label>Phone</label>
+    <div class="form-addons">
+        <input type="phone" placeholder="Enter your phone number" id="userPhone">
+        <img src="{{ asset('assets/img/icons/phone.svg') }}" alt="img">
     </div>
 </div>
 
@@ -39,7 +47,7 @@
             <li class="p-0">
                 <div class="productviews">
                     <div class="productviewsimg">
-                        <img id="profilePicture" class="mw-100 mh-100" src="{{ asset('assets/img/profiles/avatar-17.jpg') }}" alt="website logo">
+                        <img id="profilePicture" class="mw-100 mh-100" src="{{ asset('assets/img/profiles/avater.png') }}" alt="profile picture">
                     </div>
                 </div>
             </li>
@@ -120,6 +128,7 @@ async function signupUser(){
         let user_first_name      = $('#userFirstName').val().trim();
         let user_last_name       = $('#userLastName').val().trim();
         let user_email           = $('#userEmail').val().trim();
+        let user_phone           = $('#userPhone').val().trim();
         let user_password        = $('#userPassword').val().trim();
         let user_profile_picture = $('#userProfilePicture')[0].files[0];
 
@@ -137,12 +146,14 @@ async function signupUser(){
             displayToast('warning', 'Mail address is required');
         } else if(!emailPattern.test(user_email)){
             displayToast('warning', 'Invalid email address');
+        } else if(user_phone.length === 0){
+            displayToast('warning', 'Phone number is required');
+        } else if(user_phone.length < 8 || user_phone.length > 15){
+            displayToast('warning', 'Invalid phone number');
         } else if(user_password.length === 0){
             displayToast('warning', 'Password is required');
         } else if(user_password.length < 8){
             displayToast('warning', 'Password should be at least 8 character long');
-        } else if(!user_profile_picture){
-            displayToast('warning', 'Profile picture is required');
         } else{
             // Form data object creation
             let formData = new FormData();
@@ -151,8 +162,9 @@ async function signupUser(){
             formData.append('first_name', user_first_name);
             formData.append('last_name', user_last_name);
             formData.append('email', user_email);
+            formData.append('phone', user_phone);
             formData.append('password', user_password);
-            formData.append('profile_picture', user_profile_picture);
+            if(user_profile_picture) formData.append('profile_picture', user_profile_picture);
 
             // Pssing data to controller and getting response
             showLoader();

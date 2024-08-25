@@ -9,36 +9,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     {{-- Title --}}
-    <title>{{ ucwords($seoproperty->page_name) }} - Admin - {{ ucwords($seoproperty->site_title) }}</title>
+    <title>{{ ucwords($routeName) }} - Admin - {{ ucwords('munaimpro') }}</title>
 
     {{-- Meta Description --}}
-    <meta name="description" content="{{ $seoproperty->site_description }}">
+    {{-- <meta name="description" content="{{ $seoproperty->site_description }}"> --}}
 
     {{-- Keywords --}}
-    <meta name="keywords" content="{{ $seoproperty->site_keywords }}">
+    {{-- <meta name="keywords" content="{{ $seoproperty->site_keywords }}"> --}}
 
     {{-- Author --}}
-    <meta name="author" content="{{ $seoproperty->author }}">
+    {{-- <meta name="author" content="{{ $seoproperty->author }}"> --}}
 
     {{-- Open Graph Meta Tags --}}
-    <meta property="og:title" content="{{ $seoproperty->og_title }}">
+    {{-- <meta property="og:title" content="{{ $seoproperty->og_title }}">
     <meta property="og:description" content="{{ $seoproperty->og_description }}">
     <meta property="og:url" content="{{ $seoproperty->og_url }}">
     <meta property="og:image" content="{{ $seoproperty->og_image }}">
     <meta property="og:type" content="{{ $seoproperty->og_type }}">
-    <meta property="og:site_name" content="{{ $seoproperty->og_site_name }}">
+    <meta property="og:site_name" content="{{ $seoproperty->og_site_name }}"> --}}
 
     {{-- Twitter Card Meta Tags --}}
-    <meta name="twitter:card" content="summary_large_image">
+    {{-- <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Your Name - Web Developer">
     <meta name="twitter:description" content="Discover my web development projects and skills.">
-    <meta name="twitter:image" content="https://www.yourwebsite.com/images/twitter-image.jpg">
+    <meta name="twitter:image" content="https://www.yourwebsite.com/images/twitter-image.jpg"> --}}
 
     {{-- Robots --}}
-    <meta name="robots" content="{{ $seoproperty->robots }}">
+    {{-- <meta name="robots" content="{{ $seoproperty->robots }}"> --}}
 
     {{-- Canonical URL --}}
-    <link rel="canonical" href="{{ $seoproperty->canonical_url }}">
+    {{-- <link rel="canonical" href="{{ $seoproperty->canonical_url }}"> --}}
 
     {{-- Content Language --}}
     <meta http-equiv="Content-Language" content="en">
@@ -64,6 +64,17 @@
 
     {{-- Custom CSS --}}
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+
+    {{-- Pre loader Configuration --}}
+    <script>
+        function showLoader(){
+            $('#global-loader').removeClass('d-none');
+        }
+
+        function hideLoader(){
+            $('#global-loader').addClass('d-none');
+        }
+    </script>
 </head>
 
 <body class="account-page">

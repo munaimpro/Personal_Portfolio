@@ -38,25 +38,28 @@ class UserController extends Controller
                 'first_name' => 'required|string|max:50',
                 'last_name' => 'required|string|max:50',
                 'email' => 'required|email|unique:users,email',
+                'phone' => 'required|string|min:8|max:15',
                 'password' => 'required|string|min:8|max:100',
-                'profile_picture' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             ]);
 
             if($request->hasFile('profile_picture')){
-                /* Getting profile picture */
+                // Validate profile picture
+                $request->validate(['profile_picture' => 'image|mimes:jpeg,png,jpg|max:2048']);
+
+                // Getting profile picture 
                 $profilePicture = $request->file('profile_picture');
 
-                /* Extract the original file name with extension */
+                // Generating unique name for profile picture
                 $profilePictureName = substr(md5(time()), 0, 5).'-'.$profilePicture->getClientOriginalName();
 
-                /* Merge profile picture into array */
-                $userData = array_merge($validatedData, ['profile_picture' => $profilePictureName]);
+                // Assigning profile picture name to array
+                $validatedData['profile_picture'] = $profilePictureName;
                 
-                $user = User::create($userData);
+                $user = User::create($validatedData);
 
                 /* Store profile picture into storage/public/profile_picture folder */
                 if($user){
-                    $profilePicture->storeAs('profile_picture/', $profilePictureName, 'public');
+                    $profilePicture->storeAs('profile_picture/user_images/', $profilePictureName, 'public');
                 }
             } else{
                 User::create($validatedData);

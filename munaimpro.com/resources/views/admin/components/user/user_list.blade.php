@@ -96,7 +96,9 @@
 
             response.data.data.forEach(function(item, index){
                 // Generating full path for the user image
-                let userImageFullPath = baseUrl + '/storage/profile_picture/user_images/' + item['profile_picture'];
+                let userImageFullPath = item['profile_picture'] == null ? baseUrl + '/assets/img/profiles/avater.png' : baseUrl + '/storage/profile_picture/user_images/' + item['profile_picture'];
+
+                console.log(baseUrl + '/storage/profile_picture/user_images/' + item['profile_picture']);
 
                 let row = `<tr>
                                 <td class="productimgname d-block">
