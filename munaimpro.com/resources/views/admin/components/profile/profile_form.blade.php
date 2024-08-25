@@ -61,12 +61,6 @@
             </div>
             <div class="col-lg-6 col-sm-12">
                 <div class="form-group">
-                    <label>User Name</label>
-                    <input type="text" placeholder="+1452 876 5432">
-                </div>
-            </div>
-            <div class="col-lg-6 col-sm-12">
-                <div class="form-group">
                     <button class="btn btn-submit" data-bs-toggle="modal" data-bs-target="#editModal">Change Password</button>
                 </div>
             </div>

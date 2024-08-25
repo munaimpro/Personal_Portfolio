@@ -12,7 +12,7 @@ class JWTToken
      * Method for create token
     */
 		
-    static function CreateToken($userEmail, $userId):string{
+    static function CreateToken($userId, $userEmail, $userFirstName, $userLastName, $userProfilePicture, $userRole):string{
         $key = env('JWT_KEY');
 
         $payload = [
@@ -22,8 +22,12 @@ class JWTToken
             /**
             * User email and user id passed to token to find after token decode 
             */
+            'userId' => $userId,
             'userEmail' => $userEmail,
-            'userId' => $userId
+            'userFirstName' => $userFirstName,
+            'userLastName' => $userLastName,
+            'userProfilePicture' => $userProfilePicture,
+            'userRole' => $userRole,
         ];
 
         return JWT::encode($payload, $key, 'HS256');

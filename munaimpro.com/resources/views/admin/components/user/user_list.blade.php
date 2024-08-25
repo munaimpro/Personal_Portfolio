@@ -4,11 +4,6 @@
         <h4>User List</h4>
         <h6>Manage your User</h6>
     </div>
-    <div class="page-btn">
-        <button class="btn btn-added" data-bs-toggle="modal" data-bs-target="#createModal">
-            <img src="{{ asset('assets/img/icons/plus.svg') }}" class="me-1" alt="img">Add User
-        </button>
-    </div>
 </div>
 {{-- Page header start --}}
 

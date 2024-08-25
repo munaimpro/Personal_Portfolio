@@ -47,6 +47,17 @@ class TokenVerificationMiddleware
             } else{
                 $request->headers->set('userEmail', $SigninTokenResult->userEmail);
                 $request->headers->set('userId', $SigninTokenResult->userId);
+                    
+                $authenticUserData = [
+                    'first_name' => $SigninTokenResult->userFirstName,
+                    'last_name' => $SigninTokenResult->userLastName,
+                    'profile_picture' => $SigninTokenResult->userProfilePicture,
+                    'role' => $SigninTokenResult->userRole,
+                ];
+
+                // Share the user data with all views
+                view()->share('authUser', $authenticUserData);
+
                 return $next($request);
             }
             

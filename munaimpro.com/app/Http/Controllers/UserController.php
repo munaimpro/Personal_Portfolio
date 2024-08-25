@@ -102,11 +102,11 @@ class UserController extends Controller
                 'password' => 'required|string',
             ]);
 
-            $userCheck = User::where('email', '=', $request->email)->select('id', 'password')->first();
+            $userCheck = User::where('email', '=', $request->email)->select('id', 'first_name', 'last_name', 'profile_picture', 'password', 'role')->first();
 
             if($userCheck != NULL && Hash::check($request->password, $userCheck->password)){
                 
-                $token = JWTToken::CreateToken($request->input('email'), $userCheck->id);
+                $token = JWTToken::CreateToken($userCheck->id, $request->input('email'), $userCheck->first_name, $userCheck->last_name, $userCheck->profile_picture, $userCheck->role);
                 
                 return response()->json([
                     'status' => 'success',
