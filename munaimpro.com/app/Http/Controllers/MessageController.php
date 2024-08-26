@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\User;
+use App\Models\About;
 use App\Models\Message;
 use App\Models\Seoproperty;
+use App\Models\SocialMedias;
 use Illuminate\Http\Request;
 use App\Mail\AdminMessageMail;
 use App\Mail\ClientMessageMail;
@@ -76,9 +78,14 @@ class MessageController extends Controller
                 'message' => 'required|string',
             ]);
             
-            // dd($message);
+            $aboutId = About::pluck('id')->first(); // Primary key id from about table
+            $about = About::where('id', '=', $aboutId)->first(); // Getting about data by id
+
+            $facebook = SocialMedias::where('social_media_title', 'facebook')->first(['social_media_link']);
+
+            $linkedin = SocialMedias::where('social_media_title', 'linkedin')->first(['social_media_link']);
             
-            $sendMessage = Mail::to($validatedData['email'])->send(new AdminMessageMail($validatedData['email'], $validatedData['subject'], $validatedData['message']));
+            $sendMessage = Mail::to($validatedData['email'])->send(new AdminMessageMail($validatedData['email'], $validatedData['subject'], $validatedData['message'], $about->full_name, $about->designation, $facebook->social_media_link, $linkedin->social_media_link));
 
             if($sendMessage){
                 return response()->json([

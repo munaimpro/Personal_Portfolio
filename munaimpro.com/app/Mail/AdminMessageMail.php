@@ -20,12 +20,20 @@ class AdminMessageMail extends Mailable
     public $email;
     public $subject;
     public $adminMessage;
+    public $fullName;
+    public $designation;
+    public $facebookLink;
+    public $linkedinLink;
     
-    public function __construct($email, $subject, $adminMessage)
+    public function __construct($email, $subject, $adminMessage, $fullName, $designation, $facebookLink, $linkedinLink)
     {
         $this->email = $email;
         $this->subject = $subject;
         $this->adminMessage = $adminMessage;
+        $this->fullName = $fullName;
+        $this->designation = $designation;
+        $this->facebookLink = $facebookLink;
+        $this->linkedinLink = $linkedinLink;
     }
 
     /**
