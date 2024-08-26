@@ -46,28 +46,15 @@
                         </th>
                         <th>IP Address</th>
                         <th>Country</th>
-                        <th>City</th>
                         <th>Browser</th>
                         <th>Total Visit</th>
                         <th>Last Visit</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
 
                 <tbody id="tableList">
-                    <tr>
-                        <td>
-                            <label class="checkboxs">
-                                <input type="checkbox">
-                                <span class="checkmarks"></span>
-                            </label>
-                        </td>
-                        <td>Ip address</td>
-                        <td>country name</td>
-                        <td>city name</td>
-                        <td>browser name</td>
-                        <td>total visit count</td>
-                        <td>last visiting time and date</td>
-                    </tr>
+                    
                 </tbody>
             </table>
         </div>
@@ -129,8 +116,18 @@
                                 <td>${item['visitor_browser']}</td>
                                 <td>${item['total_visit']}</td>
                                 <td>${formattedDate}</td>
+                                <td>
+                                    <a data-id="${item.id}" class="viewBtn me-3" data-bs-toggle="modal" data-bs-target="#viewModal">
+                                        <img src="{{ asset('assets/img/icons/eye.svg') }}" alt="Edit">
+                                    </a>
+                                </td>
                             </tr>`
                 table_list.append(row);
+            });
+
+            $('.viewBtn').on('click', function(){
+                let visitor_info_id = $(this).data('id');
+                retrieveVisitorInfoById(visitor_info_id);
             });
 
             // table_data.DataTable();

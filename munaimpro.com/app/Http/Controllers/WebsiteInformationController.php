@@ -12,8 +12,8 @@ use App\Models\Portfolio;
 use App\Models\Seoproperty;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\DB;
 use App\Models\VisitorInformations;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -434,7 +434,37 @@ class WebsiteInformationController extends Controller
     
     public function retrieveAllVisitorInfo(){
         try{
-            $visitor = VisitorInformations::get(['ip_address', 'visitor_country', 'visitor_browser', 'total_visit', 'last_visiting_time']);
+            $visitor = VisitorInformations::get(['id', 'ip_address', 'visitor_country', 'visitor_browser', 'total_visit', 'last_visiting_time']);
+            
+            if($visitor){
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Request success',
+                    'data' => $visitor
+                ]);
+            } else{
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Data not found'
+                ]);
+            }
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong'.' '.$e->getMessage()
+            ]);
+        }
+        
+    }
+
+
+    /* Method for retrieve website visitor information by id */
+    
+    public function retrieveVisitorInfoById(Request $request){
+        try{
+            $visitorInfoId = $request->input('visitor_info_id'); // Primary key id from input
+        
+            $visitor = VisitorInformations::findOrFail($visitorInfoId, ['ip_address', 'visitor_country', 'visitor_browser', 'total_visit', 'last_visiting_time']); // Getting visitor data by id
             
             if($visitor){
                 return response()->json([

@@ -9,5 +9,5 @@ class VisitorInformations extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id_address', 'visitor_country', 'visitor_browser', 'total_visit', 'last_visiting_time'];
+    protected $fillable = ['ip_address', 'visitor_country', 'visitor_browser', 'total_visit', 'last_visiting_time'];
 }

@@ -150,6 +150,7 @@ Route::post('updateLogoInfo', [WebsiteInformationController::class, 'updateLogoI
 Route::get('retreiveAllSeoPropertyInfo', [WebsiteInformationController::class, 'retreiveAllSeoPropertyInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::post('retrieveSeoPropertyInfoById', [WebsiteInformationController::class, 'retrieveSeoPropertyInfoById'])->middleware(TokenVerificationMiddleware::class);
 Route::get('retrieveAllVisitorInfo', [WebsiteInformationController::class, 'retrieveAllVisitorInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::post('retrieveVisitorInfoById', [WebsiteInformationController::class, 'retrieveVisitorInfoById'])->middleware(TokenVerificationMiddleware::class);
 Route::post('updateSeoPropertyInfo', [WebsiteInformationController::class, 'updateSeoPropertyInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::get('dashboardSummaryInfo', [WebsiteInformationController::class, 'dashboardSummaryInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deleteSeoPropertyInfo', [WebsiteInformationController::class, 'deleteSeoPropertyInfo'])->middleware(TokenVerificationMiddleware::class);

@@ -108,6 +108,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'retriveAllSeoPropertyInfo',
             'retriveSeoPropertyInfoById',
             'retriveAllVisitorInfo',
+            'retrieveVisitorInfoById',
             'updateSeoPropertyInfo',
             'dashboardSummaryInfo',
 
