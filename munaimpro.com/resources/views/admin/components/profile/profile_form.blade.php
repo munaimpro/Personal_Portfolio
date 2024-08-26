@@ -16,7 +16,7 @@
             <div class="profile-top">
                 <div class="profile-content">
                     <div class="profile-contentimg">
-                        <img src="{{ asset('assets/img/customer/customer5.jpg') }}" alt="img" id="userProfileImage">
+                        <img src="{{ asset('assets/img/profiles/avater.png') }}" alt="img" id="userProfileImage">
                         <div class="profileupload">
                             <input type="file" id="uploadProfilePicture" oninput="userProfileImage.src=window.URL.createObjectURL(this.files[0])">
                             <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/edit-set.svg') }}" alt="img"></a>
@@ -56,7 +56,7 @@
             <div class="col-lg-6 col-sm-12">
                 <div class="form-group">
                     <label>Phone</label>
-                    <input type="text" placeholder="+1452 876 5432">
+                    <input type="phone" id="userPhone">
                 </div>
             </div>
             <div class="col-lg-6 col-sm-12">
@@ -103,13 +103,14 @@
             let baseUrl = "{{ url('/') }}";
             
             // Generating full path for the profile picture
-            let profilePictureFullPath = baseUrl + '/storage/profile_picture/' + response.data.data['profile_picture'];
+            let profilePictureFullPath = response.data.data['profile_picture'] == null ? baseUrl + '/assets/img/profiles/avater.png' : baseUrl + '/storage/profile_picture/user_images/' + response.data.data['profile_picture'];
             
             document.getElementById('userFullName').innerText = response.data.data['first_name']+" "+response.data.data['last_name'];
             document.getElementById('userProfileImage').src = profilePictureFullPath;
             document.getElementById('userFirstName').value = response.data.data['first_name'];
             document.getElementById('userLastName').value = response.data.data['last_name'];
             document.getElementById('userEmail').value = response.data.data['email'];
+            document.getElementById('userPhone').value = response.data.data['phone'];
             document.getElementById('currentPassword').value = response.data.data['password'];
         } else{
             displayToast('error', response.data['message']);
@@ -124,6 +125,7 @@
             let user_first_name = $('#userFirstName').val().trim();
             let user_last_name = $('#userLastName').val().trim();
             let user_email = $('#userEmail').val().trim();
+            let user_phone = $('#userPhone').val().trim();
             let upload_profile_picture = document.getElementById('uploadProfilePicture').files[0];
 
             // Regular expression for basic email validation
@@ -138,6 +140,8 @@
                 displayToast('warning', 'Mail address is required');
             } else if(!emailPattern.test(user_email)){
                 displayToast('warning', 'Invalid email address');
+            } else if(user_phone.length === 0){
+                displayToast('warning', 'Phone number is required');
             } else{
                 // FormData object
                 let formData = new FormData();
@@ -146,6 +150,7 @@
                 formData.append('first_name', user_first_name);
                 formData.append('last_name', user_last_name);
                 formData.append('email', user_email);
+                formData.append('phone', user_phone);
                 if(upload_profile_picture) formData.append('profile_picture', upload_profile_picture);
 
                 // Pssing data to controller and getting response

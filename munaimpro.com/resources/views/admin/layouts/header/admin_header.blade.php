@@ -51,8 +51,14 @@
             <div class="dropdown-menu menu-drop-user">
                 <div class="profilename">
                     <div class="profileset">
-                    <span class="user-img"><img src="{{ asset('assets/img/profiles/avater.png') }}" alt="">
-                    <span class="status online"></span></span>
+                    <span class="user-img">
+                        @if($authUser['profile_picture'] == NULL)
+                            <img src="{{ asset('assets/img/profiles/avater.png') }}" alt="profile picture">
+                        @else
+                            <img src="{{ asset('storage/profile_picture/user_images/'.$authUser['profile_picture']) }}" alt="profile picture">
+                        @endif
+                        <span class="status online"></span>
+                    </span>
                     <div class="profilesets">
                     <h6>{{ $authUser['first_name'].' '. $authUser['last_name']}}</h6>
                     <h5>{{ ucwords($authUser['role']) }}</h5>

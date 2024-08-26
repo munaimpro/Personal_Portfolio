@@ -102,7 +102,7 @@ class UserController extends Controller
                 'password' => 'required|string',
             ]);
 
-            $userCheck = User::where('email', '=', $request->email)->select('id', 'first_name', 'last_name', 'profile_picture', 'password', 'role')->first();
+            $userCheck = User::where('email', '=', $validatedData['email'])->select('id', 'first_name', 'last_name', 'profile_picture', 'password', 'role')->first();
 
             if($userCheck != NULL && Hash::check($request->password, $userCheck->password)){
                 
@@ -298,9 +298,9 @@ class UserController extends Controller
 
     public function userProfile(Request $request){
         try{
-            $email = $request->header('userEmail'); // Email from header
+            $id = $request->header('userId'); // Id from header
             
-            $user = User::where('email', '=', $email)->select('first_name', 'last_name', 'email', 'password', 'profile_picture')->first(); // Getting user data by email
+            $user = User::where('id', '=', $id)->select('first_name', 'last_name', 'email', 'phone', 'password', 'profile_picture')->first(); // Getting user data by email
 
             if($user){
                 return response()->json([
@@ -329,25 +329,26 @@ class UserController extends Controller
     public function updateProfile(Request $request){
         try{
             // Input validation process for backend
-            $request->validate([
+            $validatedData = $request->validate([
                 'first_name' => 'required|string|max:50',
                 'last_name' => 'required|string|max:50',
                 'email' => 'required|email',
+                'phone' => 'required|string',
                 'profile_picture' => 'image|mimes:jpg,png,jpeg|max:2048',
             ]);
 
-            // Getting logedin user email
-            $email = $request->header('userEmail');
+            // Getting logedin user id
+            $id = $request->header('userId');
 
             if($request->hasFile('profile_picture')){
                 
                 // Retrive profile picture link from database
-                $getPreviousProfilePicture = User::where('email', '=', $email)->first('profile_picture');
+                $getPreviousProfilePicture = User::where('id', '=', $id)->first('profile_picture');
 
                 // Remove file from storage
                 if($getPreviousProfilePicture){
-                    if(Storage::exists("public/profile_picture/".$getPreviousProfilePicture->profile_picture)){
-                        Storage::delete("public/profile_picture/".$getPreviousProfilePicture->profile_picture);
+                    if(Storage::exists("public/profile_picture/user_images/".$getPreviousProfilePicture->profile_picture)){
+                        Storage::delete("public/profile_picture/user_images/".$getPreviousProfilePicture->profile_picture);
                     }
                 }
 
@@ -356,16 +357,13 @@ class UserController extends Controller
 
                 // Extract the original file name with extension
                 $profilePictureName = substr(md5(time()), 0, 5).'-'.$profilePicture->getClientOriginalName();
+                $validatedData['profile_picture'] = $profilePictureName;
 
-                $user = User::where('email', '=', $email)->update([
-                    'first_name' => $request->input('first_name'),
-                    'last_name' => $request->input('last_name'),
-                    'email' => $request->input('email'),
-                    'profile_picture' => $profilePictureName,
-                ]);
+                // Update user with validated data
+                $user = User::where('id', '=', $id)->update($validatedData);
 
                 if($user){
-                    $profilePicture->storeAs('profile_picture', $profilePictureName, 'public');
+                    $profilePicture->storeAs('profile_picture/user_images/', $profilePictureName, 'public');
                     
                     return response()->json([
                         'status' => 'success',
@@ -374,11 +372,8 @@ class UserController extends Controller
                 }
 
             } else{
-                $user = User::where('email', '=', $email)->update([
-                    'first_name' => $request->input('first_name'),
-                    'last_name' => $request->input('last_name'),
-                    'email' => $request->input('email'),
-                ]);
+                // Update user with validated data
+                $user = User::where('id', '=', $id)->update($validatedData);
                 
                 if($user){
                     return response()->json([
