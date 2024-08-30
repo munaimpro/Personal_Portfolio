@@ -19,8 +19,6 @@ return new class extends Migration
             $table->string('project_type', 100);
             $table->foreignId('service_id')->constrained();
             $table->text('project_description');
-            $table->string('client_name', 100);
-            $table->string('client_designation', 100)->nullable();
             $table->date('project_starting_date');
             $table->date('project_ending_date')->nullable();
             $table->string('project_url', 100);

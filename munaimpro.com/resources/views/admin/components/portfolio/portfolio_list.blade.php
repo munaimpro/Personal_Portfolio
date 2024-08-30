@@ -123,7 +123,7 @@
                 // Generating full path for the project thumbnail
                 let projectThumbnailFullPath = baseUrl + '/storage/portfolio/thumbnails/' + item['project_thumbnail'];
 
-                // Formatting the project starting date date
+                // Formatting the project starting date
                 let startingDate = new Date(item['project_starting_date']);
                 let formattedStartingDate = startingDate.toLocaleDateString('en-US', {
                     year: 'numeric',
@@ -131,7 +131,7 @@
                     day: 'numeric',
                 });
 
-                // Formatting the project ending date date
+                // Formatting the project ending date
                 let endingDate = new Date(item['project_ending_date']);
                 let formattedEndingDate = endingDate.toLocaleDateString('en-US', {
                     year: 'numeric',
@@ -148,7 +148,7 @@
                                 </td>
                                 <td>${item['project_type']}</td>
                                 <td>${item['project_url']}</td>
-                                <td>${formattedStartingDate} to ${formattedEndingDate}</td>
+                                <td>${formattedStartingDate} to ${endingDate < startingDate ? 'Present' : formattedEndingDate}</td>
                                 <td>${item['project_view']}</td>
                                 <td>${item['project_status'] === 'published' ? '<span class="bg-lightgreen badges">Published</span>' : item['project_status'] === 'running' ? '<span class="bg-lightgrey badges">Running</span>' : '<span class="bg-lightred badges">Private</span>'}</td>
                                 <td>

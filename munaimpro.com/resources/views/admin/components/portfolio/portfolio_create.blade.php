@@ -110,28 +110,6 @@
                             <option value="published">Published</option>
                         </select>
                     </div>
-                    
-
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <label>Client Name</label>
-                            <input class="form-control" type="text" id="clientName">
-                        </div>
-                    </div>
-
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <label>Client Designation</label>
-                            <input class="form-control" type="text" id="clientDesignation">
-                        </div>
-                    </div>
-
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <label>Client Institution</label>
-                            <input class="form-control" type="text" id="clientInstitution">
-                        </div>
-                    </div>
                 </form>
             </div>
             <div class="modal-footer justify-content-end">
@@ -216,38 +194,29 @@
             let project_url = $('#projectUrl').val().trim();
             let project_technology = $('#projectTechnology').val().trim();
             let project_status = $('#projectStatus').val().trim();
-            let client_name = $('#clientName').val().trim();
-            let client_designation = $('#clientDesignation').val().trim();
-            let client_institution = $('#clientInstitution').val().trim();
 
             // Front-end validation process
-            if (project_title.length === 0) {
+            if (project_title.length === 0){
                 displayToast('warning', 'Project title is required');
-            } else if (project_type.length === 0) {
+            } else if (project_type.length === 0){
                 displayToast('warning', 'Project type is required');
-            } else if (service_id === '') {
+            } else if (service_id === ''){
                 displayToast('warning', 'Service ID is required');
-            } else if (project_starting_date === '') {
+            } else if (project_starting_date === ''){
                 displayToast('warning', 'Project starting date is required');
             } else if (project_ending_date != '' && project_starting_date > project_ending_date) {
                 displayToast('warning', 'Invalid ending date');
-            } else if (project_url.length === 0) {
+            } else if (project_url.length === 0){
                 displayToast('warning', 'Project URL is required');
-            } else if (project_technology.length === 0) {
+            } else if (project_technology.length === 0){
                 displayToast('warning', 'Project technology is required');
-            } else if (project_description.length === 0) {
+            } else if (project_description.length === 0){
                 displayToast('warning', 'Project description is required');
-            } else if (!project_thumbnail) {
+            } else if (!project_thumbnail){
                 displayToast('warning', 'Project thumbnail is required');
-            } else if (project_ui_image.length === 0) {
+            } else if (project_ui_image.length === 0){
                 displayToast('warning', 'At least one UI image is required');
-            } else if (client_name.length === 0) {
-                displayToast('warning', 'Client name is required');
-            } else if (client_designation.length === 0) {
-                displayToast('warning', 'Client designation is required');
-            } else if (client_institution.length === 0) {
-                displayToast('warning', 'Client institution is required');
-            } else {
+            } else{
                 // Closing modal
                 $('#createModal').modal('hide');
 
@@ -268,9 +237,6 @@
                 formData.append('project_url', project_url);
                 formData.append('core_technology', project_technology);
                 formData.append('project_status', project_status);
-                formData.append('client_name', client_name);
-                formData.append('client_designation', client_designation);
-                formData.append('client_institution', client_institution);
 
                 // Sending data to the controller and getting response
                 showLoader();

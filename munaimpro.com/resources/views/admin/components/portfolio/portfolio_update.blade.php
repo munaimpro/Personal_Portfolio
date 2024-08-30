@@ -83,7 +83,7 @@
                             <li class="ps-0">
                                 <div class="productviewset">
                                     <div class="productviewsimg">
-                                        <img src="{{ asset('assets/img/customer/profile2.jpg') }}" alt="img" id="updateProjectThumbnailPreview">
+                                        <img src="{{ asset('assets/img/profiles/avater.png') }}" alt="img" id="updateProjectThumbnailPreview">
                                     </div>
                                 </div>
                             </li>
@@ -119,39 +119,17 @@
                             <option value="published">Published</option>
                         </select>
                     </div>
-                    
-
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <label>Client Name</label>
-                            <input class="form-control" type="text" id="updateClientName">
-                        </div>
-                    </div>
-
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <label>Client Designation</label>
-                            <input class="form-control" type="text" id="updateClientDesignation">
-                        </div>
-                    </div>
-
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <label>Client Institution</label>
-                            <input class="form-control" type="text" id="updateClientInstitution">
-                        </div>
-                    </div>
 
                     <h6 class="text-center mt-5 mb-1">Client Feedback</h6>
 
                     <div class="row">
-                        <div class="client-feedbacks">
+                        <div id="clientFeedbackContent" class="d-none">
                             <div class="product-list">
                                 <ul class="row justify-content-center">
                                     <li class="p-0">
                                         <div class="productviewset p-0">
                                             <div class="productviewsimg rounded-circle overflow-hidden m-auto" style="max-width: 120px; height: 120px;">
-                                                <img class="h-100" src="" alt="client image" id="clientImage">
+                                                <img class="h-100" src="{{ asset('assets/img/profiles/avater.png') }}" alt="client image" id="clientImage">
                                             </div>
                                         </div>
                                     </li>
@@ -196,10 +174,10 @@
                     </div>
 
                     <div class="justify-content-end mt-2">
-                        <button type="button" class="btn btn-success" onclick="generateFeedbackUrl()">Get Feedback</button>
+                        <button type="button" class="btn btn-submit" id="feedbackButton" style="padding:12px;" onclick="generateFeedbackUrl()">Get Feedback</button>
                     </div>
 
-                    <input type="text" id="portfolioInfoId">
+                    <input type="number" class="d-none" id="portfolioInfoId">
                 </form>
             </div>
             <div class="modal-footer justify-content-end">
@@ -246,7 +224,7 @@
     async function retrivePortfolioInfoById(portfolio_info_id){
         try {
             // Assigning id to hidden field
-            document.getElementById('portfolioInfoId').value = portfolio_info_id;
+            $('#portfolioInfoId').val(portfolio_info_id);
 
             // Sending id to controller and getting response
             showLoader();
@@ -254,14 +232,14 @@
             hideLoader();
 
             if (response.data['status'] === 'success'){
+
+                // console.log(response.data.data['client_feedback'].length > 0);
+
                 // Getting base URL of the system
                 let baseUrl = "{{ url('/') }}";
                 
                 // Generating full path for the project thumbnail
                 let projectThumbnailFullPath = baseUrl + '/storage/portfolio/thumbnails/' + response.data.data['project_thumbnail'];
-                
-                // Generating full path for the client image
-                let clientImageFullPath = baseUrl + '/storage/profile_picture/client_images/' + response.data.data['client_feedback'][0]['client_image'];
             
                 // Assigning retrieved values
                 $('#updateProjectTitle').val(response.data.data['project_title']);
@@ -275,12 +253,39 @@
                 $('#updateProjectUrl').val(response.data.data['project_url']);
                 $('#updateProjectTechnology').val(response.data.data['core_technology']);
                 $('#updateProjectStatus').val(response.data.data['project_status']);
-                $('#updateClientName').val(response.data.data['client_name']);
-                $('#updateClientDesignation').val(response.data.data['client_designation']);
-            } else {
+                $('#portfolioTestData').val(response.data.data['client_feedback'][0]['client_first_name']);
+
+                if(response.data.data['client_feedback'].length > 0){
+                    // Showing client feedback content
+                    $('#clientFeedbackContent').removeClass('d-none');
+
+                    // Hiding client feedback button
+                    $('#feedbackButton').addClass('d-none');
+
+                    // Generating full path for the client image
+                    let clientImageFullPath = baseUrl + '/storage/profile_picture/client_images/' + response.data.data['client_feedback'][0]['client_image'];
+
+                    // Formatting the client feedback date
+                    let feedbackDate = new Date(response.data.data['client_feedback'][0]['created_at']);
+                    let formattedFeedbackDate = feedbackDate.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                    });
+
+                    $('#clientImage')[0].src = clientImageFullPath;
+                    $('#clientFirstName').val(response.data.data['client_feedback'][0]['client_first_name']);
+                    $('#clientLastName').val(response.data.data['client_feedback'][0]['client_last_name']);
+                    $('#clientDesignation').val(response.data.data['client_feedback'][0]['client_designation']);
+                    $('#clientFeedback').val(response.data.data['client_feedback'][0]['client_feedback']);
+                    $('#clientFeedbackDate').val(formattedFeedbackDate);
+                }
+            } else{
                 displayToast('error', response.data['message']);
             }
-        } catch (e) {
+        } catch (e){
             console.error('Something went wrong', e);
         }
     }
@@ -334,7 +339,6 @@
         try {
             // Get portfolio ID
             let portfolio_info_id = $('#portfolioInfoId').val();
-            console.log(portfolio_info_id);
 
             // Send request to server to remove image from JSON
             showLoader();
@@ -400,35 +404,26 @@
             let project_url = $('#updateProjectUrl').val().trim();
             let project_technology = $('#updateProjectTechnology').val().trim();
             let project_status = $('#updateProjectStatus').val().trim();
-            let client_name = $('#updateClientName').val().trim();
-            let client_designation = $('#updateClientDesignation').val().trim();
-            let client_institution = $('#updateClientInstitution').val().trim();
             let portfolio_info_id = $('#portfolioInfoId').val().trim();
 
             // Front-end validation process
-            if (project_title.length === 0) {
+            if (project_title.length === 0){
                 displayToast('warning', 'Project title is required');
-            } else if (project_type.length === 0) {
+            } else if (project_type.length === 0){
                 displayToast('warning', 'Project type is required');
             } else if (service_id === '') {
                 displayToast('warning', 'Service ID is required');
-            } else if (project_starting_date === '') {
+            } else if (project_starting_date === ''){
                 displayToast('warning', 'Project starting date is required');
             } else if (project_ending_date != '' && project_starting_date > project_ending_date) {
                 displayToast('warning', 'Invalid ending date');
-            } else if (project_url.length === 0) {
+            } else if (project_url.length === 0){
                 displayToast('warning', 'Project URL is required');
-            } else if (project_technology.length === 0) {
+            } else if (project_technology.length === 0){
                 displayToast('warning', 'Project technology is required');
-            } else if (project_description.length === 0) {
+            } else if (project_description.length === 0){
                 displayToast('warning', 'Project description is required');
-            } else if (client_name.length === 0) {
-                displayToast('warning', 'Client name is required');
-            } else if (client_designation.length === 0) {
-                displayToast('warning', 'Client designation is required');
-            } else if (client_institution.length === 0) {
-                displayToast('warning', 'Client institution is required');
-            } else {
+            } else{
                 // Closing modal
                 $('#editModal').modal('hide');
 
@@ -450,9 +445,6 @@
                 formData.append('project_url', project_url);
                 formData.append('core_technology', project_technology);
                 formData.append('project_status', project_status);
-                formData.append('client_name', client_name);
-                formData.append('client_designation', client_designation);
-                formData.append('client_institution', client_institution);
                 formData.append('portfolio_info_id', portfolio_info_id);
 
                 // Sending data to the controller and getting response
