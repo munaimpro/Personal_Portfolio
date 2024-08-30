@@ -3,7 +3,10 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Edit Social Media</h5>
+                <h5 class="modal-title" id="editModalLabel">Update Social Media</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <form id="updateSocialMediaForm">
@@ -22,7 +25,7 @@
 
                                 <div class="form-group">
                                     <label class="form-label">Media Icon *</label>
-                                    <select class="form-control" id="updateSocialMediaIcon">
+                                    <select class="select" id="updateSocialMediaIcon">
                                         <option value="<i class='fas fa-phone'></i>">Icon</option>
                                         <option value="<i class='fas fa-phone'></i>">Icon</option>
                                         <option value="<i class='fas fa-phone'></i>">Icon</option>
@@ -31,7 +34,7 @@
 
                                 <div class="form-group">
                                     <label class="form-label">Global Media</label>
-                                    <select class="form-control" id="updateGlobalSocialMedia">
+                                    <select class="select" id="updateGlobalSocialMedia">
                                         <option value = "0">No</option>
                                         <option value = "1">Yes</option>
                                     </select>

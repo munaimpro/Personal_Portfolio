@@ -74,6 +74,9 @@
 
     {{-- Animate CSS --}}
     <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
+    
+    {{-- Select 2 CSS --}}
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
 
     {{-- Datatable CSS --}}
     <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap4.min.css') }}">
@@ -156,6 +159,9 @@
 
 {{-- Slimscroll JS --}}
 <script src="{{ asset('assets/js/jquery.slimscroll.min.js') }}"></script>
+    
+{{-- Select 2 JS --}}
+<script src="{{ asset('assets/plugins/select2/js/select2.min.js') }}"></script>
 
 {{-- Datatable JS --}}
 {{-- <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>

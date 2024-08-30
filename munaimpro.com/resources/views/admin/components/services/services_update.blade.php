@@ -4,6 +4,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="editModalLabel">Update Service</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <form id="updateServiceForm">
@@ -17,7 +20,7 @@
                                 
                                 <div class="form-group">
                                     <label>Service Icon</label>
-                                    <select class="form-control" id="updateServiceIcon">
+                                    <select class="select" id="updateServiceIcon">
                                         <option value="<i class='fas fa-phone'></i>">Icon</option>
                                         <option value="<i class='fas fa-phone'></i>">Icon</option>
                                         <option value="<i class='fas fa-phone'></i>">Icon</option>
@@ -31,7 +34,7 @@
                                 
                                 <div class="form-group">
                                     <label>Service Status</label>
-                                    <select class="form-control" id="updateServiceStatus">
+                                    <select class="select" id="updateServiceStatus">
                                         <option value="1">Activate</option>
                                         <option value="0">Deactivate</option>
                                     </select>

@@ -4,6 +4,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="createModalLabel">Create Post</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <form id="addPostForm">
@@ -20,7 +23,7 @@
 
                         <div class="form-group">
                             <label>Category</label>
-                            <select class="form-control" id="categoryId">
+                            <select class="select" id="categoryId">
                                 
                             </select>
                         </div>

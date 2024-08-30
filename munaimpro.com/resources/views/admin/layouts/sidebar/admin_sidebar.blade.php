@@ -44,6 +44,10 @@
                     <a @if($routeName === 'message') class="active" @endif href="{{ url('Admin/message') }}"><i data-feather="file"></i><span> Message</span> </a>
                 </li>
                 
+                <li>
+                    <a @if($routeName === 'client_feedback') class="active" @endif href="{{ url('Admin/client_feedback') }}"><i data-feather="file"></i><span> Client Feedback</span> </a>
+                </li>
+                
                 <li class="submenu">
                     <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/expense1.svg') }}" alt="img"><span> Post</span> <span class="menu-arrow"></span></a>
                     <ul>

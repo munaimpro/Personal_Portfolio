@@ -4,6 +4,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="createModalLabel">Create Skill</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <form id="addSkillForm">
@@ -12,7 +15,7 @@
                             <div class="col-12 p-1">
                                 <div class="form-group">
                                     <label class="form-label">Skill Type *</label>
-                                    <select class="form-control" id="skillType">
+                                    <select class="select" id="skillType">
                                         <option value="Programming">Programming Skill</option>
                                         <option value="Technical">Technical Skill</option>
                                         <option value="Other">Other Skill</option>

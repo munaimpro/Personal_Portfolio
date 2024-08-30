@@ -4,6 +4,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="editModalLabel">Update Post</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <form id="updatePostForm">
@@ -20,7 +23,7 @@
 
                         <div class="form-group">
                             <label>Category</label>
-                            <select class="form-control" id="updateCategoryId">
+                            <select class="select" id="updateCategoryId">
                                 
                             </select>
                         </div>
@@ -61,7 +64,7 @@
 
                     <div class="form-group">
                         <label>Post Visibility</label>
-                        <select class="form-control" id="updatePostStatus" onchange="toggleUpdatePostButton()">
+                        <select class="select" id="updatePostStatus" onchange="toggleUpdatePostButton()">
                             <option value="published">Published</option>
                             <option value="scheduled">Scheduled</option>
                             <option value="unpublished">Unpublished</option>

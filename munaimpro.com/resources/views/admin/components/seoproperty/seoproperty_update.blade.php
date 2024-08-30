@@ -4,6 +4,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="editModalLabel">SEO Properties</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <form id="updateSEOPropertyForm">
@@ -47,7 +50,7 @@
 
                                 <div class="form-group">
                                     <label class="form-label mt-3">Open Graph Type *</label>
-                                    <select class="form-control" id="ogSiteType">
+                                    <select class="select" id="ogSiteType">
                                         <option value="website">Website (General web page)</option>
                                         <option value="article">Article (News or blog post)</option>
                                         <option value="profile">Profile (Personal or company profile)</option>
@@ -91,7 +94,7 @@
 
                                 <div class="form-group">
                                     <label class="form-label mt-3">Twitter Card Type *</label>
-                                    <select class="form-control" id="twitterCard">
+                                    <select class="select" id="twitterCard">
                                         <option value="summary">Summary (small image and text)</option>
                                         <option value="summary_large_image">Summary Large Image (large image and text)</option>
                                         <option value="app">App (mobile app promotion)</option>
@@ -134,7 +137,7 @@
 
                                 <div class="form-group">
                                     <label class="form-label mt-3">Robots Type *</label>
-                                    <select class="form-control" id="robots">
+                                    <select class="select" id="robots">
                                         <option value="index, follow">Index, Follow (Default behavior)</option>
                                         <option value="noindex, follow">No Index, Follow (Do not index this page, but follow links)</option>
                                         <option value="index, nofollow">Index, No Follow (Index this page, but do not follow links)</option>
@@ -169,7 +172,7 @@
 
                                 <div class="form-group">
                                     <label class="form-label">Referrer Policy *</label>
-                                    <select class="form-control" id="referrerPolicy">
+                                    <select class="select" id="referrerPolicy">
                                         <option value="no-referrer">no-referrer</option>
                                         <option value="no-referrer-when-downgrade">no-referrer-when-downgrade</option>
                                         <option value="origin">origin</option>

@@ -97,3 +97,7 @@
     </div>
 </div>
 {{-- first row end --}}
+
+<script>
+    hideLoader();
+</script>

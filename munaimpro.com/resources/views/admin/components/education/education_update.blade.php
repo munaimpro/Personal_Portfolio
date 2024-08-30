@@ -3,7 +3,10 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Edit Education</h5>
+                <h5 class="modal-title" id="editModalLabel">Update Education</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <form id="updateEducationForm">
@@ -12,7 +15,7 @@
                             <div class="col-12 p-1">
                                 <div class="form-group">
                                     <label class="form-label">Education Type *</label>
-                                    <select class="form-control" id="updateEducationType">
+                                    <select class="select" id="updateEducationType">
                                         <option value="Academic">Academic Education</option>
                                         <option value="Technical">Technical Education</option>
                                     </select>

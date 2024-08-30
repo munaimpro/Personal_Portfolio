@@ -1,9 +1,12 @@
 {{-- Edit modal start --}}
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Edit Interest</h5>
+                <h5 class="modal-title" id="editModalLabel">Update Interest</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <form id="updateInterestForm">
@@ -14,7 +17,7 @@
                                 <input type="text" class="form-control" id="updateInterestTitle">
 
                                 <label class="form-label">Icon *</label>
-                                <select class="form-control" id="updateInterestIcon">
+                                <select class="select" id="updateInterestIcon">
                                     <option value="<i class='fas fa-phone'></i>">Icon</option>
                                     <option value="<i class='fas fa-phone'></i>">Icon</option>
                                     <option value="<i class='fas fa-phone'></i>">Icon</option>

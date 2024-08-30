@@ -4,6 +4,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="createModalLabel">Add Service</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <form id="addServiceForm">
@@ -17,7 +20,7 @@
                                 
                                 <div class="form-group">
                                     <label>Service Icon</label>
-                                    <select class="form-control" id="serviceIcon">
+                                    <select class="select" id="serviceIcon">
                                         <option value="<i class='fas fa-phone'></i>">Icon</option>
                                         <option value="<i class='fas fa-phone'></i>">Icon</option>
                                         <option value="<i class='fas fa-phone'></i>">Icon</option>

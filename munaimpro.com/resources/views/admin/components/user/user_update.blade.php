@@ -4,6 +4,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="editModalLabel">Update User</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <form id="updateUserForm">
@@ -52,7 +55,7 @@
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label>Role</label>
-                            <select class="form-control" id="userRole">
+                            <select class="select" id="userRole">
                                 <option disabled>Select</option>
                                 <option value="admin">Admin</option>
                                 <option value="user">User</option>

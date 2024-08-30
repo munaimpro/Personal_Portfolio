@@ -4,6 +4,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="editModalLabel">Update Project</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <form id="updatePortfolioForm">
@@ -24,7 +27,7 @@
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label>Category</label>
-                            <select class="form-control" type="text" id="updateServiceId">
+                            <select class="select" type="text" id="updateServiceId">
                                 
                             </select>
                         </div>
@@ -114,7 +117,7 @@
 
                     <div class="form-group">
                         <label>Portfolio Visibility</label>
-                        <select class="form-control" id="updateProjectStatus" onchange="toggleUpdateProjectStatus()">
+                        <select class="select" id="updateProjectStatus" onchange="toggleUpdateProjectStatus()">
                             <option value="running">Running</option>
                             <option value="published">Published</option>
                         </select>
