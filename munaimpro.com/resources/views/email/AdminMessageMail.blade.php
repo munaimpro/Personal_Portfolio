@@ -54,11 +54,13 @@
 <body>
     <div class="container">
         <div class="header">
-            <img src="your-logo-url-here" alt="Company Logo">
+            @include('vendor.mail.html.header')
         </div>
         <div class="body-content">
-            <p>Dear [Recipient's Name],</p>
-            
+            @if(!empty($clientName))
+                <p>Dear {{ $clientName }}</p>
+            @endif
+
             <p>{!! $adminMessage !!}</p>
             
             <p>If you have any questions or need further clarification, please feel free to reach out to me directly.</p>
@@ -71,7 +73,7 @@
             <p>Best regards,<br>
                 <strong>{{ $fullName }}</strong>
                 <br>{{ $designation }}<br>
-                {{-- [Your Company Name] --}}
+                munaimpro.com
             </p>
             
             <div class="social-icons">

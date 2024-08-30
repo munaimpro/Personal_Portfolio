@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Exception;
+use App\Models\Logo;
 use App\Models\User;
 use App\Models\About;
 use App\Models\Message;
@@ -81,11 +82,15 @@ class MessageController extends Controller
             $aboutId = About::pluck('id')->first(); // Primary key id from about table
             $about = About::where('id', '=', $aboutId)->first(); // Getting about data by id
 
+            $logo = Logo::first(['logo']);
+
+            $client_name = Message::where('email', $validatedData['email'])->first(['name']);
+
             $facebook = SocialMedias::where('social_media_title', 'facebook')->first(['social_media_link']);
 
             $linkedin = SocialMedias::where('social_media_title', 'linkedin')->first(['social_media_link']);
             
-            $sendMessage = Mail::to($validatedData['email'])->send(new AdminMessageMail($validatedData['email'], $validatedData['subject'], $validatedData['message'], $about->full_name, $about->designation, $facebook->social_media_link, $linkedin->social_media_link));
+            $sendMessage = Mail::to($validatedData['email'])->send(new AdminMessageMail($validatedData['email'], $validatedData['subject'], $validatedData['message'], $about->full_name, $about->designation, $logo, $client_name->name, $facebook->social_media_link, $linkedin->social_media_link));
 
             if($sendMessage){
                 return response()->json([
@@ -119,7 +124,18 @@ class MessageController extends Controller
                 'message' => 'required|string',
             ]);
             
-            $replyMessage = Mail::to($validatedData['email'])->send(new AdminMessageMail($validatedData['email'], $validatedData['subject'], $validatedData['message'])); 
+            $aboutId = About::pluck('id')->first(); // Primary key id from about table
+            $about = About::where('id', '=', $aboutId)->first(); // Getting about data by id
+
+            $logo = Logo::first(['logo']);
+
+            $client_name = Message::where('email', $validatedData['email'])->first(['name']);
+
+            $facebook = SocialMedias::where('social_media_title', 'facebook')->first(['social_media_link']);
+
+            $linkedin = SocialMedias::where('social_media_title', 'linkedin')->first(['social_media_link']);
+            
+            $replyMessage = Mail::to($validatedData['email'])->send(new AdminMessageMail($validatedData['email'], $validatedData['subject'], $validatedData['message'], $about->full_name, $about->designation, $logo, $client_name->name, $facebook->social_media_link, $linkedin->social_media_link)); 
 
             if($replyMessage){
                 // Update message status to "replied" in message table
