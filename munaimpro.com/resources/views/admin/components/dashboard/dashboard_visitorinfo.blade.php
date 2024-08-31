@@ -1,7 +1,8 @@
 {{-- third row start --}}
 <div class="row">
-    <div class="col-lg-6 col-sm-12 col-12">
-        <div class="card">
+{{-- Visitor country report start --}}
+    <div class="col-lg-6 col-sm-12 col-12 d-flex">
+        <div class="card flex-fill">
             <div class="card-header border-bottom">
                 <div class="card-title m-0">Visitor Country Report</div>
             </div>
@@ -24,10 +25,11 @@
             </div>
         </div>
     </div>
+{{-- Visitor country report end --}}
 
 {{-- Browser usage start --}}
-    <div class="col-lg-6 col-sm-12 col-12">
-        <div class="card">
+    <div class="col-lg-6 col-sm-12 col-12 d-flex">
+        <div class="card flex-fill">
             <div class="card-header border-bottom">
                 <div class="card-title m-0">Browser Usage</div>
             </div>

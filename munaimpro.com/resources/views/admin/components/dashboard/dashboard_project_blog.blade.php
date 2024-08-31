@@ -128,6 +128,17 @@
                                 </td>
                                 <td><span class="bg-lightgreen badges">Published</span></td>
                             </tr>
+
+                            <tr>
+                                <td>3</td>
+                                <td class="productimgname">
+                                    <a href="{{ url('Admin/post') }}" class="product-img">
+                                        <img src="{{ asset('assets/img/product/product22.jpg') }}" alt="project thumbnail">
+                                    </a>
+                                    <a href="{{ url('Admin/post') }}">Blog Title</a>
+                                </td>
+                                <td><span class="bg-lightgreen badges">Published</span></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
