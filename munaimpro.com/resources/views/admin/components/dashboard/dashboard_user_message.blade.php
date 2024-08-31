@@ -19,7 +19,7 @@
 
             <div class="card-body">
                 <div class="table-responsive dataview">
-                    <table class="table datatable ">
+                    <table class="table datatable">
                         <thead>
                             <tr>
                                 <th>Sno</th>
@@ -27,31 +27,9 @@
                                 <th>Role</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="userTableList">
                             <tr>
                                 <td>1</td>
-                                <td class="productimgname sorting_1">
-                                    <a href="{{ url('Admin/user') }}" class="product-img">
-                                        <img src="http://127.0.0.1:8000/storage/profile_picture/user_images/695a4-munaim.jpg" alt="profile picture">
-                                    </a>
-                                    <a href="{{ url('Admin/user') }}">User Full Name</a>
-                                </td>
-                                <td><span class="bg-lightgreen badges">Admin</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>2</td>
-                                <td class="productimgname sorting_1">
-                                    <a href="{{ url('Admin/user') }}" class="product-img">
-                                        <img src="http://127.0.0.1:8000/storage/profile_picture/user_images/695a4-munaim.jpg" alt="profile picture">
-                                    </a>
-                                    <a href="{{ url('Admin/user') }}">User Full Name</a>
-                                </td>
-                                <td><span class="bg-lightgreen badges">Admin</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>3</td>
                                 <td class="productimgname sorting_1">
                                     <a href="{{ url('Admin/user') }}" class="product-img">
                                         <img src="http://127.0.0.1:8000/storage/profile_picture/user_images/695a4-munaim.jpg" alt="profile picture">
@@ -84,7 +62,8 @@
                     </ul>
                 </div>
             </div>
-            <div class="card-body">
+
+            <div class="card-body d-none" id="dashboardMessage">
                 <div class="col-lg-12">
                     <div class="form-group">
                         <label>Name</label>
@@ -119,8 +98,110 @@
                     <button type="button" class="btn btn-submit" data-bs-toggle="modal" data-bs-target="#replyModal">Reply</button>
                 </div>
             </div>
+
+            <div id="dashboardMessageStatus" class="d-flex" style="min-height:100vh">
+                <div class="card w-50 m-auto">
+                    <div class="card-body text-center">
+                        <h5 style="color: #ff9f43">No new message</h5>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {{-- Latest Message end --}}
 </div>
 {{-- third row end --}}
+
+
+{{-- Front end script start --}}
+
+<script>
+
+    // Function for retrieve dashboard latest user
+    
+    dashboardLatestUserInfo();
+
+    async function dashboardLatestUserInfo(){
+
+        try{
+            // Getting data table
+            let data_table = $('.datatable');
+
+            // Getting table rows
+            let table_list = $('#userTableList');
+
+            // Destroy data table
+            // data_table.DataTable().destroy();
+
+            // Make data table empty
+            table_list.empty();
+
+            // Pssing data to controller and getting response
+            showLoader();
+            let response = await axios.get('/dashboardLatestUserInfo');
+            hideLoader();
+
+            // Getting base URL of the system
+            let baseUrl = "{{ url('/') }}";
+
+            response.data.data.forEach(function(item, index){
+                // Generating full path for the user image
+                let userImageFullPath = item['profile_picture'] == null ? baseUrl + '/assets/img/profiles/avater.png' : baseUrl + '/storage/profile_picture/user_images/' + item['profile_picture'];
+
+                let row = `<tr>
+                                <td>${index + 1}</td>
+                                <td class="productimgname">
+                                    <a href="{{ url('Admin/portfolio') }}" class="product-img">
+                                        <img src="${userImageFullPath}" alt="profile picture">
+                                    </a>
+                                    <a href="{{ url('Admin/portfolio') }}">${item['first_name']} ${item['last_name']}</a>
+                                </td>
+                                <td>${item['role'] === 'admin' ? '<span class="bg-lightgreen badges">Admin</span>' : '<span class="bg-lightgrey badges">User</span>'}</td>
+                            </tr>`
+                table_list.append(row);
+            });
+
+            // data_table.DataTable();
+        } catch(e){
+            console.error('Something went wrong', e);
+        }
+    }
+
+
+
+    // Function for retrive dashboard new message
+
+    dashboardNewMessageInfo();
+
+    async function dashboardNewMessageInfo(){
+
+        try{
+            // Pssing id to controller and getting response
+            showLoader();
+            let response = await axios.get('/dashboardNewMessageInfo');
+            hideLoader();
+
+            if(response.data['status'] === 'success'){
+                if(response.data.data.length > 0){
+                    // Showing message
+                    $('#dashboardMessage').removeClass('d-none');
+                    $('#dashboardMessageStatus').addClass('d-none');
+
+                    // Assigning retrived values
+                    $('#messageClientName').val(response.data.data[0]['name']);
+                    $('#messageMail').val(response.data.data[0]['email']);
+                    $('#replyMessageMail').val(response.data.data[0]['email']);
+                    $('#messageSubject').val(response.data.data[0]['subject']);
+                    $('#messageDescription').val(response.data.data[0]['message']);
+                    $('#messageInfoId').val(response.data.data[0]['id']);
+                }
+            } else{
+                console.log('error', response.data['message']);
+            }
+        } catch(e){
+            console.error('Something went wrong', e);
+        }
+    }
+</script>
+
+{{-- Front end script end --}}

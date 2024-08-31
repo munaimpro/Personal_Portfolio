@@ -120,6 +120,58 @@ class WebsiteInformationController extends Controller
     }
 
 
+    /* Method for admin dashboard latest user */
+
+    public function dashboardLatestUserInfo(){
+        try{
+            $latestUser = User::latest()->take(3)->get(['first_name', 'last_name', 'profile_picture', 'role']);
+
+            if($latestUser){
+                return response()->json([
+                    'status' => 'success',
+                    'data' => $latestUser
+                ]);
+            } else{
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Something went wrong'
+                ]);
+            }
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong'.' '.$e->getMessage()
+            ]);
+        }
+    }
+
+
+    /* Method for admin dashboard new message */
+
+    public function dashboardNewMessageInfo(){
+        try{
+            $newMessage = Message::where('message_status', 'new')->latest()->get(['id', 'name', 'email', 'subject', 'message']);
+
+            if($newMessage){
+                return response()->json([
+                    'status' => 'success',
+                    'data' => $newMessage
+                ]);
+            } else{
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Something went wrong'
+                ]);
+            }
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong'.' '.$e->getMessage()
+            ]);
+        }
+    }
+
+
     /* Method for admin logo & seo property page */
 
     public function adminLogoWithSEOPropertyPage(){

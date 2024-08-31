@@ -3,8 +3,8 @@
 {{-- Visitor country report start --}}
     <div class="col-lg-6 col-sm-12 col-12 d-flex">
         <div class="card flex-fill">
-            <div class="card-header border-bottom">
-                <div class="card-title m-0">Visitor Country Report</div>
+            <div class="card-header">
+                <div class="card-title">Visitor Country Report</div>
             </div>
             <div class="card-body">
                 <div id="map"></div>
@@ -30,8 +30,8 @@
 {{-- Browser usage start --}}
     <div class="col-lg-6 col-sm-12 col-12 d-flex">
         <div class="card flex-fill">
-            <div class="card-header border-bottom">
-                <div class="card-title m-0">Browser Usage</div>
+            <div class="card-header">
+                <div class="card-title">Browser Usage</div>
             </div>
             <div class="card-body">
                 <canvas id="browserChart" width="400" height="400"></canvas>
