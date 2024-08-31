@@ -161,3 +161,146 @@ tinymce.init({
 
     table_default_styles: { width: '100%' },  // Default table styles
 });
+
+
+/**
+ * Chart JS Configuration (Pie chart for browser usage in Dashboard)
+ */
+// Data for the chart
+const data = {
+    labels: [
+        'Chrome',
+        'Firefox',
+        'Safari',
+        'Edge',
+        'Other'
+    ],
+    datasets: [{
+        label: 'Browser Usage',
+        data: [60, 15, 10, 10, 5], // Replace these values with your actual data
+        backgroundColor: [
+            'rgba(251, 188, 5, 1)', // Chrome browser color code
+            'rgba(255, 69, 0, 1)', // Firefox browser color code
+            'rgba(64, 158, 255, 1)', // Safari browser color code
+            'rgba(102, 51, 153, 1)', // Edge browser color code
+            'rgba(51, 51, 51, 1)' // Other browser color code
+        ],
+        borderColor: [
+            'rgba(251, 188, 5, 1)', // Chrome browser color code
+            'rgba(255, 69, 0, 1)', // Firefox browser color code
+            'rgba(64, 158, 255, 1)', // Safari browser color code
+            'rgba(102, 51, 153, 1)', // Edge browser color code
+            'rgba(51, 51, 51, 1)' // Other browser color code
+        ],
+        borderWidth: 1
+    }]
+};
+
+// Configuration options
+const config = {
+    type: 'pie',
+    data: data,
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        let label = context.label || '';
+                        if (label) {
+                            label += ': ';
+                        }
+                        label += context.raw + '%';
+                        return label;
+                    }
+                }
+            },
+            datalabels: {
+                formatter: (value, context) => {
+                    let sum = context.dataset.data.reduce((a, b) => a + b, 0);
+                    let percentage = (value * 100 / sum);
+
+                    // Only display the label if the percentage is 5% or more
+                    if (percentage < 6) {
+                        return null;
+                    }
+
+                    let label = context.chart.data.labels[context.dataIndex];
+                    return label + '\n' + percentage + '%';
+                },
+                color: '#fff',
+                labels: {
+                    title: {
+                        font: {
+                            weight: 'bold',
+                            size: '14'
+                        }
+                    }
+                },
+                anchor: 'end',
+                align: 'start',
+                offset: 10
+            }
+        }
+    },
+    plugins: [ChartDataLabels]
+};
+
+// Render the chart
+const browserChart = new Chart(
+    document.getElementById('browserChart'),
+    config
+);
+
+
+/**
+ * Leaflet JS Configuration (Geographic map for visitor country report in Dashboard)
+ */
+var map = L.map('map').setView([20, 0], 2); // Center the map
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+// GeoJSON URL (for example purposes, this URL may not be valid)
+var geojsonUrl = 'https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson';
+
+// Function to set styles for different regions
+function style(feature){
+    switch (feature.properties.ADMIN) {
+        case 'France': return { color: "#008000" }; // Green
+        case 'United Kingdom': return { color: "#008000" }; // Green
+        case 'United States': return { color: "#008000" }; // Green
+        case 'Japan': return { color: "#008000" }; // Green
+        case 'Russia': return { color: "#008000" }; // Green
+        case 'China': return { color: "#008000" }; // Green
+        case 'Germany': return { color: "#008000" }; // Green
+        case 'Spain': return { color: "#008000" }; // Green
+        case 'India': return { color: "#008000" }; // Green
+        case 'Brazil': return { color: "#008000" }; // Green
+    }
+}
+
+// Function to bind tooltips and other events
+function onEachFeature(feature, layer) {
+    // Bind a tooltip with the region's name
+    layer.bindTooltip(feature.properties.ADMIN, {
+        permanent: false, // Tooltip only shows on hover
+        direction: "center"
+    });
+
+    // You can add other events or interactions here
+}
+
+// Load GeoJSON data and apply style
+L.geoJson.ajax(geojsonUrl, {
+    style: style,
+    onEachFeature: onEachFeature
+}).addTo(map);
+
+// Ensure map size is recalculated correctly
+map.invalidateSize();

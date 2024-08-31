@@ -4627,8 +4627,17 @@ span.select2-container.select2-container--default.select2-container--open{
 .dash-count.das2{
     background:#1b2850
 }
-.dash-count.das3{
+.dash-count.das3, .last-visitor-info{
     background:#28c76f
+}
+.dash-count.das4{
+    background:#6a1b9a
+}
+.dash-count.das5{
+    background:#473a34
+}
+.dash-count.das6{
+    background:#cc2f2f
 }
 .dash-count h4{
     font-size:24px;

@@ -1,58 +1,10 @@
 {{-- first row start --}}
 <div class="row">
-    <div class="col-lg-3 col-sm-6 col-12">
-        <div class="dash-widget">
-            <div class="dash-widgetimg">
-                <span><img src="{{ asset('assets/img/icons/dash1.svg') }}" alt="img"></span>
-            </div>
-            <div class="dash-widgetcontent">
-                <h5>$<span class="counters" data-count="307144.00">$307,144.00</span></h5>
-                <h6>Total Purchase Due</h6>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-3 col-sm-6 col-12">
-        <div class="dash-widget dash1">
-            <div class="dash-widgetimg">
-                <span><img src="{{ asset('assets/img/icons/dash2.svg') }}" alt="img"></span>
-            </div>
-            <div class="dash-widgetcontent">
-                <h5>$<span class="counters" data-count="4385.00">$4,385.00</span></h5>
-                <h6>Total Sales Due</h6>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-3 col-sm-6 col-12">
-        <div class="dash-widget dash2">
-            <div class="dash-widgetimg">
-                <span><img src="{{ asset('assets/img/icons/dash3.svg') }}" alt="img"></span>
-            </div>
-            <div class="dash-widgetcontent">
-                <h5>$<span class="counters" data-count="385656.50">385,656.50</span></h5>
-                <h6>Total Sale Amount</h6>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-3 col-sm-6 col-12">
-        <div class="dash-widget dash3">
-            <div class="dash-widgetimg">
-                <span><img src="{{ asset('assets/img/icons/dash4.svg') }}" alt="img"></span>
-            </div>
-            <div class="dash-widgetcontent">
-                <h5>$<span class="counters" data-count="40000.00">400.00</span></h5>
-                <h6>Total Sale Amount</h6>
-            </div>
-        </div>
-    </div>
-
     <div class="col-lg-3 col-sm-6 col-12 d-flex">
         <div class="dash-count">
             <div class="dash-counts">
                 <h4>100</h4>
-                <h5>Customers</h5>
+                <h5>Users</h5>
             </div>
             <div class="dash-imgs">
                 <i data-feather="user"></i>
@@ -64,10 +16,10 @@
         <div class="dash-count das1">
             <div class="dash-counts">
                 <h4>100</h4>
-                <h5>Suppliers</h5>
+                <h5>Projects</h5>
             </div>
             <div class="dash-imgs">
-                <i data-feather="user-check"></i>
+                <i data-feather="briefcase"></i>
             </div>
         </div>
     </div>
@@ -76,10 +28,10 @@
         <div class="dash-count das2">
             <div class="dash-counts">
                 <h4>100</h4>
-                <h5>Purchase Invoice</h5>
+                <h5>Services</h5>
             </div>
             <div class="dash-imgs">
-                <i data-feather="file-text"></i>
+                <i data-feather="settings"></i>
             </div>
         </div>
     </div>
@@ -88,10 +40,46 @@
         <div class="dash-count das3">
             <div class="dash-counts">
                 <h4>105</h4>
-                <h5>Sales Invoice</h5>
+                <h5>Blogs</h5>
             </div>
             <div class="dash-imgs">
-                <i data-feather="file"></i>
+                <i data-feather="file-text"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-sm-6 col-12 d-flex">
+        <div class="dash-count das4">
+            <div class="dash-counts">
+                <h4>5</h4>
+                <h5>Categories</h5>
+            </div>
+            <div class="dash-imgs">
+                <i data-feather="list"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-sm-6 col-12 d-flex">
+        <div class="dash-count das5">
+            <div class="dash-counts">
+                <h4>105</h4>
+                <h5>Visitors</h5>
+            </div>
+            <div class="dash-imgs">
+                <i data-feather="eye"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-sm-6 col-12 d-flex">
+        <div class="dash-count das6">
+            <div class="dash-counts">
+                <h4>8</h4>
+                <h5>Messages</h5>
+            </div>
+            <div class="dash-imgs">
+                <i data-feather="message-circle"></i>
             </div>
         </div>
     </div>
