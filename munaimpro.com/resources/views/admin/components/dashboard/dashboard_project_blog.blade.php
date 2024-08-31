@@ -27,7 +27,7 @@
                                 <th>Status</th>
                             </tr>
                         </thead>
-                        <tbody id="tableList">
+                        <tbody id="projectTableList">
                             <tr>
                                 <td>1</td>
                                 <td class="productimgname">
@@ -73,42 +73,9 @@
                                 <th>Status</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="postTableList">
                             <tr>
                                 <td>1</td>
-                                <td class="productimgname">
-                                    <a href="{{ url('Admin/post') }}" class="product-img">
-                                        <img src="{{ asset('assets/img/product/product22.jpg') }}" alt="project thumbnail">
-                                    </a>
-                                    <a href="{{ url('Admin/post') }}">Blog Title</a>
-                                </td>
-                                <td><span class="bg-lightgreen badges">Published</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>2</td>
-                                <td class="productimgname">
-                                    <a href="{{ url('Admin/post') }}" class="product-img">
-                                        <img src="{{ asset('assets/img/product/product22.jpg') }}" alt="project thumbnail">
-                                    </a>
-                                    <a href="{{ url('Admin/post') }}">Blog Title</a>
-                                </td>
-                                <td><span class="bg-lightgreen badges">Published</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>3</td>
-                                <td class="productimgname">
-                                    <a href="{{ url('Admin/post') }}" class="product-img">
-                                        <img src="{{ asset('assets/img/product/product22.jpg') }}" alt="project thumbnail">
-                                    </a>
-                                    <a href="{{ url('Admin/post') }}">Blog Title</a>
-                                </td>
-                                <td><span class="bg-lightgreen badges">Published</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>3</td>
                                 <td class="productimgname">
                                     <a href="{{ url('Admin/post') }}" class="product-img">
                                         <img src="{{ asset('assets/img/product/product22.jpg') }}" alt="project thumbnail">
@@ -143,7 +110,7 @@
             let data_table = $('.datatable');
 
             // Getting table rows
-            let table_list = $('#tableList');
+            let table_list = $('#projectTableList');
 
             // Destroy data table
             // data_table.DataTable().destroy();
@@ -172,6 +139,58 @@
                                     <a href="{{ url('Admin/portfolio') }}">${item['project_title']}</a>
                                 </td>
                                 <td>${item['project_status'] === 'published' ? '<span class="bg-lightgreen badges">Published</span>' : item['project_status'] === 'running' ? '<span class="bg-lightgrey badges">Running</span>' : '<span class="bg-lightred badges">Private</span>'}</td>
+                            </tr>`
+                table_list.append(row);
+            });
+
+            // data_table.DataTable();
+        } catch(e){
+            console.error('Something went wrong', e);
+        }
+    }
+
+
+
+    // Function for retrieve dashboard recent blog post
+    
+    dashboardLatestPostInfo();
+
+    async function dashboardLatestPostInfo(){
+
+        try{
+            // Getting data table
+            let data_table = $('.datatable');
+
+            // Getting table rows
+            let table_list = $('#postTableList');
+
+            // Destroy data table
+            // data_table.DataTable().destroy();
+
+            // Make data table empty
+            table_list.empty();
+
+            // Pssing data to controller and getting response
+            showLoader();
+            let response = await axios.get('/dashboardLatestPostInfo');
+            hideLoader();
+
+            // Getting base URL of the system
+            let baseUrl = "{{ url('/') }}";
+
+            response.data.data.forEach(function(item, index){
+                // Generating full path for the post thumbnail
+                let postThumbnailFullPath = baseUrl + '/storage/post_thumbnails/' + item['post_thumbnail'];
+
+                let row = `<tr>
+                                <td>${index + 1}</td>
+                                <td class="productimgname">
+                                    <a href="{{ url('Admin/portfolio') }}" class="product-img">
+                                        <img src="${postThumbnailFullPath}" alt="project thumbnail">
+                                    </a>
+                                    <a href="{{ url('Admin/portfolio') }}">${item['post_heading']}</a>
+                                </td>
+                                <td>${item['post_status'] === 'published' ? '<span class="bg-lightgreen badges">Published</span>' : item['post_status'] === 'scheduled' ? '<span class="bg-lightgrey badges">Scheduled</span>' : '<span class="bg-lightred badges">Private</span>'}</td>
                             </tr>`
                 table_list.append(row);
             });

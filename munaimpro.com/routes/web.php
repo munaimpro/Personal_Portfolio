@@ -156,6 +156,7 @@ Route::delete('deleteSeoPropertyInfo', [WebsiteInformationController::class, 'de
 
 Route::get('dashboardStatInfo', [WebsiteInformationController::class, 'dashboardStatInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::get('dashboardLatestProjectInfo', [WebsiteInformationController::class, 'dashboardLatestProjectInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::get('dashboardLatestPostInfo', [WebsiteInformationController::class, 'dashboardLatestPostInfo'])->middleware(TokenVerificationMiddleware::class);
 
 
 // API Routes (ClientFeedback Controller)

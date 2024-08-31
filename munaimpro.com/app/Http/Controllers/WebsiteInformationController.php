@@ -68,7 +68,7 @@ class WebsiteInformationController extends Controller
     }
 
 
-    /* Method for admin dashboard statistics */
+    /* Method for admin dashboard latest project */
 
     public function dashboardLatestProjectInfo(){
         try{
@@ -78,6 +78,32 @@ class WebsiteInformationController extends Controller
                 return response()->json([
                     'status' => 'success',
                     'data' => $latestProject
+                ]);
+            } else{
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Something went wrong'
+                ]);
+            }
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong'.' '.$e->getMessage()
+            ]);
+        }
+    }
+
+
+    /* Method for admin dashboard latest post */
+
+    public function dashboardLatestPostInfo(){
+        try{
+            $latestPost = Post::latest()->take(3)->get(['post_heading', 'post_thumbnail', 'post_status']);
+
+            if($latestPost){
+                return response()->json([
+                    'status' => 'success',
+                    'data' => $latestPost
                 ]);
             } else{
                 return response()->json([
