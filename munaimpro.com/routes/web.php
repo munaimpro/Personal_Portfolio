@@ -152,8 +152,10 @@ Route::post('retrieveSeoPropertyInfoById', [WebsiteInformationController::class,
 Route::get('retrieveAllVisitorInfo', [WebsiteInformationController::class, 'retrieveAllVisitorInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::post('retrieveVisitorInfoById', [WebsiteInformationController::class, 'retrieveVisitorInfoById'])->middleware(TokenVerificationMiddleware::class);
 Route::post('updateSeoPropertyInfo', [WebsiteInformationController::class, 'updateSeoPropertyInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('dashboardSummaryInfo', [WebsiteInformationController::class, 'dashboardSummaryInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deleteSeoPropertyInfo', [WebsiteInformationController::class, 'deleteSeoPropertyInfo'])->middleware(TokenVerificationMiddleware::class);
+
+Route::get('dashboardStatInfo', [WebsiteInformationController::class, 'dashboardStatInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::get('dashboardLatestProjectInfo', [WebsiteInformationController::class, 'dashboardLatestProjectInfo'])->middleware(TokenVerificationMiddleware::class);
 
 
 // API Routes (ClientFeedback Controller)

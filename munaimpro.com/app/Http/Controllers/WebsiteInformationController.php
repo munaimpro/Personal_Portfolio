@@ -7,13 +7,14 @@ use App\Models\Logo;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Message;
+use App\Models\Service;
 use App\Models\Category;
 use App\Models\Portfolio;
 use App\Models\Seoproperty;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use App\Models\VisitorInformations;
 use Illuminate\Support\Facades\DB;
+use App\Models\VisitorInformations;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -31,28 +32,65 @@ class WebsiteInformationController extends Controller
 
     /* Method for admin dashboard statistics */
 
-    public function dashboardSummaryInfo(){
-        // Total user
-        $total_user = User::all()->count();
-        // Total portfolio
-        $total_portfolio = Portfolio::all()->count();
-        // Total category
-        $total_category = Category::all()->count();
-        // Total post
-        $total_post = Post::all()->count();
-        // Total visitor
-        $total_visitor = VisitorInformations::all()->count();
-        // Total new message
-        $total_message = Message::all()->count();
+    public function dashboardStatInfo(){
+        try{
+            // Total user
+            $total_user = User::all()->count();
+            // Total portfolio
+            $total_portfolio = Portfolio::all()->count();
+            // Total service
+            $total_service = Service::all()->count();
+            // Total category
+            $total_category = Category::all()->count();
+            // Total post
+            $total_post = Post::all()->count();
+            // Total visitor
+            $total_visitor = VisitorInformations::all()->count();
+            // Total new message
+            $total_message = Message::where('message_status', 'new')->get()->count();
 
-        return response()->json([
-            'total_user' => $total_user,
-            'total_portfolio' => $total_portfolio,
-            'total_category' => $total_category,
-            'total_post' => $total_post,
-            'total_visitor' => $total_visitor,
-            'total_message' => $total_message,
-        ]);
+            return response()->json([
+                'status' => 'success',
+                'total_user' => $total_user,
+                'total_portfolio' => $total_portfolio,
+                'total_service' => $total_service,
+                'total_category' => $total_category,
+                'total_post' => $total_post,
+                'total_visitor' => $total_visitor,
+                'total_message' => $total_message,
+            ]);
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong'.' '.$e->getMessage()
+            ]);
+        }
+    }
+
+
+    /* Method for admin dashboard statistics */
+
+    public function dashboardLatestProjectInfo(){
+        try{
+            $latestProject = Portfolio::latest()->take(3)->get(['project_title', 'project_thumbnail', 'project_status']);
+
+            if($latestProject){
+                return response()->json([
+                    'status' => 'success',
+                    'data' => $latestProject
+                ]);
+            } else{
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Something went wrong'
+                ]);
+            }
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong'.' '.$e->getMessage()
+            ]);
+        }
     }
 
 

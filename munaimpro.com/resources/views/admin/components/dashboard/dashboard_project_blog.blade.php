@@ -19,7 +19,7 @@
 
             <div class="card-body">
                 <div class="table-responsive dataview">
-                    <table class="table datatable ">
+                    <table class="table datatable">
                         <thead>
                             <tr>
                                 <th>Sno</th>
@@ -27,31 +27,9 @@
                                 <th>Status</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tableList">
                             <tr>
                                 <td>1</td>
-                                <td class="productimgname">
-                                    <a href="{{ url('Admin/portfolio') }}" class="product-img">
-                                        <img src="{{ asset('assets/img/product/product22.jpg') }}" alt="project thumbnail">
-                                    </a>
-                                    <a href="{{ url('Admin/portfolio') }}">Project Name</a>
-                                </td>
-                                <td><span class="bg-lightgreen badges">Published</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>2</td>
-                                <td class="productimgname">
-                                    <a href="{{ url('Admin/portfolio') }}" class="product-img">
-                                        <img src="{{ asset('assets/img/product/product22.jpg') }}" alt="project thumbnail">
-                                    </a>
-                                    <a href="{{ url('Admin/portfolio') }}">Project Name</a>
-                                </td>
-                                <td><span class="bg-lightgreen badges">Published</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>3</td>
                                 <td class="productimgname">
                                     <a href="{{ url('Admin/portfolio') }}" class="product-img">
                                         <img src="{{ asset('assets/img/product/product22.jpg') }}" alt="project thumbnail">
@@ -148,3 +126,61 @@
 {{-- Recent blogs end --}}
 </div>
 {{-- Second row end --}}
+
+
+{{-- Front end script start --}}
+
+<script>
+
+    // Function for retrieve dashboard recent portfolio
+    
+    dashboardLatestProjectInfo();
+
+    async function dashboardLatestProjectInfo(){
+
+        try{
+            // Getting data table
+            let data_table = $('.datatable');
+
+            // Getting table rows
+            let table_list = $('#tableList');
+
+            // Destroy data table
+            // data_table.DataTable().destroy();
+
+            // Make data table empty
+            table_list.empty();
+
+            // Pssing data to controller and getting response
+            showLoader();
+            let response = await axios.get('/dashboardLatestProjectInfo');
+            hideLoader();
+
+            // Getting base URL of the system
+            let baseUrl = "{{ url('/') }}";
+
+            response.data.data.forEach(function(item, index){
+                // Generating full path for the project thumbnail
+                let projectThumbnailFullPath = baseUrl + '/storage/portfolio/thumbnails/' + item['project_thumbnail'];
+
+                let row = `<tr>
+                                <td>${index + 1}</td>
+                                <td class="productimgname">
+                                    <a href="{{ url('Admin/portfolio') }}" class="product-img">
+                                        <img src="${projectThumbnailFullPath}" alt="project thumbnail">
+                                    </a>
+                                    <a href="{{ url('Admin/portfolio') }}">${item['project_title']}</a>
+                                </td>
+                                <td>${item['project_status'] === 'published' ? '<span class="bg-lightgreen badges">Published</span>' : item['project_status'] === 'running' ? '<span class="bg-lightgrey badges">Running</span>' : '<span class="bg-lightred badges">Private</span>'}</td>
+                            </tr>`
+                table_list.append(row);
+            });
+
+            // data_table.DataTable();
+        } catch(e){
+            console.error('Something went wrong', e);
+        }
+    }
+</script>
+
+{{-- Front end script end --}}
