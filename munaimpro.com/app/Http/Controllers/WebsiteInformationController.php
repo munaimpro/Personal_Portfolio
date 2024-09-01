@@ -120,7 +120,7 @@ class WebsiteInformationController extends Controller
     }
 
 
-    /* Method for admin dashboard new message */
+    /* Method for admin dashboard visitor country report */
 
     public function dashboardVisitorCountryInfo(){
         try{
@@ -130,6 +130,45 @@ class WebsiteInformationController extends Controller
                 return response()->json([
                     'status' => 'success',
                     'data' => $visitorCountry
+                ]);
+            } else{
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Something went wrong'
+                ]);
+            }
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong'.' '.$e->getMessage()
+            ]);
+        }
+    }
+
+
+    /* Method for admin dashboard visitor browser usage */
+
+    public function dashboardVisitorBrowserUsageInfo(){
+        try{
+            // Getting all visitor browser
+            $visitors = Visitorinformations::get(['visitor_browser']);
+
+            // Count total number of visitor
+            $totalVisitor = $visitors->count();
+
+            // Count the number of visitors for each browser
+            $browserCounts = $visitors->groupBy('visitor_browser')->map->count();
+
+            // Calculate the percentage for each browser
+            $browserPercentages = $browserCounts->mapWithKeys(function ($count, $browser) use ($totalVisitor) {
+                return [$browser => ($count / $totalVisitor) * 100];
+            });
+
+            if($browserPercentages){
+                return response()->json([
+                    'status' => 'success',
+                    'labels' => $browserPercentages->keys(),
+                    'percentage' => $browserPercentages->values()
                 ]);
             } else{
                 return response()->json([

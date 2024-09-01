@@ -167,91 +167,91 @@ tinymce.init({
  * Chart JS Configuration (Pie chart for browser usage in Dashboard)
  */
 // Data for the chart
-const data = {
-    labels: [
-        'Chrome',
-        'Firefox',
-        'Safari',
-        'Edge',
-        'Other'
-    ],
-    datasets: [{
-        label: 'Browser Usage',
-        data: [60, 15, 10, 10, 5], // Replace these values with your actual data
-        backgroundColor: [
-            'rgba(251, 188, 5, 1)', // Chrome browser color code
-            'rgba(255, 69, 0, 1)', // Firefox browser color code
-            'rgba(64, 158, 255, 1)', // Safari browser color code
-            'rgba(102, 51, 153, 1)', // Edge browser color code
-            'rgba(51, 51, 51, 1)' // Other browser color code
-        ],
-        borderColor: [
-            'rgba(251, 188, 5, 1)', // Chrome browser color code
-            'rgba(255, 69, 0, 1)', // Firefox browser color code
-            'rgba(64, 158, 255, 1)', // Safari browser color code
-            'rgba(102, 51, 153, 1)', // Edge browser color code
-            'rgba(51, 51, 51, 1)' // Other browser color code
-        ],
-        borderWidth: 1
-    }]
-};
+// const data = {
+//     labels: [
+//         'Chrome',
+//         'Firefox',
+//         'Safari',
+//         'Edge',
+//         'Other'
+//     ],
+//     datasets: [{
+//         label: 'Browser Usage',
+//         data: [60, 15, 10, 10, 5], // Replace these values with your actual data
+//         backgroundColor: [
+//             'rgba(251, 188, 5, 1)', // Chrome browser color code
+//             'rgba(255, 69, 0, 1)', // Firefox browser color code
+//             'rgba(64, 158, 255, 1)', // Safari browser color code
+//             'rgba(102, 51, 153, 1)', // Edge browser color code
+//             'rgba(51, 51, 51, 1)' // Other browser color code
+//         ],
+//         borderColor: [
+//             'rgba(251, 188, 5, 1)', // Chrome browser color code
+//             'rgba(255, 69, 0, 1)', // Firefox browser color code
+//             'rgba(64, 158, 255, 1)', // Safari browser color code
+//             'rgba(102, 51, 153, 1)', // Edge browser color code
+//             'rgba(51, 51, 51, 1)' // Other browser color code
+//         ],
+//         borderWidth: 1
+//     }]
+// };
 
-// Configuration options
-const config = {
-    type: 'pie',
-    data: data,
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: {
-                position: 'top',
-            },
-            tooltip: {
-                callbacks: {
-                    label: function(context) {
-                        let label = context.label || '';
-                        if (label) {
-                            label += ': ';
-                        }
-                        label += context.raw + '%';
-                        return label;
-                    }
-                }
-            },
-            datalabels: {
-                formatter: (value, context) => {
-                    let sum = context.dataset.data.reduce((a, b) => a + b, 0);
-                    let percentage = (value * 100 / sum);
+// // Configuration options
+// const config = {
+//     type: 'pie',
+//     data: data,
+//     options: {
+//         responsive: true,
+//         maintainAspectRatio: false,
+//         plugins: {
+//             legend: {
+//                 position: 'top',
+//             },
+//             tooltip: {
+//                 callbacks: {
+//                     label: function(context) {
+//                         let label = context.label || '';
+//                         if (label) {
+//                             label += ': ';
+//                         }
+//                         label += context.raw + '%';
+//                         return label;
+//                     }
+//                 }
+//             },
+//             datalabels: {
+//                 formatter: (value, context) => {
+//                     let sum = context.dataset.data.reduce((a, b) => a + b, 0);
+//                     let percentage = (value * 100 / sum);
 
-                    // Only display the label if the percentage is 5% or more
-                    if (percentage < 6) {
-                        return null;
-                    }
+//                     // Only display the label if the percentage is 5% or more
+//                     if (percentage < 6) {
+//                         return null;
+//                     }
 
-                    let label = context.chart.data.labels[context.dataIndex];
-                    return label + '\n' + percentage + '%';
-                },
-                color: '#fff',
-                labels: {
-                    title: {
-                        font: {
-                            weight: 'bold',
-                            size: '14'
-                        }
-                    }
-                },
-                anchor: 'end',
-                align: 'start',
-                offset: 10
-            }
-        }
-    },
-    plugins: [ChartDataLabels]
-};
+//                     let label = context.chart.data.labels[context.dataIndex];
+//                     return label + '\n' + percentage + '%';
+//                 },
+//                 color: '#fff',
+//                 labels: {
+//                     title: {
+//                         font: {
+//                             weight: 'bold',
+//                             size: '14'
+//                         }
+//                     }
+//                 },
+//                 anchor: 'end',
+//                 align: 'start',
+//                 offset: 10
+//             }
+//         }
+//     },
+//     plugins: [ChartDataLabels]
+// };
 
-// Render the chart
-const browserChart = new Chart(
-    document.getElementById('browserChart'),
-    config
-);
+// // Render the chart
+// const browserChart = new Chart(
+//     document.getElementById('browserChart'),
+//     config
+// );

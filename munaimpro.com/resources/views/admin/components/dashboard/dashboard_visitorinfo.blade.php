@@ -87,7 +87,7 @@
 
     dashboardVisitorCountryInfo();
 
-    async function dashboardVisitorCountryInfo() {
+    async function dashboardVisitorCountryInfo(){
         try {
             // Passing id to controller and getting response
             showLoader();
@@ -142,6 +142,138 @@
             console.error('Something went wrong', e);
         }
     }
+
+
+
+    // Function for retrive dashboard visitor browser usage information
+
+    dashboardVisitorBrowserUsageInfo();
+
+    // async function dashboardVisitorBrowserUsageInfo(){
+    //     try {
+    //         // Passing id to controller and getting response
+    //         showLoader();
+    //         let response = await axios.get('/dashboardVisitorBrowserUsageInfo');
+    //         hideLoader();
+
+    //         if (response.data['status'] === 'success') {
+
+    //         } else {
+    //             console.log('error', response.data['message']);
+    //         }
+    //     } catch (e) {
+    //         console.error('Something went wrong', e);
+    //     }
+    // }
+
+    async function dashboardVisitorBrowserUsageInfo(){
+        try {
+            // Show loader while fetching data
+            showLoader();
+            let response = await axios.get('/dashboardVisitorBrowserUsageInfo');
+            hideLoader();
+
+            if (response.data['status'] === 'success') {
+                const chartData = response.data;
+
+                // Define default colors for browsers
+                const colorMap = {
+                    'Chrome': 'rgba(251, 188, 5, 1)',
+                    'Firefox': 'rgba(255, 69, 0, 1)',
+                    'Safari': 'rgba(64, 158, 255, 1)',
+                    'Edge': 'rgba(102, 51, 153, 1)',
+                    'Opera': 'rgba(217, 0, 29, 1)',
+                    'Other': 'rgba(51, 51, 51, 1)'
+                };
+
+                // Initialize arrays for colors
+                const backgroundColors = [];
+                const borderColors = [];
+
+                // Assign colors dynamically based on the browser labels
+                chartData.labels.forEach(label => {
+                    backgroundColors.push(colorMap[label] || 'rgba(200, 200, 200, 1)');
+                    borderColors.push(colorMap[label] || 'rgba(200, 200, 200, 1)');
+                });
+
+                // Update the chart data dynamically
+                const data = {
+                    labels: chartData.labels,
+                    datasets: [{
+                        label: 'Browser Usage',
+                        data: chartData.percentage,
+                        backgroundColor: backgroundColors,
+                        borderColor: borderColors,
+                        borderWidth: 1
+                    }]
+                };
+
+                // Configuration options
+                const config = {
+                    type: 'pie',
+                    data: data,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        label += context.raw.toFixed(2) + '%';
+                                        return label;
+                                    }
+                                }
+                            },
+                            datalabels: {
+                                formatter: (value, context) => {
+                                    let sum = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    let percentage = (value * 100 / sum);
+
+                                    if (percentage < 6) {
+                                        return null;
+                                    }
+
+                                    let label = context.chart.data.labels[context.dataIndex];
+                                    return label + '\n' + percentage.toFixed(2) + '%';
+                                },
+                                color: '#fff',
+                                labels: {
+                                    title: {
+                                        font: {
+                                            weight: 'bold',
+                                            size: '14'
+                                        }
+                                    }
+                                },
+                                anchor: 'end',
+                                align: 'start',
+                                offset: 10
+                            }
+                        }
+                    },
+                    plugins: [ChartDataLabels]
+                };
+
+                // Render the chart
+                const browserChart = new Chart(
+                    document.getElementById('browserChart'),
+                    config
+                );
+            } else {
+                console.log('error', response.data['message']);
+            }
+        } catch (e) {
+            console.error('Something went wrong', e);
+        }
+    }
+
 
 </script>
 

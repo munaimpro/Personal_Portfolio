@@ -105,6 +105,10 @@
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet-ajax/dist/leaflet.ajax.min.js"></script>
 
+    {{-- Chart JS --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+
     {{-- Pre loader Configuration --}}
     <script>
         function showLoader(){
@@ -187,10 +191,6 @@
 {{-- Apex Chart JS --}}
 <script src="{{ asset('assets/plugins/apexchart/apexcharts.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/apexchart/chart-data.js') }}"></script>
-
-{{-- Chart JS --}}
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 
 {{-- TinyMCE Editor JS --}}
 <script src="{{ asset('assets/js/tinymce/tinymce.min.js') }}"></script>

@@ -81,8 +81,9 @@
                     // Reset form
                     $('#replyMessageForm')[0].reset();
 
-                    // Call function to refresh message list
-                    await retrieveAllMessageInfo();
+                    // Call function to refresh dashboard stat and new message
+                    await dashboardStatInfo();
+                    await dashboardNewMessageInfo();
 
                     displayToast('success', response.data['message']);
                 } else{
