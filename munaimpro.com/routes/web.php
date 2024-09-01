@@ -10,6 +10,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\InterestController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ExperienceController;
@@ -154,14 +155,16 @@ Route::post('retrieveVisitorInfoById', [WebsiteInformationController::class, 're
 Route::post('updateSeoPropertyInfo', [WebsiteInformationController::class, 'updateSeoPropertyInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deleteSeoPropertyInfo', [WebsiteInformationController::class, 'deleteSeoPropertyInfo'])->middleware(TokenVerificationMiddleware::class);
 
-Route::get('dashboardStatInfo', [WebsiteInformationController::class, 'dashboardStatInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('dashboardLatestProjectInfo', [WebsiteInformationController::class, 'dashboardLatestProjectInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('dashboardLatestPostInfo', [WebsiteInformationController::class, 'dashboardLatestPostInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('dashboardVisitorCountryInfo', [WebsiteInformationController::class, 'dashboardVisitorCountryInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('dashboardLatestVisitorInfo', [WebsiteInformationController::class, 'dashboardLatestVisitorInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('dashboardVisitorBrowserUsageInfo', [WebsiteInformationController::class, 'dashboardVisitorBrowserUsageInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('dashboardLatestUserInfo', [WebsiteInformationController::class, 'dashboardLatestUserInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('dashboardNewMessageInfo', [WebsiteInformationController::class, 'dashboardNewMessageInfo'])->middleware(TokenVerificationMiddleware::class);
+
+// API Routes (Dashboard Controller)
+Route::get('dashboardStatInfo', [DashboardController::class, 'dashboardStatInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::get('dashboardLatestProjectInfo', [DashboardController::class, 'dashboardLatestProjectInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::get('dashboardLatestPostInfo', [DashboardController::class, 'dashboardLatestPostInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::get('dashboardVisitorCountryInfo', [DashboardController::class, 'dashboardVisitorCountryInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::get('dashboardLatestVisitorInfo', [DashboardController::class, 'dashboardLatestVisitorInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::get('dashboardVisitorBrowserUsageInfo', [DashboardController::class, 'dashboardVisitorBrowserUsageInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::get('dashboardLatestUserInfo', [DashboardController::class, 'dashboardLatestUserInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::get('dashboardNewMessageInfo', [DashboardController::class, 'dashboardNewMessageInfo'])->middleware(TokenVerificationMiddleware::class);
 
 
 // API Routes (ClientFeedback Controller)
@@ -186,8 +189,8 @@ Route::group(['prefix' => 'Admin', 'middleware' => TokenVerificationMiddleware::
     Route::get('/password_reset', [UserController::class, 'resetPasswordPage']);
     Route::get('/profile', [UserController::class, 'userProfilePage']);
     
-    // Page Routes (Website Controller)
-    Route::get('/dashboard', [WebsiteinformationController::class, 'adminDashboardPage']);
+    // Page Routes (Dashboard Controller)
+    Route::get('/dashboard', [DashboardController::class, 'adminDashboardPage']);
     
     // Page Routes (Award Controller)
     Route::get('/award', [AwardController::class, 'adminAwardPage']);

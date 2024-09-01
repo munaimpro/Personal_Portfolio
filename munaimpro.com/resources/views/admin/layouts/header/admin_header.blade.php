@@ -65,6 +65,7 @@
                     </div>
                     </div>
                     <hr class="m-0">
+                    <a class="dropdown-item" href="{{ url('/') }}" target="_blank"> <i class="me-2" data-feather="globe"></i> Website</a>
                     <a class="dropdown-item" href="{{ url('Admin/profile') }}"> <i class="me-2" data-feather="user"></i> My Profile</a>
                     <a class="dropdown-item" href="generalsettings.html"><i class="me-2" data-feather="settings"></i>Settings</a>
                     <hr class="m-0">
