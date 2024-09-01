@@ -11,15 +11,15 @@
                 <div class="last-visitor-info d-flex text-white p-3">
                     <div class="col-4">
                         <p class="m-0">Last visitor IP</p>
-                        <p class="fw-bold">100.56.89.90</p>
+                        <p class="fw-bold" id="lastVisitorIP"></p>
                     </div>
                     <div class="col-4">
                         <p class="m-0">Last visitor country</p>
-                        <p class="fw-bold">USA</p>
+                        <p class="fw-bold" id="lastVisitorCountry"></p>
                     </div>
                     <div class="col-4">
                         <p class="m-0">Last visitor time</p>
-                        <p class="fw-bold">August 24, 2024 at 5:19 PM</p>
+                        <p class="fw-bold" id="lastVisitingDate"></p>
                     </div>
                 </div>
             </div>
@@ -41,3 +41,108 @@
 {{-- Browser usage end --}}
 </div>
 {{-- third row end --}}
+
+
+{{-- Front end script start --}}
+
+<script>
+
+    // Function for retrive dashboard last visitor information
+
+    dashboardLatestVisitorInfo();
+
+    async function dashboardLatestVisitorInfo(){
+        try{
+            // Pssing id to controller and getting response
+            showLoader();
+            let response = await axios.get('/dashboardLatestVisitorInfo');
+            hideLoader();
+
+            // Formatting the client feedback created at date
+            let lastVisitingTime = new Date(response.data.data[0]['last_visiting_time']);
+            let formattedLastVisitingTime = lastVisitingTime.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            if(response.data['status'] === 'success'){
+                // Assigning retrived values
+                $('#lastVisitorIP').html(response.data.data[0]['ip_address']);
+                $('#lastVisitorCountry').html(response.data.data[0]['visitor_country']);
+                $('#lastVisitingDate').html(formattedLastVisitingTime);
+            } else{
+                console.log('error', response.data['message']);
+            }
+        } catch(e){
+            console.error('Something went wrong', e);
+        }
+    }
+
+
+
+    // Function for retrive dashboard visitor country information
+
+    dashboardVisitorCountryInfo();
+
+    async function dashboardVisitorCountryInfo() {
+        try {
+            // Passing id to controller and getting response
+            showLoader();
+            let response = await axios.get('/dashboardVisitorCountryInfo');
+            hideLoader();
+
+            if (response.data['status'] === 'success') {
+
+                var map = L.map('map').setView([20, 0], 2.2); // Center the map
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+
+                // GeoJSON URL (for example purposes, this URL may not be valid)
+                var geojsonUrl = 'https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson';
+
+                // Function to determine the style based on visitor countries
+                function style(feature) {
+                    let countryMatched = response.data.data.some(item => item['visitor_country'] === feature.properties.ADMIN);
+                    if (countryMatched) {
+                        return { color: "#008000" };
+                    } else {
+                        return { color: "#CCCCCC" }; // Default color for other countries
+                    }
+                }
+
+                // Function to bind tooltips and other events
+                function onEachFeature(feature, layer) {
+                    // Bind a tooltip with the region's name
+                    layer.bindTooltip(feature.properties.ADMIN, {
+                        permanent: false, // Tooltip only shows on hover
+                        direction: "center"
+                    });
+
+                    // You can add other events or interactions here
+                }
+
+                // Load GeoJSON data and apply style
+                L.geoJson.ajax(geojsonUrl, {
+                    style: style,
+                    onEachFeature: onEachFeature
+                }).addTo(map);
+
+                // Ensure map size is recalculated correctly
+                map.invalidateSize();
+
+            } else {
+                console.log('error', response.data['message']);
+            }
+        } catch (e) {
+            console.error('Something went wrong', e);
+        }
+    }
+
+</script>
+
+{{-- Front end script end --}}

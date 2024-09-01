@@ -120,6 +120,58 @@ class WebsiteInformationController extends Controller
     }
 
 
+    /* Method for admin dashboard new message */
+
+    public function dashboardVisitorCountryInfo(){
+        try{
+            $visitorCountry = Visitorinformations::get(['visitor_country']);
+
+            if($visitorCountry){
+                return response()->json([
+                    'status' => 'success',
+                    'data' => $visitorCountry
+                ]);
+            } else{
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Something went wrong'
+                ]);
+            }
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong'.' '.$e->getMessage()
+            ]);
+        }
+    }
+
+
+    /* Method for admin dashboard new message */
+
+    public function dashboardLatestVisitorInfo(){
+        try{
+            $latestVisitor = Visitorinformations::orderBy('last_visiting_time', 'desc')->take(1)->get(['ip_address', 'visitor_country', 'last_visiting_time']);
+
+            if($latestVisitor){
+                return response()->json([
+                    'status' => 'success',
+                    'data' => $latestVisitor
+                ]);
+            } else{
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Something went wrong'
+                ]);
+            }
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong'.' '.$e->getMessage()
+            ]);
+        }
+    }
+
+
     /* Method for admin dashboard latest user */
 
     public function dashboardLatestUserInfo(){

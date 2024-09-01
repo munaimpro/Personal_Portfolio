@@ -157,6 +157,8 @@ Route::delete('deleteSeoPropertyInfo', [WebsiteInformationController::class, 'de
 Route::get('dashboardStatInfo', [WebsiteInformationController::class, 'dashboardStatInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::get('dashboardLatestProjectInfo', [WebsiteInformationController::class, 'dashboardLatestProjectInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::get('dashboardLatestPostInfo', [WebsiteInformationController::class, 'dashboardLatestPostInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::get('dashboardVisitorCountryInfo', [WebsiteInformationController::class, 'dashboardVisitorCountryInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::get('dashboardLatestVisitorInfo', [WebsiteInformationController::class, 'dashboardLatestVisitorInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::get('dashboardLatestUserInfo', [WebsiteInformationController::class, 'dashboardLatestUserInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::get('dashboardNewMessageInfo', [WebsiteInformationController::class, 'dashboardNewMessageInfo'])->middleware(TokenVerificationMiddleware::class);
 

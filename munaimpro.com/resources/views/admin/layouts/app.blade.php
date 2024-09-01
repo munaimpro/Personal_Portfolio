@@ -101,6 +101,10 @@
     {{-- Axios JS --}}
     <script src="{{ asset('assets/js/axios.min.js') }}"></script>
 
+    {{-- Leaflet JS --}}
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-ajax/dist/leaflet.ajax.min.js"></script>
+
     {{-- Pre loader Configuration --}}
     <script>
         function showLoader(){
@@ -187,10 +191,6 @@
 {{-- Chart JS --}}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
-
-{{-- Leaflet JS --}}
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="https://unpkg.com/leaflet-ajax/dist/leaflet.ajax.min.js"></script>
 
 {{-- TinyMCE Editor JS --}}
 <script src="{{ asset('assets/js/tinymce/tinymce.min.js') }}"></script>
