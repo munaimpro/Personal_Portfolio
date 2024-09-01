@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AboutController;
@@ -243,7 +244,7 @@ Route::group(['prefix' => 'Admin', 'middleware' => TokenVerificationMiddleware::
     Route::get('/user', [UserController::class, 'adminUserPage']);
 });
 
-// Page Routes (ClientFeedback Controller)
+// Page Route (ClientFeedback Controller)
 Route::get('/feedback/{token}', [ClientFeedbackController::class, 'clientFeedbackPage']);
 
 
@@ -252,3 +253,6 @@ Route::get('/feedback/{token}', [ClientFeedbackController::class, 'clientFeedbac
 /**
  * Page Route for Website
 */
+
+// Page Route (Home Controller)
+Route::get('/', [HomeController::class, 'websiteHomePage']);

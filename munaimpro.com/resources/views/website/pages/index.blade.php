@@ -1,0 +1,11 @@
+@extends('website.layouts.app')
+@section('component')
+    @include('website.components.index.banner')
+    @include('website.components.index.about')
+    @include('website.components.index.skills')
+    @include('website.components.index.service')
+    @include('website.components.index.portfolio')
+    @include('website.components.index.testimonial')
+    @include('website.components.index.blog')
+    @include('website.components.index.contact')
+@endsection
