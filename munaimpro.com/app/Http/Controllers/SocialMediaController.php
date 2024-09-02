@@ -6,6 +6,7 @@ use Exception;
 use App\Models\Seoproperty;
 use App\Models\SocialMedias;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Route;
 
 class SocialMediaController extends Controller
@@ -29,13 +30,13 @@ class SocialMediaController extends Controller
                 'social_media_title' => 'required|string|max:100',
                 'social_media_link' => 'required|string|max:100',
                 'social_media_icon' => 'required|string|max:50',
+                'social_media_placement' => 'required|array',
+                'social_media_placement.*' => ['nullable', Rule::in(['hero', 'contact', 'footer'])],
             ]);
 
-            // Global social media added to validation array for condition - Yes
-            if($request->input('global_social_media') === "1"){
-                $validatedData = array_merge($validatedData, $request->validate(['global_social_media' => 'int']));
-            }
-
+            // Converting the array of placements to JSON
+            $validatedData['social_media_placement'] = json_encode($request->input('social_media_placement'));
+            
             $social_media = SocialMedias::create($validatedData);
 
             if($social_media){
@@ -67,9 +68,13 @@ class SocialMediaController extends Controller
                 'social_media_title' => 'required|string|max:100',
                 'social_media_link' => 'required|string|max:100',
                 'social_media_icon' => 'required|string|max:50',
-                'global_social_media' => 'required',
+                'social_media_placement' => 'required|array',
+                'social_media_placement.*' => ['nullable', Rule::in(['hero', 'contact', 'footer'])],
                 'social_media_info_id' => 'required',
             ]);
+
+            // Converting the array of placements to JSON
+            $validatedData['social_media_placement'] = json_encode($request->input('social_media_placement'));
         
             $social_media = SocialMedias::findOrFail($validatedData['social_media_info_id']);
             $social_media->update($validatedData);
@@ -98,7 +103,7 @@ class SocialMediaController extends Controller
 
     public function retriveAllSocialMediaInfo(){
         try{
-            $social_media = SocialMedias::get(['id', 'social_media_title', 'social_media_link', 'social_media_icon']); // Getting all social media data
+            $social_media = SocialMedias::get(['id', 'social_media_title', 'social_media_link', 'social_media_icon', 'social_media_placement']); // Getting all social media data
 
             if($social_media){
                 return response()->json([
@@ -128,7 +133,7 @@ class SocialMediaController extends Controller
         try{
             $socialMediaInfoId = $request->input('social_media_info_id'); // Primary key id from input
         
-            $social_media = SocialMedias::findOrFail($socialMediaInfoId, ['id', 'social_media_title', 'social_media_link', 'social_media_icon', 'global_social_media']); // Getting social media data by id
+            $social_media = SocialMedias::findOrFail($socialMediaInfoId, ['id', 'social_media_title', 'social_media_link', 'social_media_icon', 'social_media_placement']); // Getting social media data by id
 
             if($social_media){
                 return response()->json([

@@ -45,7 +45,7 @@ Route::delete('deleteUserInfo', [UserController::class, 'deleteUserInfo'])->midd
 // API Routes (About Controller)
 Route::post('addAboutInfo', [AboutController::class, 'addAboutInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::post('updateAboutInfo', [AboutController::class, 'updateAboutInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retriveAboutInfo', [AboutController::class, 'retriveAboutInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::get('retriveAboutInfo', [AboutController::class, 'retriveAboutInfo']);
 
 
 // API Routes (Education Controller)
@@ -120,7 +120,7 @@ Route::delete('deleteAwardInfo', [AwardController::class, 'deleteAwardInfo'])->m
 // API Routes (Social Media Controller)
 Route::post('addSocialMediaInfo', [SocialMediaController::class, 'addSocialMediaInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::put('updateSocialMediaInfo', [SocialMediaController::class, 'updateSocialMediaInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retriveAllSocialMediaInfo', [SocialMediaController::class, 'retriveAllSocialMediaInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::get('retriveAllSocialMediaInfo', [SocialMediaController::class, 'retriveAllSocialMediaInfo']);
 Route::post('retriveSocialMediaInfoById', [SocialMediaController::class, 'retriveSocialMediaInfoById'])->middleware(TokenVerificationMiddleware::class);
 Route::get('retriveSpecificSocialMediaInfo', [SocialMediaController::class, 'retriveSpecificSocialMediaInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deleteSocialMediaInfo', [SocialMediaController::class, 'deleteSocialMediaInfo'])->middleware(TokenVerificationMiddleware::class);

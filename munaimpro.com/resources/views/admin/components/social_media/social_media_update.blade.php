@@ -33,10 +33,12 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="form-label">Global Media</label>
-                                    <select class="select" id="updateGlobalSocialMedia">
-                                        <option value = "0">No</option>
-                                        <option value = "1">Yes</option>
+                                    <label class="form-label">Media Placement</label>
+                                    <select class="select" id="updateSocialMediaPlacement" multiple>
+                                        <option value = " ">Select media placement</option>
+                                        <option value = "hero">Website Hero Section</option>
+                                        <option value = "contact">Website Contact</option>
+                                        <option value = "footer">Website Footer</option>
                                     </select>
                                 </div>
 
@@ -60,30 +62,50 @@
 
 <script>
     // Function for retrive social media details
-    async function retriveSocialMediaInfoById(social_media_info_id){
-
+    async function retriveSocialMediaInfoById(social_media_info_id) {
         try{
             // Assigning id to hidden field
             document.getElementById('socialMediaInfoId').value = social_media_info_id;
 
             // Pssing id to controller and getting response
             showLoader();
-            let response = await axios.post('/retriveSocialMediaInfoById', {social_media_info_id:social_media_info_id});
+            let response = await axios.post('/retriveSocialMediaInfoById', { social_media_info_id: social_media_info_id });
             hideLoader();
 
-            if(response.data['status'] === 'success'){
-                // Assigning retrived values
+            if (response.data['status'] === 'success') {
+                // Assigning retrieved values to form fields
                 document.getElementById('updateSocialMediaTitle').value = response.data.data['social_media_title'];
                 document.getElementById('updateSocialMediaLink').value = response.data.data['social_media_link'];
                 document.getElementById('updateSocialMediaIcon').value = response.data.data['social_media_icon'];
-                document.getElementById('updateGlobalSocialMedia').value = response.data.data['global_social_media'];
-            } else{
+
+                // Handle social media placement as an array (in case it's JSON)
+                let placements = response.data.data['social_media_placement'];
+                if (typeof placements === 'string') {
+                    placements = JSON.parse(placements); // Convert JSON string to array
+                }
+
+                let selectElement = document.getElementById('updateSocialMediaPlacement');
+                // Reset select options
+                for (let option of selectElement.options) {
+                    option.selected = false;
+                }
+
+                // Mark appropriate options as selected
+                for (let placement of placements) {
+                    for (let option of selectElement.options) {
+                        if (option.value === placement) {
+                            option.selected = true;
+                        }
+                    }
+                }
+            } else {
                 displayToast('error', response.data['message']);
             }
         } catch(e){
             console.error('Something went wrong', e);
         }
     }
+
 
     // Function for update social media information
     async function updateSocialMediaInfo(){
@@ -92,7 +114,7 @@
             let social_media_title = $('#updateSocialMediaTitle').val().trim();
             let social_media_link = $('#updateSocialMediaLink').val().trim();
             let social_media_icon = $('#updateSocialMediaIcon').val().trim();
-            let global_social_media = $('#updateGlobalSocialMedia').val().trim();
+            let social_media_placement = $('#updateSocialMediaPlacement').val();
             let social_media_info_id = $('#socialMediaInfoId').val().trim();
 
             // Front end validation process
@@ -111,7 +133,7 @@
                     "social_media_title" : social_media_title,
                     "social_media_link" : social_media_link,
                     "social_media_icon" : social_media_icon,
-                    "global_social_media" : global_social_media,
+                    "social_media_placement" : social_media_placement,
                     "social_media_info_id" : social_media_info_id,
                 }
 

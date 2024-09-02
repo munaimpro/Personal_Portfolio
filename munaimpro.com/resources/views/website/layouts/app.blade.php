@@ -81,6 +81,12 @@
     {{-- Highlight JS CSS Link --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/gradient-light.css">
 
+    {{-- jQuery CDN Link --}}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    
+    {{-- Axios JS --}}
+    <script src="{{ asset('assets/js/axios.min.js') }}"></script>
+
     {{-- Owl Carousal CSS CDN Link --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
@@ -91,17 +97,6 @@
 
     {{-- Sweet alert JS --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
-    {{-- Pre loader Configuration --}}
-    <script>
-        function showLoader(){
-            $('#global-loader').removeClass('d-none');
-        }
-
-        function hideLoader(){
-            $('#global-loader').addClass('d-none');
-        }
-    </script>
 </head>
 
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="90" data-bs-theme="dark">
@@ -146,7 +141,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
 
 {{-- jQuery CDN Link --}}
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+{{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> --}}
+
+{{-- Axios JS --}}
+{{-- <script src="{{ asset('assets/js/axios.min.js') }}"></script> --}}
 
 {{-- Owl Carousal JS Link --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
@@ -157,6 +155,26 @@
 
 {{-- Custom JS Link --}}
 <script src="{{ asset('assets/website/js/main.js') }}"></script>
+
+@stack('banner_about_section_script')
+
+<script>
+    // Function for toast message common features
+    function displayToast(icon, title){
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: icon,
+            iconColor: 'white',
+            title: title,
+            showConfirmButton: false,
+            timer: 60000,
+            customClass: {
+                popup: 'colored-toast'
+            }
+        });
+    }
+</script>
 
 {{-- Script end --}}
 </body>

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('social_media_title', 100);
             $table->string('social_media_link', 100);
             $table->string('social_media_icon', 50);
-            $table->tinyInteger('global_social_media')->default(0);
+            $table->json('social_media_placement')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });

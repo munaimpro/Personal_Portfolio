@@ -222,7 +222,7 @@
                 displayToast('warning', 'Invalid email address');
             } else if(website_phone.length === 0){
                 displayToast('warning', 'Phone number is required');
-            } else if(website_phone.length < 8 || user_phone.length > 15){
+            } else if(website_phone.length < 8 || website_phone.length > 15){
                 displayToast('warning', 'Invalid phone number');
             } else if(website_location.length === 0){
                 displayToast('warning', 'Location is required');

@@ -110,6 +110,6 @@ function showLoader(){
     $('.loader_bg').removeClass('d-none');
 }
 
-setTimeout(function(){
-    $('.loader_bg').fadeToggle();
-  }, 2000);
+// setTimeout(function(){
+//     $('.loader_bg').fadeToggle();
+//   }, 2000);

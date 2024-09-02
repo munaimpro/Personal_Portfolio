@@ -33,10 +33,12 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="form-label">Global Media</label>
-                                    <select class="select" id="globalSocialMedia">
-                                        <option value = "0">No</option>
-                                        <option value = "1">Yes</option>
+                                    <label class="form-label">Media Placement</label>
+                                    <select class="select" id="socialMediaPlacement" multiple>
+                                        <option value = " ">Select media placement</option>
+                                        <option value = "hero">Website Hero Section</option>
+                                        <option value = "contact">Website Contact</option>
+                                        <option value = "footer">Website Footer</option>
                                     </select>
                                 </div>
                             </div>
@@ -65,7 +67,7 @@
             let social_media_title = $('#socialMediaTitle').val().trim();
             let social_media_link = $('#socialMediaLink').val().trim();
             let social_media_icon = $('#socialMediaIcon').val().trim();
-            let global_social_media = $('#globalSocialMedia').val().trim();
+            let social_media_placement = $('#socialMediaPlacement').val();
 
             // Front end validation process
             if(social_media_title.length === 0){
@@ -83,7 +85,7 @@
                     "social_media_title" : social_media_title,
                     "social_media_link" : social_media_link,
                     "social_media_icon" : social_media_icon,
-                    "global_social_media" : global_social_media,
+                    "social_media_placement" : social_media_placement,
                 }
 
                 // Pssing data to controller and getting response
