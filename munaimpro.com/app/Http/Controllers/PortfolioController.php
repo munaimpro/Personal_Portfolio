@@ -548,4 +548,30 @@ class PortfolioController extends Controller
         }
 
     }
+
+
+    /* Method for website portfolio page load */
+    
+    public function websitePortfolioPage(){
+        // Getting view name from uri
+        $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+        
+        // Getting SEO property
+        $seoproperty = Seoproperty::where('page_name', 'index')->first();
+
+        return view('website.pages.portfolio', compact(['routeName', 'seoproperty']));
+    }
+
+
+    /* Method for website portfolio details page load */
+    
+    public function websitePortfolioDetailsPage(){
+        // Getting view name from uri
+        $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+        
+        // Getting SEO property
+        $seoproperty = Seoproperty::where('page_name', 'index')->first();
+
+        return view('website.pages.portfolio_details', compact(['routeName', 'seoproperty']));
+    }
 }

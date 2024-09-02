@@ -189,59 +189,57 @@ Route::group(['prefix' => 'Admin', 'middleware' => TokenVerificationMiddleware::
     Route::get('/verifyotp', [UserController::class, 'verifyOtpPage']);
     Route::get('/password_reset', [UserController::class, 'resetPasswordPage']);
     Route::get('/profile', [UserController::class, 'userProfilePage']);
+    Route::get('/user', [UserController::class, 'adminUserPage']);
     
-    // Page Routes (Dashboard Controller)
+    // Page Route (Dashboard Controller)
     Route::get('/dashboard', [DashboardController::class, 'adminDashboardPage']);
     
-    // Page Routes (Award Controller)
+    // Page Route (Award Controller)
     Route::get('/award', [AwardController::class, 'adminAwardPage']);
     
-    // Page Routes (WebsiteInformation Controller)
+    // Page Route (WebsiteInformation Controller)
     Route::get('/seoproperty', [WebsiteInformationController::class, 'adminLogoWithSEOPropertyPage']);
     
-    // Page Routes (WebsiteInformation Controller)
+    // Page Route (WebsiteInformation Controller)
     Route::get('/visitorinfo', [WebsiteInformationController::class, 'adminVisitorInformationPage']);
 
-    // Page Routes (About Controller)
+    // Page Route (About Controller)
     Route::get('/about', [AboutController::class, 'aboutInfoPage']);
 
-    // Page Routes (Education Controller)
+    // Page Route (Education Controller)
     Route::get('/education', [EducationController::class, 'adminEducationPage']);
 
-    // Page Routes (Skill Controller)
+    // Page Route (Skill Controller)
     Route::get('/skill', [SkillController::class, 'adminSkillPage']);
 
-    // Page Routes (Experience Controller)
+    // Page Route (Experience Controller)
     Route::get('/experience', [ExperienceController::class, 'adminExperiencePage']);
 
-    // Page Routes (Interest Controller)
+    // Page Route (Interest Controller)
     Route::get('/interest', [InterestController::class, 'adminInterestPage']);
 
-    // Page Routes (SocialMedia Controller)
+    // Page Route (SocialMedia Controller)
     Route::get('/social_media', [SocialMediaController::class, 'adminSocialMediaPage']);
 
-    // Page Routes (Service Controller)
+    // Page Route (Service Controller)
     Route::get('/service', [ServiceController::class, 'adminServicePage']);
 
-    // Page Routes (Portfolio Controller)
+    // Page Route (Portfolio Controller)
     Route::get('/portfolio', [PortfolioController::class, 'adminPortfolioPage']);
 
     Route::view('/pricing', 'admin.pages.pricing');
 
-    // Page Routes (Service Controller)
+    // Page Route (Service Controller)
     Route::get('/message', [MessageController::class, 'adminMessagePage']);
 
-    // Page Routes (Service Controller)
+    // Page Route (Service Controller)
     Route::get('/category', [CategoryController::class, 'adminCategoryPage']);
 
-    // Page Routes (Post Controller)
+    // Page Route (Post Controller)
     Route::get('/post', [PostController::class, 'adminPostPage']);
 
-    // Page Routes (ClientFeedback Controller)
+    // Page Route (ClientFeedback Controller)
     Route::get('/client_feedback', [ClientFeedbackController::class, 'adminClientFeedbackPage']);
-
-    // Page Routes (User Controller)
-    Route::get('/user', [UserController::class, 'adminUserPage']);
 });
 
 // Page Route (ClientFeedback Controller)
@@ -256,3 +254,27 @@ Route::get('/feedback/{token}', [ClientFeedbackController::class, 'clientFeedbac
 
 // Page Route (Home Controller)
 Route::get('/', [HomeController::class, 'websiteHomePage']);
+
+// Page Route (About Controller)
+Route::get('/about', [AboutController::class, 'websiteAboutPage']);
+
+// Page Route (Service Controller)
+Route::get('/services', [ServiceController::class, 'websiteServicePage']);
+
+// Page Route (Portfolio Controller)
+Route::get('/portfolio', [PortfolioController::class, 'websitePortfolioPage']);
+
+// Page Route (Portfolio Controller)
+Route::get('/portfolio_details', [PortfolioController::class, 'websitePortfolioDetailsPage']);
+
+// Page Route (Pricing Controller)
+Route::view('/pricing', 'website.pages.pricing');
+
+// Page Route (Post Controller)
+Route::get('/blog', [PostController::class, 'websiteBlogPage']);
+
+// Page Route (Post Controller)
+Route::get('/blog/{slug}', [PostController::class, 'websiteBlogDetailsPage']);
+
+// Page Route (Message Controller)
+Route::get('/contact', [MessageController::class, 'websiteContactPage']);

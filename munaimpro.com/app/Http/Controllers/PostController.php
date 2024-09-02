@@ -461,4 +461,30 @@ class PostController extends Controller
         }
 
     }
+
+
+    /* Method for website blog page load */
+    
+    public function websiteBlogPage(){
+        // Getting view name from uri
+        $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+        
+        // Getting SEO property
+        $seoproperty = Seoproperty::where('page_name', 'index')->first();
+
+        return view('website.pages.blog', compact(['routeName', 'seoproperty']));
+    }
+
+
+    /* Method for website blog details page load */
+    
+    public function websiteBlogDetailsPage(){
+        // Getting view name from uri
+        $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+        
+        // Getting SEO property
+        $seoproperty = Seoproperty::where('page_name', 'index')->first();
+
+        return view('website.pages.blog_details', compact(['routeName', 'seoproperty']));
+    }
 }

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
 
 class AboutController extends Controller
 {
-    /* Method for signup page load */
+    /* Method for admin about page load */
     
     public function aboutInfoPage(){
         // Getting view name from uri
@@ -223,5 +223,19 @@ class AboutController extends Controller
                 'message' => 'Something went wrong'.' '.$e->getMessage()
             ]);
         }
+    }
+
+
+
+    /* Method for website about page load */
+    
+    public function websiteAboutPage(){
+        // Getting view name from uri
+        $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+        
+        // Getting SEO property
+        $seoproperty = Seoproperty::where('page_name', 'index')->first();
+
+        return view('website.pages.about', compact(['routeName', 'seoproperty']));
     }
 }

@@ -175,4 +175,17 @@ class ServiceController extends Controller
             ]);
         }
     }
+
+
+    /* Method for website service page load */
+    
+    public function websiteServicePage(){
+        // Getting view name from uri
+        $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+        
+        // Getting SEO property
+        $seoproperty = Seoproperty::where('page_name', 'index')->first();
+
+        return view('website.pages.services', compact(['routeName', 'seoproperty']));
+    }
 }

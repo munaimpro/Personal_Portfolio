@@ -253,4 +253,17 @@ class MessageController extends Controller
             ]);
         }
     }
+
+
+    /* Method for website contact page load */
+    
+    public function websiteContactPage(){
+        // Getting view name from uri
+        $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+        
+        // Getting SEO property
+        $seoproperty = Seoproperty::where('page_name', 'index')->first();
+
+        return view('website.pages.contact', compact(['routeName', 'seoproperty']));
+    }
 }
