@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('about_description');
             $table->string('about_image', 100);
             $table->string('resume_link', 100);
+            $table->text('skill_description');
             $table->string('email', 50);
             $table->string('phone', 15);
             $table->string('location', 255);

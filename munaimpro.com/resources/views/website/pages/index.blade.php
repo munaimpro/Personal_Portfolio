@@ -46,6 +46,7 @@
                 $('#websiteAboutDescription').html(response.data.data['about_description']);
                 $('#websiteAboutImage').attr('src', aboutImageFullPath);
                 $('#resumeDownloadButton').attr('href', resumeFullPath);
+                $('#websiteSkillDescription').html(response.data.data['skill_description']);
             } else{
                 displayToast('error', response.data['message']);
             }

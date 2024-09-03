@@ -7,55 +7,57 @@
         </div>
         <div class="col-lg-5 mb-5 section_MK25_subtitle">
             <h3>Skills i acquired</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptas eum reprehenderit maxime natus cum sequi ab saepe labore fugit, fugiat, facilis sed? Minima non labore quod inventore modi provident consequatur!</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis veniam praesentium officiis perferendis corrupti nobis dicta at non adipisci neque!</p>
+            <p id="websiteSkillDescription"></p>
         </div>
-        <div class="col-lg-7 mb-5 skill_MK25_items">
-            <div class="bar">
-            <div class="bar_MK25_text row justify-content-space-between">
-                <div class="col-6">HTML</div>
-                <div class="col-6">95%</div>
-            </div>
-            <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                <div class="progress-bar" style="width: 25%"></div>
-            </div>
-            </div>
-
-            <div class="bar">
-            <div class="bar_MK25_text row justify-content-space-between">
-                <div class="col-6">CSS</div>
-                <div class="col-6">95%</div>
-            </div>
-            <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                <div class="progress-bar" style="width: 25%"></div>
-            </div>
-            </div>
-
-            <div class="bar">
-            <div class="bar_MK25_text row justify-content-space-between">
-                <div class="col-6">JavaScript</div>
-                <div class="col-6">95%</div>
-            </div>
-            <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                <div class="progress-bar" style="width: 25%"></div>
-            </div>
-            </div>
-
-            <div class="bar">
-            <div class="bar_MK25_text row justify-content-space-between">
-                <div class="col-6">PHP</div>
-                <div class="col-6">95%</div>
-            </div>
-            <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                <div class="progress-bar" style="width: 25%"></div>
-            </div>
-            </div>
+        <div class="col-lg-7 mb-5 skill_MK25_items" id="websiteHomeSkills">
+            
         </div>
         <div class="col-12">
-            <a href="" class="external_MK25_section_link fw-bold">
+            <a href="{{ url('about') }}" class="external_MK25_section_link fw-bold">
             View All About <i class="fa-solid fa-circle-arrow-right"></i>
             </a>
         </div>
         </div>
     </div>
 </section>
+
+
+{{-- Front end script start --}}
+
+<script>
+
+    // Function for retrive skill information
+    
+    retriveAllSkillInfo();
+
+    async function retriveAllSkillInfo(){
+
+        try{
+            // Pssing data to controller and getting response
+            showLoader();
+            let response = await axios.get('/retriveAllSkillInfo');
+            hideLoader();
+
+            website_home_skills = $('#websiteHomeSkills');
+
+            response.data.data.forEach(function(item, index){
+                if(index < 4){
+                    let row = `<div class="bar">
+                                    <div class="bar_MK25_text row justify-content-space-between">
+                                        <div class="col-6">${item['skill_name']}</div>
+                                        <div class="col-6">${item['skill_percentage']}%</div>
+                                    </div>
+                                    <div class="progress" role="progressbar" aria-label="${item['skill_name']}" aria-valuenow="${item['skill_percentage']}" aria-valuemin="0" aria-valuemax="100">
+                                        <div class="progress-bar" style="width: ${item['skill_percentage']}%"></div>
+                                    </div>
+                                </div>`
+                    website_home_skills.append(row);
+                }
+            });
+        } catch(e){
+            console.error('Something went wrong', e);
+        }
+    }
+</script>
+
+{{-- Front end script end --}}

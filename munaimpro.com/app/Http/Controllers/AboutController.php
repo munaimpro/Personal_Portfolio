@@ -77,6 +77,7 @@ class AboutController extends Controller
             'location' => 'required|string|max:255',
             'hero_description' => 'required|string',
             'about_description' => 'required|string',
+            'skill_description' => 'required|string',
         ]);
 
         // dd($validatedData['phone']);

@@ -140,6 +140,13 @@
                         </div>
                     </div>
                 </div>
+            </div>            
+
+            <div class="col-lg-12 col-sm-6 col-12">
+                <div class="form-group">
+                    <label>Skill Description</label>
+                    <textarea class="contentDetails" spellcheck="false" data-ms-editor="true" id="websiteSkillDescription"></textarea>
+                </div>
             </div>
 
             <div class="col-lg-12">
@@ -184,6 +191,7 @@
             document.getElementById('websiteAboutDescription').value = response.data.data['about_description'];
             document.getElementById('websiteAboutImage').src = aboutImageFullPath;
             document.getElementById('resumePreview').innerHTML = response.data.data['resume_link'];
+            document.getElementById('websiteSkillDescription').value = response.data.data['skill_description'];
         } else{
             displayToast('error', response.data['message']);
         }
@@ -205,6 +213,7 @@
             let website_about_description = tinymce.get('websiteAboutDescription').getContent().trim();
             let upload_about_image = document.getElementById('uploadAboutImage').files[0];
             let website_resume = document.getElementById('uploadResume').files[0];
+            let website_skill_description = tinymce.get('websiteSkillDescription').getContent().trim();
 
             // Regular expression for basic email validation
             let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -230,6 +239,8 @@
                 displayToast('warning', 'Hero description is required');
             } else if(website_about_description.length === 0){
                 displayToast('warning', 'About description is required');
+            } else if(website_skill_description.length === 0){
+                displayToast('warning', 'Skill description is required');
             } else{
                 // FormData object
                 let formData = new FormData();
@@ -246,6 +257,7 @@
                 formData.append('about_description', website_about_description);
                 if(upload_about_image) formData.append('about_image', upload_about_image);
                 if(website_resume) formData.append('resume_link', website_resume);
+                formData.append('skill_description', website_skill_description);
 
                 // Pssing data to controller and getting response
                 showLoader();
@@ -264,11 +276,6 @@
         } catch(e){
             console.error('Something went wrong', e);
         }
-    
-
-    
-
-    
     }
 </script>
 
