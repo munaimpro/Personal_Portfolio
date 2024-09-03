@@ -46,8 +46,6 @@
             let baseUrl = "{{ url('/') }}";
 
             response.data.data.forEach(function(item, index){
-                
-                console.log(item['project_status'] === 'published');
 
                 if(index < 3 && item['project_status'] === 'published'){
                     // Generating full path for the project thumbnail
@@ -77,17 +75,6 @@
                     website_home_portfolio.append(row);
                 }
             });
-
-            $('.deleteBtn').on('click', function(){
-                $('#portfolioInfoDeleteId').val($(this).data('id'));
-            });
-
-            $('.editBtn').on('click', function(){
-                let portfolio_info_id = $(this).data('id');
-                retrivePortfolioInfoById(portfolio_info_id);
-            });
-
-            // table_data.DataTable();
         } catch(e){
             console.error('Something went wrong', e);
         }

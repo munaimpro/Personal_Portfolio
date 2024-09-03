@@ -208,7 +208,7 @@
             iconColor: 'white',
             title: title,
             showConfirmButton: false,
-            timer: 60000,
+            timer: 3000,
             customClass: {
                 popup: 'colored-toast'
             }

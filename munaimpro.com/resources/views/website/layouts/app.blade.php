@@ -196,7 +196,7 @@ function checkAuth() {
             icon: icon,
             title: title,
             showConfirmButton: false,
-            timer: 2000,
+            timer: 3000,
             customClass: {
                 popup: 'colored-toast'
             }
