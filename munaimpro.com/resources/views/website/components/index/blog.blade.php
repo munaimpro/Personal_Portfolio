@@ -59,7 +59,7 @@
                     // Limit the post description
                     function shortenText(text, length = 100, suffix = '...') {
                         // Create a temporary DOM element to strip HTML tags
-                        let tempElement = $('<div>').html(text);
+                        let tempElement = $('<p>').html(text);
                         let strippedText = tempElement.text();
 
                         if (strippedText.length > length) {
@@ -90,9 +90,9 @@
                                             <span class="mx-2 fw-bold">.</span>
                                             <i class="fa-solid fa-calendar-days"></i><span class="ms-1">${formattedPublishTime}</span>
                                         </p>
-                                        <div class="card-text">
+                                        <p class="card-text">
                                             ${shortenText(item['post_description'])}
-                                        </div>
+                                        </p>
                                         <a href="blog_details/${item['post_slug']}" class="read_more_link">
                                             Read More <i class="fa-solid fa-circle-arrow-right"></i>
                                         </a>

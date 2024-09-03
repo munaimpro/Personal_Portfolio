@@ -54,9 +54,14 @@
             let send_message_subject = $('#sendMessageSubject').val().trim();
             let send_message_description = tinymce.get('sendMessageDescription').getContent();
 
+            // Regular expression for basic email validation
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
             // Front end validation process
             if(send_message_mail.length === 0){
                 displayToast('warning', 'Email address is required');
+            } else if(!emailPattern.test(user_email)){
+                displayToast('warning', 'Invalid email address');
             } else if(send_message_subject.length === 0){
                 displayToast('warning', 'Message subject is required');
             } else if(send_message_description.length === 0){

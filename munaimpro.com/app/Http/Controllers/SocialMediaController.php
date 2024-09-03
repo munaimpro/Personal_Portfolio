@@ -101,7 +101,7 @@ class SocialMediaController extends Controller
 
     /* Method for retrive all social media information */
 
-    public function retriveAllSocialMediaInfo(){
+    public function retrieveAllSocialMediaInfo(){
         try{
             $social_media = SocialMedias::get(['id', 'social_media_title', 'social_media_link', 'social_media_icon', 'social_media_placement']); // Getting all social media data
 

@@ -78,11 +78,8 @@ class AboutController extends Controller
             'hero_description' => 'required|string',
             'about_description' => 'required|string',
             'skill_description' => 'required|string',
+            'copyright' => 'required|string',
         ]);
-
-        // dd($validatedData['phone']);
-        // dd($validatedData['location']);
-        // dd($validatedData['email']);
 
         try{
             // Start DB transaction
@@ -198,9 +195,9 @@ class AboutController extends Controller
 
 
 
-    /* Method for about information retrive */
+    /* Method for about information retrieve */
 
-    public function retriveAboutInfo(){
+    public function retrieveAboutInfo(){
         try{
             $aboutId = About::pluck('id')->first(); // Primary key id from about table
             

@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('email', 50);
             $table->string('phone', 15);
             $table->string('location', 255);
+            $table->string('copyright', 100);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });

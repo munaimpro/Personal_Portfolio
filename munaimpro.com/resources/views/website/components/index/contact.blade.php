@@ -11,19 +11,19 @@
                     <p>I am always open to discuss about <span>web application development</span></p>
                     <form class="row g-3">
                     <div class="col-md-6">
-                        <input placeholder="Name" type="text" class="form-control" id="name">
+                        <input placeholder="Name" type="text" class="form-control" id="sendMessageName">
                     </div>
                     <div class="col-md-6">
-                        <input placeholder="Email" type="email" class="form-control" id="email">
+                        <input placeholder="Email" type="email" class="form-control" id="sendMessageMail">
                     </div>
                     <div class="col-12">
-                        <input placeholder="Subject" type="text" class="form-control" id="subject">
+                        <input placeholder="Subject" type="text" class="form-control" id="sendMessageSubject">
                     </div>
                     <div class="col-12">
-                        <textarea placeholder="Message" class="form-control" id="message"></textarea>
+                        <textarea placeholder="Message" class="form-control" id="sendMessageDescription"></textarea>
                     </div>
                     <div class="col-12">
-                        <button type="submit" class="btn primary-btn">Send Message <i class="fa-regular fa-paper-plane"></i></button>
+                        <button type="button" class="btn primary-btn" onclick="sendMessageFromWebsite()">Send Message <i class="fa-regular fa-paper-plane"></i></button>
                     </div>
                     </form>
                 </div>
@@ -38,7 +38,7 @@
                 </div>
                 <div class="contact_widget_item_text">
                     <p class="m-0 mb-2 contact_widget_item_title">Locatoin</p>
-                    <p class="m-0">Lorem ipsum dolor sit amet</p>
+                    <p class="m-0" id="websiteHomeContactLocation"></p>
                 </div>
                 </div>
                 <div class="contact_widget_item">
@@ -47,7 +47,7 @@
                 </div>
                 <div class="contact_widget_item_text">
                     <p class="m-0 mb-2 contact_widget_item_title">Email</p>
-                    <p class="m-0">example@example.com</p>
+                    <p class="m-0" id="websiteHomeContactEmail"></p>
                 </div>
                 </div>
                 <div class="contact_widget_item">
@@ -56,38 +56,16 @@
                 </div>
                 <div class="contact_widget_item_text">
                     <p class="m-0 mb-2 contact_widget_item_title">Phone</p>
-                    <p class="m-0">01233-324254</p>
+                    <p class="m-0" id="websiteHomeContactPhone"></p>
                 </div>
                 </div>
                 <div class="social_links">
-                <div>
-                    <p class="mb-2 contact_widget_item_title">Follow me on social</p>
-                </div>
-                <div class="d-flex">
-                    <div class="d-flex align-items-center me-3">
-                    <a target="_blank" href="">
-                        <div class="social_MK25_icon rounded-circle justify-content-center align-items-center">
-                        <i class="fa-brands fa-facebook-f"></i>
-                        </div>
-                    </a>
+                    <div class="d-none" id="contactWidgetTitle">
+                        <p class="mb-2 contact_widget_item_title">Follow me on social</p>
                     </div>
-
-                    <div class="d-flex align-items-center me-3">
-                    <a target="_blank" href="">
-                        <div class="social_MK25_icon rounded-circle justify-content-center align-items-center">
-                        <i class="fa-brands fa-linkedin-in"></i>
-                        </div>
-                    </a>
+                    <div class="d-flex" id="contactSocialLinks">
+                        
                     </div>
-
-                    <div class="d-flex align-items-center me-3">
-                    <a target="_blank" href="">
-                        <div class="social_MK25_icon rounded-circle justify-content-center align-items-center">
-                        <i class="fa-brands fa-github"></i>
-                        </div>
-                    </a>
-                    </div>
-                </div>
                 </div>
             </div>
             
@@ -95,3 +73,62 @@
         </div>
     </div>
 </section>
+
+
+{{-- Front end script start --}}
+
+<script>
+    // Function for sending message from website
+    async function sendMessageFromWebsite(){
+
+        try{
+            // Getting input data
+            let send_message_name = $('#sendMessageName').val().trim();
+            let send_message_mail = $('#sendMessageMail').val().trim();
+            let send_message_subject = $('#sendMessageSubject').val().trim();
+            let send_message_description = $('#sendMessageDescription').val().trim();
+
+            // Regular expression for basic email validation
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            // Front end validation process
+            if(send_message_name.length === 0){
+                displayToast('warning', 'Name is required');
+            } else if(send_message_mail.length === 0){
+                displayToast('warning', 'Email address is required');
+            } else if(!emailPattern.test(send_message_mail)){
+                displayToast('warning', 'Invalid email address');
+            } else if(send_message_subject.length === 0){
+                displayToast('warning', 'Message subject is required');
+            } else if(send_message_description.length === 0){
+                displayToast('warning', 'Message is required');
+            } else{
+                // Assigning send message data to variable in JSON format
+                let sendMessageData = {
+                    "name" : send_message_name,
+                    "email" : send_message_mail,
+                    "subject" : send_message_subject,
+                    "message" : send_message_description,
+                }
+
+                // Passing data to controller and getting response
+                showLoader();
+                let response = await axios.post('/sendMessageFromWebsite', sendMessageData);
+                hideLoader();
+
+                if(response.data['status'] === 'success'){
+                    // Reset contact form
+                    $('#sendMessageForm')[0].reset();
+
+                    displayToast('success', response.data['message']);
+                } else{
+                    displayToast('error', response.data['message']);
+                }
+            }
+        } catch(e){
+            console.error('Something went wrong', e);
+        }
+    }
+</script>
+
+{{-- Front end script end --}}

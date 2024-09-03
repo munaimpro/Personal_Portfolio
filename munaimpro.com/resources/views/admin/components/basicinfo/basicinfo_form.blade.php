@@ -147,6 +147,13 @@
                     <label>Skill Description</label>
                     <textarea class="contentDetails" spellcheck="false" data-ms-editor="true" id="websiteSkillDescription"></textarea>
                 </div>
+            </div>            
+
+            <div class="col-lg-12 col-sm-6 col-12">
+                <div class="form-group">
+                    <label>Copyright Information</label>
+                    <input type="text" class="form-control" spellcheck="false" data-ms-editor="true" id="websiteCopyright">
+                </div>
             </div>
 
             <div class="col-lg-12">
@@ -163,11 +170,11 @@
 
 <script>
     // Function for retriving about information
-    getAboutInfo();
+    retrieveAboutInfo();
 
-    async function getAboutInfo() {
+    async function retrieveAboutInfo() {
         showLoader();
-        let response = await axios.get('/retriveAboutInfo');
+        let response = await axios.get('/retrieveAboutInfo');
         hideLoader();
 
         if(response.data['status'] === 'success'){
@@ -192,6 +199,7 @@
             document.getElementById('websiteAboutImage').src = aboutImageFullPath;
             document.getElementById('resumePreview').innerHTML = response.data.data['resume_link'];
             document.getElementById('websiteSkillDescription').value = response.data.data['skill_description'];
+            document.getElementById('websiteCopyright').value = response.data.data['copyright'];
         } else{
             displayToast('error', response.data['message']);
         }
@@ -214,6 +222,7 @@
             let upload_about_image = document.getElementById('uploadAboutImage').files[0];
             let website_resume = document.getElementById('uploadResume').files[0];
             let website_skill_description = tinymce.get('websiteSkillDescription').getContent().trim();
+            let website_copyright = $('#websiteCopyright').val().trim();
 
             // Regular expression for basic email validation
             let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -241,6 +250,8 @@
                 displayToast('warning', 'About description is required');
             } else if(website_skill_description.length === 0){
                 displayToast('warning', 'Skill description is required');
+            } else if(website_copyright.length === 0){
+                displayToast('warning', 'Copyright information required');
             } else{
                 // FormData object
                 let formData = new FormData();
@@ -258,6 +269,7 @@
                 if(upload_about_image) formData.append('about_image', upload_about_image);
                 if(website_resume) formData.append('resume_link', website_resume);
                 formData.append('skill_description', website_skill_description);
+                formData.append('copyright', website_copyright);
 
                 // Pssing data to controller and getting response
                 showLoader();
@@ -267,7 +279,7 @@
                 hideLoader();
 
                 if(response.data['status'] === 'success'){
-                    getAboutInfo();
+                    retrieveAboutInfo();
                     displayToast('success', response.data['message']);
                 } else{
                     displayToast('error', response.data['message']);

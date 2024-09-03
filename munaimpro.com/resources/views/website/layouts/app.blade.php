@@ -170,20 +170,170 @@
 @stack('banner_about_section_script')
 
 <script>
+    // Function for checking user authentication
+    checkAuth();
+
+    function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+function checkAuth() {
+    const token = getCookie('SigninToken');
+    if (token) {
+        $('#userAuthenticationButton').html('Dashboard');
+        $('#userAuthenticationButton').attr('href', 'Admin/dashboard');
+    }
+}
+
+
     // Function for toast message common features
     function displayToast(icon, title){
         Swal.fire({
             toast: true,
-            position: 'top-end',
+            position: 'bottom',
             icon: icon,
-            iconColor: 'white',
             title: title,
             showConfirmButton: false,
-            timer: 60000,
+            timer: 2000,
             customClass: {
                 popup: 'colored-toast'
             }
         });
+    }
+
+
+    // Function for retrieve about information
+    retrieveAboutInfo();
+
+    async function retrieveAboutInfo(){
+        showLoader();
+        let response = await axios.get('/retrieveAboutInfo');
+        hideLoader();
+
+        if(response.data['status'] === 'success'){
+            // Getting base URL of the system
+            let baseUrl = "{{ url('/') }}";
+            
+            // Generating full path for the hero image
+            let heroImageFullPath = baseUrl + '/storage/website_pictures/hero/' + response.data.data['hero_image'];
+
+            // Generating full path for the about image
+            let aboutImageFullPath = baseUrl + '/storage/website_pictures/about/' + response.data.data['about_image'];
+
+            // Generating full path for the resume link
+            let resumeFullPath = baseUrl + '/storage/resume/' + response.data.data['resume_link'];
+
+            // Hero section informations - Home page
+            $('#websiteHeroGreetings').html(response.data.data['greetings']);
+            $('#websiteHeroFullName').html(response.data.data['full_name']);
+            $('#websiteHeroDesignation').html(response.data.data['designation']);
+            $('#websiteHeroDescription').html(response.data.data['hero_description']);
+            $('#websiteHeroImage').attr('src', heroImageFullPath);
+
+            // About section informations - Home page
+            $('#websiteAboutFullName').html("I am "+response.data.data['full_name']);
+            $('#websiteAboutDesignation').html(response.data.data['designation']);
+            $('#websiteAboutDescription').html(response.data.data['about_description']);
+            $('#websiteAboutImage').attr('src', aboutImageFullPath);
+            $('#resumeDownloadButton').attr('href', resumeFullPath);
+
+            // Skill section informations - Home page
+            $('#websiteSkillDescription').html(response.data.data['skill_description']);
+
+            // Contact section informations - Home page
+            $('#websiteHomeContactPhone').html(response.data.data['phone']);
+            $('#websiteHomeContactEmail').html(response.data.data['email']);
+            $('#websiteHomeContactLocation').html(response.data.data['location']);
+
+            // Contact section informations - Contact page
+            $('#websiteContactPagePhone').html(response.data.data['phone']);
+            $('#websiteContactPageEmail').html(response.data.data['email']);
+            $('#websiteContactPageLocation').html(response.data.data['location']);
+
+            // Footer section informations
+            $('#websiteFooterFullName').html(response.data.data['full_name']);
+            $('#websiteFooterDesignation').html(response.data.data['designation']);
+            $('#websiteCopyright').html(`&copy; ${response.data.data['copyright']} ${new Date().getFullYear()} | Developed by <a href="/" target="_blank" rel="noopener noreferrer">${response.data.data['full_name']}</a>`);
+
+        } else{
+            displayToast('error', response.data['message']);
+        }
+    }
+
+
+    // Function to retrieve social media information
+    $(document).ready(function(){
+        retrieveAllSocialMediaInfo();
+    });
+
+    async function retrieveAllSocialMediaInfo(){
+        try{
+            // Hero section social media div
+            let hero_social_media_link = $('#heroSocialLinks');
+
+            // Contact section social media div
+            let contact_social_media_link = $('#contactSocialLinks');
+
+            // Footer section social media div
+            let footer_social_media_link = $('#footerSocialLinks');
+
+            // Passing data to the controller and getting response
+            let response = await axios.get('/retrieveAllSocialMediaInfo');
+
+            // Process each social media item
+            response.data.data.forEach(function(item){
+
+                // Parse social_media_placement if it's a string representing a JSON array
+                let placements = [];
+
+                try{
+                    placements = item['social_media_placement'] ? JSON.parse(item['social_media_placement']) : [];
+                } catch(e){
+                    console.error('Error parsing social_media_placement:', e);
+                }
+
+                // Handle hero placement
+                if(placements.includes('hero')){
+                    let row = `<div class="d-flex align-items-center mb-3">
+                                <a target="_blank" href="${item['social_media_link']}">
+                                    <div class="social_MK25_icon rounded-circle justify-content-center align-items-center">
+                                        ${item['social_media_icon']}
+                                    </div>
+                                </a>
+                            </div>`;
+                    hero_social_media_link.append(row);
+                }
+
+                // Handle contact placement
+                if(placements.includes('contact')){
+                    let row = `<div class="d-flex align-items-center me-3">
+                                <a target="_blank" href="${item['social_media_link']}">
+                                    <div class="social_MK25_icon rounded-circle justify-content-center align-items-center">
+                                        ${item['social_media_icon']}
+                                    </div>
+                                </a>
+                            </div>`;
+                    contact_social_media_link.append(row);
+                    $('#contactWidgetTitle').removeClass('d-none');
+                }
+
+                // Handle footer placement
+                if(placements.includes('footer')){
+                    let row = `<div class="d-flex align-items-center me-3">
+                                <a target="_blank" href="${item['social_media_link']}">
+                                    <div class="social_MK25_icon rounded-circle justify-content-center align-items-center">
+                                        ${item['social_media_icon']}
+                                    </div>
+                                </a>
+                            </div>`;
+                    footer_social_media_link.append(row);
+                }
+            });
+        } catch(e){
+            console.error('Something went wrong:', e);
+        }
     }
 </script>
 
