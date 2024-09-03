@@ -102,13 +102,13 @@ $('.owl-carousel').owlCarousel({
 
 
 // Pre Loader functionality
-function hideLoader(){
-    $('.loader_bg').addClass('d-none');
-}
+// function hideLoader(){
+//     $('.loader_bg').addClass('d-none');
+// }
 
-function showLoader(){
-    $('.loader_bg').removeClass('d-none');
-}
+// function showLoader(){
+//     $('.loader_bg').removeClass('d-none');
+// }
 
 // setTimeout(function(){
 //     $('.loader_bg').fadeToggle();

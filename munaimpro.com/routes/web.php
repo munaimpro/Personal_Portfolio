@@ -146,7 +146,7 @@ Route::delete('deleteMessageInfo', [MessageController::class, 'deleteMessageInfo
 
 
 // API Routes (WebsiteInformation Controller)
-Route::get('retrieveLogoInfo', [WebsiteInformationController::class, 'retrieveLogoInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::get('retrieveLogoInfo', [WebsiteInformationController::class, 'retrieveLogoInfo']);
 Route::post('addLogoInfo', [WebsiteInformationController::class, 'addLogoInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::post('updateLogoInfo', [WebsiteInformationController::class, 'updateLogoInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::get('retreiveAllSeoPropertyInfo', [WebsiteInformationController::class, 'retreiveAllSeoPropertyInfo'])->middleware(TokenVerificationMiddleware::class);

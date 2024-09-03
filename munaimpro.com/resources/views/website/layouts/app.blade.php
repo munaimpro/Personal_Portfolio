@@ -97,6 +97,17 @@
 
     {{-- Sweet alert JS --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script>
+        // Pre Loader functionality
+        function hideLoader(){
+            $('.loader_bg').addClass('d-none');
+        }
+
+        function showLoader(){
+            $('.loader_bg').removeClass('d-none');
+        }
+    </script>
 </head>
 
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="90" data-bs-theme="dark">
