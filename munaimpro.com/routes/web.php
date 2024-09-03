@@ -91,7 +91,7 @@ Route::delete('deleteExperienceInfo', [ExperienceController::class, 'deleteExper
 // API Routes (Service Controller)
 Route::post('addServiceInfo', [ServiceController::class, 'addServiceInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::put('updateServiceInfo', [ServiceController::class, 'updateServiceInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retriveAllServiceInfo', [ServiceController::class, 'retriveAllServiceInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::get('retriveAllServiceInfo', [ServiceController::class, 'retriveAllServiceInfo']);
 Route::post('retriveServiceInfoById', [ServiceController::class, 'retriveServiceInfoById'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deleteServiceInfo', [ServiceController::class, 'deleteServiceInfo'])->middleware(TokenVerificationMiddleware::class);
 
@@ -100,7 +100,7 @@ Route::delete('deleteServiceInfo', [ServiceController::class, 'deleteServiceInfo
 Route::post('addPostInfo', [PostController::class, 'addPostInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::post('publishSchedulePost', [PostController::class, 'publishSchedulePost'])->middleware(TokenVerificationMiddleware::class);
 Route::post('updatePostInfo', [PostController::class, 'updatePostInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retriveAllPostInfo', [PostController::class, 'retriveAllPostInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::get('retriveAllPostInfo', [PostController::class, 'retriveAllPostInfo']);
 Route::post('retrivePostInfoById', [PostController::class, 'retrivePostInfoById'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deletePostInfo', [PostController::class, 'deletePostInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::get('retrivePostInfoBySlug/{slug}', [PostController::class, 'retrivePostInfoBySlug'])->middleware(TokenVerificationMiddleware::class);
@@ -129,7 +129,7 @@ Route::delete('deleteSocialMediaInfo', [SocialMediaController::class, 'deleteSoc
 // API Routes (Portfolio Controller)
 Route::post('addPortfolioInfo', [PortfolioController::class, 'addPortfolioInfo']);
 Route::post('updatePortfolioInfo', [PortfolioController::class, 'updatePortfolioInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retriveAllPortfolioInfo', [PortfolioController::class, 'retriveAllPortfolioInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::get('retriveAllPortfolioInfo', [PortfolioController::class, 'retriveAllPortfolioInfo']);
 Route::post('retrivePortfolioInfoById', [PortfolioController::class, 'retrivePortfolioInfoById'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deletePortfolioInfo', [PortfolioController::class, 'deletePortfolioInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('removePortfolioUiImage', [PortfolioController::class, 'removePortfolioUiImage'])->middleware(TokenVerificationMiddleware::class);
@@ -170,7 +170,7 @@ Route::get('dashboardNewMessageInfo', [DashboardController::class, 'dashboardNew
 
 // API Routes (ClientFeedback Controller)
 Route::post('addClientFeedbackInfo', [ClientFeedbackController::class, 'addClientFeedbackInfo']);
-Route::get('retrieveAllClientFeedbackInfo', [ClientFeedbackController::class, 'retrieveAllClientFeedbackInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::get('retrieveAllClientFeedbackInfo', [ClientFeedbackController::class, 'retrieveAllClientFeedbackInfo']);
 Route::post('retrieveClientFeedbackInfoById', [ClientFeedbackController::class, 'retrieveClientFeedbackInfoById'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deleteClientFeedbackInfo', [ClientFeedbackController::class, 'deleteClientFeedbackInfo'])->middleware(TokenVerificationMiddleware::class);
 

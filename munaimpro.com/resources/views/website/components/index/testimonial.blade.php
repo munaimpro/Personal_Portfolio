@@ -10,71 +10,68 @@
         </div>
 
         <div class="col-lg-10 m-auto mb-5">
-        <div class="owl-carousel owl-theme">
-            <!-- Testimonial 1 -->
-            <div class="item">
-            <div class="row justify-content-center">
-                <div class="col-md-6 testimonial_image">
-                    <div class="mb-4 mb-lg-0">
-                        <img src="{{ asset('assets/website/images/portfolio/portfolio1.webp') }}" class="img-fluid" alt="Client Image">
-                    </div>
-                </div>
-                <div class="col-md-6 testimonial_data">
-                    <div class="client_message border-bottom">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec justo eu felis dapibus consectetur. Donec maximus metus a nisl posuere, ut convallis nisl mollis. Sed vitae tellus sed massa placerat vulputate.</p>
-                    </div>
-                    
-                    <div class="client_identity">
-                    <h3>Jhon Doe 1</h3>
-                    <p>Marketing Manager</p>
-                    </div>
-                </div>
-            </div>
-            </div>
-
-            <!-- Testimonial 2 -->
-            <div class="item">
-            <div class="row justify-content-center">
-                <div class="col-md-6 testimonial_image">
-                    <div class="mb-4 mb-lg-0">
-                        <img src="{{ asset('assets/website/images/portfolio/portfolio1.webp') }}" class="img-fluid" alt="Client Image">
-                    </div>
-                </div>
-                <div class="col-md-6 testimonial_data">
-                    <div class="client_message border-bottom">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec justo eu felis dapibus consectetur. Donec maximus metus a nisl posuere, ut convallis nisl mollis. Sed vitae tellus sed massa placerat vulputate.</p>
-                    </div>
-                    
-                    <div class="client_identity">
-                    <h3>Jhon Doe 2</h3>
-                    <p>Marketing Manager</p>
-                    </div>
-                </div>
-            </div>
-            </div>
-
-            <!-- Testimonial 3 -->
-            <div class="item">
-            <div class="row justify-content-center">
-                <div class="col-md-6 testimonial_image">
-                    <div class="mb-4 mb-lg-0">
-                        <img src="{{ asset('assets/website/images/portfolio/portfolio1.webp') }}" class="img-fluid" alt="Client Image">
-                    </div>
-                </div>
-                <div class="col-md-6 testimonial_data">
-                    <div class="client_message border-bottom">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec justo eu felis dapibus consectetur. Donec maximus metus a nisl posuere, ut convallis nisl mollis. Sed vitae tellus sed massa placerat vulputate.</p>
-                    </div>
-                    
-                    <div class="client_identity">
-                    <h3>Jhon Doe 3</h3>
-                    <p>Marketing Manager</p>
-                    </div>
-                </div>
-            </div>
-            </div>
+        <div class="owl-carousel owl-theme" id="websiteHomeTestimonial">
+            
         </div>
         </div>
     </div>
     </div>
 </section>
+
+
+{{-- Front end script start --}}
+
+<script>
+
+    // Function for retrieve client feedback information
+    
+    retrieveAllClientFeedbackInfo();
+
+    async function retrieveAllClientFeedbackInfo(){
+
+        try{
+            // Getting testimonial content
+            let website_home_testimonial = $('#websiteHomeTestimonial');
+
+            // Pssing data to controller and getting response
+            showLoader();
+            let response = await axios.get('/retrieveAllClientFeedbackInfo');
+            hideLoader();
+
+            // Getting base URL of the system
+            let baseUrl = "{{ url('/') }}";
+
+            response.data.data.forEach(function(item, index){
+                if(index < 3){
+                    // Generating full path for the client image
+                    let clientImageFullPath = baseUrl + '/storage/profile_picture/client_images/' + item['client_image'];
+
+                    let row = `<div class="item">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-6 testimonial_image">
+                                            <div class="mb-4 mb-lg-0">
+                                                <img src="${clientImageFullPath}" class="img-fluid" alt="Client Image">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 testimonial_data">
+                                            <div class="client_message border-bottom">
+                                                <p>${item['client_feedback']}</p>
+                                            </div>
+                                            
+                                            <div class="client_identity">
+                                            <h3>${item['client_first_name']} ${item['client_last_name']}</h3>
+                                            <p>${item['client_designation']}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`
+                    website_home_testimonial.trigger('add.owl.carousel', [$(row)]).trigger('refresh.owl.carousel');
+                }
+            });
+        } catch(e){
+            console.error('Something went wrong', e);
+        }
+    }
+</script>
+
+{{-- Front end script end --}}
