@@ -11,7 +11,7 @@
             <div class="row">
               <div class="col-12">
                 <p>Are you ready to transform your vision into reality? Let's collaborate to bring your projects to life. Whether you're envisioning a sleek website, a dynamic web application, or anything in between, I've got the expertise to make it happen</p>
-                <a href="contact.html" class="btn text-capitalize">Lets talk about ideas</a>
+                <a href="{{ url('contact') }}" class="btn text-capitalize">Lets talk about ideas</a>
               </div>
             </div>
           </div>
