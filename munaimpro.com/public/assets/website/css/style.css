@@ -679,11 +679,12 @@ code{
     margin-right: 5px;
 }
 
+/*-- Load more button included instead
 .blog_wrapper .pagination .btn{
     padding: 5px 15px;
     border-radius: 5px;
     margin: 0;
-}
+} --*/
 
 .breadcrumb_MK25_blog .breadcrumb_MK25_title{
     color: var(--text-black);

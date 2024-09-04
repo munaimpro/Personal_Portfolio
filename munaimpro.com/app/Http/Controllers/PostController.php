@@ -472,7 +472,10 @@ class PostController extends Controller
         // Getting SEO property
         $seoproperty = Seoproperty::where('page_name', 'index')->first();
 
-        return view('website.pages.blog', compact(['routeName', 'seoproperty']));
+        // Getting total post
+        $totalPost = Post::get()->count();
+
+        return view('website.pages.blog', compact(['routeName', 'seoproperty', 'totalPost']));
     }
 
 
