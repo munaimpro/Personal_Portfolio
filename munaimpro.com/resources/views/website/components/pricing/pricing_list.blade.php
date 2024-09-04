@@ -1,4 +1,4 @@
-{{-- Pricing section --}}
+{{-- Pricing section start --}}
 <section class="pricing_wrapper vertical_MK25_w_space">
     <div class="container">
       <div class="row">
@@ -73,3 +73,4 @@
       </div>
     </div>
 </section>
+{{-- Pricing section end --}}

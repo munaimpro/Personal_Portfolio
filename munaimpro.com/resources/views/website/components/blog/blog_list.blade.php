@@ -1,4 +1,4 @@
-{{-- Blog section --}}
+{{-- Blog section start --}}
 <section id="blog" class="blog_wrapper vertical_MK25_w_space">
     <div class="container">
     <div class="row justify-content-center">
@@ -78,3 +78,4 @@
     </div>
     </div>
 </section>
+{{-- Blog section end --}}

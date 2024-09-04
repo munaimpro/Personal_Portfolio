@@ -1,4 +1,4 @@
-{{-- Blog details section --}}
+{{-- Blog details section start --}}
 <section class="blog_details_wrapper vertical_MK25_w_space">
     <div class="container">
     <div class="row justify-content-center">
@@ -125,3 +125,4 @@
     </div>
     </div>
 </section>
+{{-- Blog details end --}}

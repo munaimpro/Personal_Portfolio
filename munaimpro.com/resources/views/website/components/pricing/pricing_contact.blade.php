@@ -1,4 +1,4 @@
-{{-- Contact section --}}
+{{-- Contact section start --}}
 <section id="contact" class="contact_wrapper vertical_MK25_w_space">
     <div class="container">
     <div class="row justify-content-center">
@@ -94,3 +94,4 @@
     </div>
     </div>
 </section>
+{{-- Contact section end --}}

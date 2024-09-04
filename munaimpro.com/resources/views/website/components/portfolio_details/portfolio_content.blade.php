@@ -1,4 +1,4 @@
-{{-- Project details section --}}
+{{-- Project details section start --}}
 <section class="project_details_wrapper vertical_MK25_w_space">
     <div class="container">
     <div class="row justify-content-center">
@@ -47,3 +47,4 @@
     </div>
     </div>
 </section>
+{{-- Project details section end --}}

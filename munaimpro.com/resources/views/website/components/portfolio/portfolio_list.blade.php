@@ -1,4 +1,4 @@
-{{-- Portfolio section --}}
+{{-- Portfolio section start --}}
 <section id="portfolio" class="portfolio_wrapper vertical_MK25_w_space">
     <div class="container">
         <div class="row justify-content-start">
@@ -16,6 +16,7 @@
         </div>
     </div>
 </section>
+{{-- Portfolio section end --}}
 
 
 {{-- Front end script start --}}
