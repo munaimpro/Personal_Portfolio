@@ -41,7 +41,7 @@
 
                 if(response.data['status'] === 'success'){
                     // Call function to refresh post list
-                    await retriveAllPostInfo();
+                    await retrieveAllPostInfo();
 
                     displayToast('success', response.data['message']);
                 } else{

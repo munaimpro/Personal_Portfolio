@@ -52,8 +52,8 @@
 {{-- Front end script start --}}
 
 <script>
-    // Function for retrive message details
-    async function retriveMessageInfoById(message_info_id, message_info_action){
+    // Function for retrieve message details
+    async function retrieveMessageInfoById(message_info_id, message_info_action){
 
         try{
             // Assigning id to hidden field
@@ -61,11 +61,11 @@
 
             // Pssing id to controller and getting response
             showLoader();
-            let response = await axios.post('/retriveMessageInfoById', {message_info_id:message_info_id, message_info_action:message_info_action});
+            let response = await axios.post('/retrieveMessageInfoById', {message_info_id:message_info_id, message_info_action:message_info_action});
             hideLoader();
 
             if(response.data['status'] === 'success'){
-                // Assigning retrived values
+                // Assigning retrieved values
                 document.getElementById('messageClientName').value = response.data.data['name'];
                 document.getElementById('messageMail').value = response.data.data['email'];
                 document.getElementById('replyMessageMail').value = response.data.data['email'];

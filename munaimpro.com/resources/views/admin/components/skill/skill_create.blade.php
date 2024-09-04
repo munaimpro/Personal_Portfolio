@@ -86,7 +86,7 @@
                     $('#addSkillForm')[0].reset();
 
                     // Call function to refresh skill list
-                    await retriveAllSkillInfo();
+                    await retrieveAllSkillInfo();
 
                     displayToast('success', response.data['message']);
                 } else{

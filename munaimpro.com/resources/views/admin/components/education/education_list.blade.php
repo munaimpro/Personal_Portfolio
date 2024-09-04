@@ -72,11 +72,11 @@
 
 <script>
 
-    // Function for retrive education information
+    // Function for retrieve education information
     
-    retriveAllEducationInfo();
+    retrieveAllEducationInfo();
 
-    async function retriveAllEducationInfo(){
+    async function retrieveAllEducationInfo(){
 
         try{
             // Getting data table
@@ -93,7 +93,7 @@
 
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retriveAllEducationInfo');
+            let response = await axios.get('/retrieveAllEducationInfo');
             hideLoader();
 
             response.data.data.forEach(function(item, index){
@@ -143,7 +143,7 @@
 
             $('.editBtn').on('click', function(){
                 let education_info_id = $(this).data('id');
-                retriveEducationInfoById(education_info_id);
+                retrieveEducationInfoById(education_info_id);
             });
 
             // table_data.DataTable();

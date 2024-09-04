@@ -48,16 +48,16 @@
 
 <script>
 
-    // Function for retrive skill information
+    // Function for retrieve skill information
     
-    retriveAllSkillInfo();
+    retrieveAllSkillInfo();
 
-    async function retriveAllSkillInfo(){
+    async function retrieveAllSkillInfo(){
 
         try{
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retriveAllSkillInfo');
+            let response = await axios.get('/retrieveAllSkillInfo');
             hideLoader();
 
             let website_programming_skills = $('#websiteProgrammingSkills');
@@ -93,16 +93,16 @@
     }
     
 
-    // Function for retrive education information
+    // Function for retrieve education information
     
-    retriveAllEducationInfo();
+    retrieveAllEducationInfo();
 
-    async function retriveAllEducationInfo(){
+    async function retrieveAllEducationInfo(){
 
         try{
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retriveAllEducationInfo');
+            let response = await axios.get('/retrieveAllEducationInfo');
             hideLoader();
             console.log(response);
 

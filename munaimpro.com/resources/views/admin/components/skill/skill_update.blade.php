@@ -51,8 +51,8 @@
 {{-- Front end script start --}}
 
 <script>
-    // Function for retrive education details
-    async function retriveSkillInfoById(skill_info_id){
+    // Function for retrieve education details
+    async function retrieveSkillInfoById(skill_info_id){
 
         try{
             // Assigning id to hidden field
@@ -60,11 +60,11 @@
 
             // Pssing id to controller and getting response
             showLoader();
-            let response = await axios.post('/retriveSkillInfoById', {skill_info_id:skill_info_id});
+            let response = await axios.post('/retrieveSkillInfoById', {skill_info_id:skill_info_id});
             hideLoader();
 
             if(response.data['status'] === 'success'){
-                // Assigning retrived values
+                // Assigning retrieved values
                 document.getElementById('updateSkillType').value = response.data.data['skill_type'];
                 document.getElementById('updateSkillName').value = response.data.data['skill_name'];
                 document.getElementById('updateSkillPercentage').value = response.data.data['skill_percentage'];
@@ -114,7 +114,7 @@
                     $('#updateSkillForm')[0].reset();
 
                     // Call function to refresh skill list
-                    await retriveAllSkillInfo();
+                    await retrieveAllSkillInfo();
 
                     displayToast('success', response.data['message']);
                 } else{

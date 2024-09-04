@@ -47,7 +47,7 @@
 
 <script>
 
-    // Function for retrive dashboard last visitor information
+    // Function for retrieve dashboard last visitor information
 
     dashboardLatestVisitorInfo();
 
@@ -69,7 +69,7 @@
             });
 
             if(response.data['status'] === 'success'){
-                // Assigning retrived values
+                // Assigning retrieved values
                 $('#lastVisitorIP').html(response.data.data[0]['ip_address']);
                 $('#lastVisitorCountry').html(response.data.data[0]['visitor_country']);
                 $('#lastVisitingDate').html(formattedLastVisitingTime);
@@ -83,7 +83,7 @@
 
 
 
-    // Function for retrive dashboard visitor country information
+    // Function for retrieve dashboard visitor country information
 
     dashboardVisitorCountryInfo();
 
@@ -145,7 +145,7 @@
 
 
 
-    // Function for retrive dashboard visitor browser usage information
+    // Function for retrieve dashboard visitor browser usage information
 
     dashboardVisitorBrowserUsageInfo();
 

@@ -71,11 +71,11 @@
 
 <script>
 
-    // Function for retrive skill information
+    // Function for retrieve skill information
     
-    retriveAllSkillInfo();
+    retrieveAllSkillInfo();
 
-    async function retriveAllSkillInfo(){
+    async function retrieveAllSkillInfo(){
 
         try{
             // Getting data table
@@ -92,7 +92,7 @@
 
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retriveAllSkillInfo');
+            let response = await axios.get('/retrieveAllSkillInfo');
             hideLoader();
 
             response.data.data.forEach(function(item, index){
@@ -124,7 +124,7 @@
 
             $('.editBtn').on('click', function(){
                 let skill_info_id = $(this).data('id');
-                retriveSkillInfoById(skill_info_id);
+                retrieveSkillInfoById(skill_info_id);
             });
 
             // table_data.DataTable();

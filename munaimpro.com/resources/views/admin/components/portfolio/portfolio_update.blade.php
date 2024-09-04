@@ -197,11 +197,11 @@
 
 <script>
 
-    // Function for retrive category(service) information
+    // Function for retrieve category(service) information
 
-    retriveAllServiceInfo();
+    retrieveAllServiceInfo();
 
-    async function retriveAllServiceInfo(){
+    async function retrieveAllServiceInfo(){
 
         try{
             // Getting input field
@@ -209,7 +209,7 @@
 
             // Pssing request to controller and getting response
             showLoader();
-            let response = await axios.get('/retriveAllServiceInfo');
+            let response = await axios.get('/retrieveAllServiceInfo');
             hideLoader();
 
             response.data.data.forEach(function(item, index){
@@ -222,16 +222,16 @@
     }
 
 
-    // Function for retrive post details
+    // Function for retrieve post details
 
-    async function retrivePortfolioInfoById(portfolio_info_id){
+    async function retrievePortfolioInfoById(portfolio_info_id){
         try {
             // Assigning id to hidden field
             $('#portfolioInfoId').val(portfolio_info_id);
 
             // Sending id to controller and getting response
             showLoader();
-            let response = await axios.post('../retrivePortfolioInfoById', { portfolio_info_id: portfolio_info_id });
+            let response = await axios.post('../retrievePortfolioInfoById', { portfolio_info_id: portfolio_info_id });
             hideLoader();
 
             if (response.data['status'] === 'success'){
@@ -353,7 +353,7 @@
 
             if (response.data.status === 'success') {
                 // Re-fetch portfolio info to refresh the UI images preview
-                await retrivePortfolioInfoById(portfolio_info_id);
+                await retrievePortfolioInfoById(portfolio_info_id);
                 displayToast('success', response.data.message);
             } else {
                 displayToast('error', response.data.message);
@@ -462,7 +462,7 @@
                     $('#updatePortfolioForm')[0].reset();
 
                     // Call function to refresh the portfolio list (if applicable)
-                    await retriveAllPortfolioInfo();
+                    await retrieveAllPortfolioInfo();
 
                     displayToast('success', response.data['message']);
                 } else {

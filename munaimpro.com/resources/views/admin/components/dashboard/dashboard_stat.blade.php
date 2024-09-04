@@ -91,7 +91,7 @@
 
 <script>
 
-    // Function for retrive dashboard statistics
+    // Function for retrieve dashboard statistics
 
     dashboardStatInfo();
 
@@ -103,7 +103,7 @@
             hideLoader();
 
             if(response.data['status'] === 'success'){
-                // Assigning retrived values
+                // Assigning retrieved values
                 $('#totalUser').html(response.data.total_user);
                 $('#totalProject').html(response.data.total_portfolio);
                 $('#totalService').html(response.data.total_service);

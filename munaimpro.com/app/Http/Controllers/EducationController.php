@@ -117,9 +117,9 @@ class EducationController extends Controller
     }
 
 
-    /* Method for retrive all education information */
+    /* Method for retrieve all education information */
 
-    public function retriveAllEducationInfo(){
+    public function retrieveAllEducationInfo(){
         try{
             $education = Education::get(['id', 'education_type', 'education_starting_date', 'education_ending_date', 'education_degree', 'education_institution']); // Getting all education data
 
@@ -145,9 +145,9 @@ class EducationController extends Controller
     }
 
 
-    /* Method for retrive education information by id */
+    /* Method for retrieve education information by id */
 
-    public function retriveEducationInfoById(Request $request){
+    public function retrieveEducationInfoById(Request $request){
         try{
             // Primary key id from input
             $educationInfoId = $request->input('education_info_id');

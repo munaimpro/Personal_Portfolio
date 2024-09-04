@@ -41,7 +41,7 @@
 
                 if(response.data['status'] === 'success'){
                     // Call function to refresh category list
-                    await retriveAllCategoryInfo();
+                    await retrieveAllCategoryInfo();
 
                     displayToast('success', response.data['message']);
                 } else{

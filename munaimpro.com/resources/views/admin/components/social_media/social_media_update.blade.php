@@ -61,15 +61,15 @@
 {{-- Front end script start --}}
 
 <script>
-    // Function for retrive social media details
-    async function retriveSocialMediaInfoById(social_media_info_id) {
+    // Function for retrieve social media details
+    async function retrieveSocialMediaInfoById(social_media_info_id) {
         try{
             // Assigning id to hidden field
             document.getElementById('socialMediaInfoId').value = social_media_info_id;
 
             // Pssing id to controller and getting response
             showLoader();
-            let response = await axios.post('/retriveSocialMediaInfoById', { social_media_info_id: social_media_info_id });
+            let response = await axios.post('/retrieveSocialMediaInfoById', { social_media_info_id: social_media_info_id });
             hideLoader();
 
             if (response.data['status'] === 'success') {
@@ -147,7 +147,7 @@
                     $('#updateSocialMediaForm')[0].reset();
 
                     // Call function to refresh social media list
-                    await retriveAllSocialMediaInfo();
+                    await retrieveAllSocialMediaInfo();
 
                     displayToast('success', response.data['message']);
                 } else{

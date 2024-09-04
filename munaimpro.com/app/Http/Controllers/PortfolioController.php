@@ -193,9 +193,9 @@ class PortfolioController extends Controller
     }    
 
 
-    /* Method for retrive all post information */
+    /* Method for retrieve all post information */
 
-    public function retriveAllPortfolioInfo(Request $request){
+    public function retrieveAllPortfolioInfo(Request $request){
         try{
             // Getting all portfolio data with category and user
             $portfolio = Portfolio::with(['service:id,service_title'])->get();
@@ -222,9 +222,9 @@ class PortfolioController extends Controller
     }
 
 
-    /* Method for retrive post information by id */
+    /* Method for retrieve post information by id */
 
-    public function retrivePortfolioInfoById(Request $request){
+    public function retrievePortfolioInfoById(Request $request){
         try{
             // Primary key id from input
             $portfolioInfoId = $request->input('portfolio_info_id');
@@ -421,9 +421,9 @@ class PortfolioController extends Controller
     }
 
 
-    /* Method for retrive post information by slug */
+    /* Method for retrieve post information by slug */
 
-    public function retrivePostInfoBySlug($slug){
+    public function retrievePostInfoBySlug($slug){
         try{
             // Getting post data by slug with category and user
             $post = Portfolio::where('post_slug', '=', $slug)->with(['category:id,category_name', 'user:id,first_name,last_name'])->get(['id', 'post_heading', 'post_slug', 'post_thumbnail', 'post_description', 'category_id', 'user_id']);
@@ -453,9 +453,9 @@ class PortfolioController extends Controller
     }
 
 
-    /* Method for retrive previous post information by id */
+    /* Method for retrieve previous post information by id */
 
-    public function retrivePreviousPostInfoById(Request $request){
+    public function retrievePreviousPostInfoById(Request $request){
         try{
             $portfolioInfoId = $request->input('portfolio_info_id'); // Primary key id from input
             
@@ -487,9 +487,9 @@ class PortfolioController extends Controller
     }
 
 
-    /* Method for retrive next post information by id */
+    /* Method for retrieve next post information by id */
 
-    public function retriveNextPostInfoById(Request $request){
+    public function retrieveNextPostInfoById(Request $request){
         try{
             $portfolioInfoId = $request->input('portfolio_info_id'); // Primary key id from input
             
@@ -521,9 +521,9 @@ class PortfolioController extends Controller
     }
 
 
-    /* Method for retrive latest post information by id */
+    /* Method for retrieve latest post information by id */
 
-    public function retriveLatestPostInfo(){
+    public function retrieveLatestPostInfo(){
         try{
             // Getting latest 2 post data with category and user
             $post = Portfolio::with(['category:id,category_name', 'user:id'])->latest('publish_time')->take(2)->get(['id', 'post_heading', 'post_thumbnail', 'publish_time']);

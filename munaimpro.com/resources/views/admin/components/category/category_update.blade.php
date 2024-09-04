@@ -33,8 +33,8 @@
 {{-- Front end script start --}}
 
 <script>
-    // Function for retrive category details
-    async function retriveCategoryInfoById(category_info_id){
+    // Function for retrieve category details
+    async function retrieveCategoryInfoById(category_info_id){
 
         try{
             // Assigning id to hidden field
@@ -42,11 +42,11 @@
 
             // Pssing id to controller and getting response
             showLoader();
-            let response = await axios.post('/retriveCategoryInfoById', {category_info_id:category_info_id});
+            let response = await axios.post('/retrieveCategoryInfoById', {category_info_id:category_info_id});
             hideLoader();
 
             if(response.data['status'] === 'success'){
-                // Assigning retrived values
+                // Assigning retrieved values
                 document.getElementById('updateCategoryName').value = response.data.data['category_name'];
             } else{
                 displayToast('error', response.data['message']);
@@ -86,7 +86,7 @@
                     $('#updateCategoryForm')[0].reset();
 
                     // Call function to refresh category list
-                    await retriveAllCategoryInfo();
+                    await retrieveAllCategoryInfo();
 
                     displayToast('success', response.data['message']);
                 } else{

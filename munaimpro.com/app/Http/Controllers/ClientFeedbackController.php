@@ -83,7 +83,7 @@ class ClientFeedbackController extends Controller
     }    
 
 
-    /* Method for retrive all client feedback information */
+    /* Method for retrieve all client feedback information */
 
     public function retrieveAllClientFeedbackInfo(Request $request){
         try{
@@ -112,7 +112,7 @@ class ClientFeedbackController extends Controller
     }
 
 
-    /* Method for retrive client feedback information by id */
+    /* Method for retrieve client feedback information by id */
 
     public function retrieveClientFeedbackInfoById(Request $request){
         try{

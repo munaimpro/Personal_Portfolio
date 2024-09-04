@@ -153,7 +153,7 @@ class PostController extends Controller
             if($userIdFromHeader === $userIdFromInput){
 
                 if($request->hasFile('post_thumbnail')){
-                    // Retrive post thumbnail link from database
+                    // retrieve post thumbnail link from database
                     $getPreviousPostThumbnail = Post::where('id', '=', $validatedData['post_info_id'])->first('post_thumbnail');
 
                     // Remove previous post thumbnail file from storage
@@ -222,9 +222,9 @@ class PostController extends Controller
     }
 
 
-    /* Method for retrive all post information */
+    /* Method for retrieve all post information */
 
-    public function retriveAllPostInfo(Request $request){
+    public function retrieveAllPostInfo(Request $request){
         try{
             // Getting all post data with category and user
             $post = Post::with(['category:id,category_name', 'user:id,first_name,last_name'])->get();
@@ -251,9 +251,9 @@ class PostController extends Controller
     }
 
 
-    /* Method for retrive post information by id */
+    /* Method for retrieve post information by id */
 
-    public function retrivePostInfoById(Request $request){
+    public function retrievePostInfoById(Request $request){
         try{
             // Primary key id from input
             $postInfoId = $request->input('post_info_id');
@@ -334,9 +334,9 @@ class PostController extends Controller
     }    
 
 
-    /* Method for retrive post information by slug */
+    /* Method for retrieve post information by slug */
 
-    public function retrivePostInfoBySlug($slug){
+    public function retrievePostInfoBySlug($slug){
         try{
             // Getting post data by slug with category and user
             $post = Post::where('post_slug', '=', $slug)->with(['category:id,category_name', 'user:id,first_name,last_name'])->get(['id', 'post_heading', 'post_slug', 'post_thumbnail', 'post_description', 'category_id', 'user_id']);
@@ -366,9 +366,9 @@ class PostController extends Controller
     }
 
 
-    /* Method for retrive previous post information by id */
+    /* Method for retrieve previous post information by id */
 
-    public function retrivePreviousPostInfoById(Request $request){
+    public function retrievePreviousPostInfoById(Request $request){
         try{
             $postInfoId = $request->input('post_info_id'); // Primary key id from input
             
@@ -400,9 +400,9 @@ class PostController extends Controller
     }
 
 
-    /* Method for retrive next post information by id */
+    /* Method for retrieve next post information by id */
 
-    public function retriveNextPostInfoById(Request $request){
+    public function retrieveNextPostInfoById(Request $request){
         try{
             $postInfoId = $request->input('post_info_id'); // Primary key id from input
             
@@ -434,9 +434,9 @@ class PostController extends Controller
     }
 
 
-    /* Method for retrive latest post information by id */
+    /* Method for retrieve latest post information by id */
 
-    public function retriveLatestPostInfo(){
+    public function retrieveLatestPostInfo(){
         try{
             // Getting latest 2 post data with category and user
             $post = Post::with(['category:id,category_name', 'user:id'])->latest('publish_time')->take(2)->get(['id', 'post_heading', 'post_thumbnail', 'publish_time']);

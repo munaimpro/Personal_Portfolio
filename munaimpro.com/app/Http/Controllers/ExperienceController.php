@@ -102,9 +102,9 @@ class ExperienceController extends Controller
     }
 
 
-    /* Method for retrive all experience information */
+    /* Method for retrieve all experience information */
 
-    public function retriveAllExperienceInfo(){
+    public function retrieveAllExperienceInfo(){
         try{
             $experience = Experience::get(['id', 'experience_title', 'experience_institution', 'experience_starting_date', 'experience_ending_date']); // Getting all experience data
 
@@ -130,9 +130,9 @@ class ExperienceController extends Controller
     }
 
 
-    /* Method for retrive Experience information by id */
+    /* Method for retrieve Experience information by id */
 
-    public function retriveExperienceInfoById(Request $request){
+    public function retrieveExperienceInfoById(Request $request){
         try{
             $experienceInfoId = $request->input('experience_info_id'); // Primary key id from input
         

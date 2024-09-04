@@ -86,7 +86,7 @@
                     $('#addServiceForm')[0].reset();
 
                     // Call function to refresh service list
-                    await retriveAllServiceInfo();
+                    await retrieveAllServiceInfo();
 
                     displayToast('success', response.data['message']);
                 } else{

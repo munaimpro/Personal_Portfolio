@@ -70,11 +70,11 @@
 
 <script>
 
-    // Function for retrive social media information
+    // Function for retrieve social media information
     
-    retriveAllSocialMediaInfo();
+    retrieveAllSocialMediaInfo();
 
-    async function retriveAllSocialMediaInfo(){
+    async function retrieveAllSocialMediaInfo(){
 
         try{
             // Getting data table
@@ -91,7 +91,7 @@
 
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retriveAllSocialMediaInfo');
+            let response = await axios.get('/retrieveAllSocialMediaInfo');
             hideLoader();
 
             response.data.data.forEach(function(item, index){
@@ -122,7 +122,7 @@
 
             $('.editBtn').on('click', function(){
                 let social_media_info_id = $(this).data('id');
-                retriveSocialMediaInfoById(social_media_info_id);
+                retrieveSocialMediaInfoById(social_media_info_id);
             });
 
             // table_data.DataTable();

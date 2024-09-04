@@ -86,9 +86,9 @@ class InterestController extends Controller
     }
 
 
-    /* Method for retrive all interest information */
+    /* Method for retrieve all interest information */
 
-    public function retriveAllInterestInfo(Request $request){
+    public function retrieveAllInterestInfo(Request $request){
         try{
             $interest = Interest::get(['id', 'interest_title', 'interest_icon']); // Getting all interest data
 
@@ -114,9 +114,9 @@ class InterestController extends Controller
     }
 
 
-    /* Method for retrive interest information by id */
+    /* Method for retrieve interest information by id */
 
-    public function retriveInterestInfoById(Request $request){
+    public function retrieveInterestInfoById(Request $request){
         try{
             $interestInfoId = $request->input('interest_info_id'); // Primary key id from input
         

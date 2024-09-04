@@ -52,8 +52,8 @@
 {{-- Front end script start --}}
 
 <script>
-    // Function for retrive experience details
-    async function retriveExperienceInfoById(experience_info_id){
+    // Function for retrieve experience details
+    async function retrieveExperienceInfoById(experience_info_id){
 
         try{
             // Assigning id to hidden field
@@ -61,11 +61,11 @@
 
             // Pssing id to controller and getting response
             showLoader();
-            let response = await axios.post('../retriveExperienceInfoById', {experience_info_id:experience_info_id});
+            let response = await axios.post('../retrieveExperienceInfoById', {experience_info_id:experience_info_id});
             hideLoader();
 
             if(response.data['status'] === 'success'){
-                // Assigning retrived values
+                // Assigning retrieved values
                 document.getElementById('updateExperienceTitle').value = response.data.data['experience_title'];
                 document.getElementById('updateExperienceInstitution').value = response.data.data['experience_institution'];
                 document.getElementById('updateExperienceStartingDate').value = response.data.data['experience_starting_date'];
@@ -122,7 +122,7 @@
                     $('#updateExperienceForm')[0].reset();
 
                     // Call function to refresh experience list
-                    await retriveAllExperienceInfo();
+                    await retrieveAllExperienceInfo();
 
                     displayToast('success', response.data['message']);
                 } else{

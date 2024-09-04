@@ -60,8 +60,8 @@
 {{-- Front end script start --}}
 
 <script>
-    // Function for retrive education details
-    async function retriveEducationInfoById(education_info_id){
+    // Function for retrieve education details
+    async function retrieveEducationInfoById(education_info_id){
 
         try{
             // Assigning id to hidden field
@@ -69,11 +69,11 @@
 
             // Pssing id to controller and getting response
             showLoader();
-            let response = await axios.post('/retriveEducationInfoById', {education_info_id:education_info_id});
+            let response = await axios.post('/retrieveEducationInfoById', {education_info_id:education_info_id});
             hideLoader();
 
             if(response.data['status'] === 'success'){
-                // Assigning retrived values
+                // Assigning retrieved values
                 document.getElementById('updateEducationType').value = response.data.data['education_type'];
                 document.getElementById('updateEducationDegree').value = response.data.data['education_degree'];
                 document.getElementById('updateEducationInstitution').value = response.data.data['education_institution'];
@@ -137,7 +137,7 @@
                     $('#updateEducationForm')[0].reset();
 
                     // Call function to refresh education list
-                    await retriveAllEducationInfo();
+                    await retrieveAllEducationInfo();
 
                     displayToast('success', response.data['message']);
                 } else{

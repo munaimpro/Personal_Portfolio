@@ -204,7 +204,7 @@
 
 <script>
 
-    // Function for retrive SEO property details
+    // Function for retrieve SEO property details
 
     async function retrieveSeoPropertyInfoById(seoproperty_info_id){
 

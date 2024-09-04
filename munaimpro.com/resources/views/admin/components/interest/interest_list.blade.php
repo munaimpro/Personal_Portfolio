@@ -69,11 +69,11 @@
 
 <script>
 
-    // Function for retrive interest information
+    // Function for retrieve interest information
     
-    retriveAllInterestInfo();
+    retrieveAllInterestInfo();
 
-    async function retriveAllInterestInfo(){
+    async function retrieveAllInterestInfo(){
 
         try{
             // Getting data table
@@ -90,7 +90,7 @@
 
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retriveAllInterestInfo');
+            let response = await axios.get('/retrieveAllInterestInfo');
             hideLoader();
 
             response.data.data.forEach(function(item, index){
@@ -120,7 +120,7 @@
 
             $('.editBtn').on('click', function(){
                 let interest_info_id = $(this).data('id');
-                retriveInterestInfoById(interest_info_id);
+                retrieveInterestInfoById(interest_info_id);
             });
 
             // table_data.DataTable();

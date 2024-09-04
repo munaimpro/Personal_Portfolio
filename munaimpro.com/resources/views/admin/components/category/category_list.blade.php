@@ -71,11 +71,11 @@
 
 <script>
 
-    // Function for retrive category information
+    // Function for retrieve category information
     
-    retriveAllCategoryInfo();
+    retrieveAllCategoryInfo();
 
-    async function retriveAllCategoryInfo(){
+    async function retrieveAllCategoryInfo(){
 
         try{
             // Getting data table
@@ -92,7 +92,7 @@
 
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retriveAllCategoryInfo');
+            let response = await axios.get('/retrieveAllCategoryInfo');
             hideLoader();
 
             response.data.data.forEach(function(item, index){
@@ -122,7 +122,7 @@
 
             $('.editBtn').on('click', function(){
                 let category_info_id = $(this).data('id');
-                retriveCategoryInfoById(category_info_id);
+                retrieveCategoryInfoById(category_info_id);
             });
 
             // table_data.DataTable();

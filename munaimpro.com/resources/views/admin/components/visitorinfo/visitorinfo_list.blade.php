@@ -68,7 +68,7 @@
 
 <script>
 
-    // Function for retrive visitor information
+    // Function for retrieve visitor information
     
     retrieveAllVisitorInfo();
 

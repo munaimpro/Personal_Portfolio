@@ -169,7 +169,7 @@
 
 
 
-    // Function for retrive dashboard new message
+    // Function for retrieve dashboard new message
 
     dashboardNewMessageInfo();
 
@@ -187,7 +187,7 @@
                     $('#dashboardMessage').removeClass('d-none');
                     $('#dashboardMessageStatus').addClass('d-none');
 
-                    // Assigning retrived values
+                    // Assigning retrieved values
                     $('#messageClientName').val(response.data.data[0]['name']);
                     $('#messageMail').val(response.data.data[0]['email']);
                     $('#replyMessageMail').val(response.data.data[0]['email']);

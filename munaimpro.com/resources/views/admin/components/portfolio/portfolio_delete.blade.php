@@ -41,7 +41,7 @@
 
                 if(response.data['status'] === 'success'){
                     // Call function to refresh portfolio list
-                    await retriveAllPortfolioInfo();
+                    await retrieveAllPortfolioInfo();
 
                     displayToast('success', response.data['message']);
                 } else{

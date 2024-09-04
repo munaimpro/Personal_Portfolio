@@ -88,9 +88,9 @@ class SkillController extends Controller
     }
 
 
-    /* Method for retrive all skill information */
+    /* Method for retrieve all skill information */
 
-    public function retriveAllSkillInfo(Request $request){
+    public function retrieveAllSkillInfo(Request $request){
         try{
             $skill = Skill::get(['id', 'skill_type', 'skill_name', 'skill_percentage']); // Getting all skill data
 
@@ -116,9 +116,9 @@ class SkillController extends Controller
     }
 
 
-    /* Method for retrive skill information by id */
+    /* Method for retrieve skill information by id */
 
-    public function retriveSkillInfoById(Request $request){
+    public function retrieveSkillInfoById(Request $request){
         try{
             $skillInfoId = $request->input('skill_info_id'); // Primary key id from input
         

@@ -61,8 +61,8 @@
 {{-- Front end script start --}}
 
 <script>
-    // Function for retrive award details
-    async function retriveAwardInfoById(award_info_id){
+    // Function for retrieve award details
+    async function retrieveAwardInfoById(award_info_id){
 
         try{
             // Assigning id to hidden field
@@ -70,11 +70,11 @@
 
             // Pssing id to controller and getting response
             showLoader();
-            let response = await axios.post('/retriveAwardInfoById', {award_info_id:award_info_id});
+            let response = await axios.post('/retrieveAwardInfoById', {award_info_id:award_info_id});
             hideLoader();
 
             if(response.data['status'] === 'success'){
-                // Assigning retrived values
+                // Assigning retrieved values
                 document.getElementById('updateAwardType').value = response.data.data['award_type'];
                 document.getElementById('updateAwardTitle').value = response.data.data['award_title'];
                 document.getElementById('updateAwardDate').value = response.data.data['award_date'];
@@ -134,7 +134,7 @@
                     $('#updateAwardForm')[0].reset();
 
                     // Call function to refresh award list
-                    await retriveAllAwardInfo();
+                    await retrieveAllAwardInfo();
 
                     displayToast('success', response.data['message']);
                 } else{

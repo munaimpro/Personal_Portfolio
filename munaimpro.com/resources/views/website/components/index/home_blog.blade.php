@@ -25,11 +25,11 @@
 
 <script>
 
-    // Function for retrive post information
+    // Function for retrieve post information
     
-    retriveAllPostInfo();
+    retrieveAllPostInfo();
 
-    async function retriveAllPostInfo(){
+    async function retrieveAllPostInfo(){
 
         try{
             // Getting testimonial content
@@ -37,7 +37,7 @@
 
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retriveAllPostInfo');
+            let response = await axios.get('/retrieveAllPostInfo');
             hideLoader();
 
             // Getting base URL of the system

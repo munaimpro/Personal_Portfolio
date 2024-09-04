@@ -89,9 +89,9 @@ class ServiceController extends Controller
     }
 
 
-    /* Method for retrive all service information */
+    /* Method for retrieve all service information */
 
-    public function retriveAllServiceInfo(Request $request){
+    public function retrieveAllServiceInfo(Request $request){
         try{
             $service = Service::get(['id', 'service_icon', 'service_title', 'service_description', 'service_status']); // Getting all service data
 
@@ -117,9 +117,9 @@ class ServiceController extends Controller
     }
 
 
-    /* Method for retrive service information by id */
+    /* Method for retrieve service information by id */
 
-    public function retriveServiceInfoById(Request $request){
+    public function retrieveServiceInfoById(Request $request){
         try{
             $serviceInfoId = $request->input('service_info_id'); // Primary key id from input
         

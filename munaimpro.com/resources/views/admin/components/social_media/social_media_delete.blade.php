@@ -41,7 +41,7 @@
 
                 if(response.data['status'] === 'success'){
                     // Call function to refresh social media list
-                    await retriveAllSocialMediaInfo();
+                    await retrieveAllSocialMediaInfo();
 
                     displayToast('success', response.data['message']);
                 } else{

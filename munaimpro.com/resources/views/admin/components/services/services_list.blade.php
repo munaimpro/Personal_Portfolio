@@ -78,11 +78,11 @@
 
 <script>
 
-    // Function for retrive service information
+    // Function for retrieve service information
     
-    retriveAllServiceInfo();
+    retrieveAllServiceInfo();
 
-    async function retriveAllServiceInfo(){
+    async function retrieveAllServiceInfo(){
 
         try{
             // Getting data table
@@ -99,7 +99,7 @@
 
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retriveAllServiceInfo');
+            let response = await axios.get('/retrieveAllServiceInfo');
             hideLoader();
 
             response.data.data.forEach(function(item, index){
@@ -130,7 +130,7 @@
 
             $('.editBtn').on('click', function(){
                 let service_info_id = $(this).data('id');
-                retriveServiceInfoById(service_info_id);
+                retrieveServiceInfoById(service_info_id);
             });
 
             // table_data.DataTable();

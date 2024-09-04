@@ -111,7 +111,7 @@ class WebsiteInformationController extends Controller
             $logo = Logo::first();
 
             if($request->hasFile('logo')){
-                // Retrive previous logo link from database
+                // retrieve previous logo link from database
                 $getPreviousLogoImage = Logo::where('id', '=', $logo->id)->first('logo');
 
                 // Remove logo file from storage
@@ -180,7 +180,7 @@ class WebsiteInformationController extends Controller
 
 
     
-    /* Method for retrive SEO property information by id */
+    /* Method for retrieve SEO property information by id */
 
     public function retrieveSeoPropertyInfoById(Request $request){
         try{

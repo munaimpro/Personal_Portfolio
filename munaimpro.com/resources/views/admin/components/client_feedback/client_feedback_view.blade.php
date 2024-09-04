@@ -77,7 +77,7 @@
 
 <script>
 
-    // Function for retrive client feedback details
+    // Function for retrieve client feedback details
 
     async function retrieveClientFeedbackInfoById(clientfeedback_info_id){
 
@@ -106,7 +106,7 @@
                     minute: '2-digit'
                 });
             
-                // Assigning retrived values
+                // Assigning retrieved values
                 $('#clientFirstName').val(response.data.data['client_first_name']);
                 $('#clientLastName').val(response.data.data['client_last_name']);
                 $('#clientDesignation').val(response.data.data['client_designation']);

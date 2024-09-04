@@ -49,7 +49,7 @@
 
 <script>
 
-    // Function for retrive website logo
+    // Function for retrieve website logo
 
     retrieveLogoInfo();
 

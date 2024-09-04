@@ -41,7 +41,7 @@
 
                 if(response.data['status'] === 'success'){
                     // Call function to refresh award list
-                    await retriveAllAwardInfo();
+                    await retrieveAllAwardInfo();
 
                     displayToast('success', response.data['message']);
                 } else{

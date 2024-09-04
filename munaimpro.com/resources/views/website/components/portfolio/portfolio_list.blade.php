@@ -23,11 +23,11 @@
 
 <script>
 
-    // Function for retrive portfolio information
+    // Function for retrieve portfolio information
     
-    retriveAllPortfolioInfo();
+    retrieveAllPortfolioInfo();
 
-    async function retriveAllPortfolioInfo(){
+    async function retrieveAllPortfolioInfo(){
 
         try{
             // Getting content section
@@ -35,7 +35,7 @@
 
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retriveAllPortfolioInfo');
+            let response = await axios.get('/retrieveAllPortfolioInfo');
             hideLoader();
 
             // Getting base URL of the system

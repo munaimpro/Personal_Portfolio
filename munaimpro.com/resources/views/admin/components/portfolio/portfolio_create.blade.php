@@ -129,11 +129,11 @@
 
 <script>
 
-    // Function for retrive category(service) information
+    // Function for retrieve category(service) information
 
-    retriveAllServiceInfo();
+    retrieveAllServiceInfo();
 
-    async function retriveAllServiceInfo(){
+    async function retrieveAllServiceInfo(){
 
         try{
             // Getting input field
@@ -141,7 +141,7 @@
 
             // Pssing request to controller and getting response
             showLoader();
-            let response = await axios.get('/retriveAllServiceInfo');
+            let response = await axios.get('/retrieveAllServiceInfo');
             hideLoader();
 
             response.data.data.forEach(function(item, index){
@@ -253,7 +253,7 @@
                     $('#addPortfolioForm')[0].reset();
 
                     // Call function to refresh the portfolio list (if applicable)
-                    await retriveAllPortfolioInfo();
+                    await retrieveAllPortfolioInfo();
 
                     displayToast('success', response.data['message']);
                 } else {

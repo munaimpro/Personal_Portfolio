@@ -99,7 +99,7 @@ class SocialMediaController extends Controller
     }
 
 
-    /* Method for retrive all social media information */
+    /* Method for retrieve all social media information */
 
     public function retrieveAllSocialMediaInfo(){
         try{
@@ -127,9 +127,9 @@ class SocialMediaController extends Controller
     }
 
 
-    /* Method for retrive social media information by id */
+    /* Method for retrieve social media information by id */
 
-    public function retriveSocialMediaInfoById(Request $request){
+    public function retrieveSocialMediaInfoById(Request $request){
         try{
             $socialMediaInfoId = $request->input('social_media_info_id'); // Primary key id from input
         
@@ -157,9 +157,9 @@ class SocialMediaController extends Controller
     }
 
 
-    /* Method for retrive specific social media information */
+    /* Method for retrieve specific social media information */
 
-    public function retriveSpecificSocialMediaInfo(){
+    public function retrieveSpecificSocialMediaInfo(){
         try{
             $social_media = SocialMedias::where('global_social_media', '=', 1)->get(['social_media_link', 'social_media_icon']); // Getting specific social media data
 

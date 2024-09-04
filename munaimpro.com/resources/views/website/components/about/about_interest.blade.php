@@ -20,16 +20,16 @@
 
 <script>
 
-    // Function for retrive website interest information
+    // Function for retrieve website interest information
     
-    retriveAllInterestInfo();
+    retrieveAllInterestInfo();
 
-    async function retriveAllInterestInfo(){
+    async function retrieveAllInterestInfo(){
 
         try{
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retriveAllInterestInfo');
+            let response = await axios.get('/retrieveAllInterestInfo');
             hideLoader();
 
             // Getting interest component

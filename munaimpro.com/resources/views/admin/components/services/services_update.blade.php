@@ -59,8 +59,8 @@
 {{-- Front end script start --}}
 
 <script>
-    // Function for retrive service details
-    async function retriveServiceInfoById(service_info_id){
+    // Function for retrieve service details
+    async function retrieveServiceInfoById(service_info_id){
 
         try{
             // Assigning id to hidden field
@@ -68,11 +68,11 @@
 
             // Pssing id to controller and getting response
             showLoader();
-            let response = await axios.post('/retriveServiceInfoById', {service_info_id:service_info_id});
+            let response = await axios.post('/retrieveServiceInfoById', {service_info_id:service_info_id});
             hideLoader();
 
             if(response.data['status'] === 'success'){
-                // Assigning retrived values
+                // Assigning retrieved values
                 document.getElementById('updateServiceTitle').value = response.data.data['service_title'];
                 document.getElementById('updateServiceIcon').value = response.data.data['service_icon'];
                 document.getElementById('updateServiceDescription').value = response.data.data['service_description'];
@@ -125,7 +125,7 @@
                     $('#updateServiceForm')[0].reset();
 
                     // Call function to refresh service list
-                    await retriveAllServiceInfo();
+                    await retrieveAllServiceInfo();
 
                     displayToast('success', response.data['message']);
                 } else{

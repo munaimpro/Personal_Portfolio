@@ -108,9 +108,9 @@ class CategoryController extends Controller
     }
 
 
-    /* Method for retrive all category information */
+    /* Method for retrieve all category information */
 
-    public function retriveAllCategoryInfo(){
+    public function retrieveAllCategoryInfo(){
         try{
             $category = Category::get(['id', 'category_name']); // Getting all category data
 
@@ -136,9 +136,9 @@ class CategoryController extends Controller
     }
 
 
-    /* Method for retrive category information by id */
+    /* Method for retrieve category information by id */
 
-    public function retriveCategoryInfoById(Request $request){
+    public function retrieveCategoryInfoById(Request $request){
         try{
             $categoryInfoId = $request->input('category_info_id'); // Primary key id from input
         
@@ -176,7 +176,7 @@ class CategoryController extends Controller
             // Start a DB transaction
             DB::beginTransaction();
 
-            // Retrive all post by category from database
+            // retrieve all post by category from database
             $posts = Post::where('category_id', '=', $categoryInfoId)->get();
 
             foreach($posts as $post){

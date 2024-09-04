@@ -92,9 +92,9 @@ class AwardController extends Controller
     }
 
 
-    /* Method for retrive all award information */
+    /* Method for retrieve all award information */
 
-    public function retriveAllAwardInfo(){
+    public function retrieveAllAwardInfo(){
         try{
             $award = Award::get(['id', 'award_type', 'award_title', 'award_date', 'award_provider', 'award_for']); // Getting all award data
 
@@ -120,9 +120,9 @@ class AwardController extends Controller
     }
 
 
-    /* Method for retrive award information by id */
+    /* Method for retrieve award information by id */
 
-    public function retriveAwardInfoById(Request $request){
+    public function retrieveAwardInfoById(Request $request){
         try{
             $awardInfoId = $request->input('award_info_id'); // Primary key id from input
         

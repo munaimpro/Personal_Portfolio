@@ -80,7 +80,7 @@
 
 <script>
 
-    // Function for retrive user details
+    // Function for retrieve user details
 
     async function retrieveUserInfoById(user_info_id){
         try {

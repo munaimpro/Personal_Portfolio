@@ -26,16 +26,16 @@
 
 <script>
 
-    // Function for retrive skill information
+    // Function for retrieve skill information
     
-    retriveHomeSkillInfo();
+    retrieveHomeSkillInfo();
 
-    async function retriveHomeSkillInfo(){
+    async function retrieveHomeSkillInfo(){
 
         try{
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retriveAllSkillInfo');
+            let response = await axios.get('/retrieveAllSkillInfo');
             hideLoader();
 
             website_home_skills = $('#websiteHomeSkills');

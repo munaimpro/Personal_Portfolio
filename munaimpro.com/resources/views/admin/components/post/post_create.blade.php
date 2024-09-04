@@ -80,11 +80,11 @@
 
 <script>
 
-    // Function for retrive category information
+    // Function for retrieve category information
 
-    retriveAllCategoryInfo();
+    retrieveAllCategoryInfo();
 
-    async function retriveAllCategoryInfo(){
+    async function retrieveAllCategoryInfo(){
 
         try{
             // Getting input field
@@ -92,7 +92,7 @@
 
             // Pssing request to controller and getting response
             showLoader();
-            let response = await axios.get('/retriveAllCategoryInfo');
+            let response = await axios.get('/retrieveAllCategoryInfo');
             hideLoader();
 
             response.data.data.forEach(function(item, index){
@@ -199,7 +199,7 @@
                     $('#addPostForm')[0].reset();
 
                     // Call function to refresh post list
-                    await retriveAllPostInfo();
+                    await retrieveAllPostInfo();
 
                     displayToast('success', response.data['message']);
                 } else{
@@ -225,7 +225,7 @@
 
         if(response.data['status'] === 'success'){
             // Call function to refresh post list
-            await retriveAllPostInfo();
+            await retrieveAllPostInfo();
 
             console.log(response.data['message']);
         } else{

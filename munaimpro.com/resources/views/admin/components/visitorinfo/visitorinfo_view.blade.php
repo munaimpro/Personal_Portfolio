@@ -70,7 +70,7 @@
 {{-- Front end script start --}}
 
 <script>
-    // Function for retrive visitor details
+    // Function for retrieve visitor details
     async function retrieveVisitorInfoById(visitor_info_id){
 
         try{
@@ -80,7 +80,7 @@
             hideLoader();
 
             if(response.data['status'] === 'success'){
-                // Assigning retrived values
+                // Assigning retrieved values
                 document.getElementById('visitorIPAddress').value = response.data.data['ip_address'];
                 document.getElementById('visitorCountry').value = response.data.data['visitor_country'];
                 // document.getElementById('visitorCity').value = response.data.data['visitor_city'];

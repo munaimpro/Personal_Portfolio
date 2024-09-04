@@ -91,7 +91,7 @@ class AboutController extends Controller
                 // Validate hero image
                 $request->validate(['hero_image' => 'image|mimes:jpeg,jpg,png|max:2048']);
                 
-                // Retrive hero image link from database
+                // retrieve hero image link from database
                 $getPreviousHeroImage = About::where('id', '=', $about->id)->first('hero_image');
 
                 // Remove hero file from storage
@@ -115,7 +115,7 @@ class AboutController extends Controller
                 // Validate about image
                 $request->validate(['about_image' => 'image|mimes:jpeg,jpg,png|max:2048']);
                 
-                // Retrive about image link from database
+                // retrieve about image link from database
                 $getPreviousAboutImage = About::where('id', '=', $about->id)->first('about_image');
 
                 // Remove about file from storage
@@ -139,7 +139,7 @@ class AboutController extends Controller
                 // Validate about image
                 $request->validate(['resume_link' => 'file|mimes:pdf|max:2048']);
                 
-                // Retrive resume link from database
+                // retrieve resume link from database
                 $getPreviousResumeLink = About::where('id', '=', $about->id)->first('resume_link');
 
                 // Remove resume file from storage

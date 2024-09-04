@@ -93,7 +93,7 @@
                     $('#addExperienceForm')[0].reset();
 
                     // Call function to refresh experience list
-                    await retriveAllExperienceInfo();
+                    await retrieveAllExperienceInfo();
 
                     displayToast('success', response.data['message']);
                 } else{

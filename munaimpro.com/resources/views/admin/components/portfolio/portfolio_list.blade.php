@@ -92,11 +92,11 @@
 
 <script>
 
-    // Function for retrive portfolio information
+    // Function for retrieve portfolio information
     
-    retriveAllPortfolioInfo();
+    retrieveAllPortfolioInfo();
 
-    async function retriveAllPortfolioInfo(){
+    async function retrieveAllPortfolioInfo(){
 
         try{
             // Getting data table
@@ -113,7 +113,7 @@
 
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retriveAllPortfolioInfo');
+            let response = await axios.get('/retrieveAllPortfolioInfo');
             hideLoader();
 
             // Getting base URL of the system
@@ -169,7 +169,7 @@
 
             $('.editBtn').on('click', function(){
                 let portfolio_info_id = $(this).data('id');
-                retrivePortfolioInfoById(portfolio_info_id);
+                retrievePortfolioInfoById(portfolio_info_id);
             });
 
             // table_data.DataTable();

@@ -104,7 +104,7 @@
                     $('#addAwardForm')[0].reset();
 
                     // Call function to refresh award list
-                    await retriveAllAwardInfo();
+                    await retrieveAllAwardInfo();
 
                     displayToast('success', response.data['message']);
                 } else{

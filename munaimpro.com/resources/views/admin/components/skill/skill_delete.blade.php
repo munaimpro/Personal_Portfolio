@@ -41,7 +41,7 @@
 
                 if(response.data['status'] === 'success'){
                     // Call function to refresh skill list
-                    await retriveAllSkillInfo();
+                    await retrieveAllSkillInfo();
 
                     displayToast('success', response.data['message']);
                 } else{

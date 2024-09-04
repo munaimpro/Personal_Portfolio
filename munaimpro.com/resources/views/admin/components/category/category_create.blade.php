@@ -55,7 +55,7 @@
                     $('#addCategoryForm')[0].reset();
 
                     // Call function to refresh category list
-                    await retriveAllCategoryInfo();
+                    await retrieveAllCategoryInfo();
 
                     displayToast('success', response.data['message']);
                 } else{

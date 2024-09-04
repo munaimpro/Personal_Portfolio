@@ -160,9 +160,9 @@ class MessageController extends Controller
     }
 
 
-    /* Method for retrive message by id */
+    /* Method for retrieve message by id */
 
-    public function retriveMessageInfoById(Request $request){
+    public function retrieveMessageInfoById(Request $request){
         try{
             $messageId = $request->input('message_info_id'); // Primary key id from input
             $messageAction = $request->input('message_info_action'); // Message action from input
@@ -196,9 +196,9 @@ class MessageController extends Controller
     }
 
 
-    /* Method for retrive all message */
+    /* Method for retrieve all message */
 
-    public function retriveAllMessageInfo(){
+    public function retrieveAllMessageInfo(){
         try{
             // Getting all message
             $message = Message::get(['id', 'name', 'email', 'subject', 'message', 'message_status', 'created_at']);

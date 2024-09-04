@@ -41,7 +41,7 @@
 
                 if(response.data['status'] === 'success'){
                     // Call function to refresh education list
-                    await retriveAllEducationInfo();
+                    await retrieveAllEducationInfo();
 
                     displayToast('success', response.data['message']);
                 } else{

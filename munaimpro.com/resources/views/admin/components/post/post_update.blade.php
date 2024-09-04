@@ -94,11 +94,11 @@
 
 <script>
 
-    // Function for retrive category information
+    // Function for retrieve category information
 
-    retriveAllCategoryInfo();
+    retrieveAllCategoryInfo();
 
-    async function retriveAllCategoryInfo(){
+    async function retrieveAllCategoryInfo(){
 
         try{
             // Getting data table
@@ -106,7 +106,7 @@
 
             // Pssing request to controller and getting response
             showLoader();
-            let response = await axios.get('/retriveAllCategoryInfo');
+            let response = await axios.get('/retrieveAllCategoryInfo');
             hideLoader();
 
             response.data.data.forEach(function(item, index){
@@ -118,9 +118,9 @@
         }
     }
 
-    // Function for retrive post details
+    // Function for retrieve post details
     
-    async function retrivePostInfoById(post_info_id){
+    async function retrievePostInfoById(post_info_id){
 
         try{
             // Assigning id to hidden field
@@ -128,7 +128,7 @@
 
             // Pssing id to controller and getting response
             showLoader();
-            let response = await axios.post('../retrivePostInfoById', {post_info_id:post_info_id});
+            let response = await axios.post('../retrievePostInfoById', {post_info_id:post_info_id});
             hideLoader();
 
             if(response.data['status'] === 'success'){
@@ -138,7 +138,7 @@
                 // Generating full path for the post thumbnail
                 let postThumbnailFullPath = baseUrl + '/storage/post_thumbnails/' + response.data.data['post_thumbnail'];
             
-                // Assigning retrived values
+                // Assigning retrieved values
                 document.getElementById('updatePostHeading').value = response.data.data['post_heading'];
                 document.getElementById('updatePostSlug').value = response.data.data['post_slug'];
                 document.getElementById('updateCategoryId').value = response.data.data['category_id'];
@@ -270,7 +270,7 @@
                     $('#updatePostForm')[0].reset();
 
                     // Call function to refresh post list
-                    await retriveAllPostInfo();
+                    await retrieveAllPostInfo();
 
                     displayToast('success', response.data['message']);
                 } else{
@@ -296,7 +296,7 @@
 
         if(response.data['status'] === 'success'){
             // Call function to refresh post list
-            await retriveAllPostInfo();
+            await retrieveAllPostInfo();
 
             console.log(response.data['message']);
         } else{

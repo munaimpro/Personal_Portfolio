@@ -78,7 +78,7 @@
 
             // Passing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retriveAllMessageInfo');
+            let response = await axios.get('/retrieveAllMessageInfo');
             hideLoader();
 
             response.data.data.forEach(function(item){
@@ -120,13 +120,13 @@
             $('.viewBtn').on('click', function(){
                 let message_info_id = $(this).data('id');
                 let message_info_action = $(this).data('action');
-                retriveMessageInfoById(message_info_id, message_info_action);
+                retrieveMessageInfoById(message_info_id, message_info_action);
             });
 
             $('.replyBtn').on('click', function(){
                 let message_info_id = $(this).data('id');
                 let message_info_action = $(this).data('action');
-                retriveMessageInfoById(message_info_id, message_info_action);
+                retrieveMessageInfoById(message_info_id, message_info_action);
             });
 
         } catch (e){

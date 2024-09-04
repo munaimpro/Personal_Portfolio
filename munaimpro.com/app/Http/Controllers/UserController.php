@@ -342,7 +342,7 @@ class UserController extends Controller
 
             if($request->hasFile('profile_picture')){
                 
-                // Retrive profile picture link from database
+                // retrieve profile picture link from database
                 $getPreviousProfilePicture = User::where('id', '=', $id)->first('profile_picture');
 
                 // Remove file from storage

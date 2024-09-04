@@ -62,7 +62,7 @@
 
 <script>
 
-    // Function for retrive user information
+    // Function for retrieve user information
     
     retrieveAllUserInfo();
 

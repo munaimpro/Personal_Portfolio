@@ -41,7 +41,7 @@
 
                 if(response.data['status'] === 'success'){
                     // Call function to refresh interest list
-                    await retriveAllInterestInfo();
+                    await retrieveAllInterestInfo();
 
                     displayToast('success', response.data['message']);
                 } else{

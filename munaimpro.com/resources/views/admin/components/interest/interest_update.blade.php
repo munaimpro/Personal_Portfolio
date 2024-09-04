@@ -42,8 +42,8 @@
 {{-- Front end script start --}}
 
 <script>
-    // Function for retrive interest details
-    async function retriveInterestInfoById(interest_info_id){
+    // Function for retrieve interest details
+    async function retrieveInterestInfoById(interest_info_id){
 
         try{
             // Assigning id to hidden field
@@ -51,11 +51,11 @@
 
             // Pssing id to controller and getting response
             showLoader();
-            let response = await axios.post('/retriveInterestInfoById', {interest_info_id:interest_info_id});
+            let response = await axios.post('/retrieveInterestInfoById', {interest_info_id:interest_info_id});
             hideLoader();
 
             if(response.data['status'] === 'success'){
-                // Assigning retrived values
+                // Assigning retrieved values
                 document.getElementById('updateInterestTitle').value = response.data.data['interest_title'];
                 document.getElementById('updateInterestIcon').value = response.data.data['interest_icon'];
             } else{
@@ -100,7 +100,7 @@
                     $('#updateInterestForm')[0].reset();
 
                     // Call function to refresh interest list
-                    await retriveAllInterestInfo();
+                    await retrieveAllInterestInfo();
 
                     displayToast('success', response.data['message']);
                 } else{
