@@ -30,7 +30,7 @@
             response.data.data.forEach(function(item, index){
                 let row = `<div class="col-sm-12 col-lg-6 mb-5">
                             <div class="card">
-                                <div class="service_MK25_icon fs-1">
+                                <div class="service_MK25_icon fa-3x">
                                     ${item['service_icon']}
                                 </div>
                                 <h3 class="text-uppercase mb-3 mt-4">${item['service_title']}</h3>

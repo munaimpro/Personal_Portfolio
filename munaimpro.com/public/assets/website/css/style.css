@@ -1008,12 +1008,8 @@ code{
     justify-content: center;
 }
 
-.page_sectionMK25_wrapper{
+.page_sectionMK25_wrapper, .page_sectionMK25_wrapper h3{
     position: relative;
-}
-
-.page_sectionMK25_wrapper h3::before{
-    top: 78px;
 }
 
 .call_to_action_wrapper .card{

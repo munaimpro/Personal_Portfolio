@@ -28,9 +28,9 @@
 
     // Function for retrive skill information
     
-    retriveAllSkillInfo();
+    retriveHomeSkillInfo();
 
-    async function retriveAllSkillInfo(){
+    async function retriveHomeSkillInfo(){
 
         try{
             // Pssing data to controller and getting response

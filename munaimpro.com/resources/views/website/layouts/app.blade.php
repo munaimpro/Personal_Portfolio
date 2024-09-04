@@ -247,6 +247,11 @@ function checkAuth() {
             $('#websiteHomeContactEmail').html(response.data.data['email']);
             $('#websiteHomeContactLocation').html(response.data.data['location']);
 
+            // Contact section informations - About page
+            $('#websiteAboutContactPhone').html(response.data.data['phone']);
+            $('#websiteAboutContactEmail').html(response.data.data['email']);
+            $('#websiteAboutContactLocation').html(response.data.data['location']);
+
             // Contact section informations - Contact page
             $('#websiteContactPagePhone').html(response.data.data['phone']);
             $('#websiteContactPageEmail').html(response.data.data['email']);
@@ -275,6 +280,9 @@ function checkAuth() {
 
             // Contact section social media div
             let contact_social_media_link = $('#contactSocialLinks');
+
+            // About page social media div
+            let about_social_media_link = $('#aboutSocialLinks');
 
             // Footer section social media div
             let footer_social_media_link = $('#footerSocialLinks');
@@ -330,6 +338,21 @@ function checkAuth() {
                             </div>`;
                     footer_social_media_link.append(row);
                 }
+
+                // Load all social media to about page
+                let row = `<div class="col-lg-6 col-md-6 col-sm-12 social_MK25_items">
+                                <a href="${item['social_media_link']}">
+                                    <div class="social_MK25_item me-1 row align-items-center">
+                                        <div class="col-3 outer_changeable_icon fa-2x">
+                                            ${item['social_media_icon']}
+                                        </div>
+                                        <div class="col-9 outer_changeable_text">
+                                            <p class="m-0">${item['social_media_title']}</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>`;    
+                about_social_media_link.append(row);
             });
         } catch(e){
             console.error('Something went wrong:', e);

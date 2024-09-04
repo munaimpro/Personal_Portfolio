@@ -1,4 +1,4 @@
-{{-- Breadcrumb Section --}}
+{{-- Breadcrumb section start --}}
 <section class="breadcumb_wrapper">
     <div class="container-fluid vertical_MK25_w_space">
         <div class="row overflow-hidden position-relative">
@@ -15,3 +15,4 @@
         </div>
     </div>
 </section>
+{{-- Breadcrumb section end --}}

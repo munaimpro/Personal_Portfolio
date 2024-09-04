@@ -1,4 +1,4 @@
-{{-- Cal To Action section --}}
+{{-- Cal to action section start --}}
 <section class="call_to_action_wrapper vertical_MK25_w_space">
     <div class="container">
     <div class="row justify-content-center">
@@ -32,3 +32,4 @@
     </div>
     </div>
 </section>
+{{-- Cal to action section end --}}
