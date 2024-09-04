@@ -15,7 +15,8 @@
 
             <div class="col-12 text-center pagination justify-content-center">
                 <button class="btn" id="loadMoreButton">
-                    <span id="loadMoreButtonText">Load More</span>
+                    <span id="loadMoreButtonText">Load More <i class="fas fa-chevron-down"></i>
+                    </span>
                     <div id="loadMoreButtonSpinner" class="spinner-border text-light d-none" role="status">
                         <span class="visually-hidden">Loading...</span>
                     </div>

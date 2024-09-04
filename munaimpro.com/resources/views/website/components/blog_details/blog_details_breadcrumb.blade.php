@@ -4,10 +4,10 @@
         <div class="row">
             <div class="col-12 text-center breadcrumb_bg breadcrumb_MK25_blog">
                 <div class="breadcrumb_MK25_title">
-                    <h3 class="text-uppercase section_MK25_first_title">WHAT MAKES USERS WANT TO SHARE A VIDEO ON SOCIAL MEDIA?</h3>
+                    <h3 class="text-uppercase section_MK25_first_title" id="websiteBlogHeading"></h3>
                     <div class="breadcrumb_MK25_links">
-                        <a class="external_MK25_section_link" href="index.html"><i class="fas fa-user"></i> Munaim Khan</a>
-                        <span class="ms-1"><i class="fa-solid fa-calendar-days"></i> Jan 03, 2020</span>
+                        <a class="external_MK25_section_link" href="" id="websiteBlogUser"></a>
+                        <span class="ms-1" id="websiteBlogPublishDate"></span>
                     </div>
                 </div>
             </div>

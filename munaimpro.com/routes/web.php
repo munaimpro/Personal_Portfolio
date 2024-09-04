@@ -103,10 +103,10 @@ Route::post('updatePostInfo', [PostController::class, 'updatePostInfo'])->middle
 Route::get('retrieveAllPostInfo', [PostController::class, 'retrieveAllPostInfo']);
 Route::post('retrievePostInfoById', [PostController::class, 'retrievePostInfoById'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deletePostInfo', [PostController::class, 'deletePostInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retrievePostInfoBySlug/{slug}', [PostController::class, 'retrievePostInfoBySlug'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retrievePreviousPostInfoById', [PostController::class, 'retrievePreviousPostInfoById'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retrieveNextPostInfoById', [PostController::class, 'retrieveNextPostInfoById'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retrieveLatestPostInfo', [PostController::class, 'retrieveLatestPostInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::get('retrievePostInfoBySlug/{slug}', [PostController::class, 'retrievePostInfoBySlug']);
+Route::get('retrievePreviousPostInfoById', [PostController::class, 'retrievePreviousPostInfoById']);
+Route::get('retrieveNextPostInfoById', [PostController::class, 'retrieveNextPostInfoById']);
+Route::get('retrieveLatestPostInfo', [PostController::class, 'retrieveLatestPostInfo']);
 
 
 // API Routes (Award Controller)
