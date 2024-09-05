@@ -14,6 +14,8 @@
         <title>About Me - {{ $seoproperty->author }}</title>
     @elseif (!empty($slug))
         <title>{{ ucwords($slug) }} - {{ $seoproperty->author }}</title>
+    @elseif (!empty($id))
+        <title>Project Details - {{ $seoproperty->author }}</title>
     @else
         <title>{{ ucwords($routeName) }} - {{ $seoproperty->author }}</title>
     @endif
@@ -109,9 +111,6 @@
         function showLoader(){
             $('.loader_bg').removeClass('d-none');
         }
-
-        // Extracting post slug from URL
-        const slug = window.location.pathname.split('/').pop();
     </script>
 </head>
 
@@ -270,6 +269,89 @@ function checkAuth() {
         } else{
             displayToast('error', response.data['message']);
         }
+    }
+
+
+    // Function for retrieve portfolio details
+
+    async function retrievePortfolioInfoById(portfolio_info_id){
+        // Setting the portfolio id to the local storage for use
+        localStorage.setItem('portfolio_info_id', portfolio_info_id);
+
+        try {
+            // Redirecting to portfolio details page
+            window.location = 'portfolio/details';
+
+            // Getting the portfolio id from the local storage
+            let portfolioInfoId = localStorage.getItem('portfolio_info_id');
+
+            if(portfolioInfoId){
+                // Sending id to controller and getting response
+                showLoader();
+                let response = await axios.post('../retrievePortfolioInfoById', { portfolio_info_id: portfolioInfoId });
+                hideLoader();
+
+                console.log(portfolioInfoId);
+
+                if (response.data['status'] === 'success'){
+                    // Generating full path for the project thumbnail
+                    let projectThumbnailFullPath = "{{ url('/') }}" + '/storage/portfolio/thumbnails/' + response.data.data['project_thumbnail'];
+                
+                    // Assigning retrieved values
+                    $('#websiteProjectTitle').html(response.data.data['project_title']);
+                    $('#websiteProjectType').html(response.data.data['project_type']);
+                    $('#websiteProjectDuration').html(response.data.data['project_starting_date'] - response.data.data['project_ending_date']);
+                    // $('#websiteProjectThumbnail')[0].src = projectThumbnailFullPath;
+                    getUiImagePreview(JSON.parse(response.data.data['project_ui_image']));
+                    $('#websiteProjectCategory').html(response.data.data.service['service_name']);
+                    $('websiteProjectDescription').html(response.data.data['project_description']);
+                    $('#websiteProjectUrl').attr('href', ' <i class="fas fa-external-link"></i> '+response.data.data['project_url']);
+                    $('#websiteProjectTechnology').html(response.data.data['core_technology']);
+                } else{
+                    displayToast('error', response.data['message']);
+                }
+            } else{
+                console.error('No portfolio ID found in localStorage');
+            }
+        } catch (e){
+            console.error('Something went wrong', e);
+        }
+    }
+
+    
+    // Function for UI image preview
+
+    function getUiImagePreview(uiImages){
+        const carouselContainer = $('#websiteProjectUIImages');
+
+        // Clear any existing items in the carousel
+        carouselContainer.html('');
+
+        uiImages.forEach((image, index) => {
+            // Create carousel item div
+            const itemDiv = document.createElement('div');
+            itemDiv.classList.add('item');
+
+            // Create img element for the UI image
+            const img = document.createElement('img');
+            img.src = `{{ url('/') }}/storage/portfolio/ui_images/${image}`;
+            img.alt = "UI Image";
+
+            // Append the image inside the carousel item div
+            itemDiv.append(img);
+
+            // Append the carousel item div to the owl-carousel container
+            carouselContainer.append(itemDiv);
+        });
+
+        // Reinitialize the Owl Carousel after adding new items
+        $('.owl-carousel').trigger('destroy.owl.carousel'); // Destroy the current instance
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            items: 1
+        });
     }
 
 

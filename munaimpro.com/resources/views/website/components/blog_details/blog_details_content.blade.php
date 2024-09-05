@@ -101,38 +101,42 @@
             // Extracting post slug from URL
             const slug = window.location.pathname.split('/').pop();
 
-            // Pssing slug to controller and getting response
+            // Passing slug to controller and getting response
             showLoader();
             let response = await axios.get(`/retrievePostInfoBySlug/${slug}`);
             hideLoader();
 
-            // Formatting the publish time
-            let publishTime = new Date(response.data.data[0]['publish_time']);
-            let formattedPublishTime = publishTime.toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-            });
+            if(response.data.data){
+                // Formatting the publish time
+                let publishTime = new Date(response.data.data['publish_time']);
+                let formattedPublishTime = publishTime.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                });
 
-            if(response.data['status'] === 'success'){
-                // Generating full path for the post thumbnail
-                let postThumbnailFullPath = "{{ url('/') }}" + '/storage/post_thumbnails/' + response.data.data[0]['post_thumbnail'];
-            
-                // Assigning retrieved values
-                $('#websiteBlogHeading').html(response.data.data[0]['post_heading']);
-                $('#websiteBlogUser').html('<i class="fas fa-user"></i> '+response.data.data[0]['user']['first_name']+' '+response.data.data[0]['user']['last_name']);
-                $('#websiteBlogPublishDate').html('<i class="fa-solid fa-calendar-days"></i> '+formattedPublishTime);
-                $('#websiteBlogDetailsThumbnail').attr('src', postThumbnailFullPath);
-                $('#websiteBlogDetails').html(response.data.data[0]['post_description']);
-                $('#postInfoId').val(response.data.data[0]['id']);
+                if(response.data['status'] === 'success'){
+                    // Generating full path for the post thumbnail
+                    let postThumbnailFullPath = "{{ url('/') }}" + '/storage/post_thumbnails/' + response.data.data['post_thumbnail'];
+                
+                    // Assigning retrieved values
+                    $('#websiteBlogHeading').html(response.data.data['post_heading']);
+                    $('#websiteBlogUser').html('<i class="fas fa-user"></i> '+response.data.data['user']['first_name']+' '+response.data.data['user']['last_name']);
+                    $('#websiteBlogPublishDate').html('<i class="fa-solid fa-calendar-days"></i> '+formattedPublishTime);
+                    $('#websiteBlogDetailsThumbnail').attr('src', postThumbnailFullPath);
+                    $('#websiteBlogDetails').html(response.data.data['post_description']);
+                    $('#postInfoId').val(response.data.data['id']);
 
-                // Function for retrieve previous post details
-                retrievePreviousPostInfoById();
+                    // Function for retrieve previous post details
+                    retrievePreviousPostInfoById();
 
-                // Function for retrieve next post details
-                retrieveNextPostInfoById();
+                    // Function for retrieve next post details
+                    retrieveNextPostInfoById();
+                } else{
+                    displayToast('error', response.data['message']);
+                }
             } else{
-                displayToast('error', response.data['message']);
+                window.location.href = "../blog";
             }
         } catch(e){
             console.error('Something went wrong', e);

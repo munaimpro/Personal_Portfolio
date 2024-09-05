@@ -256,7 +256,6 @@
                 $('#updateProjectUrl').val(response.data.data['project_url']);
                 $('#updateProjectTechnology').val(response.data.data['core_technology']);
                 $('#updateProjectStatus').val(response.data.data['project_status']);
-                $('#portfolioTestData').val(response.data.data['client_feedback'][0]['client_first_name']);
 
                 if(response.data.data['client_feedback'].length > 0){
                     // Showing client feedback content

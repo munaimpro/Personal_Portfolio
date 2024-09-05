@@ -339,7 +339,7 @@ class PostController extends Controller
     public function retrievePostInfoBySlug($slug){
         try{
             // Getting post data by slug with category and user
-            $post = Post::where('post_slug', '=', $slug)->with(['category:id,category_name', 'user:id,first_name,last_name'])->get(['id', 'post_heading', 'post_slug', 'post_thumbnail', 'post_description', 'category_id', 'user_id', 'publish_time']);
+            $post = Post::where('post_slug', '=', $slug)->with(['category:id,category_name', 'user:id,first_name,last_name'])->first(['id', 'post_heading', 'post_slug', 'post_thumbnail', 'post_description', 'category_id', 'user_id', 'publish_time']);
 
             if($post){
                 // Increasing post view on details view
@@ -482,10 +482,10 @@ class PostController extends Controller
     public function websiteBlogDetailsPage(){
         // Getting view name from uri
         $routeName = last(explode('/', Route::getCurrentRoute()->uri));
-
+        
         // Extracting the slug from the URL if available
         $slug = request()->segment(count(request()->segments()));
-        
+
         // Getting SEO property
         $seoproperty = Seoproperty::where('page_name', 'index')->first();
 

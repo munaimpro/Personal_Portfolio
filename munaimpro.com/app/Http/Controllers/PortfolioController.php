@@ -565,13 +565,13 @@ class PortfolioController extends Controller
 
     /* Method for website portfolio details page load */
     
-    public function websitePortfolioDetailsPage(){
+    public function websitePortfolioDetailsPage($id){
         // Getting view name from uri
         $routeName = last(explode('/', Route::getCurrentRoute()->uri));
         
         // Getting SEO property
         $seoproperty = Seoproperty::where('page_name', 'index')->first();
 
-        return view('website.pages.portfolio_details', compact(['routeName', 'seoproperty']));
+        return view('website.pages.portfolio_details', compact(['routeName', 'seoproperty', 'id']));
     }
 }

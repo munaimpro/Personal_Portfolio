@@ -100,7 +100,7 @@
                                                     <span class="me-1"><i class="fas fa-code"></i></span>
                                                     <span class="me-3">${item.core_technology}</span>
                                                 </p>
-                                                <a href="project_details/${item.id}" class="btn primary-btn float-end">
+                                                <a href="portfolio/details/${item.id}" class="btn primary-btn float-end">
                                                     Details<span class="ms-3"><i class="fa-solid fa-circle-arrow-right"></i></span>
                                                 </a>
                                             </div>

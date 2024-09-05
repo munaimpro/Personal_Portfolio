@@ -130,7 +130,7 @@ Route::delete('deleteSocialMediaInfo', [SocialMediaController::class, 'deleteSoc
 Route::post('addPortfolioInfo', [PortfolioController::class, 'addPortfolioInfo']);
 Route::post('updatePortfolioInfo', [PortfolioController::class, 'updatePortfolioInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::get('retrieveAllPortfolioInfo', [PortfolioController::class, 'retrieveAllPortfolioInfo']);
-Route::post('retrievePortfolioInfoById', [PortfolioController::class, 'retrievePortfolioInfoById'])->middleware(TokenVerificationMiddleware::class);
+Route::post('retrievePortfolioInfoById', [PortfolioController::class, 'retrievePortfolioInfoById']);
 Route::delete('deletePortfolioInfo', [PortfolioController::class, 'deletePortfolioInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('removePortfolioUiImage', [PortfolioController::class, 'removePortfolioUiImage'])->middleware(TokenVerificationMiddleware::class);
 Route::post('/generateFeedbackUrl', [PortfolioController::class, 'generateFeedbackUrl']);
@@ -265,7 +265,7 @@ Route::get('/services', [ServiceController::class, 'websiteServicePage']);
 Route::get('/portfolio', [PortfolioController::class, 'websitePortfolioPage']);
 
 // Page Route (Portfolio Controller)
-Route::get('/portfolio_details', [PortfolioController::class, 'websitePortfolioDetailsPage']);
+Route::get('/portfolio/details/{id}', [PortfolioController::class, 'websitePortfolioDetailsPage']);
 
 // Page Route (Pricing Controller)
 Route::view('/pricing', 'website.pages.pricing');
