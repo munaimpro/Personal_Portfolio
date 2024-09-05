@@ -61,50 +61,46 @@
             // Getting portfolio id
             let portfolio_info_id = {{ $id }};
 
-            if(portfolio_info_id){
-                // Sending id to controller and getting response
-                showLoader();
-                let response = await axios.post('../../retrievePortfolioInfoById', { portfolio_info_id: portfolio_info_id });
-                hideLoader();
+            // Sending id to controller and getting response
+            showLoader();
+            let response = await axios.post('../../retrievePortfolioInfoById', { portfolio_info_id: portfolio_info_id });
+            hideLoader();
 
-                if(response.data.data){
-                    // Formatting the project starting date
-                    let startingDate = new Date(response.data.data['project_starting_date']);
-                    let formattedStartingDate = startingDate.toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                    });
+            if(response.data.data){
+                // Formatting the project starting date
+                let startingDate = new Date(response.data.data['project_starting_date']);
+                let formattedStartingDate = startingDate.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                });
 
-                    // Formatting the project ending date
-                    let endingDate = new Date(response.data.data['project_ending_date']);
-                    let formattedEndingDate = endingDate.toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                    });
+                // Formatting the project ending date
+                let endingDate = new Date(response.data.data['project_ending_date']);
+                let formattedEndingDate = endingDate.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                });
 
-                    if(response.data['status'] === 'success'){
-                        // Generating full path for the project thumbnail
-                        let projectThumbnailFullPath = "{{ url('/') }}" + '/storage/portfolio/thumbnails/' + response.data.data['project_thumbnail'];
-                    
-                        // Assigning retrieved values
-                        $('#websiteProjectTitle').html(response.data.data['project_title']);
-                        $('#websiteProjectType').html(response.data.data['project_type']);
-                        $('#websiteProjectDuration').html(`${formattedStartingDate} - ${endingDate < startingDate ? 'Present' : formattedEndingDate}`);
-                        getUiImagePreview(JSON.parse(response.data.data['project_ui_image']));
-                        $('#websiteProjectCategory').html(response.data.data.service['service_title']);
-                        $('#websiteProjectUrl').html(`<a class="external_MK25_section_link p-0 fw-bold float-none" href="${response.data.data['project_url']}">${response.data.data['project_url']}</a> <i class="fas fa-external-link"></i>`);
-                        $('#websiteProjectDescription').html(response.data.data['project_description']);
-                        $('#websiteProjectTechnology').html(response.data.data['core_technology']);
-                    } else{
-                        console.log('error', response.data['message']);
-                    }
+                if(response.data['status'] === 'success'){
+                    // Generating full path for the project thumbnail
+                    let projectThumbnailFullPath = "{{ url('/') }}" + '/storage/portfolio/thumbnails/' + response.data.data['project_thumbnail'];
+                
+                    // Assigning retrieved values
+                    $('#websiteProjectTitle').html(response.data.data['project_title']);
+                    $('#websiteProjectType').html(response.data.data['project_type']);
+                    $('#websiteProjectDuration').html(`${formattedStartingDate} - ${endingDate < startingDate ? 'Present' : formattedEndingDate}`);
+                    getUiImagePreview(JSON.parse(response.data.data['project_ui_image']));
+                    $('#websiteProjectCategory').html(response.data.data.service['service_title']);
+                    $('#websiteProjectUrl').html(`<a class="external_MK25_section_link p-0 fw-bold float-none" href="${response.data.data['project_url']}">${response.data.data['project_url']}</a> <i class="fas fa-external-link"></i>`);
+                    $('#websiteProjectDescription').html(response.data.data['project_description']);
+                    $('#websiteProjectTechnology').html(response.data.data['core_technology']);
                 } else{
-                    window.location.href = '/portfolio'
+                    console.log('error', response.data['message']);
                 }
             } else{
-                console.error('No portfolio ID found in localStorage');
+                console.log('error', response.data['message']);
             }
         } catch (e){
             console.error('Something went wrong', e);

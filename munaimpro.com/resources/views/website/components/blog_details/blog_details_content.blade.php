@@ -98,8 +98,8 @@
     async function retrievePostInfoBySlug(){
 
         try{
-            // Extracting post slug from URL
-            const slug = window.location.pathname.split('/').pop();
+            // Getting post slug
+            let slug = window.location.pathname.split('/').pop();
 
             // Passing slug to controller and getting response
             showLoader();
@@ -133,10 +133,10 @@
                     // Function for retrieve next post details
                     retrieveNextPostInfoById();
                 } else{
-                    displayToast('error', response.data['message']);
+                    console.log('error', response.data['message']);
                 }
             } else{
-                window.location.href = "../blog";
+                console.log('error', response.data['message']);
             }
         } catch(e){
             console.error('Something went wrong', e);

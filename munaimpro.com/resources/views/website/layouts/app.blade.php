@@ -12,8 +12,8 @@
         <title>{{ $seoproperty->author }} - Personal Website</title>
     @elseif ($routeName === 'about')
         <title>About Me - {{ $seoproperty->author }}</title>
-    @elseif (!empty($slug))
-        <title>{{ ucwords($slug) }} - {{ $seoproperty->author }}</title>
+    @elseif (!empty($heading))
+        <title>{{ ucwords($heading) }} - {{ $seoproperty->author }}</title>
     @elseif (!empty($id))
         <title>Project Details - {{ $seoproperty->author }}</title>
     @else

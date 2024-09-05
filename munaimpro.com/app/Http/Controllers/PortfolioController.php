@@ -572,6 +572,11 @@ class PortfolioController extends Controller
         // Getting SEO property
         $seoproperty = Seoproperty::where('page_name', 'index')->first();
 
+        // Checking data availability before loading page
+        if(!is_numeric($id) || !Portfolio::where('id', $id)->exists()){
+            abort(404, 'No project available');
+        }
+
         return view('website.pages.portfolio_details', compact(['routeName', 'seoproperty', 'id']));
     }
 }

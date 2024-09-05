@@ -479,16 +479,21 @@ class PostController extends Controller
 
     /* Method for website blog details page load */
     
-    public function websiteBlogDetailsPage(){
+    public function websiteBlogDetailsPage($slug){
         // Getting view name from uri
         $routeName = last(explode('/', Route::getCurrentRoute()->uri));
-        
-        // Extracting the slug from the URL if available
-        $slug = request()->segment(count(request()->segments()));
 
         // Getting SEO property
         $seoproperty = Seoproperty::where('page_name', 'index')->first();
+        
+        // Checking data availability before loading page
+        if(!is_string($slug) || !Post::where('post_slug', '=', $slug)->exists()){
+            abort(404, 'No blog available');
+        }
 
-        return view('website.pages.blog_details', compact(['routeName', 'seoproperty', 'slug']));
+        // Getting post heading
+        $heading = Post::where('post_slug', '=', $slug)->value('post_heading');
+
+        return view('website.pages.blog_details', compact(['routeName', 'seoproperty', 'slug', 'heading']));
     }
 }
