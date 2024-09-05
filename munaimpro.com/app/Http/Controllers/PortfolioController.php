@@ -236,6 +236,9 @@ class PortfolioController extends Controller
             ])->findOrFail($portfolioInfoId);
 
             if($portfolio){
+                // Increasing portfolio view on details view
+                $portfolio->increment('project_view');
+
                 return response()->json([
                     'status' => 'success',
                     'message' => 'Portfolio data found',
@@ -418,135 +421,6 @@ class PortfolioController extends Controller
                 'message' => 'Something went wrong',
             ]);
         }
-    }
-
-
-    /* Method for retrieve post information by slug */
-
-    public function retrievePostInfoBySlug($slug){
-        try{
-            // Getting post data by slug with category and user
-            $post = Portfolio::where('post_slug', '=', $slug)->with(['category:id,category_name', 'user:id,first_name,last_name'])->get(['id', 'post_heading', 'post_slug', 'post_thumbnail', 'post_description', 'category_id', 'user_id']);
-
-            if($post){
-                // Increasing post view on details view
-                Portfolio::where('post_slug', '=', $slug)->increment('post_view');
-
-                return response()->json([
-                    'status' => 'success',
-                    'message' => 'Post data found',
-                    'data' => $post,
-                ]);
-            } else{
-                return response()->json([
-                    'status' => 'failed',
-                    'message' => 'Something went wrong'
-                ]);
-            }
-        } catch(Exception $e){
-            return response()->json([
-                'status' => 'failed',
-                'message' => 'Something went wrong'.$e->getMessage()
-            ]);
-        }
-
-    }
-
-
-    /* Method for retrieve previous post information by id */
-
-    public function retrievePreviousPostInfoById(Request $request){
-        try{
-            $portfolioInfoId = $request->input('portfolio_info_id'); // Primary key id from input
-            
-            // Get previous id
-            $previousPostInfoId = Portfolio::where('id', '<', $portfolioInfoId)->pluck('id');
-            
-            // Getting post data by id with category and user
-            $post = Portfolio::with(['category:id,category_name', 'user:id'])->findOrFail($previousPostInfoId, ['id', 'post_heading', 'post_thumbnail', 'publish_time']);
-
-            if($post){
-                return response()->json([
-                    'status' => 'success',
-                    'message' => 'Previous post data found',
-                    'data' => $post,
-                ]);
-            } else{
-                return response()->json([
-                    'status' => 'failed',
-                    'message' => 'Something went wrong'
-                ]);
-            }
-        } catch(Exception $e){
-            return response()->json([
-                'status' => 'failed',
-                'message' => 'Something went wrong'.$e->getMessage()
-            ]);
-        }
-
-    }
-
-
-    /* Method for retrieve next post information by id */
-
-    public function retrieveNextPostInfoById(Request $request){
-        try{
-            $portfolioInfoId = $request->input('portfolio_info_id'); // Primary key id from input
-            
-            // Get previous id
-            $previousPostInfoId = Portfolio::where('id', '>', $portfolioInfoId)->pluck('id');
-            
-            // Getting post data by id with category and user
-            $post = Portfolio::with(['category:id,category_name', 'user:id'])->findOrFail($previousPostInfoId, ['id', 'post_heading', 'post_thumbnail', 'publish_time']);
-
-            if($post){
-                return response()->json([
-                    'status' => 'success',
-                    'message' => 'Next post data found',
-                    'data' => $post,
-                ]);
-            } else{
-                return response()->json([
-                    'status' => 'failed',
-                    'message' => 'Something went wrong'
-                ]);
-            }
-        } catch(Exception $e){
-            return response()->json([
-                'status' => 'failed',
-                'message' => 'Something went wrong'.$e->getMessage()
-            ]);
-        }
-
-    }
-
-
-    /* Method for retrieve latest post information by id */
-
-    public function retrieveLatestPostInfo(){
-        try{
-            // Getting latest 2 post data with category and user
-            $post = Portfolio::with(['category:id,category_name', 'user:id'])->latest('publish_time')->take(2)->get(['id', 'post_heading', 'post_thumbnail', 'publish_time']);
-
-            if($post){
-                return response()->json([
-                    'status' => 'success',
-                    'message' => 'Latest post data found',
-                    'data' => $post,
-                ]);
-            } else{
-                return response()->json([
-                    'status' => 'failed',
-                    'message' => 'Something went wrong'
-                ]);
-            }
-        } catch(Exception $e){
-            return response()->json([
-                'status' => 'failed',
-                'message' => 'Something went wrong'.$e->getMessage()
-            ]);
-        }
-
     }
 
 

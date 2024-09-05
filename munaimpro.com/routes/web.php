@@ -155,6 +155,7 @@ Route::get('retrieveAllVisitorInfo', [WebsiteInformationController::class, 'retr
 Route::post('retrieveVisitorInfoById', [WebsiteInformationController::class, 'retrieveVisitorInfoById'])->middleware(TokenVerificationMiddleware::class);
 Route::post('updateSeoPropertyInfo', [WebsiteInformationController::class, 'updateSeoPropertyInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deleteSeoPropertyInfo', [WebsiteInformationController::class, 'deleteSeoPropertyInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::post('/trackVisitorInformation', [WebsiteInformationController::class, 'trackVisitorInformation']);
 
 
 // API Routes (Dashboard Controller)

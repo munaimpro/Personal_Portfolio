@@ -15,6 +15,8 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use App\Models\VisitorInformations;
+use Sokil\IsoCodes\IsoCodesFactory;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -450,4 +452,121 @@ class WebsiteInformationController extends Controller
         }
         
     }
+
+
+    /* Method for tracking visitor information */
+    
+    public function trackVisitorInformation(Request $request){
+        try{
+            // Getting view name from uri
+            $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+
+            // IP address
+            $ipAddress = '103.140.212.213';
+
+            // Fetch visitor's geolocation (country, city) using an external API
+            $geoData = $this->getGeoLocation($ipAddress);
+
+            // IsoCodesFactory instance creation
+            $isoCodes = new IsoCodesFactory();
+            $countries = $isoCodes->getCountries();
+
+            // Find the full country name by country code
+            $country = $countries->getByAlpha2($geoData['country']);
+
+            // Getting visitor data
+            $visitorData = [
+                'ip_address' => $ipAddress,
+                'visitor_country' => $country ? $country->getLocalName() : 'Unknown',
+                'visitor_city' => $geoData['city'] ?? 'Unknown',
+                'visitor_device_type' => $this->getDeviceType($request->header('User-Agent')),
+                'visitor_operating_system' => $this->getOperatingSystem($request->header('User-Agent')),
+                'visitor_browser' => $this->getBrowser($request->header('User-Agent')),
+                'visitor_screen_resolution' => $request->input('visitor_screen_resolution'),
+                'total_visit' => 1,
+            ];
+
+            // Checking the same visitor
+            if(!VisitorInformations::where('ip_address', $visitorData['ip_address'])->exists()){
+                // Save new visitor data to database
+                VisitorInformations::create($visitorData);
+
+                return response()->json(['status' => 'success', 'message' => 'Visitor information saved successfully']);
+            } else{
+                // if($routeName === ''){
+                    // Update existing visitor total visit time to database
+                    VisitorInformations::where('ip_address', $visitorData['ip_address'])->increment('total_visit');
+
+                    return response()->json(['status' => 'success', 'message' => 'Visitor information updated successfully']);
+                // }
+            }
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong'.' '.$e->getMessage()
+            ]);
+        }
+        
+    }
+
+
+    /* Private method for tracking visitor geoloacation */
+
+    private function getGeoLocation($ipAddress){
+        // Getting geolocation using ipinfo.io
+        $response = Http::get("http://ipinfo.io/{$ipAddress}/json");
+        return $response->json();
+    }
+
+
+    /* Private method for tracking visitor device type */
+
+    private function getDeviceType($userAgent){
+        if(preg_match('/mobile/i', $userAgent)){
+            return 'Mobile';
+        } elseif(preg_match('/tablet/i', $userAgent)){
+            return 'Tablet';
+        } else{
+            return 'Desktop';
+        }
+    }
+
+
+    /* Private method for tracking visitor operating system */
+
+    private function getOperatingSystem($userAgent){
+        if (preg_match('/windows/i', $userAgent)) {
+            return 'Windows';
+        } elseif (preg_match('/mac/i', $userAgent)) {
+            return 'Mac OS';
+        } elseif (preg_match('/linux/i', $userAgent)) {
+            return 'Linux';
+        } elseif (preg_match('/android/i', $userAgent)) {
+            return 'Android';
+        } elseif (preg_match('/ios/i', $userAgent)) {
+            return 'iOS';
+        } else {
+            return 'Unknown OS';
+        }
+    }
+
+
+    /* Private method for tracking visitor browser */
+
+    private function getBrowser($userAgent){
+        if (preg_match('/chrome/i', $userAgent)) {
+            return 'Chrome';
+        } elseif (preg_match('/firefox/i', $userAgent)) {
+            return 'Firefox';
+        } elseif (preg_match('/safari/i', $userAgent)) {
+            return 'Safari';
+        } elseif (preg_match('/edge/i', $userAgent)) {
+            return 'Edge';
+        } elseif (preg_match('/opera/i', $userAgent)) {
+            return 'Opera';
+        } else {
+            return 'Unknown Browser';
+        }
+    }
+
 }

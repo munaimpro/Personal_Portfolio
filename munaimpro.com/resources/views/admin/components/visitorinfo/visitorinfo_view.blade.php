@@ -83,11 +83,11 @@
                 // Assigning retrieved values
                 document.getElementById('visitorIPAddress').value = response.data.data['ip_address'];
                 document.getElementById('visitorCountry').value = response.data.data['visitor_country'];
-                // document.getElementById('visitorCity').value = response.data.data['visitor_city'];
-                // document.getElementById('visitorDeviceType').value = response.data.data['visitor_device_type'];
-                // document.getElementById('visitorOperatingSystem').value = response.data.data['visitor_operating_system'];
+                document.getElementById('visitorCity').value = response.data.data['visitor_city'];
+                document.getElementById('visitorDeviceType').value = response.data.data['visitor_device_type'];
+                document.getElementById('visitorOperatingSystem').value = response.data.data['visitor_operating_system'];
                 document.getElementById('visitorBrowser').value = response.data.data['visitor_browser'];
-                // document.getElementById('visitorScreenResolution').value = response.data.data['visitor_screen_resolution'];
+                document.getElementById('visitorScreenResolution').value = response.data.data['visitor_screen_resolution'];
             } else{
                 displayToast('error', response.data['message']);
             }

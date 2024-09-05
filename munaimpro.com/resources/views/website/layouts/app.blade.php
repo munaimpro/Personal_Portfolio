@@ -356,6 +356,7 @@ function checkAuth() {
 
 
     // Function to retrieve social media information
+
     $(document).ready(function(){
         retrieveAllSocialMediaInfo();
     });
@@ -442,6 +443,30 @@ function checkAuth() {
                 about_social_media_link.append(row);
             });
         } catch(e){
+            console.error('Something went wrong:', e);
+        }
+    }
+
+
+    // Function to retrieve social media information
+    
+    $(document).ready(function(){
+        trackVisitorInformation();
+    });
+
+    async function trackVisitorInformation(){
+        try {
+            // Capture screen resolution
+            let screenResolution = `${window.screen.width}x${window.screen.height}`;
+
+            // Send the request when the page is loaded
+            let response = await axios.post('/trackVisitorInformation', {
+                visitor_screen_resolution: screenResolution,
+            });
+
+            console.log(response.data.message);
+
+        } catch(e) {
             console.error('Something went wrong:', e);
         }
     }
