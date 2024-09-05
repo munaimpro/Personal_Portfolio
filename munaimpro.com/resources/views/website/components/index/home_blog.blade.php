@@ -93,7 +93,7 @@
                                         <p class="card-text">
                                             ${shortenText(item['post_description'])}
                                         </p>
-                                        <a href="blog_details/${item['post_slug']}" class="read_more_link">
+                                        <a href="blog/${item['post_slug']}" class="read_more_link">
                                             Read More <i class="fa-solid fa-circle-arrow-right"></i>
                                         </a>
                                     </div>

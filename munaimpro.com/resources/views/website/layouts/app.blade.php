@@ -12,6 +12,8 @@
         <title>{{ $seoproperty->author }} - Personal Website</title>
     @elseif ($routeName === 'about')
         <title>About Me - {{ $seoproperty->author }}</title>
+    @elseif (!empty($slug))
+        <title>{{ ucwords($slug) }} - {{ $seoproperty->author }}</title>
     @else
         <title>{{ ucwords($routeName) }} - {{ $seoproperty->author }}</title>
     @endif
@@ -107,6 +109,9 @@
         function showLoader(){
             $('.loader_bg').removeClass('d-none');
         }
+
+        // Extracting post slug from URL
+        const slug = window.location.pathname.split('/').pop();
     </script>
 </head>
 

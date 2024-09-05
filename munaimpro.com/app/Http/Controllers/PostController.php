@@ -482,10 +482,13 @@ class PostController extends Controller
     public function websiteBlogDetailsPage(){
         // Getting view name from uri
         $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+
+        // Extracting the slug from the URL if available
+        $slug = request()->segment(count(request()->segments()));
         
         // Getting SEO property
         $seoproperty = Seoproperty::where('page_name', 'index')->first();
 
-        return view('website.pages.blog_details', compact(['routeName', 'seoproperty']));
+        return view('website.pages.blog_details', compact(['routeName', 'seoproperty', 'slug']));
     }
 }

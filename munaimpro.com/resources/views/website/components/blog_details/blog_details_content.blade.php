@@ -15,7 +15,9 @@
 
                 </div>
 
-                <input type="text" id="postInfoId">
+                {{-- Blog id from DB --}}
+                <input type="hidden" id="postInfoId">
+                {{-- Blog id from DB --}}
 
                 <!-- Blog options -->
                 <div class="blog_details_option">
