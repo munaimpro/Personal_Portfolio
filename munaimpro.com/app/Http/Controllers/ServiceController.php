@@ -184,7 +184,7 @@ class ServiceController extends Controller
         $routeName = last(explode('/', Route::getCurrentRoute()->uri));
         
         // Getting SEO property
-        $seoproperty = Seoproperty::where('page_name', 'index')->first();
+        $seoproperty = Seoproperty::where('page_name', 'services')->first();
 
         return view('website.pages.services', compact(['routeName', 'seoproperty']));
     }

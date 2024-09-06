@@ -155,12 +155,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
 
-{{-- jQuery CDN Link --}}
-{{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> --}}
-
-{{-- Axios JS --}}
-{{-- <script src="{{ asset('assets/js/axios.min.js') }}"></script> --}}
-
 {{-- Owl Carousal JS Link --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 

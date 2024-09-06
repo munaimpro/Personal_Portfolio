@@ -9,22 +9,22 @@
             <div class="col-lg-7 mb-5 mb-lg-0">
                 <div class="contact_MK25_form">
                     <p>I am always open to discuss about <span>web application development</span></p>
-                    <form class="row g-3">
-                    <div class="col-md-6">
-                        <input placeholder="Name" type="text" class="form-control" id="sendMessageName">
-                    </div>
-                    <div class="col-md-6">
-                        <input placeholder="Email" type="email" class="form-control" id="sendMessageMail">
-                    </div>
-                    <div class="col-12">
-                        <input placeholder="Subject" type="text" class="form-control" id="sendMessageSubject">
-                    </div>
-                    <div class="col-12">
-                        <textarea placeholder="Message" class="form-control" id="sendMessageDescription"></textarea>
-                    </div>
-                    <div class="col-12">
-                        <button type="button" class="btn primary-btn" onclick="sendMessageFromWebsite()">Send Message <i class="fa-regular fa-paper-plane"></i></button>
-                    </div>
+                    <form class="row g-3" id="sendMessageForm">
+                        <div class="col-md-6">
+                            <input placeholder="Name" type="text" class="form-control" id="sendMessageName">
+                        </div>
+                        <div class="col-md-6">
+                            <input placeholder="Email" type="email" class="form-control" id="sendMessageMail">
+                        </div>
+                        <div class="col-12">
+                            <input placeholder="Subject" type="text" class="form-control" id="sendMessageSubject">
+                        </div>
+                        <div class="col-12">
+                            <textarea placeholder="Message" class="form-control" id="sendMessageDescription"></textarea>
+                        </div>
+                        <div class="col-12">
+                            <button type="button" class="btn primary-btn" onclick="sendMessageFromWebsite()">Send Message <i class="fa-regular fa-paper-plane"></i></button>
+                        </div>
                     </form>
                 </div>
             </div>

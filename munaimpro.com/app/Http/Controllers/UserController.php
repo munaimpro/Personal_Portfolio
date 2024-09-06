@@ -23,7 +23,9 @@ class UserController extends Controller
         // Getting view name from uri
         $routeName = last(explode('/', Route::getCurrentRoute()->uri));
 
-        return view('admin.pages.signup', compact(['routeName']));
+        // return view('admin.pages.signup', compact(['routeName']));
+
+        return abort(403, 'The signup service is currently unavailable');
     }
 
 

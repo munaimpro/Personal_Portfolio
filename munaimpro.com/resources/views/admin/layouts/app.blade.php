@@ -17,7 +17,7 @@
     {{-- <meta name="keywords" content="{{ $seoproperty->site_keywords }}"> --}}
 
     {{-- Author --}}
-    {{-- <meta name="author" content="{{ $seoproperty->author }}"> --}}
+    <meta name="author" content="Munaim Khan">
 
     {{-- Open Graph Meta Tags --}}
     {{-- <meta property="og:title" content="{{ $seoproperty->og_title }}">
@@ -120,6 +120,7 @@
         }
     </script>
 
+    {{-- Leaflet Map style --}}
     <style>
         #map {
             height: 500px;

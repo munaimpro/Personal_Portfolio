@@ -194,7 +194,7 @@ class PricingController extends Controller
         $routeName = last(explode('/', Route::getCurrentRoute()->uri));
         
         // Getting SEO property
-        $seoproperty = Seoproperty::where('page_name', 'index')->first();
+        $seoproperty = Seoproperty::where('page_name', 'pricing')->first();
 
         // Checking data availability before loading page
         if(!Pricing::exists()){

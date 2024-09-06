@@ -1,3 +1,13 @@
+/*!
+ * Developed by: Munaim Khan
+ * Website: https://munaimpro.com
+ * Email: khanmail2599@gmail.com
+ * Created on:
+ * Purpose: Contains JavaScript functions for the portfolio website.
+ */
+
+
+
 // Header scroll
 let nav = document.querySelector('.navbar');
 window.onscroll = function(){

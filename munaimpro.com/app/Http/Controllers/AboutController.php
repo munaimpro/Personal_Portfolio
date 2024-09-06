@@ -11,6 +11,17 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * AboutController manages the "About" section of the website, including
+ * functionalities for both the public-facing About page and the admin panel
+ * for managing About information.
+ * 
+ * Developed by: Munaim Khan
+ * Website: https://munaimpro.com
+ * Email: khanmail2599@gmail.com
+ * Created on:
+ */
+
 class AboutController extends Controller
 {
     /* Method for admin about page load */
@@ -224,7 +235,6 @@ class AboutController extends Controller
     }
 
 
-
     /* Method for website about page load */
     
     public function websiteAboutPage(){
@@ -232,7 +242,7 @@ class AboutController extends Controller
         $routeName = last(explode('/', Route::getCurrentRoute()->uri));
         
         // Getting SEO property
-        $seoproperty = Seoproperty::where('page_name', 'index')->first();
+        $seoproperty = Seoproperty::where('page_name', 'about')->first();
 
         return view('website.pages.about', compact(['routeName', 'seoproperty']));
     }

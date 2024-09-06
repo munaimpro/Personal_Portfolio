@@ -262,7 +262,7 @@ class MessageController extends Controller
         $routeName = last(explode('/', Route::getCurrentRoute()->uri));
         
         // Getting SEO property
-        $seoproperty = Seoproperty::where('page_name', 'index')->first();
+        $seoproperty = Seoproperty::where('page_name', 'message')->first();
 
         return view('website.pages.contact', compact(['routeName', 'seoproperty']));
     }

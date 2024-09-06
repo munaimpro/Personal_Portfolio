@@ -264,7 +264,7 @@ Route::get('/feedback/{token}', [ClientFeedbackController::class, 'clientFeedbac
 */
 
 // Page Route (Home Controller)
-Route::get('/', [HomeController::class, 'websiteHomePage']);
+Route::get('/', [WebsiteInformationController::class, 'websiteHomePage']);
 
 // Page Route (About Controller)
 Route::get('/about', [AboutController::class, 'websiteAboutPage']);

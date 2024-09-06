@@ -468,7 +468,7 @@ class PostController extends Controller
         $routeName = last(explode('/', Route::getCurrentRoute()->uri));
         
         // Getting SEO property
-        $seoproperty = Seoproperty::where('page_name', 'index')->first();
+        $seoproperty = Seoproperty::where('page_name', 'blog')->first();
 
         // Getting total post
         $totalPost = Post::get()->count();
@@ -484,7 +484,7 @@ class PostController extends Controller
         $routeName = last(explode('/', Route::getCurrentRoute()->uri));
 
         // Getting SEO property
-        $seoproperty = Seoproperty::where('page_name', 'index')->first();
+        $seoproperty = Seoproperty::where('page_name', 'blog_details')->first();
         
         // Checking data availability before loading page
         if(!is_string($slug) || !Post::where('post_slug', '=', $slug)->exists()){

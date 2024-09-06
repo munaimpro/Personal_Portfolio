@@ -431,7 +431,7 @@ class PortfolioController extends Controller
         $routeName = last(explode('/', Route::getCurrentRoute()->uri));
         
         // Getting SEO property
-        $seoproperty = Seoproperty::where('page_name', 'index')->first();
+        $seoproperty = Seoproperty::where('page_name', 'portfolio')->first();
 
         return view('website.pages.portfolio', compact(['routeName', 'seoproperty']));
     }
@@ -444,7 +444,7 @@ class PortfolioController extends Controller
         $routeName = last(explode('/', Route::getCurrentRoute()->uri));
         
         // Getting SEO property
-        $seoproperty = Seoproperty::where('page_name', 'index')->first();
+        $seoproperty = Seoproperty::where('page_name', 'portfolio_details')->first();
 
         // Checking data availability before loading page
         if(!is_numeric($id) || !Portfolio::where('id', $id)->exists()){
