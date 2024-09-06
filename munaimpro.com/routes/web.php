@@ -279,7 +279,7 @@ Route::get('/portfolio', [PortfolioController::class, 'websitePortfolioPage']);
 Route::get('/portfolio/details/{id}', [PortfolioController::class, 'websitePortfolioDetailsPage']);
 
 // Page Route (Pricing Controller)
-Route::view('/pricing', 'website.pages.pricing');
+Route::get('/pricing', [PricingController::class, 'websitePricingPage']);
 
 // Page Route (Post Controller)
 Route::get('/blog', [PostController::class, 'websiteBlogPage']);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\Pricing;
+use App\Models\Seoproperty;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Route;
@@ -62,7 +63,7 @@ class PricingController extends Controller
 
     public function retrieveAllPricingInfo(Request $request){
         try{
-            $pricing = Pricing::get(['id', 'pricing_title', 'pricing_price', 'pricing_status']); // Getting all pricing data
+            $pricing = Pricing::get(['id', 'pricing_title', 'pricing_price', 'pricing_features', 'pricing_status']); // Getting all pricing data
 
             if($pricing){
                 return response()->json([
@@ -153,6 +154,54 @@ class PricingController extends Controller
                 'message' => 'Something went wrong: '.$e->getMessage()
             ]);
         }
+    }
+
+
+    /* Method for delete pricing information */
+
+    public function deletePricingInfo(Request $request){
+        try{
+            // Getting pricing id from input
+            $pricingInfoId = $request->input('pricing_info_id');
+            
+            // Delete pricing data by id
+            $pricingDelete = Pricing::findOrFail($pricingInfoId)->delete(); 
+
+            if($pricingDelete){
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Pricing information deleted'
+                ]);
+            } else{
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Something went wrong'
+                ]);
+            }
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong'.$e->getMessage()
+            ]);
+        }
+    }
+
+
+    /* Method for website pricing page load */
+    
+    public function websitePricingPage(){
+        // Getting view name from uri
+        $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+        
+        // Getting SEO property
+        $seoproperty = Seoproperty::where('page_name', 'index')->first();
+
+        // Checking data availability before loading page
+        if(!Pricing::exists()){
+            abort(404, 'Page not available');
+        }
+
+        return view('website.pages.pricing', compact(['routeName', 'seoproperty']));
     }
     
 }

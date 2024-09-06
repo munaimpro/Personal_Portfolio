@@ -5,11 +5,11 @@
             <div class="modal-body text-center">
                 <h3 class="mt-3">Are you sure?</h3>
                 <p class="mb-3">You won't be able to revert this!</p>
-                <input class="" id="interestInfoDeleteId"/>
+                <input class="" id="pricingInfoDeleteId"/>
             </div>
             <div class="modal-footer justify-content-end">
-                <button type="button" class="btn btn-sm btn-submit" onclick="deleteInterestInfo()">Yes, delete it!</button>
-                <button type="button" class="btn btn-sm btn-cancel" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-sm btn-submit" onclick="deletePricingInfo()">Yes, delete it!</button>
+                <button type="button" class="btn btn-sm btn-cancel" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -21,27 +21,27 @@
 
 <script>
 
-    // Function for delete interest information
-    async function deleteInterestInfo() {
+    // Function for delete pricing information
+    async function deletePricingInfo() {
         try{
             // Getting input data
-            let interest_info_id = $('#interestInfoDeleteId').val().trim();
+            let pricing_info_id = $('#pricingInfoDeleteId').val().trim();
 
             // Front end validation process
-            if(interest_info_id.length === 0){
-                displayToast('warning', 'Interest details id missing');
+            if(pricing_info_id.length === 0){
+                displayToast('warning', 'Pricing details id missing');
             } else{
                 // Closing modal
                 $('#deleteModal').modal('hide');
 
                 // Pssing data to controller and getting response
                 showLoader();
-                let response = await axios.delete('/deleteInterestInfo', { data: { interest_info_id: interest_info_id } });
+                let response = await axios.delete('/deletePricingInfo', { data: { pricing_info_id: pricing_info_id } });
                 hideLoader();
 
                 if(response.data['status'] === 'success'){
-                    // Call function to refresh interest list
-                    await retrieveAllInterestInfo();
+                    // Call function to refresh pricing list
+                    await retrieveAllPricingInfo();
 
                     displayToast('success', response.data['message']);
                 } else{
