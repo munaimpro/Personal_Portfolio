@@ -20,6 +20,44 @@ class PricingController extends Controller
     }
 
 
+    /* Method for add pricing information */
+
+    public function addPricingInfo(Request $request){
+        try{
+            // Input validation process for backend
+            $validatedData = $request->validate([
+                'pricing_title' => 'required|string|max:50',
+                'pricing_price' => 'required|numeric',
+                'pricing_features' => 'required|array',
+                'pricing_status' => ['nullable', Rule::in(['inactive', 'active'])],
+            ]);
+    
+            // Converting the array of pricing features to JSON
+            $validatedData['pricing_features'] = json_encode($validatedData['pricing_features']);
+    
+            // Creating new pricing record
+            $pricing = Pricing::create($validatedData);
+    
+            if($pricing){
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Pricing details updated'
+                ]);
+            } else{
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Failed to create new pricing'
+                ]);
+            }
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong: '.$e->getMessage()
+            ]);
+        }
+    }
+
+
     /* Method for retrieve all pricing information */
 
     public function retrieveAllPricingInfo(Request $request){
@@ -54,7 +92,7 @@ class PricingController extends Controller
         try{
             $pricingInfoId = $request->input('pricing_info_id'); // Primary key id from input
         
-            $pricing = Pricing::findOrFail($pricingInfoId, ['id', 'pricing_title', 'pricing_price', 'pricing_features']); // Getting pricing data by id
+            $pricing = Pricing::findOrFail($pricingInfoId, ['id', 'pricing_title', 'pricing_price', 'pricing_features', 'pricing_status']); // Getting pricing data by id
 
             if($pricing){
                 return response()->json([
@@ -85,9 +123,10 @@ class PricingController extends Controller
             // Input validation process for backend
             $validatedData = $request->validate([
                 'pricing_title' => 'required|string|max:50',
-                'pricing_price' => 'required|numeric', // Corrected to numeric
-                'pricing_features' => 'required|array', // Validate features as an array
-                'pricing_info_id' => 'required|exists:pricings,id', // Validate the ID
+                'pricing_price' => 'required|numeric',
+                'pricing_features' => 'required|array',
+                'pricing_status' => ['nullable', Rule::in(['inactive', 'active'])],
+                'pricing_info_id' => 'required|exists:pricings,id',
             ]);
     
             // Converting the array of pricing features to JSON

@@ -1,41 +1,39 @@
 {{-- Edit modal start --}}
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Update Pricing</h5>
+                <h5 class="modal-title" id="editModalLabel">Add Pricing</h5>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="updatePricingForm">
+                <form id="addPricingForm">
                     <div class="container">
                         <div class="row">
                             <div class="col-12 p-1">
                                 <label class="form-label">Plan *</label>
-                                <input type="text" class="form-control" id="updatePricingTitle">
+                                <input type="text" class="form-control" id="pricingTitle">
 
                                 <label class="form-label">Price *</label>
-                                <input type="number" class="form-control" step="0.01" id="updatePricingPrice">
+                                <input type="number" class="form-control" step="0.01" id="pricingPrice">
 
                                 <label class="form-label">Features</label>
-                                <textarea class="form-control" rows="5" id="updatePricingFeatures"></textarea>
+                                <textarea class="form-control" rows="5" id="pricingFeatures"></textarea>
 
                                 <label class="form-label">Status *</label>
-                                <select class="select" id="updatePricingStatus">
+                                <select class="select" id="pricingStatus">
                                     <option value="inactive">Inactive</option>
                                     <option value="active">Active</option>
                                 </select>
-
-                                <input type="text" class="form-control" id="pricingInfoId">
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer justify-content-end">
-                <button type="button" class="btn btn-sm btn-submit" onclick="updatePricingInfo()">Save Changes</button>
+                <button type="button" class="btn btn-sm btn-submit" onclick="addPricingInfo()">Add</button>
                 <button type="button" class="btn btn-sm btn-cancel" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
@@ -47,50 +45,16 @@
 {{-- Front end script start --}}
 
 <script>
-    // Function for retrieve pricing details
-    async function retrievePricingInfoById(pricing_info_id){
 
-        try{
-            // Assigning id to hidden field
-            document.getElementById('pricingInfoId').value = pricing_info_id;
-
-            // Pssing id to controller and getting response
-            showLoader();
-            let response = await axios.post('/retrievePricingInfoById', {pricing_info_id:pricing_info_id});
-            hideLoader();
-
-            if(response.data['status'] === 'success'){
-                // Assigning retrieved values
-                $('#updatePricingTitle').val(response.data.data['pricing_title']);
-                $('#updatePricingPrice').val(response.data.data['pricing_price']);
-                
-                // Iterate through the options and add `selected` attribute to the correct one
-                $('#updatePricingStatus option').each(function() {
-                    if ($(this).val() == response.data.data['pricing_status']) {
-                        $(this).prop('selected', true);
-                    }
-                });
-
-                // Converting JSON array to a comma-separated string and showing
-                let features = JSON.parse(response.data.data['pricing_features']).join(', ');
-                $('#updatePricingFeatures').val(features);
-            } else{
-                displayToast('error', response.data['message']);
-            }
-        } catch(e){
-            console.error('Something went wrong', e);
-        }
-    }
-
-    // Function for update pricing details
-    async function updatePricingInfo() {
+    // Function for add pricing
+    
+    async function addPricingInfo(){
         try{
             // Getting input data
-            let pricing_title = $('#updatePricingTitle').val().trim();
-            let pricing_price = $('#updatePricingPrice').val().trim();
-            let pricing_feature = $('#updatePricingFeatures').val().trim();
-            let pricing_status = $('#updatePricingStatus').val().trim();
-            let pricing_info_id = $('#pricingInfoId').val().trim();
+            let pricing_title = $('#pricingTitle').val().trim();
+            let pricing_price = $('#pricingPrice').val().trim();
+            let pricing_feature = $('#pricingFeatures').val().trim();
+            let pricing_status = $('#pricingStatus').val().trim();
 
             // Front end validation process
             if(pricing_title.length === 0){
@@ -103,7 +67,7 @@
                 displayToast('warning', 'Pricing status is required');
             } else{
                 // Closing modal
-                $('#editModal').modal('hide');
+                $('#createModal').modal('hide');
 
                 // Convert features string to an array (split by comma)
                 let featuresArray = pricing_feature.split(',').map(feature => feature.trim());
@@ -114,17 +78,16 @@
                     "pricing_price" : pricing_price,
                     "pricing_features" : featuresArray,
                     "pricing_status" : pricing_status,
-                    "pricing_info_id" : pricing_info_id,
                 };
 
                 // Pssing data to controller and getting response
                 showLoader();
-                let response = await axios.put('/updatePricingInfo', pricingData);
+                let response = await axios.post('/addPricingInfo', pricingData);
                 hideLoader();
 
                 if(response.data['status'] === 'success'){
                     // Reset form
-                    $('#updatePricingForm')[0].reset();
+                    $('#addPricingForm')[0].reset();
 
                     // Call function to refresh pricing list
                     await retrieveAllPricingInfo();
