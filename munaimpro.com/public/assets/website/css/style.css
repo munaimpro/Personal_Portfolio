@@ -735,6 +735,7 @@ code{
     border-right: 3px solid var(--second-color) !important;
     display: flex;
     flex-direction: row;
+    height: 8.5rem;
 }
 
 .blog_details_option .col-lg-6:last-child .card{

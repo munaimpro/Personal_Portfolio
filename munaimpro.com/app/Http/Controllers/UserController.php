@@ -111,7 +111,7 @@ class UserController extends Controller
                 return response()->json([
                     'status' => 'success',
                     'message' => 'Signin successfully',
-                ])->cookie('SigninToken', $token, time()+60*60);
+                ])->cookie('SigninToken', $token, 60, '/', null, false, false);
             } else{
                 return response()->json([
                     'status' => 'failed',

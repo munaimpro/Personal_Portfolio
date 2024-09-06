@@ -174,22 +174,29 @@
 @stack('banner_about_section_script')
 
 <script>
-    // Function for checking user authentication
+    // Function for checking authenticated user
     checkAuth();
 
-    function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-}
-
-function checkAuth() {
-    const token = getCookie('SigninToken');
-    if (token) {
-        $('#userAuthenticationButton').html('Dashboard');
-        $('#userAuthenticationButton').attr('href', 'Admin/dashboard');
+    function getCookie(name){
+        let cookieArr = document.cookie.split(';');
+        for (let i = 0; i < cookieArr.length; i++) {
+            let cookiePair = cookieArr[i].split('=');
+            if (name === cookiePair[0].trim()) {
+                return decodeURIComponent(cookiePair[1]);
+            }
+        }
+        return null;
     }
-}
+
+    function checkAuth(){
+        const token = getCookie('SigninToken');
+        
+        if (token){
+            $('#userAuthenticationButton').html(`<i class="fas fa-gauge"></i> Dashboard`);
+            $('#userAuthenticationButton').attr('href', 'Admin/dashboard');
+        }
+    }
+
 
 
     // Function for toast message common features
@@ -450,9 +457,7 @@ function checkAuth() {
 
     // Function to retrieve social media information
     
-    $(document).ready(function(){
-        trackVisitorInformation();
-    });
+    trackVisitorInformation();
 
     async function trackVisitorInformation(){
         try {
