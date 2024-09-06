@@ -45,4 +45,34 @@ class PricingController extends Controller
         }
 
     }
+
+
+    /* Method for retrieve pricing information by id */
+
+    public function retrievepricingInfoById(Request $request){
+        try{
+            $pricingInfoId = $request->input('pricing_info_id'); // Primary key id from input
+        
+            $pricing = Pricing::findOrFail($pricingInfoId, ['id', 'pricing_title', 'pricing_price', 'pricing_features']); // Getting pricing data by id
+
+            if($pricing){
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Pricing data found',
+                    'data' => $pricing,
+                ]);
+            } else{
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Something went wrong'
+                ]);
+            }
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Something went wrong'.$e->getMessage()
+            ]);
+        }
+
+    }
 }
