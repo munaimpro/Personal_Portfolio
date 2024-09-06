@@ -8,6 +8,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AwardController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\PricingController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\InterestController;
@@ -176,6 +177,13 @@ Route::post('retrieveClientFeedbackInfoById', [ClientFeedbackController::class, 
 Route::delete('deleteClientFeedbackInfo', [ClientFeedbackController::class, 'deleteClientFeedbackInfo'])->middleware(TokenVerificationMiddleware::class);
 
 
+// API Routes (Pricing Controller)
+Route::post('addPricingInfo', [PricingController::class, 'addPricingInfo']);
+Route::get('retrieveAllPricingInfo', [PricingController::class, 'retrieveAllPricingInfo']);
+Route::post('retrievePricingInfoById', [PricingController::class, 'retrievePricingInfoById'])->middleware(TokenVerificationMiddleware::class);
+Route::delete('deletePricingInfo', [PricingController::class, 'deletePricingInfo'])->middleware(TokenVerificationMiddleware::class);
+
+
 
 
 /**
@@ -228,7 +236,8 @@ Route::group(['prefix' => 'Admin', 'middleware' => TokenVerificationMiddleware::
     // Page Route (Portfolio Controller)
     Route::get('/portfolio', [PortfolioController::class, 'adminPortfolioPage']);
 
-    Route::view('/pricing', 'admin.pages.pricing');
+    // Page Route (Pricing Controller)
+    Route::get('/pricing', [PricingController::class, 'adminPricingPage']);
 
     // Page Route (Service Controller)
     Route::get('/message', [MessageController::class, 'adminMessagePage']);
