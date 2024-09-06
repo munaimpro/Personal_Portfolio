@@ -181,7 +181,7 @@ Route::delete('deleteClientFeedbackInfo', [ClientFeedbackController::class, 'del
 Route::post('addPricingInfo', [PricingController::class, 'addPricingInfo']);
 Route::get('retrieveAllPricingInfo', [PricingController::class, 'retrieveAllPricingInfo']);
 Route::post('retrievePricingInfoById', [PricingController::class, 'retrievePricingInfoById'])->middleware(TokenVerificationMiddleware::class);
-Route::post('updatePricingInfo', [PricingController::class, 'updatePricingInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::put('updatePricingInfo', [PricingController::class, 'updatePricingInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deletePricingInfo', [PricingController::class, 'deletePricingInfo'])->middleware(TokenVerificationMiddleware::class);
 
 

@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="updateInterestForm">
+                <form id="updatePricingForm">
                     <div class="container">
                         <div class="row">
                             <div class="col-12 p-1">
@@ -58,7 +58,10 @@
                 // Assigning retrieved values
                 $('#updatePricingTitle').val(response.data.data['pricing_title']);
                 $('#updatePricingPrice').val(response.data.data['pricing_price']);
-                $('#updatePricingFeatures').val(response.data.data['pricing_features']);
+
+                // Converting JSON array to a comma-separated string and showing
+                let features = JSON.parse(response.data.data['pricing_features']).join(', ');
+                $('#updatePricingFeatures').val(features);
             } else{
                 displayToast('error', response.data['message']);
             }
@@ -87,22 +90,25 @@
                 // Closing modal
                 $('#editModal').modal('hide');
 
+                // Convert features string to an array (split by comma)
+                let featuresArray = pricing_feature.split(',').map(feature => feature.trim());
+
                 // Assigning pricing data to variable in JSON format
                 let pricingData = {
                     "pricing_title" : pricing_title,
                     "pricing_price" : pricing_price,
-                    "pricing_feature" : pricing_feature,
+                    "pricing_features" : featuresArray,
                     "pricing_info_id" : pricing_info_id,
-                }
+                };
 
                 // Pssing data to controller and getting response
                 showLoader();
-                let response = await axios.put('/updatePricingInfo', interestData);
+                let response = await axios.put('/updatePricingInfo', pricingData);
                 hideLoader();
 
                 if(response.data['status'] === 'success'){
                     // Reset form
-                    $('#updateInterestForm')[0].reset();
+                    $('#updatePricingForm')[0].reset();
 
                     // Call function to refresh pricing list
                     await retrieveAllPricingInfo();
