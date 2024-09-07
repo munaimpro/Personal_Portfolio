@@ -43,12 +43,6 @@
             <table class="table datanew" id="tableData">
                 <thead>
                     <tr>
-                        <th>
-                            <label class="checkboxs">
-                                <input type="checkbox" id="select-all">
-                                <span class="checkmarks"></span>
-                            </label>
-                        </th>
                         <th>Interest Topic</th>
                         <th>Action</th>
                     </tr>
@@ -95,12 +89,6 @@
 
             response.data.data.forEach(function(item, index){
                 let row = `<tr>
-                                <td>
-                                    <label class="checkboxs">
-                                        <input type="checkbox">
-                                        <span class="checkmarks"></span>
-                                    </label>
-                                </td>
                                 <td>${item['interest_title']}</td>
                                 <td>
                                     <a data-id=${item.id} class="editBtn me-3" data-bs-toggle="modal" data-bs-target="#editModal">

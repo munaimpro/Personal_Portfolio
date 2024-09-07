@@ -42,12 +42,6 @@
             <table class="table datanew" id="tableData">
                 <thead>
                     <tr>
-                        <th>
-                            <label class="checkboxs">
-                                <input type="checkbox" id="select-all">
-                                <span class="checkmarks"></span>
-                            </label>
-                        </th>
                         <th>Service Name</th>
                         <th>Service Status</th>
                         <th>Action</th>
@@ -55,17 +49,7 @@
                 </thead>
 
                 <tbody id="tableList">
-                    <tr>
-                        <td>Name</td>
-                        <td>
-                            <a class="me-3" data-bs-toggle="modal" data-bs-target="#editModal">
-                                <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
-                            </a>                                        
-                            <a lass="me-3" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                                <img src="{{ asset('assets/img/icons/delete.svg') }}" alt="img">
-                            </a>
-                        </td>
-                    </tr>
+                    {{-- All service item loaded here --}}
                 </tbody>
             </table>
         </div>
@@ -104,12 +88,6 @@
 
             response.data.data.forEach(function(item, index){
                 let row = `<tr>
-                                <td>
-                                    <label class="checkboxs">
-                                        <input type="checkbox">
-                                        <span class="checkmarks"></span>
-                                    </label>
-                                </td>
                                 <td>${item['service_title']}</td>
                                 <td>${item['service_status'] == 0 ? '<span class="bg-lightred badges">Inactive</span>' : '<span class="bg-lightgreen badges">Active</span>'}</td>
                                 <td>

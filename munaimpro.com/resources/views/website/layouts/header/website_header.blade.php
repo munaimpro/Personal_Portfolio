@@ -34,7 +34,7 @@
                 <a class="nav-link @if($routeName === 'contact') active @endif" href="{{ url('contact') }}">Contact</a>
               </li>
               <li class="nav-item">
-                <a class="btn primary-btn m-0 px-4 py-2" href="{{ url('Admin/signin') }}" id="userAuthenticationButton">
+                <a class="btn primary-btn m-0 px-4 py-2" href="{{ url('Admin/signin') }}" id="userAuthenticationButton" target="_blank">
                   Sign In <i class="fas fa-sign-in-alt"></i>
                 </a>
               </li>

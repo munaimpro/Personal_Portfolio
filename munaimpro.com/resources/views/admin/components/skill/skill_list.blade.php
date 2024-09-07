@@ -43,12 +43,6 @@
             <table class="table datanew" id="tableData">
                 <thead>
                     <tr>
-                        <th>
-                            <label class="checkboxs">
-                                <input type="checkbox" id="select-all">
-                                <span class="checkmarks"></span>
-                            </label>
-                        </th>
                         <th>Skill Type</th>
                         <th>Name</th>
                         <th>Streanth</th>
@@ -97,12 +91,6 @@
 
             response.data.data.forEach(function(item, index){
                 let row = `<tr>
-                                <td>
-                                    <label class="checkboxs">
-                                        <input type="checkbox">
-                                        <span class="checkmarks"></span>
-                                    </label>
-                                </td>
                                 <td>${item['skill_type']}</td>
                                 <td>${item['skill_name']}</td>
                                 <td>${item['skill_percentage']}%</td>

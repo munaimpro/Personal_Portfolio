@@ -52,7 +52,7 @@
 
         try{
             // Assigning id to hidden field
-            document.getElementById('pricingInfoId').value = pricing_info_id;
+            $('#pricingInfoId').val(pricing_info_id);
 
             // Pssing id to controller and getting response
             showLoader();

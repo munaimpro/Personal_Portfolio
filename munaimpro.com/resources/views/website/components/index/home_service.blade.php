@@ -43,7 +43,7 @@
             hideLoader();
 
             response.data.data.forEach(function(item, index){
-                if(index < 4){
+                if(index < 4 && item['service_status'] === 1){
                     let row = `<div class="col-sm-12 col-lg-6 mb-5">
                                 <div class="card">
                                     <div class="service_MK25_icon fa-3x">

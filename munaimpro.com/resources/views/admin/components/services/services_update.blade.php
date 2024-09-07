@@ -64,7 +64,7 @@
 
         try{
             // Assigning id to hidden field
-            document.getElementById('serviceInfoId').value = service_info_id;
+            $('#serviceInfoId').val(service_info_id);
 
             // Pssing id to controller and getting response
             showLoader();
@@ -73,10 +73,16 @@
 
             if(response.data['status'] === 'success'){
                 // Assigning retrieved values
-                document.getElementById('updateServiceTitle').value = response.data.data['service_title'];
-                document.getElementById('updateServiceIcon').value = response.data.data['service_icon'];
-                document.getElementById('updateServiceDescription').value = response.data.data['service_description'];
-                document.getElementById('updateServiceStatus').value = response.data.data['service_status'];
+                $('#updateServiceTitle').val(response.data.data['service_title']);
+                $('#updateServiceIcon').val(response.data.data['service_icon']);
+                $('#updateServiceDescription').val(response.data.data['service_description']);
+                
+                // Iterate through the options and add `selected` attribute to the correct one
+                $('#updateServiceStatus option').each(function() {
+                    if ($(this).val() == response.data.data['service_status']) {
+                        $(this).prop('selected', true);
+                    }
+                });
             } else{
                 displayToast('error', response.data['message']);
             }

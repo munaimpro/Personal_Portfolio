@@ -23,7 +23,7 @@
                                 <li class="p-0">
                                     <div class="productviews">
                                         <div class="productviewsimg">
-                                            <img class="mw-100 mh-100" src="{{ asset('assets/img/logo.png') }}" alt="website logo" id="websiteLogoPreview">
+                                            <img class="mw-100 mh-100" src="" alt="website logo" id="websiteLogoPreview">
                                         </div>
                                     </div>
                                 </li>

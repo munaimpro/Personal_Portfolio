@@ -47,7 +47,7 @@
 
         try{
             // Assigning id to hidden field
-            document.getElementById('interestInfoId').value = interest_info_id;
+            $('#interestInfoId').val(interest_info_id);
 
             // Pssing id to controller and getting response
             showLoader();
@@ -56,8 +56,8 @@
 
             if(response.data['status'] === 'success'){
                 // Assigning retrieved values
-                document.getElementById('updateInterestTitle').value = response.data.data['interest_title'];
-                document.getElementById('updateInterestIcon').value = response.data.data['interest_icon'];
+                $('#updateInterestTitle').val(response.data.data['interest_title']);
+                $('#updateInterestIcon').val(response.data.data['interest_icon']);
             } else{
                 displayToast('error', response.data['message']);
             }

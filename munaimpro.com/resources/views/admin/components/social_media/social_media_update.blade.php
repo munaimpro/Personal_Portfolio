@@ -65,7 +65,7 @@
     async function retrieveSocialMediaInfoById(social_media_info_id) {
         try{
             // Assigning id to hidden field
-            document.getElementById('socialMediaInfoId').value = social_media_info_id;
+            $('#socialMediaInfoId').val(social_media_info_id);
 
             // Pssing id to controller and getting response
             showLoader();
@@ -74,9 +74,9 @@
 
             if (response.data['status'] === 'success') {
                 // Assigning retrieved values to form fields
-                document.getElementById('updateSocialMediaTitle').value = response.data.data['social_media_title'];
-                document.getElementById('updateSocialMediaLink').value = response.data.data['social_media_link'];
-                document.getElementById('updateSocialMediaIcon').value = response.data.data['social_media_icon'];
+                $('#updateSocialMediaTitle').val(response.data.data['social_media_title']);
+                $('#updateSocialMediaLink').val(response.data.data['social_media_link']);
+                $('#updateSocialMediaIcon').val(response.data.data['social_media_icon']);
 
                 // Handle social media placement as an array (in case it's JSON)
                 let placements = response.data.data['social_media_placement'];

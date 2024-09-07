@@ -43,12 +43,6 @@
             <table class="table datanew" id="tableData">
                 <thead>
                     <tr>
-                        <th>
-                            <label class="checkboxs">
-                                <input type="checkbox" id="select-all">
-                                <span class="checkmarks"></span>
-                            </label>
-                        </th>
                         <th>Award Type</th>
                         <th>Name</th>
                         <th>Issue Date</th>
@@ -106,12 +100,6 @@
                 });
 
                 let row = `<tr>
-                                <td>
-                                    <label class="checkboxs">
-                                        <input type="checkbox">
-                                        <span class="checkmarks"></span>
-                                    </label>
-                                </td>
                                 <td>${item['award_type']}</td>
                                 <td>${item['award_title']}</td>
                                 <td>${formattedAwardDate}</td>

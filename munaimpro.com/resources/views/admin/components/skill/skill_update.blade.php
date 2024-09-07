@@ -56,7 +56,7 @@
 
         try{
             // Assigning id to hidden field
-            document.getElementById('skillInfoId').value = skill_info_id;
+            $('#skillInfoId').val(skill_info_id);
 
             // Pssing id to controller and getting response
             showLoader();
@@ -65,9 +65,9 @@
 
             if(response.data['status'] === 'success'){
                 // Assigning retrieved values
-                document.getElementById('updateSkillType').value = response.data.data['skill_type'];
-                document.getElementById('updateSkillName').value = response.data.data['skill_name'];
-                document.getElementById('updateSkillPercentage').value = response.data.data['skill_percentage'];
+                $('#updateSkillType').val(response.data.data['skill_type']);
+                $('#updateSkillName').val(response.data.data['skill_name']);
+                $('#updateSkillPercentage').val(response.data.data['skill_percentage']);
             } else{
                 displayToast('error', response.data['message']);
             }

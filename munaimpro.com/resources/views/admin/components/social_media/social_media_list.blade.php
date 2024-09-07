@@ -43,13 +43,8 @@
             <table class="table datanew" id="tableData">
                 <thead>
                     <tr>
-                        <th>
-                            <label class="checkboxs">
-                                <input type="checkbox" id="select-all">
-                                <span class="checkmarks"></span>
-                            </label>
-                        </th>
                         <th>Social Media</th>
+                        <th>Placement</th>
                         <th>Link</th>
                         <th>Action</th>
                     </tr>
@@ -93,16 +88,29 @@
             showLoader();
             let response = await axios.get('/retrieveAllSocialMediaInfo');
             hideLoader();
-
+            
             response.data.data.forEach(function(item, index){
+                let formattedPlacement = '';
+
+                if(item['social_media_placement'].includes("hero") && item['social_media_placement'].includes("contact")){
+                    formattedPlacement = 'About page, Hero, Contact';
+                } else if(item['social_media_placement'].includes("hero") && item['social_media_placement'].includes("footer")){
+                    formattedPlacement = 'About page, Hero, Footer';
+                } else if(item['social_media_placement'].includes("contact") && item['social_media_placement'].includes("footer")){
+                    formattedPlacement = 'About page, Contact, Footer';
+                } else if(item['social_media_placement'].includes("hero")){
+                    formattedPlacement = 'About page, Hero';
+                } else if(item['social_media_placement'].includes("contact")){
+                    formattedPlacement = 'About page, Contact';
+                } else if(item['social_media_placement'].includes("footer")){
+                    formattedPlacement = 'About page, Footer';
+                } else{
+                    formattedPlacement = 'About page';
+                }
+
                 let row = `<tr>
-                                <td>
-                                    <label class="checkboxs">
-                                        <input type="checkbox">
-                                        <span class="checkmarks"></span>
-                                    </label>
-                                </td>
                                 <td>${item['social_media_title']}</td>
+                                <td>${formattedPlacement}</td>
                                 <td>${item['social_media_link']}</td>
                                 <td>
                                     <a data-id=${item.id} class="editBtn me-3" data-bs-toggle="modal" data-bs-target="#editModal">

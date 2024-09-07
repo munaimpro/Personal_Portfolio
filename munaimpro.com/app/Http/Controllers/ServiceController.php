@@ -123,7 +123,7 @@ class ServiceController extends Controller
         try{
             $serviceInfoId = $request->input('service_info_id'); // Primary key id from input
         
-            $service = Service::findOrFail($serviceInfoId, ['id', 'service_icon', 'service_title', 'service_description']); // Getting Service data by id
+            $service = Service::findOrFail($serviceInfoId, ['id', 'service_icon', 'service_title', 'service_description', 'service_status']); // Getting Service data by id
 
             if($service){
                 return response()->json([

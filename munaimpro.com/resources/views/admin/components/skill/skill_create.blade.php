@@ -29,7 +29,7 @@
                                 
                                 <div class="form-group">
                                     <label class="form-label mt-3">Percentage *</label>
-                                    <input type="text" class="form-control" id="skillPercentage">
+                                    <input type="number" class="form-control" id="skillPercentage">
                                 </div>
                             </div>
                         </div>

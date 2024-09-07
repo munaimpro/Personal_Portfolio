@@ -57,7 +57,7 @@
 
         try{
             // Assigning id to hidden field
-            document.getElementById('experienceInfoId').value = experience_info_id;
+            $('#experienceInfoId').val(experience_info_id);
 
             // Pssing id to controller and getting response
             showLoader();
@@ -66,10 +66,10 @@
 
             if(response.data['status'] === 'success'){
                 // Assigning retrieved values
-                document.getElementById('updateExperienceTitle').value = response.data.data['experience_title'];
-                document.getElementById('updateExperienceInstitution').value = response.data.data['experience_institution'];
-                document.getElementById('updateExperienceStartingDate').value = response.data.data['experience_starting_date'];
-                document.getElementById('updateExperienceEndingDate').value = response.data.data['experience_ending_date'];
+                $('#updateExperienceTitle').val(response.data.data['experience_title']);
+                $('#updateExperienceInstitution').val(response.data.data['experience_institution']);
+                $('#updateExperienceStartingDate').val(response.data.data['experience_starting_date']);
+                $('#updateExperienceEndingDate').val(response.data.data['experience_ending_date']);
             } else{
                 displayToast('error', response.data['message']);
             }

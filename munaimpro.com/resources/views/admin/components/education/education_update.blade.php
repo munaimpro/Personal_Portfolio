@@ -65,7 +65,7 @@
 
         try{
             // Assigning id to hidden field
-            document.getElementById('educationInfoId').value = education_info_id;
+            $('#educationInfoId').val(education_info_id);
 
             // Pssing id to controller and getting response
             showLoader();
@@ -73,12 +73,18 @@
             hideLoader();
 
             if(response.data['status'] === 'success'){
+                // Iterate through the options and add `selected` attribute to the correct one
+                $('#updateEducationType option').each(function() {
+                    if ($(this).val() == response.data.data['education_type']) {
+                        $(this).prop('selected', true);
+                    }
+                });
+
                 // Assigning retrieved values
-                document.getElementById('updateEducationType').value = response.data.data['education_type'];
-                document.getElementById('updateEducationDegree').value = response.data.data['education_degree'];
-                document.getElementById('updateEducationInstitution').value = response.data.data['education_institution'];
-                document.getElementById('updateEducationStartingDate').value = response.data.data['education_starting_date'];
-                document.getElementById('updateEducationEndingDate').value = response.data.data['education_ending_date'];
+                $('#updateEducationDegree').val(response.data.data['education_degree']);
+                $('#updateEducationInstitution').val(response.data.data['education_institution']);
+                $('#updateEducationStartingDate').val(response.data.data['education_starting_date']);
+                $('#updateEducationEndingDate').val(response.data.data['education_ending_date']);
             } else{
                 displayToast('error', response.data['message']);
             }

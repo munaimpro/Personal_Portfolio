@@ -30,7 +30,7 @@ class SocialMediaController extends Controller
                 'social_media_title' => 'required|string|max:100',
                 'social_media_link' => 'required|string|max:100',
                 'social_media_icon' => 'required|string|max:50',
-                'social_media_placement' => 'required|array',
+                'social_media_placement' => 'array',
                 'social_media_placement.*' => ['nullable', Rule::in(['hero', 'contact', 'footer'])],
             ]);
 
@@ -68,7 +68,7 @@ class SocialMediaController extends Controller
                 'social_media_title' => 'required|string|max:100',
                 'social_media_link' => 'required|string|max:100',
                 'social_media_icon' => 'required|string|max:50',
-                'social_media_placement' => 'required|array',
+                'social_media_placement' => 'array',
                 'social_media_placement.*' => ['nullable', Rule::in(['hero', 'contact', 'footer'])],
                 'social_media_info_id' => 'required',
             ]);

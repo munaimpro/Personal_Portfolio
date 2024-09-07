@@ -66,7 +66,7 @@
 
         try{
             // Assigning id to hidden field
-            document.getElementById('awardInfoId').value = award_info_id;
+            $('#awardInfoId').val(award_info_id);
 
             // Pssing id to controller and getting response
             showLoader();
@@ -75,10 +75,10 @@
 
             if(response.data['status'] === 'success'){
                 // Assigning retrieved values
-                document.getElementById('updateAwardType').value = response.data.data['award_type'];
-                document.getElementById('updateAwardTitle').value = response.data.data['award_title'];
-                document.getElementById('updateAwardDate').value = response.data.data['award_date'];
-                document.getElementById('updateAwardProvider').value = response.data.data['award_provider'];
+                $('#updateAwardType').val(response.data.data['award_type']);
+                $('#updateAwardTitle').val(response.data.data['award_title']);
+                $('#updateAwardDate').val(response.data.data['award_date']);
+                $('#updateAwardProvider').val(response.data.data['award_provider']);
                 tinymce.get('updateAwardFor').setContent(response.data.data['award_for']);
             } else{
                 displayToast('error', response.data['message']);

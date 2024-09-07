@@ -443,7 +443,7 @@ class WebsiteInformationController extends Controller
         try{
             $visitorInfoId = $request->input('visitor_info_id'); // Primary key id from input
         
-            $visitor = VisitorInformations::findOrFail($visitorInfoId, ['ip_address', 'visitor_country', 'visitor_browser', 'total_visit', 'last_visiting_time']); // Getting visitor data by id
+            $visitor = VisitorInformations::findOrFail($visitorInfoId, ['ip_address', 'visitor_country','visitor_city', 'visitor_device_type', 'visitor_operating_system', 'visitor_browser', 'visitor_screen_resolution', 'total_visit', 'last_visiting_time']); // Getting visitor data by id
             
             if($visitor){
                 return response()->json([

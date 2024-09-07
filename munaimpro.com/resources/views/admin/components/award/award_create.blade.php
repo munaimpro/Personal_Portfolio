@@ -39,7 +39,7 @@
 
                                 <div class="form-group">
                                     <label class="form-label mt-3">Award For *</label>
-                                    <textarea class="contentDetails" id="awardFor"></textarea>
+                                    <textarea class="contentDetails" id="awardFor" rows="30"></textarea>
                                 </div>
                             </div>
                         </div>
