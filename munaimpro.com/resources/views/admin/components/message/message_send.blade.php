@@ -60,7 +60,7 @@
             // Front end validation process
             if(send_message_mail.length === 0){
                 displayToast('warning', 'Email address is required');
-            } else if(!emailPattern.test(user_email)){
+            } else if(!emailPattern.test(send_message_mail)){
                 displayToast('warning', 'Invalid email address');
             } else if(send_message_subject.length === 0){
                 displayToast('warning', 'Message subject is required');

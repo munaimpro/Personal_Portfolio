@@ -47,10 +47,10 @@
             </thead>
 
             <tbody id="tableList">
-                
+                {{-- Admin all client feedback loaded here --}}
             </tbody>
             </table>
-            </div>
+        </div>
     </div>
 </div>
 {{-- Table end --}}
@@ -81,7 +81,7 @@
 
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retrieveAllClientFeedbackInfo');
+            let response = await axios.post('/retrieveAllClientFeedbackInfo');
             hideLoader();
 
             console.log(response);

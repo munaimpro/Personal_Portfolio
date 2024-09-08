@@ -89,7 +89,7 @@
 
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retrieveAllVisitorInfo');
+            let response = await axios.post('/retrieveAllVisitorInfo');
             hideLoader();
 
             response.data.data.forEach(function(item, index){

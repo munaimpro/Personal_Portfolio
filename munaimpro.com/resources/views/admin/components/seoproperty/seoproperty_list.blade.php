@@ -79,7 +79,7 @@
 
             // Passing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retreiveAllSeoPropertyInfo');
+            let response = await axios.post('/retreiveAllSeoPropertyInfo');
             hideLoader();
 
             response.data.data.forEach(function(item, index) {

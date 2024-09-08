@@ -150,9 +150,9 @@ Route::delete('deleteMessageInfo', [MessageController::class, 'deleteMessageInfo
 Route::post('retrieveLogoInfo', [WebsiteInformationController::class, 'retrieveLogoInfo']);
 Route::post('addLogoInfo', [WebsiteInformationController::class, 'addLogoInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::post('updateLogoInfo', [WebsiteInformationController::class, 'updateLogoInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retreiveAllSeoPropertyInfo', [WebsiteInformationController::class, 'retreiveAllSeoPropertyInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::post('retreiveAllSeoPropertyInfo', [WebsiteInformationController::class, 'retreiveAllSeoPropertyInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::post('retrieveSeoPropertyInfoById', [WebsiteInformationController::class, 'retrieveSeoPropertyInfoById'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retrieveAllVisitorInfo', [WebsiteInformationController::class, 'retrieveAllVisitorInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::post('retrieveAllVisitorInfo', [WebsiteInformationController::class, 'retrieveAllVisitorInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::post('retrieveVisitorInfoById', [WebsiteInformationController::class, 'retrieveVisitorInfoById'])->middleware(TokenVerificationMiddleware::class);
 Route::post('updateSeoPropertyInfo', [WebsiteInformationController::class, 'updateSeoPropertyInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deleteSeoPropertyInfo', [WebsiteInformationController::class, 'deleteSeoPropertyInfo'])->middleware(TokenVerificationMiddleware::class);
@@ -172,14 +172,14 @@ Route::post('dashboardNewMessageInfo', [DashboardController::class, 'dashboardNe
 
 // API Routes (ClientFeedback Controller)
 Route::post('addClientFeedbackInfo', [ClientFeedbackController::class, 'addClientFeedbackInfo']);
-Route::get('retrieveAllClientFeedbackInfo', [ClientFeedbackController::class, 'retrieveAllClientFeedbackInfo']);
+Route::post('retrieveAllClientFeedbackInfo', [ClientFeedbackController::class, 'retrieveAllClientFeedbackInfo']);
 Route::post('retrieveClientFeedbackInfoById', [ClientFeedbackController::class, 'retrieveClientFeedbackInfoById'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deleteClientFeedbackInfo', [ClientFeedbackController::class, 'deleteClientFeedbackInfo'])->middleware(TokenVerificationMiddleware::class);
 
 
 // API Routes (Pricing Controller)
 Route::post('addPricingInfo', [PricingController::class, 'addPricingInfo']);
-Route::get('retrieveAllPricingInfo', [PricingController::class, 'retrieveAllPricingInfo']);
+Route::post('retrieveAllPricingInfo', [PricingController::class, 'retrieveAllPricingInfo']);
 Route::post('retrievePricingInfoById', [PricingController::class, 'retrievePricingInfoById'])->middleware(TokenVerificationMiddleware::class);
 Route::put('updatePricingInfo', [PricingController::class, 'updatePricingInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deletePricingInfo', [PricingController::class, 'deletePricingInfo'])->middleware(TokenVerificationMiddleware::class);

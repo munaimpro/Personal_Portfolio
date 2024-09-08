@@ -92,7 +92,7 @@
 
             // Pssing request to controller and getting response
             showLoader();
-            let response = await axios.get('/retrieveAllCategoryInfo');
+            let response = await axios.post('/retrieveAllCategoryInfo');
             hideLoader();
 
             response.data.data.forEach(function(item, index){
