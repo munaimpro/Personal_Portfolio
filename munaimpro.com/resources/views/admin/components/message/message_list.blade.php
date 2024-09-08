@@ -51,7 +51,7 @@
                     </tr>
                 </thead>
                 <tbody id="tableList">
-                    
+                    {{-- Admin all message loaded here --}}
                 </tbody>
             </table>
         </div>
@@ -78,7 +78,7 @@
 
             // Passing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retrieveAllMessageInfo');
+            let response = await axios.post('/retrieveAllMessageInfo');
             hideLoader();
 
             response.data.data.forEach(function(item){
@@ -101,10 +101,11 @@
                                 <td>
                                     <a data-id="${item.id}" data-action="viewMessage" class="viewBtn me-3" data-bs-toggle="modal" data-bs-target="#viewModal">
                                         <img src="{{ asset('assets/img/icons/eye.svg') }}" alt="img">
-                                    </a>                                        
-                                    <a data-id="${item.id}" data-action="replyMessage" class="replyBtn me-3" data-bs-toggle="modal" data-bs-target="#replyModal">
+                                    </a>
+                                    ${item['message_status'] !== 'replied' ? 
+                                    `<a data-id="${item.id}" data-action="replyMessage" class="replyBtn me-3" data-bs-toggle="modal" data-bs-target="#replyModal">
                                         <img src="{{ asset('assets/img/icons/reply.svg') }}" alt="img">
-                                    </a>                                        
+                                    </a>` : ''} 
                                     <a data-id="${item.id}" class="deleteBtn me-3" data-bs-toggle="modal" data-bs-target="#deleteModal">
                                         <img src="{{ asset('assets/img/icons/delete.svg') }}" alt="img">
                                     </a>

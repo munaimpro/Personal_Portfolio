@@ -209,7 +209,7 @@
 
             // Pssing request to controller and getting response
             showLoader();
-            let response = await axios.get('/retrieveAllServiceInfo');
+            let response = await axios.post('/retrieveAllServiceInfo');
             hideLoader();
 
             response.data.data.forEach(function(item, index){

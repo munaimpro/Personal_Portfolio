@@ -113,7 +113,7 @@
 
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retrieveAllPortfolioInfo');
+            let response = await axios.post('/retrieveAllPortfolioInfo');
             hideLoader();
 
             // Getting base URL of the system

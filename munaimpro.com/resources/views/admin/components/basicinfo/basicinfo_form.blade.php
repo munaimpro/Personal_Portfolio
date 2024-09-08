@@ -174,7 +174,7 @@
 
     async function retrieveAboutInfo() {
         showLoader();
-        let response = await axios.get('/retrieveAboutInfo');
+        let response = await axios.post('/retrieveAboutInfo');
         hideLoader();
 
         if(response.data['status'] === 'success'){

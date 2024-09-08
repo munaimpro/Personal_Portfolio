@@ -106,7 +106,7 @@
 
             // Pssing request to controller and getting response
             showLoader();
-            let response = await axios.get('/retrieveAllCategoryInfo');
+            let response = await axios.post('/retrieveAllCategoryInfo');
             hideLoader();
 
             response.data.data.forEach(function(item, index){
@@ -124,7 +124,7 @@
 
         try{
             // Assigning id to hidden field
-            document.getElementById('postInfoId').value = post_info_id;
+            $('#postInfoId').val(post_info_id);
 
             // Pssing id to controller and getting response
             showLoader();
@@ -132,22 +132,18 @@
             hideLoader();
 
             if(response.data['status'] === 'success'){
-                // Getting base URL of the system
-                let baseUrl = "{{ url('/') }}";
-                
                 // Generating full path for the post thumbnail
-                let postThumbnailFullPath = baseUrl + '/storage/post_thumbnails/' + response.data.data['post_thumbnail'];
+                let postThumbnailFullPath = `{{ url('/') }}/storage/post_thumbnails/` + response.data.data['post_thumbnail'];
             
                 // Assigning retrieved values
-                document.getElementById('updatePostHeading').value = response.data.data['post_heading'];
-                document.getElementById('updatePostSlug').value = response.data.data['post_slug'];
-                document.getElementById('updateCategoryId').value = response.data.data['category_id'];
-                document.getElementById('updatePostThumbnailPreview').src = postThumbnailFullPath;
+                $('#updatePostHeading').val(response.data.data['post_heading']);
+                $('#updatePostSlug').val(response.data.data['post_slug']);
+                $('#updateCategoryId').val(response.data.data['category_id']);
+                $('#updatePostThumbnailPreview')[0].src = postThumbnailFullPath;
                 tinymce.get('updatePostDescription').setContent(response.data.data['post_description']);
-                document.getElementById('updatePostStatus').value = response.data.data['post_status'];
-                document.getElementById('updatePublishTime').value = response.data.data['publish_time'];
-                document.getElementById('userId').value = response.data.data['user_id'];
-                console.log(response.data.data['post_status']);
+                $('#updatePostStatus').val(response.data.data['post_status']);
+                $('#updatePublishTime').val(response.data.data['publish_time']);
+                $('#userId').val(response.data.data['user_id']);
             } else{
                 displayToast('error', response.data['message']);
             }

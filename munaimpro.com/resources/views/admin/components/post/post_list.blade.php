@@ -53,7 +53,7 @@
                 </thead>
 
                 <tbody id="tableList">
-                    
+                    {{-- Admin all post loaded here --}}
                 </tbody>
             </table>
         </div>
@@ -87,15 +87,12 @@
 
             // Pssing data to controller and getting response
             // showLoader();
-            let response = await axios.get('/retrieveAllPostInfo');
+            let response = await axios.post('/retrieveAllPostInfo');
             // hideLoader();
-
-            // Getting base URL of the system
-            let baseUrl = "{{ url('/') }}";
 
             response.data.data.forEach(function(item, index){
                 // Generating full path for the post thumbnail
-                let postThumbnailFullPath = baseUrl + '/storage/post_thumbnails/' + item['post_thumbnail'];
+                let postThumbnailFullPath = `{{ url('/') }}/storage/post_thumbnails/` + item['post_thumbnail'];
 
                 // Formatting the created_at date
                 let createdAt = new Date(item['created_at']);

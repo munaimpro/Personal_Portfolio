@@ -64,7 +64,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     {{-- Favicon --}}
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicon.jpg') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="" id="adminBrowserTabImage">
 
     {{-- Sweet alert JS --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>

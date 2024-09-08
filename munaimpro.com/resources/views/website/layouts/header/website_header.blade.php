@@ -66,9 +66,10 @@
                 let baseUrl = "{{ url('/') }}";
                 
                 // Generating full path for the open graph website image
-                let logoImageFullPath = baseUrl + '/storage/website_logo/' + response.data.data['logo'];
+                let logoImageFullPath = `{{ url('/') }}/storage/website_logo/` + response.data.data['logo'];
 
                 $('#websiteLogo')[0].src = logoImageFullPath;
+                $('#websiteTabImage').attr('href', logoImageFullPath);
             } else{
                 console.log('error', response.data['message']);
             }

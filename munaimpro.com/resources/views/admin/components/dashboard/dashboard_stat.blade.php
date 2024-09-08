@@ -99,7 +99,7 @@
         try{
             // Pssing id to controller and getting response
             showLoader();
-            let response = await axios.get('/dashboardStatInfo');
+            let response = await axios.post('/dashboardStatInfo');
             hideLoader();
 
             if(response.data['status'] === 'success'){

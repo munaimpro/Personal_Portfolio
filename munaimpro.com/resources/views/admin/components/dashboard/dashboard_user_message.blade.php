@@ -138,7 +138,7 @@
 
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/dashboardLatestUserInfo');
+            let response = await axios.post('/dashboardLatestUserInfo');
             hideLoader();
 
             // Getting base URL of the system
@@ -178,7 +178,7 @@
         try{
             // Pssing id to controller and getting response
             showLoader();
-            let response = await axios.get('/dashboardNewMessageInfo');
+            let response = await axios.post('/dashboardNewMessageInfo');
             hideLoader();
 
             if(response.data['status'] === 'success'){

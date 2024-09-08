@@ -41,7 +41,7 @@
             </div>
             <div class="modal-footer justify-content-end">
                 <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Ok</button>
-                <button type="button" class="btn btn-submit" data-bs-toggle="modal" data-bs-target="#replyModal">Reply</button>
+                <button type="button" class="btn btn-submit" data-bs-toggle="modal" data-bs-target="#replyModal" id="replyMessageButton">Reply</button>
             </div>
         </div>
     </div>
@@ -57,7 +57,7 @@
 
         try{
             // Assigning id to hidden field
-            document.getElementById('messageInfoId').value = message_info_id;
+            $('#messageInfoId').val(message_info_id);
 
             // Pssing id to controller and getting response
             showLoader();
@@ -65,11 +65,18 @@
             hideLoader();
 
             if(response.data['status'] === 'success'){
+                console.log(response.data.data['message_status']);
+
+                if(response.data.data['message_status'] === 'replied'){
+                    $('#replyMessageButton').addClass('d-none');
+                } else{
+                    $('#replyMessageButton').removeClass('d-none');
+                }
                 // Assigning retrieved values
-                document.getElementById('messageClientName').value = response.data.data['name'];
-                document.getElementById('messageMail').value = response.data.data['email'];
-                document.getElementById('replyMessageMail').value = response.data.data['email'];
-                document.getElementById('messageSubject').value = response.data.data['subject'];
+                $('#messageClientName').val(response.data.data['name']);
+                $('#messageMail').val(response.data.data['email']);
+                $('#replyMessageMail').val(response.data.data['email']);
+                $('#messageSubject').val(response.data.data['subject']);
                 tinymce.get('messageDescription').setContent(response.data.data['message']);
                 
                 // Call function to refresh message list

@@ -55,7 +55,7 @@
         try{
             // Pssing id to controller and getting response
             showLoader();
-            let response = await axios.get('/dashboardLatestVisitorInfo');
+            let response = await axios.post('/dashboardLatestVisitorInfo');
             hideLoader();
 
             // Formatting the client feedback created at date
@@ -91,7 +91,7 @@
         try {
             // Passing id to controller and getting response
             showLoader();
-            let response = await axios.get('/dashboardVisitorCountryInfo');
+            let response = await axios.post('/dashboardVisitorCountryInfo');
             hideLoader();
 
             if (response.data['status'] === 'success') {
@@ -153,7 +153,7 @@
     //     try {
     //         // Passing id to controller and getting response
     //         showLoader();
-    //         let response = await axios.get('/dashboardVisitorBrowserUsageInfo');
+    //         let response = await axios.post('/dashboardVisitorBrowserUsageInfo');
     //         hideLoader();
 
     //         if (response.data['status'] === 'success') {
@@ -170,7 +170,7 @@
         try {
             // Show loader while fetching data
             showLoader();
-            let response = await axios.get('/dashboardVisitorBrowserUsageInfo');
+            let response = await axios.post('/dashboardVisitorBrowserUsageInfo');
             hideLoader();
 
             if (response.data['status'] === 'success') {

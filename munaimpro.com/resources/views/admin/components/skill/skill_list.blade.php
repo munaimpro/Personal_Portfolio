@@ -86,7 +86,7 @@
 
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retrieveAllSkillInfo');
+            let response = await axios.post('/retrieveAllSkillInfo');
             hideLoader();
 
             response.data.data.forEach(function(item, index){

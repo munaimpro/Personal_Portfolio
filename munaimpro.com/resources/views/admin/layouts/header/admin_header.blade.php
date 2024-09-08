@@ -2,7 +2,7 @@
 <div class="header">
     <div class="header-left active">
         <a href="index.html" class="logo">
-            <img src="{{ asset('assets/img/logo.png') }}" alt="">
+            <img src="" alt="Logo" id="adminSidebarLogo">
         </a>
         <a href="index.html" class="logo-small">
             <img src="{{ asset('assets/img/logo-small.png') }}" alt="">
@@ -85,3 +85,33 @@
     </div>
 </div>
 {{-- Header end --}}
+
+
+{{-- Front end script start --}}
+
+<script>
+    // Function for retrieve website logo
+
+    retrieveLogoInfo();
+
+    async function retrieveLogoInfo(){
+
+        try{
+            // Pssing id to controller and getting response
+            let response = await axios.post('/retrieveLogoInfo');
+
+            if(response.data['status'] === 'success'){
+                // Generating full path for the open graph website image
+                let logoImageFullPath = `{{ url('/') }}/storage/website_logo/` + response.data.data['logo'];
+
+                $('#adminBrowserTabImage').attr('href', logoImageFullPath);
+                $('#adminSidebarLogo')[0].src = logoImageFullPath;
+                $('#websiteLogoPreview')[0].src = logoImageFullPath;
+            } else{
+                displayToast('error', response.data['message']);
+            }
+        } catch(e){
+            console.error('Something went wrong', e);
+        }
+    }
+</script>

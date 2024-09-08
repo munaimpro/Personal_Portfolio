@@ -86,7 +86,7 @@
 
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retrieveAllSocialMediaInfo');
+            let response = await axios.post('/retrieveAllSocialMediaInfo');
             hideLoader();
             
             response.data.data.forEach(function(item, index){

@@ -53,36 +53,6 @@
 {{-- Front end script start --}}
 
 <script>
-
-    // Function for retrieve website logo
-
-    retrieveLogoInfo();
-
-    async function retrieveLogoInfo(){
-
-        try{
-            // Pssing id to controller and getting response
-            showLoader();
-            let response = await axios.get('/retrieveLogoInfo',);
-            hideLoader();
-
-            if(response.data['status'] === 'success'){
-                // Getting base URL of the system
-                let baseUrl = "{{ url('/') }}";
-                
-                // Generating full path for the open graph website image
-                let logoImageFullPath = baseUrl + '/storage/website_logo/' + response.data.data['logo'];
-
-                $('#websiteLogoPreview')[0].src = logoImageFullPath;
-            } else{
-                displayToast('error', response.data['message']);
-            }
-        } catch(e){
-            console.error('Something went wrong', e);
-        }
-    }
-
-
     // Function for update website logo
 
     async function updateLogoInfo(){

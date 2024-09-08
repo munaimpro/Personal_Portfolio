@@ -83,7 +83,7 @@
 
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retrieveAllUserInfo');
+            let response = await axios.post('/retrieveAllUserInfo');
             hideLoader();
 
             // Getting base URL of the system

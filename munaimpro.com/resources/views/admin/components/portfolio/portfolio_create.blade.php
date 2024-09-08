@@ -86,7 +86,7 @@
                             <li class="ps-0">
                                 <div class="productviewset">
                                     <div class="productviewsimg">
-                                        <img src="{{ asset('assets/img/customer/profile2.jpg') }}" alt="img" id="projectThumbnailPreview">
+                                        <img src="{{ asset('assets/img/project/project_placeholder.png') }}" alt="img" id="projectThumbnailPreview">
                                     </div>
                                 </div>
                             </li>
@@ -141,7 +141,7 @@
 
             // Pssing request to controller and getting response
             showLoader();
-            let response = await axios.get('/retrieveAllServiceInfo');
+            let response = await axios.post('/retrieveAllServiceInfo');
             hideLoader();
 
             response.data.data.forEach(function(item, index){

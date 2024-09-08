@@ -38,7 +38,7 @@
 
         try{
             // Assigning id to hidden field
-            document.getElementById('categoryInfoId').value = category_info_id;
+            $('#categoryInfoId').val(category_info_id);
 
             // Pssing id to controller and getting response
             showLoader();
@@ -47,7 +47,7 @@
 
             if(response.data['status'] === 'success'){
                 // Assigning retrieved values
-                document.getElementById('updateCategoryName').value = response.data.data['category_name'];
+                $('#updateCategoryName').val(response.data.data['category_name']);
             } else{
                 displayToast('error', response.data['message']);
             }

@@ -43,12 +43,6 @@
             <table class="table datanew" id="tableData">
                 <thead>
                     <tr>
-                        <th>
-                            <label class="checkboxs">
-                                <input type="checkbox" id="select-all">
-                                <span class="checkmarks"></span>
-                            </label>
-                        </th>
                         <th>Education Type</th>
                         <th>Degree</th>
                         <th>Starting Date</th>
@@ -93,7 +87,7 @@
 
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retrieveAllEducationInfo');
+            let response = await axios.post('/retrieveAllEducationInfo');
             hideLoader();
 
             response.data.data.forEach(function(item, index){
@@ -115,12 +109,6 @@
                 });
 
                 let row = `<tr>
-                                <td>
-                                    <label class="checkboxs">
-                                        <input type="checkbox">
-                                        <span class="checkmarks"></span>
-                                    </label>
-                                </td>
                                 <td>${item['education_type']}</td>
                                 <td>${item['education_degree']}</td>
                                 <td>${formattedStartingDate}</td>

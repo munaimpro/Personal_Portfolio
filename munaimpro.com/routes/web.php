@@ -35,9 +35,9 @@ Route::get('userSignout', [UserController::class, 'userSignout']);
 Route::post('userSendOTP', [UserController::class, 'sendOTPCode']);
 Route::post('userOTPVerification', [UserController::class, 'verifyOTPCode']);
 Route::post('userResetPassword', [UserController::class, 'resetPassword'])->middleware(TokenVerificationMiddleware::class);
-Route::get('userProfile', [UserController::class, 'userProfile'])->middleware(TokenVerificationMiddleware::class);
+Route::post('userProfile', [UserController::class, 'userProfile'])->middleware(TokenVerificationMiddleware::class);
 Route::post('userUpdateProfile', [UserController::class, 'updateProfile'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retrieveAllUserInfo', [UserController::class, 'retrieveAllUserInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::post('retrieveAllUserInfo', [UserController::class, 'retrieveAllUserInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::post('retrieveUserInfoById', [UserController::class, 'retrieveUserInfoById'])->middleware(TokenVerificationMiddleware::class);
 Route::post('updateUserInfo', [UserController::class, 'updateUserInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deleteUserInfo', [UserController::class, 'deleteUserInfo'])->middleware(TokenVerificationMiddleware::class);
@@ -46,13 +46,13 @@ Route::delete('deleteUserInfo', [UserController::class, 'deleteUserInfo'])->midd
 // API Routes (About Controller)
 Route::post('addAboutInfo', [AboutController::class, 'addAboutInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::post('updateAboutInfo', [AboutController::class, 'updateAboutInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retrieveAboutInfo', [AboutController::class, 'retrieveAboutInfo']);
+Route::post('retrieveAboutInfo', [AboutController::class, 'retrieveAboutInfo']);
 
 
 // API Routes (Education Controller)
 Route::post('addEducationInfo', [EducationController::class, 'addEducationInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::put('updateEducationInfo', [EducationController::class, 'updateEducationInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retrieveAllEducationInfo', [EducationController::class, 'retrieveAllEducationInfo']);
+Route::post('retrieveAllEducationInfo', [EducationController::class, 'retrieveAllEducationInfo']);
 Route::post('retrieveEducationInfoById', [EducationController::class, 'retrieveEducationInfoById'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deleteEducationInfo', [EducationController::class, 'deleteEducationInfo'])->middleware(TokenVerificationMiddleware::class);
 
@@ -60,7 +60,7 @@ Route::delete('deleteEducationInfo', [EducationController::class, 'deleteEducati
 // API Routes (Skill Controller)
 Route::post('addSkillInfo', [SkillController::class, 'addSkillInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::put('updateSkillInfo', [SkillController::class, 'updateSkillInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retrieveAllSkillInfo', [SkillController::class, 'retrieveAllSkillInfo']);
+Route::post('retrieveAllSkillInfo', [SkillController::class, 'retrieveAllSkillInfo']);
 Route::post('retrieveSkillInfoById', [SkillController::class, 'retrieveSkillInfoById'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deleteSkillInfo', [SkillController::class, 'deleteSkillInfo'])->middleware(TokenVerificationMiddleware::class);
 
@@ -68,7 +68,7 @@ Route::delete('deleteSkillInfo', [SkillController::class, 'deleteSkillInfo'])->m
 // API Routes (Interest Controller)
 Route::post('addInterestInfo', [InterestController::class, 'addInterestInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::put('updateInterestInfo', [InterestController::class, 'updateInterestInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retrieveAllInterestInfo', [InterestController::class, 'retrieveAllInterestInfo']);
+Route::post('retrieveAllInterestInfo', [InterestController::class, 'retrieveAllInterestInfo']);
 Route::post('retrieveInterestInfoById', [InterestController::class, 'retrieveInterestInfoById'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deleteInterestInfo', [InterestController::class, 'deleteInterestInfo'])->middleware(TokenVerificationMiddleware::class);
 
@@ -76,7 +76,7 @@ Route::delete('deleteInterestInfo', [InterestController::class, 'deleteInterestI
 // API Routes (Category Controller)
 Route::post('addCategoryInfo', [CategoryController::class, 'addCategoryInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::put('updateCategoryInfo', [CategoryController::class, 'updateCategoryInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retrieveAllCategoryInfo', [CategoryController::class, 'retrieveAllCategoryInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::post('retrieveAllCategoryInfo', [CategoryController::class, 'retrieveAllCategoryInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::post('retrieveCategoryInfoById', [CategoryController::class, 'retrieveCategoryInfoById'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deleteCategoryInfo', [CategoryController::class, 'deleteCategoryInfo'])->middleware(TokenVerificationMiddleware::class);
 
@@ -84,7 +84,7 @@ Route::delete('deleteCategoryInfo', [CategoryController::class, 'deleteCategoryI
 // API Routes (Experience Controller)
 Route::post('addExperienceInfo', [ExperienceController::class, 'addExperienceInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::put('updateExperienceInfo', [ExperienceController::class, 'updateExperienceInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retrieveAllExperienceInfo', [ExperienceController::class, 'retrieveAllExperienceInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::post('retrieveAllExperienceInfo', [ExperienceController::class, 'retrieveAllExperienceInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::post('retrieveExperienceInfoById', [ExperienceController::class, 'retrieveExperienceInfoById'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deleteExperienceInfo', [ExperienceController::class, 'deleteExperienceInfo'])->middleware(TokenVerificationMiddleware::class);
 
@@ -92,7 +92,7 @@ Route::delete('deleteExperienceInfo', [ExperienceController::class, 'deleteExper
 // API Routes (Service Controller)
 Route::post('addServiceInfo', [ServiceController::class, 'addServiceInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::put('updateServiceInfo', [ServiceController::class, 'updateServiceInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retrieveAllServiceInfo', [ServiceController::class, 'retrieveAllServiceInfo']);
+Route::post('retrieveAllServiceInfo', [ServiceController::class, 'retrieveAllServiceInfo']);
 Route::post('retrieveServiceInfoById', [ServiceController::class, 'retrieveServiceInfoById'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deleteServiceInfo', [ServiceController::class, 'deleteServiceInfo'])->middleware(TokenVerificationMiddleware::class);
 
@@ -101,7 +101,7 @@ Route::delete('deleteServiceInfo', [ServiceController::class, 'deleteServiceInfo
 Route::post('addPostInfo', [PostController::class, 'addPostInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::post('publishSchedulePost', [PostController::class, 'publishSchedulePost'])->middleware(TokenVerificationMiddleware::class);
 Route::post('updatePostInfo', [PostController::class, 'updatePostInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retrieveAllPostInfo', [PostController::class, 'retrieveAllPostInfo']);
+Route::post('retrieveAllPostInfo', [PostController::class, 'retrieveAllPostInfo']);
 Route::post('retrievePostInfoById', [PostController::class, 'retrievePostInfoById'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deletePostInfo', [PostController::class, 'deletePostInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::get('retrievePostInfoBySlug/{slug}', [PostController::class, 'retrievePostInfoBySlug']);
@@ -113,7 +113,7 @@ Route::get('retrieveLatestPostInfo', [PostController::class, 'retrieveLatestPost
 // API Routes (Award Controller)
 Route::post('addAwardInfo', [AwardController::class, 'addAwardInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::put('updateAwardInfo', [AwardController::class, 'updateAwardInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retrieveAllAwardInfo', [AwardController::class, 'retrieveAllAwardInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::post('retrieveAllAwardInfo', [AwardController::class, 'retrieveAllAwardInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::post('retrieveAwardInfoById', [AwardController::class, 'retrieveAwardInfoById'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deleteAwardInfo', [AwardController::class, 'deleteAwardInfo'])->middleware(TokenVerificationMiddleware::class);
 
@@ -121,7 +121,7 @@ Route::delete('deleteAwardInfo', [AwardController::class, 'deleteAwardInfo'])->m
 // API Routes (Social Media Controller)
 Route::post('addSocialMediaInfo', [SocialMediaController::class, 'addSocialMediaInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::put('updateSocialMediaInfo', [SocialMediaController::class, 'updateSocialMediaInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retrieveAllSocialMediaInfo', [SocialMediaController::class, 'retrieveAllSocialMediaInfo']);
+Route::post('retrieveAllSocialMediaInfo', [SocialMediaController::class, 'retrieveAllSocialMediaInfo']);
 Route::post('retrieveSocialMediaInfoById', [SocialMediaController::class, 'retrieveSocialMediaInfoById'])->middleware(TokenVerificationMiddleware::class);
 Route::get('retrieveSpecificSocialMediaInfo', [SocialMediaController::class, 'retrieveSpecificSocialMediaInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deleteSocialMediaInfo', [SocialMediaController::class, 'deleteSocialMediaInfo'])->middleware(TokenVerificationMiddleware::class);
@@ -130,7 +130,7 @@ Route::delete('deleteSocialMediaInfo', [SocialMediaController::class, 'deleteSoc
 // API Routes (Portfolio Controller)
 Route::post('addPortfolioInfo', [PortfolioController::class, 'addPortfolioInfo']);
 Route::post('updatePortfolioInfo', [PortfolioController::class, 'updatePortfolioInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retrieveAllPortfolioInfo', [PortfolioController::class, 'retrieveAllPortfolioInfo']);
+Route::post('retrieveAllPortfolioInfo', [PortfolioController::class, 'retrieveAllPortfolioInfo']);
 Route::post('retrievePortfolioInfoById', [PortfolioController::class, 'retrievePortfolioInfoById']);
 Route::delete('deletePortfolioInfo', [PortfolioController::class, 'deletePortfolioInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('removePortfolioUiImage', [PortfolioController::class, 'removePortfolioUiImage'])->middleware(TokenVerificationMiddleware::class);
@@ -142,12 +142,12 @@ Route::post('sendMessageFromWebsite', [MessageController::class, 'sendMessageFro
 Route::post('sendMessageFromAdmin', [MessageController::class, 'sendMessageFromAdmin'])->middleware(TokenVerificationMiddleware::class);
 Route::post('replyMessageFromAdmin', [MessageController::class, 'replyMessageFromAdmin'])->middleware(TokenVerificationMiddleware::class);
 Route::post('retrieveMessageInfoById', [MessageController::class, 'retrieveMessageInfoById'])->middleware(TokenVerificationMiddleware::class);
-Route::get('retrieveAllMessageInfo', [MessageController::class, 'retrieveAllMessageInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::post('retrieveAllMessageInfo', [MessageController::class, 'retrieveAllMessageInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::delete('deleteMessageInfo', [MessageController::class, 'deleteMessageInfo'])->middleware(TokenVerificationMiddleware::class);
 
 
 // API Routes (WebsiteInformation Controller)
-Route::get('retrieveLogoInfo', [WebsiteInformationController::class, 'retrieveLogoInfo']);
+Route::post('retrieveLogoInfo', [WebsiteInformationController::class, 'retrieveLogoInfo']);
 Route::post('addLogoInfo', [WebsiteInformationController::class, 'addLogoInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::post('updateLogoInfo', [WebsiteInformationController::class, 'updateLogoInfo'])->middleware(TokenVerificationMiddleware::class);
 Route::get('retreiveAllSeoPropertyInfo', [WebsiteInformationController::class, 'retreiveAllSeoPropertyInfo'])->middleware(TokenVerificationMiddleware::class);
@@ -160,14 +160,14 @@ Route::post('/trackVisitorInformation', [WebsiteInformationController::class, 't
 
 
 // API Routes (Dashboard Controller)
-Route::get('dashboardStatInfo', [DashboardController::class, 'dashboardStatInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('dashboardLatestProjectInfo', [DashboardController::class, 'dashboardLatestProjectInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('dashboardLatestPostInfo', [DashboardController::class, 'dashboardLatestPostInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('dashboardVisitorCountryInfo', [DashboardController::class, 'dashboardVisitorCountryInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('dashboardLatestVisitorInfo', [DashboardController::class, 'dashboardLatestVisitorInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('dashboardVisitorBrowserUsageInfo', [DashboardController::class, 'dashboardVisitorBrowserUsageInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('dashboardLatestUserInfo', [DashboardController::class, 'dashboardLatestUserInfo'])->middleware(TokenVerificationMiddleware::class);
-Route::get('dashboardNewMessageInfo', [DashboardController::class, 'dashboardNewMessageInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::post('dashboardStatInfo', [DashboardController::class, 'dashboardStatInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::post('dashboardLatestProjectInfo', [DashboardController::class, 'dashboardLatestProjectInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::post('dashboardLatestPostInfo', [DashboardController::class, 'dashboardLatestPostInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::post('dashboardVisitorCountryInfo', [DashboardController::class, 'dashboardVisitorCountryInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::post('dashboardLatestVisitorInfo', [DashboardController::class, 'dashboardLatestVisitorInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::post('dashboardVisitorBrowserUsageInfo', [DashboardController::class, 'dashboardVisitorBrowserUsageInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::post('dashboardLatestUserInfo', [DashboardController::class, 'dashboardLatestUserInfo'])->middleware(TokenVerificationMiddleware::class);
+Route::post('dashboardNewMessageInfo', [DashboardController::class, 'dashboardNewMessageInfo'])->middleware(TokenVerificationMiddleware::class);
 
 
 // API Routes (ClientFeedback Controller)

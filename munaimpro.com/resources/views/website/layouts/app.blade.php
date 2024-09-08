@@ -73,8 +73,8 @@
     {{-- X-UA-Compatible --}}
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    {{-- FAVICON --}}
-    <link rel="icon" type="image/png" href="{{ asset('assets/website/images/favicon.png') }}">
+    {{-- Tab Image --}}
+    <link rel="icon" type="image/png" href="" id="websiteTabImage">
 
     {{-- Bootstrap 5 CSS CDN Link --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">

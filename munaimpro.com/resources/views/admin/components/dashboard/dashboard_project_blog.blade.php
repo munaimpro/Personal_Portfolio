@@ -120,7 +120,7 @@
 
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/dashboardLatestProjectInfo');
+            let response = await axios.post('/dashboardLatestProjectInfo');
             hideLoader();
 
             // Getting base URL of the system
@@ -172,7 +172,7 @@
 
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/dashboardLatestPostInfo');
+            let response = await axios.post('/dashboardLatestPostInfo');
             hideLoader();
 
             // Getting base URL of the system

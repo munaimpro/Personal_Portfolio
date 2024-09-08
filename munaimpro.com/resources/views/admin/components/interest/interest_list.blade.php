@@ -84,7 +84,7 @@
 
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retrieveAllInterestInfo');
+            let response = await axios.post('/retrieveAllInterestInfo');
             hideLoader();
 
             response.data.data.forEach(function(item, index){

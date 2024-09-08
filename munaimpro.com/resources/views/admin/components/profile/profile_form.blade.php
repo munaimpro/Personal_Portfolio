@@ -95,7 +95,7 @@
 
     async function getUserInfo() {
         showLoader();
-        let response = await axios.get('../userProfile');
+        let response = await axios.post('../userProfile');
         hideLoader();
 
         if(response.data['status'] === 'success'){
