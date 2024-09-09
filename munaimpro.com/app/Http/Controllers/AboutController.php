@@ -240,6 +240,11 @@ class AboutController extends Controller
     public function websiteAboutPage(){
         // Getting view name from uri
         $routeName = last(explode('/', Route::getCurrentRoute()->uri));
+
+        // Checking data availability before loading page
+        if(!About::exists()){
+            abort(404, 'Page not available');
+        }
         
         // Getting SEO property
         $seoproperty = Seoproperty::where('page_name', 'about')->first();
