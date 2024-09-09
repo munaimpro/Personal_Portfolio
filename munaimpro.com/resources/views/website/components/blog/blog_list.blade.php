@@ -36,7 +36,7 @@
         try{
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retrieveAllPostInfo');
+            let response = await axios.post('/retrieveAllPostInfo');
             hideLoader();
 
             // Getting all post in a variable

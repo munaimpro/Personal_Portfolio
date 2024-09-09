@@ -355,7 +355,7 @@ code{
 }
 
 .header_wrapper .nav-item .nav-link:hover,
-.header_wrapper .nav-item .active{
+.header_wrapper .nav-item #active{
     color: var(--second-color);
 }
 

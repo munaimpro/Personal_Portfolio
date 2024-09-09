@@ -57,7 +57,7 @@
         try{
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retrieveAllSkillInfo');
+            let response = await axios.post('/retrieveAllSkillInfo');
             hideLoader();
 
             let website_programming_skills = $('#websiteProgrammingSkills');
@@ -102,7 +102,7 @@
         try{
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retrieveAllEducationInfo');
+            let response = await axios.post('/retrieveAllEducationInfo');
             hideLoader();
             console.log(response);
 

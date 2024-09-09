@@ -45,7 +45,7 @@
         try{
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retrieveAllPortfolioInfo');
+            let response = await axios.post('/retrieveAllPortfolioInfo');
             hideLoader();
 
             // Getting all post in a variable

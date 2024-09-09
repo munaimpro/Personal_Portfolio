@@ -32,16 +32,29 @@
     async function retrieveAllPostInfo(){
 
         try{
-            // Getting testimonial content
+            // Getting blog section
+            let blog = $('#blog');
+
+            // Getting blog content
             let website_home_blog = $('#websiteHomeBlog');
 
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retrieveAllPostInfo');
+            let response = await axios.post('/retrieveAllPostInfo');
             hideLoader();
+
+            // Hiding blog section when empty
+            if(response.data.data.length === 0){
+                blog.addClass('d-none');
+            }
 
             // Getting base URL of the system
             let baseUrl = "{{ url('/') }}";
+
+            // Hiding testimonial section when empty
+            if(response.data.data.length === 0){
+                testimonial.addClass('d-none');
+            }
 
             response.data.data.forEach(function(item, index){
                 if(index < 3){

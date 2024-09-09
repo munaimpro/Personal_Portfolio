@@ -21,33 +21,33 @@
     @endif
 
     {{-- Meta Description --}}
-    {{-- <meta name="description" content="{{ $seoproperty->site_description }}"> --}}
+    <meta name="description" content="{{ $seoproperty->site_description }}">
 
     {{-- Keywords --}}
-    {{-- <meta name="keywords" content="{{ $seoproperty->site_keywords }}"> --}}
+    <meta name="keywords" content="{{ $seoproperty->site_keywords }}">
 
     {{-- Author --}}
-    {{-- <meta name="author" content="{{ $seoproperty->author }}"> --}}
+    <meta name="author" content="{{ $seoproperty->author }}">
 
     {{-- Open Graph Meta Tags --}}
-    {{-- <meta property="og:title" content="{{ $seoproperty->og_title }}">
+    <meta property="og:title" content="{{ $seoproperty->og_title }}">
     <meta property="og:description" content="{{ $seoproperty->og_description }}">
     <meta property="og:url" content="{{ $seoproperty->og_url }}">
     <meta property="og:image" content="{{ $seoproperty->og_image }}">
     <meta property="og:type" content="{{ $seoproperty->og_type }}">
-    <meta property="og:site_name" content="{{ $seoproperty->og_site_name }}"> --}}
+    <meta property="og:site_name" content="{{ $seoproperty->og_site_name }}">
 
     {{-- Twitter Card Meta Tags --}}
-    {{-- <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Your Name - Web Developer">
-    <meta name="twitter:description" content="Discover my web development projects and skills.">
-    <meta name="twitter:image" content="https://www.yourwebsite.com/images/twitter-image.jpg"> --}}
+    <meta name="twitter:card" content="{{ $seoproperty->twitter_card }}">
+    <meta name="twitter:title" content="{{ $seoproperty->twitter_title }}">
+    <meta name="twitter:description" content="{{ $seoproperty->twitter_description }}">
+    <meta name="twitter:image" content="{{ $seoproperty->twitter_image }}">
 
     {{-- Robots --}}
-    {{-- <meta name="robots" content="{{ $seoproperty->robots }}"> --}}
+    <meta name="robots" content="{{ $seoproperty->robots }}">
 
     {{-- Canonical URL --}}
-    {{-- <link rel="canonical" href="{{ $seoproperty->canonical_url }}"> --}}
+    <link rel="canonical" href="{{ $seoproperty->canonical_url }}">
 
     {{-- Content Security Policy --}}
     {{-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; script-src 'self' https://cdn.jsdelivr.net 'unsafe-inline'; style-src 'self' 'unsafe-inline';"> --}}
@@ -56,19 +56,19 @@
     <meta http-equiv="Content-Language" content="en">
 
     {{-- Application Name --}}
-    <meta name="application-name" content="Munaim">
+    <meta name="application-name" content="{{ $seoproperty->application_name }}">
 
     {{-- Theme Color --}}
-    <meta name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="{{ $seoproperty->theme_color }}">
 
     {{-- Google Site Verification --}}
-    <meta name="google-site-verification" content="your_verification_token_here">
+    <meta name="google-site-verification" content="{{ $seoproperty->google_site_verification }}">
 
     {{-- Cache Control --}}
     <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
 
     {{-- Referrer Policy --}}
-    <meta name="referrer" content="no-referrer-when-downgrade">
+    <meta name="referrer" content="{{ $seoproperty->referrer }}">
 
     {{-- X-UA-Compatible --}}
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -192,7 +192,6 @@
     }
 
 
-
     // Function for toast message common features
     function displayToast(icon, title){
         Swal.fire({
@@ -213,9 +212,7 @@
     retrieveAboutInfo();
 
     async function retrieveAboutInfo(){
-        showLoader();
-        let response = await axios.get('/retrieveAboutInfo');
-        hideLoader();
+        let response = await axios.post('/retrieveAboutInfo');
 
         if(response.data['status'] === 'success'){
             // Getting base URL of the system
@@ -288,11 +285,7 @@
 
             if(portfolioInfoId){
                 // Sending id to controller and getting response
-                showLoader();
                 let response = await axios.post('../retrievePortfolioInfoById', { portfolio_info_id: portfolioInfoId });
-                hideLoader();
-
-                console.log(portfolioInfoId);
 
                 if (response.data['status'] === 'success'){
                     // Generating full path for the project thumbnail
@@ -377,7 +370,7 @@
             let footer_social_media_link = $('#footerSocialLinks');
 
             // Passing data to the controller and getting response
-            let response = await axios.get('/retrieveAllSocialMediaInfo');
+            let response = await axios.post('/retrieveAllSocialMediaInfo');
 
             // Process each social media item
             response.data.data.forEach(function(item){

@@ -25,20 +25,22 @@
 
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retrieveAllServiceInfo');
+            let response = await axios.post('/retrieveAllServiceInfo');
             hideLoader();
 
             response.data.data.forEach(function(item, index){
-                let row = `<div class="col-sm-12 col-lg-6 mb-5">
-                            <div class="card">
-                                <div class="service_MK25_icon fa-3x">
-                                    ${item['service_icon']}
+                if(index < 4 && item['service_status'] === 1){
+                    let row = `<div class="col-sm-12 col-lg-6 mb-5">
+                                <div class="card">
+                                    <div class="service_MK25_icon fa-3x">
+                                        ${item['service_icon']}
+                                    </div>
+                                    <h3 class="text-uppercase mb-3 mt-4">${item['service_title']}</h3>
+                                    <p>${item['service_description']}</p>
                                 </div>
-                                <h3 class="text-uppercase mb-3 mt-4">${item['service_title']}</h3>
-                                <p>${item['service_description']}</p>
-                            </div>
-                        </div>`
-                website_all_service.append(row);
+                            </div>`
+                    website_all_service.append(row);
+                }
             });
         } catch(e){
             console.error('Something went wrong', e);

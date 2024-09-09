@@ -34,13 +34,21 @@
     async function retrieveAllPortfolioInfo(){
 
         try{
+            // Getting portfolio section
+            let portfolio = $('#portfolio');
+
             // Getting content section
             let website_home_portfolio = $('#websiteHomePortfolio');
 
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retrieveAllPortfolioInfo');
+            let response = await axios.post('/retrieveAllPortfolioInfo');
             hideLoader();
+
+            // Hiding portfolio section when empty
+            if(response.data.data.length === 0){
+                portfolio.addClass('d-none');
+            }
 
             // Getting base URL of the system
             let baseUrl = "{{ url('/') }}";

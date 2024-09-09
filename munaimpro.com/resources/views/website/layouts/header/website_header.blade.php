@@ -13,25 +13,25 @@
           <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav menu-navbar-nav align-items-center">
               <li class="nav-item">
-                <a class="nav-link @if($routeName === '') active @endif" aria-current="page" href="{{ url('/') }}">Home</a>
+                <a class="nav-link" aria-current="page" href="{{ url('/') }}" @if($routeName === '')id="active"@endif>Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link @if($routeName === 'about') active @endif" href="{{ url('about') }}">About</a>
+                <a class="nav-link" href="{{ url('about') }}" @if($routeName === 'about')id="active"@endif>About</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link @if($routeName === 'services') active @endif" href="{{ url('services') }}">Services</a>
+                <a class="nav-link" href="{{ url('services') }}" @if($routeName === 'services')id="active"@endif>Services</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link @if($routeName === 'portfolio') active @endif" href="{{ url('portfolio') }}">Portfolio</a>
+                <a class="nav-link" href="{{ url('portfolio') }}" @if($routeName === 'portfolio')id="active"@endif>Portfolio</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link @if($routeName === 'pricing') active @endif" href="{{ url('pricing') }}">Pricing</a>
+                <a class="nav-link" href="{{ url('pricing') }}" @if($routeName === 'pricing')id="active"@endif>Pricing</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link @if($routeName === 'blog') active @endif" href="{{ url('blog') }}">Blog</a>
+                <a class="nav-link" href="{{ url('blog') }}" @if($routeName === 'blog')id="active"@endif>Blog</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link @if($routeName === 'contact') active @endif" href="{{ url('contact') }}">Contact</a>
+                <a class="nav-link" href="{{ url('contact') }}" @if($routeName === 'contact')id="active"@endif>Contact</a>
               </li>
               <li class="nav-item">
                 <a class="btn primary-btn m-0 px-4 py-2" href="{{ url('Admin/signin') }}" id="userAuthenticationButton" target="_blank">
@@ -58,7 +58,7 @@
         try{
             // Pssing id to controller and getting response
             showLoader();
-            let response = await axios.get('/retrieveLogoInfo');
+            let response = await axios.post('/retrieveLogoInfo');
             hideLoader();
 
             if(response.data['status'] === 'success'){

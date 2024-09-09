@@ -1,5 +1,5 @@
 {{-- Interest section start --}}
-<section class="page_sectionMK25_wrapper vertical_MK25_w_space">
+<section id="interest" class="page_sectionMK25_wrapper vertical_MK25_w_space">
     <div class="container">
         <div class="row mb-5 mb-lg-0 justify-content-center" id="websiteAllInterest">
             <div class="col-12">
@@ -27,10 +27,18 @@
     async function retrieveAllInterestInfo(){
 
         try{
+            // Getting interest section
+            let interest = $('#interest');
+
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retrieveAllInterestInfo');
+            let response = await axios.post('/retrieveAllInterestInfo');
             hideLoader();
+
+            // Hiding interest section when empty
+            if(response.data.data.length === 0){
+                interest.addClass('d-none');
+            }
 
             // Getting interest component
             let website_all_interest = $('#websiteAllInterest');

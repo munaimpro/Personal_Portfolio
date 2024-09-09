@@ -31,7 +31,7 @@
 
             // Passing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retrieveAllPricingInfo');
+            let response = await axios.post('/retrieveAllPricingInfo');
             hideLoader();
 
             console.log(response);

@@ -33,10 +33,18 @@
     async function retrieveHomeSkillInfo(){
 
         try{
+            // Getting skills section
+            let skills = $('#skills');
+
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retrieveAllSkillInfo');
+            let response = await axios.post('/retrieveAllSkillInfo');
             hideLoader();
+
+            // Hiding skills section when empty
+            if(response.data.data.length === 0){
+                skills.addClass('d-none');
+            }
 
             website_home_skills = $('#websiteHomeSkills');
 

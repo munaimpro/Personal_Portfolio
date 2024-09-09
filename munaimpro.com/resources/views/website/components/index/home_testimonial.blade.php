@@ -10,9 +10,9 @@
         </div>
 
         <div class="col-lg-10 m-auto mb-5">
-        <div class="owl-carousel owl-theme" id="websiteHomeTestimonial">
-            
-        </div>
+            <div class="owl-carousel owl-theme" id="websiteHomeTestimonial">
+                
+            </div>
         </div>
     </div>
     </div>
@@ -30,21 +30,26 @@
     async function retrieveAllClientFeedbackInfo(){
 
         try{
+            // Getting testimonial section
+            let testimonial = $('#testimonial');
+
             // Getting testimonial content
             let website_home_testimonial = $('#websiteHomeTestimonial');
 
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retrieveAllClientFeedbackInfo');
+            let response = await axios.post('/retrieveAllClientFeedbackInfo');
             hideLoader();
 
-            // Getting base URL of the system
-            let baseUrl = "{{ url('/') }}";
+            // Hiding testimonial section when empty
+            if(response.data.data.length === 0){
+                testimonial.addClass('d-none');
+            }
 
             response.data.data.forEach(function(item, index){
                 if(index < 3){
                     // Generating full path for the client image
-                    let clientImageFullPath = baseUrl + '/storage/profile_picture/client_images/' + item['client_image'];
+                    let clientImageFullPath = `{{ url('/') }}/storage/profile_picture/client_images/` + item['client_image'];
 
                     let row = `<div class="item">
                                     <div class="row justify-content-center">

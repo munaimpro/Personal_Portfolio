@@ -34,13 +34,21 @@
     async function retrieveAllServiceInfo(){
 
         try{
+            // Getting services section
+            let services = $('#services');
+
             // Getting content section
             let website_home_service = $('#websiteHomeService');
 
             // Pssing data to controller and getting response
             showLoader();
-            let response = await axios.get('/retrieveAllServiceInfo');
+            let response = await axios.post('/retrieveAllServiceInfo');
             hideLoader();
+
+            // Hiding services section when empty
+            if(response.data.data.length === 0){
+                services.addClass('d-none');
+            }
 
             response.data.data.forEach(function(item, index){
                 if(index < 4 && item['service_status'] === 1){
