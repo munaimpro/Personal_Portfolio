@@ -262,7 +262,7 @@
             // Footer section informations
             $('#websiteFooterFullName').html(response.data.data['full_name']);
             $('#websiteFooterDesignation').html(response.data.data['designation']);
-            $('#websiteCopyright').html(`&copy; ${response.data.data['copyright']} ${new Date().getFullYear()} | Developed by <a href="/" target="_blank" rel="noopener noreferrer">${response.data.data['full_name']}</a>`);
+            $('#websiteCopyright').html(`&copy; ${response.data.data['copyright']} ${new Date().getFullYear()} | Developed by <a href="/" target="_blank" rel="noopener noreferrer">${response.data['developer_name']}</a>`);
 
         } else{
             displayToast('error', response.data['message']);

@@ -218,7 +218,8 @@ class AboutController extends Controller
                 return response()->json([
                     'status' => 'success',
                     'message' => 'Request success',
-                    'data' => $about
+                    'data' => $about,
+                    'developer_name' => config('app.developer_name')
                 ]);
             } else{
                 return response()->json([
